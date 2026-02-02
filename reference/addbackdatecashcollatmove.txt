@@ -1,0 +1,41 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/addbackdatecashcollatmove.html
+
+# Adding Backdated Cash Collateral Movements
+
+## Background
+
+It may be necessary to add backdated cash collateral movements for several reasons.
+
+  * Discovery that a cash collateral Movement is missing from an Agreement.
+  * Discovery that a cash collateral Movement has a different settlement date in TLM® Collateral Management versus the true settlement date in the settlement systems.
+  * Discovery that a cash collateral Movement has a different notional amount or currency in TLM Collateral Management versus the settlement systems.
+
+
+
+Often these inconsistencies are identified when the Principal and Counterparty attempt to agree their Interest Payments at the end of an Interest Period and discover that the details of the collateral movements for the Interest Period in question are not correct.
+
+In order that the collateral movements history be correct - _a pre-requisite for Interest accrual and payment calculation_ \- it is likely that the incorrect collateral movements be failed or cancelled, and then correcting backdated collateral movements be entered to truly reflect the settlement history for the period.
+
+TLM Collateral provides functionality to [add standalone movements](<movements.html#create-a-manual-movement>) which can be entered with settlement dates within the open Interest Period if needed.
+
+Note: Currently, it is only possible to enter backdated cash movements for open interest periods, not closed ones.
+
+### Example
+
+Assume today is the 3rd October, for an agreement with an Interest Period End date of 31st September, and that Interest Payments for the Period Ending September have been generated, but not yet completed.
+
+It would be possible to enter a backdated cash collateral movement for the Period 1st September to 31st September, because that Interest Period and payment are currently open.
+
+However, it would not be possible to add a cash movement or approve a cash movement with a settlement date prior to 1st September, as that Interest Period would be closed.
+
+If the user attempted to, the user would see a message similar to the one below and the movement would not be accepted: ![interestpaymentclosed.jpg](Images/interestpaymentclosed.jpg)
+
+## Inclusion of In Transit Cash Collateral Movements
+
+The Interest Accrual and Interest Payment calculation takes In Transit Cash Collateral Movements into consideration as settled movements, provided that the settlement date for the In Transit movement(s) is in the past.
+
+This allows for users to add backdated cash collateral movements to an agreement to correctly reflect the movement history for an Interest Period and calculate the Interest Accruals and Payments without having to have run the settlement task.
+
+Settled cash movements are taken into consideration in the Interest Calculation as a matter of course.
+
+**Note:** When entering a backdated cash collateral movement(s) within an open interest period, it is strongly recommended to [recalculate](<interest.html#recalculate>) any open interest payment(s) for the affected agreement to ensure the backdated movement is correctly reflected within the ending balance of the open payment period and the beginning balance of the open accrual.

@@ -1,0 +1,88 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_reset_agreed.html
+
+# Reset Agreed Amount on a Demand
+
+## Overview
+
+Should an incorrect Agreed Amount be entered on a Demand, Anticipated Demand, No Action call or an Agreed Amount entered on the wrong Demand or Anticipated Demand Margin Call, then the affected calls need to be corrected in order that they can be correctly processed.
+
+A Reset Agreed Amount function allows a user to correct these errors.
+
+The Reset Agreed Amount Function is available in the Demand and Anticipated Demand _Agreed_ and _Disputed_ states.
+
+## Resetting Agreed Amount
+
+**Procedure**
+
+  1. Select the margin call that has a state of **Disputed** by clicking the checkbox.
+  2. Select the **More** drop down button in the top right corner and select **Reset Agreed Amount**.
+  3. The user will be prompted with a pop up screen asking the following: "Are you sure you want to clear the agreed amount on this call? Any movements on the call will be set to ignored."
+  4. If the users selects **OK** the following will occur:
+
+Scenario | Results  
+---|---  
+Full Dispute on a Demand with no movements | The call will transition to the **Sent** state even if the call was disputed from either the **Unsent** or **Sent** state.  
+Partial Dispute on a Demand with no movements on an agreed portion | The call will transition to the **Sent** state even if the call was disputed from either the **Unsent** or **Sent** state.  
+Anticipated Demands with no movements | Sole Valuation Agent Agreement goes to a _Sent SVA_ state.  
+  
+Non Sole Valuation Agent goes to _Anticipated_ state.  
+Partial Dispute on an Anticipated Demand with no movements on the Partially Agreed portion | The call will transition to the **Anticipated** state.  
+Resetting Agreed Amount on a Call which has Movements | When an Agreed Amount is entered on a Margin Call and the difference between the entered amount and the call amount is outside of a predefined dispute tolerance, then a partial Dispute is created, and the call is updated to a Partially Agreed state. That is, there are there are 2 elements to the call.  
+  
+In this instance, the Agreed Amount can be reset from either _Agreed Workflow state_ or the _Disputed Workflow state_.  
+  
+Irrespective of where the reset is initiated from, the process and outcome is the same.  
+Partial Dispute on a Demand with movements on the agreed portion | If the agreed portion is in the **Sent** state, then the disputed portion can be reset and the movements will be set to **ignored**.  
+  
+If the agreed portion is in the **Agreed** state, then the disputed portion will be blocked and no reset can occur and the following message will appear on the screen:  
+  
+"Transition Failed: Cannot reset agreed amount as Margin Call has "Approved" or "To Be Approved" movements"  
+Partial Dispute on an Anticipated Demand with with movements on the Partially Agreed portion | If the agreed portion is in the **Agreed** state, then the disputed portion can be reset and the movements will be set to **ignored** and the call will transition back to **Anticipated** state.  
+  
+If the agreed portion is in the **Confirmed Approval** state, then the disputed portion will be blocked and no reset can occur.  
+Dispute on a No Action |   
+  
+The call will transition to the **Anticipated** or **UnsentSVA** state based on it's initial state before the dispute.  
+Full Dispute on a Grouped Call | The call will transition to the **Sent** state.  
+Partial Dispute on a Grouped Call | If the agreed portion is in the **Sent** state, then the disputed portion can be reset and the movements will be set to **ignored**.  
+  
+If the agreed portion is in the **Agreed** state, then the disputed portion will be blocked and no reset can occur and the following message will appear on the screen:  
+  
+"Transition Failed: Cannot reset agreed amount as Margin Call has "Approved" or "To Be Approved" movements"  
+  5. If the user select **Cancel** , for all call types, the call will remain in the **Disputed** state.
+
+
+
+
+## Considerations for Resetting an Agreed Amount
+
+  * Resetting the Agreed Amount effectively means that any agreed amount that existed on the Demand is removed, and any Collateral Movements that existed on the Demand are removed (they are set to a state of ignored and disassociated from the Demand).
+
+In essence, the user needs to re-process the Demand as if it had just been sent to the customer and placed in the _Sent_ workflow state.
+
+  * Resetting the Agreed Amount will also erase any dispute comments and categories that have been entered.
+
+  * There is another method that can be used to adjust the value of an agreed amount without affecting any Collateral Movements entered. This method should only be used if the wrong amount of agreed has been entered - if the agreed amount has been entered on the wrong Demand, Resetting Agreed Amount should be used. This method will also erase any dispute comments and categories that have been entered.
+
+
+
+## Considerations for Segregated OTC Agreements
+
+For Segregated OTC Agreements, where an item that needs to be reset is for an OTC Agreement that separates Lock Up and variation requirements, essentially the process is identical. However, resetting the Agreed Amount on an individual call requirement in this state will not affect the other call requirements on the same margin call. See Working with [OTC Agreements that Segregate Lock Up and Variation Margin](<segregate_lockup_varmargin.html>) for more details.
+
+**Note:** The following important considerations applicable in this Workflow state:
+
+  1. Disputed and Partially disputed Demands exist in this state only on the day in which they were transitioned into this state. Once the date in the Agreement's Principal Managing Location (ML) has rolled onto the next day, ( i.e. Date Time for that Agreements Principal Entity Managing Location is > than dispute date) then that item will no longer viewable from this screen, but can be seen by selecting specific dates in the [filter](<margin_calls_overview.html#calcdate>).
+
+**Note:** The local time/date may not be same as Principal ML time/date and therefore items in here with differing dates to the local timezone and items expiring from this grid during the day.
+
+  2. Additionally, please note that Disputed Demands and Partially disputed Demands in this Workflow state can be affected by a recalculation on the same day that generates differing Margin Calculation Results, i.e. if a Demand is advanced into this Workflow state today and Margin Calculations are run again today that result in a different Margin Calculation Result, the Demand in this Workflow state, and if partially disputed, the partially agreed demand in the Agreed state, will be affected.
+
+The recalculated results are viewable and actionable from both states.
+
+See [How to Process Original or New Margin Calculation Results](<margin_calls_recalc.html#processing-original-or-new-margin-calculation-results>) for more details.
+
+  3. Items in this state are filtered according to the Agreement Scope and Agreement Responsibility Groups that the user is assigned to. See [Understanding Agreement Scopes and Agreement Responsibility Groups](<understand_scope_responsibility.html>).
+
+
+

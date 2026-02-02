@@ -1,0 +1,56 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_valid_approvals.html
+
+# Validations Performed on Agreement Data During the Approvals Process
+
+## Background
+
+When a user attempts to approve Agreement Data items in the [Pending Screen](<approvals.html#pending>), a series of validations occur. The validations are performed to ensure that the data to be approved, is still valid at the time of the approval.
+
+Consider the following scenario:
+
+  * At 09:00 GMT on 18th October, User A creates an Agreement "Sunny Bank CSA", which references the Principal Entity Demo Bank. No other Agreement in the system references Principal Entity Demo Bank. User A saves the Agreement which places it in a Pending Approval State.
+
+  * At 09:05 GMT on the same day, User B, updates the Principal Entity Demo Bank, changing its type such that is no longer a Principal, but a Credit Support Provider. As no approved Agreement currently references this Principal Entity, this change is allowed. The Sunny Bank CSA Agreement record is Pending Approval as set by User A.
+
+  * At 10:00 GMT on the same day, Approver User C, attempts to approve the Pending Record for Agreement Sunny Bank CSA in the Pending Approval Queue. As the Pending Record for Sunny Bank CSA references a Principal Entity of Demo Bank which no longer exists as a Principal Entity, a validation error is raised, and the approval cannot continue.
+
+
+
+
+There are two courses of remedial action that can be taken.
+
+  1. Assuming the change made to the Principal Entity was incorrect, changing Entity Demo Bank back to a Principal Entity will allow the approval to occur.
+
+  2. The Agreement Pending Approval Record can be rejected.
+
+
+
+
+## Validations Performed
+
+The following specific validations are performed on Agreement Data when a user attempts to approve the record. It is possible that more than one validation issue exists on Pending Agreement Data Items. The validation process stops when the first error is encountered.
+
+Area | Field | Validations Performed  
+---|---|---  
+General Tab - Entities Section | Principal | The Principal Entity referenced on the pending Agreement record is validated to ensure that it still exists with a type of "Principal".  
+| Counterparty | Similar to Principal, Counterparty Entity on the pending Agreement record is validated to ensure it exists, and has a type of Counterparty.  
+| Principal Credit Support Provider | If a Credit Support Provider has been defined for the Principal on the pending approval Agreement record, the entry is validated to ensure that it exists and still remains as entity type Credit Support Provider.  
+| Counterparty Credit Support Provider | Identical to the above, with the exception that the validations are performed on the value defined in Counterparty Credit Support Provider.  
+| Principal Managing Location | The Principal Managing Location defined on the pending approval Agreement record is checked to ensure that it is still defined as a Managing Location in Reference Data.  
+| Counterparty Managing Location | This validation is identical to the above, except that the Managing Location value (if defined) for the Counterparty is validated.  
+Misc Tab - Settlement Information Section | Variation Tri Party Custodian | When a Tri Party Custodian for Variation Collateral has been defined on the pending approval Agreement record, the value is checked to ensure that the corresponding entity is still defined as Custodian.  
+| Lock Up Tri Party Custodian | Identical to the above, except it is the Lock Up Tri Party Custodian value (if defined) that is validated to ensure that the corresponding Entity is still defined with a type of Custodian.  
+Concentration Rules Tab | Collateral Groups | Any Collateral Groups that are defined on the Agreement in Concentration Rules are validated to ensure that they have not been subsequently deleted.  
+Eligibility  
+(Eligible, Advanced, Ratings Based, Wrong Way Risk)  
+Interest, Concentration | Collateral Buckets | Collateral Buckets defined on the Eligibility Tab are checked to ensure that they still exist.  
+Trade Coverage - Branches | Entity Branches | If Branch assignment is defined on the Agreement's Trade Coverage Tab (whether for Principal or Counterparty), the branches selected are validated to ensure that they still exist in the database.  
+Settlement Instructions | Various | Settlement Instructions are subject to the following Validations  
+  
+\- SSI **Name** Must be Unique  
+\- SSI **Record definition** must be unique. (there cannot be an identically defined Agreement SSI record)  
+\- If an SSI record is being set as default, it cannot overlap any other SSI record already set as default  
+  
+Any of the above validation errors will prevent the record being approved.  
+  
+In all the above cases, the validation error will prevent the record being approved. Remedial action of correcting the underlying invalid reference data, or rejecting the pending approval record is required in order to unlock the Agreement.

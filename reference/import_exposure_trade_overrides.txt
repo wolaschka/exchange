@@ -1,0 +1,190 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_exposure_trade_overrides.html
+
+# File Format for Exposure Trade Overrides
+
+When importing Exposure Trade Overrides, all data for the relevant Import Configuration is deleted when a new import is run.
+
+The Exposure Trades Overrides Import Configuration allows certain trade parameters to be changed from the value supplied by the OTC Trades or Repo Trades Import Configurations.
+
+In order to overwrite a parameter, the details must be supplied with the corresponding Trade Reference that is used on the Trades file. It is also possible to supply the Import Configuration Name of the Trades file from which the original Trade is received. This is recommended where different trades being supplied with the same Trade Reference from different source systems. If the Import Configuration Name is supplied and it includes the field on the mapping file, the name must be supplied for all the trades included in that Exposure Trades Overrides file (that is, it becomes a mandatory field). If the Import Configuration Name is not supplied for all trades in the overrides file, simply do not include this field in the mapping file. When the system attempts to overwrite the values it will check whether more than one trade exists with the same Trade Reference. If multiple trades are found, none of them will be updated and a validation Exception will be displayed. [Validation message number 154](<validation_messages.html#154>).
+
+The same file format is used for overrides to both OTC and Repo Trades. If the file contains a value for a parameter which is not valid for that business line (for example, an Additional Margin for that Repo trade) that value will not be updated and an validation warning will be displayed. [Validation message number 159](<validation_messages.html#159>).
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Additional Amount | AdditionalMargin | Yes, if an AdditionalMarginMethod has been supplied. | Decimal (19,6) | 100000.00 | The Additional Margin value for the trade.  
+  
+The numeric value here is interpreted in conjunction with AdditionalMarginMethod value  
+  
+When Flat as a AdditionalMarginMethod  
+  
+is defined, this is assumed to be an absolute set number and can be defined with 2 DP, and a value between 0 and 9,999,999,999,999.99  
+  
+When any other AdditionalMarginMethod  
+  
+is defined, the number is evaluated as a percentage and used and can be set with up to 6DP, and a value between 9999.999999  
+  
+If a percentage value is defined greater than this limit then [validation message 276](<validation_messages.html#276>) is raised.  
+Additional Currency | AdditionalMarginCurrency | Yes, if an AdditonalMarginMethod of Flat has been supplied.  
+  
+[Validation message number 176](<validation_messages.html#176>). | Char (3) | USD | The currency in which the Additional Margin is quoted.  
+  
+This needs to match a currency defined in the system.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Additional Due To | AdditionalMarginDueTo | Yes, if an AdditionalMargin has been supplied. | Char (20) | Prin | The party to which the Additional Margin is due. The allowed values are (case insensitive):  
+  
+Cpty  
+  
+Counterparty  
+  
+Prin  
+  
+Principal  
+  
+[Validation message number 148](<validation_messages.html#148>).  
+  
+If this field is not supplied on the file, the default value rule can be used in the mapping file to determine which party is due to receive the Additional Margin based on the sign of the amount.  
+Additional Method | AdditionalMarginMethod | Yes, if an AdditionalMargin has been supplied. | Char (50) | Flat | The allowed values (case insensitive) are:  
+  
+Flat  
+  
+Percent Notional 1 / Pct. Notional  
+  
+Percent Notional 2/ Pct. Notional2  
+  
+Percent Exposure  
+  
+[Validation message number 170](<validation_messages.html#170>).  
+  
+If flat margin method is used, the following fields must also be supplied:  
+  
+AdditionalMargin  
+  
+AdditionalMarginDueTo  
+  
+AdditionalMarginCurrency.  
+  
+[Validation message number 176](<validation_messages.html#176>).  
+  
+If percent method is being used, the following fields must also be supplied:  
+  
+AdditionalMargin  
+  
+AdditionalMarginCurrency.  
+  
+[Validation message number 156](<validation_messages.html#156>).  
+  
+If percentage of notional/exposure method is being used, the system will also check that the corresponding trade in the system has the relevant ExchangedNotional and ExchangedNotionalCurrency. If these values are missing the override will not be loaded.  
+  
+Validation messages [171](<validation_messages.html#171>), [172](<validation_messages.html#172>), [174](<validation_messages.html#174>) and [175](<validation_messages.html#175>).  
+Exposure Amount | ExposureAmount |  | Money | 12368.22 | The exposure represents the PV or MtM of the trade.  
+Exposure Currency | ExposureAmountCurrency |  | Char (3) | GBP | The currency that Exposure is specified in.  
+  
+This needs to match a currency defined in the system.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Exposure Date | ExposureDate |  | Date  
+  
+Any short date format accepted in a any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 03/10/2007 | The date to which the Exposure Amount corresponds.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+| ImportConfigurationName | Yes, if it has been included in the mapping file. | Char (255) | OTC Trades | The name of the OTC or Repo Trades Import Configuration from which the trade was originally received. This must match an existing Import Configuration in the system.  
+  
+[Validation message number 151](<validation_messages.html#151>).  
+  
+If the combination of Trade Reference and Import Configuration does not match an existing trade in the system the record will not be loaded.  
+  
+[Validation message number 152](<validation_messages.html#152>).  
+  
+If multiple overrides are supplied in the same file with the same Trade Reference and Import Configuration Name combination, none of them will be updated.  
+  
+[Validation message number 155](<validation_messages.html#155>).  
+Lock Up Amount | LockUpMargin | Yes, if an LockUpMarginMethod has been supplied. | Decimal (19,6) | 250000 | The Lock Up Margin value for the trade.  
+  
+The numeric value here is interpreted in conjunction with LockUpMarginMethod value.  
+  
+When Flat as a LockUpMarginMethod  
+  
+is defined, this is assumed to be an absolute set number and can be defined with 2 DP, and a value between 0 and 9,999,999,999,999.99  
+  
+When any other LockUpMarginMethod  
+  
+is defined, the number is evaluated as a percentage and used and can be set with up to 6DP, and a value between 9999.999999  
+  
+If a percentage value is defined greater than this limit then [validation message 276](<validation_messages.html#276>) is raised.  
+Lock Up Currency | LockUpMarginCurrency | Yes, if an LockUpMarginMethod of Flat has been supplied.  
+  
+[Validation message number 177](<validation_messages.html#177>). | Char (3) | EUR | The currency in which the Lock Up Margin is quoted.  
+  
+This needs to match a currency defined in the system.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Lock Up Due To | LockUpMarginDueTo | Yes, if a LockUpMargin has been supplied. | Char (20) | Cpty | The party to which the Lock Up Margin is due. The allowed values are (case insensitive):  
+  
+Cpty  
+  
+Counterparty  
+  
+Prin  
+  
+Principal  
+  
+[Validation message number 148](<validation_messages.html#148>)  
+  
+If the field does not have a value, the default value rule can be used in the mapping file to determine which party is due to receive the Lock Up Margin based on the sign of the amount.  
+Lock Up Method | LockUpMarginMethod | Yes, if LockUpMargin has been supplied. | Char (50) | Pct. Notional | The allowed values (case insensitive) are:  
+  
+Flat  
+  
+Percent Notional 1 / Pct. Notional  
+  
+Percent Notional 2/ Pct. Notional2  
+  
+Percent Exposure  
+  
+[Validation message number 170](<validation_messages.html#170>).  
+  
+If the Flat margin method is being used, the following fields must also be supplied:  
+  
+LockUpMargin  
+  
+LockUpMarginDueTo  
+  
+LockUpMarginCurrency.  
+  
+[Validation message number 177](<validation_messages.html#177>).  
+  
+If the percentage method is used, the following fields must also be supplied:  
+  
+LockUpMargin  
+  
+LockUpCurrency.  
+  
+[Validation message number 157](<validation_messages.html#157>).  
+  
+If percentage methods are defined then the value must be between 0 and 9999.99  
+  
+otherwise [Validation Message 276](<validation_messages.html#276>)  
+  
+If the percentage of notional method is being used, the system will also check that the corresponding trade in the system has the relevant ExchangedNotional and ExchangedNotionalCurrency. If these values are missing the override will not be loaded.  
+  
+Validation messages [171](<validation_messages.html#171>), [172](<validation_messages.html#172>), [174](<validation_messages.html#174>) and [175](<validation_messages.html#175>).  
+Override Comment | OverrideComment |  | Char (500) | Additional Margin was missed | The Override Comment is used to log the reason why the override was necessary.  
+  
+If this field is mapped with an empty value or more than 500 characters an error will occur.  
+  
+[Validation message number 379](<validation_messages.html#379>)  
+Trade Ref | TradeReference | Yes | Char (100) | 10006 | The Trade Reference is used to locate the trade in the system to update. If the reference supplied does not match an existing trade in the system the record will not be loaded.  
+  
+[Validation message number 153](<validation_messages.html#153>).  
+  
+If multiple trades are found, none of them will be updated.  
+  
+[Validation message number 154](<validation_messages.html#154>).  
+  
+If multiple overrides are supplied in the same file with the same Trade Reference, none of them will be updated.  
+  
+[Validation message number 112](<validation_messages.html#112>).  
+  
+**Note:** Trades can also be manually overwritten through the user interface. When a trade is changed manually, that change must be locked to be used until a particular expiry date. If a trade has a value which has been manually locked, a subsequent Exposure Trade Overrides file containing that Trade Reference will not be able to update the locked value. [Validation message number 158](<validation_messages.html#158>).

@@ -1,0 +1,249 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_repo_trades.html
+
+# File Format for Repo Trades
+
+## Case Sensitivity & Correlation Sets
+
+From version 5.2.3 onwards, for those clients using SQL Database platform, a correlation set configured as case insensitive will no longer be applied. Case sensitivity will now apply.
+
+Therefore:- Trade Ref: ABC and Trade Ref: Abc will not be seen as duplicates, but as two separate trades.
+
+## Overview
+
+When importing Repo Trade data all trades for the relevant Import Configuration are deleted when a new import is run.
+
+**Note:** No values are currently being calculated by TLM® Collateral. Trades can currently be assigned to collateral agreements either by including the Agreement name (or alias) in the file or by including the Counterparty and Principal names (or aliases) **and/or** Counterparty and Principal Branches (or aliases) **and** Trade Types (or aliases) in the file.
+
+If the Counterparty and Principal entity fields are included in the mapping file, the system will use this entity information to find agreements to which the trade could be assigned. It will then use the Counterparty Branch and Principal Branch fields (if mapped) to further analyze the trade to determine which of those agreements it should belong to.
+
+If the Counterparty and Principal entity fields are not included on the mapping file, the system will use the Counterparty Branch and Principal Branch fields to work out the Counterparty and Principal entities.
+
+If no agreement is supplied and data is missing from the Counterparty, Principal, Counterparty Branch, Principal Branch or Trade Type columns in the file, trades will still be loaded into the database but may not be assigned to a collateral agreement. [Validation message number 117](<validation_messages.html#117>).
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Source Agreement | Agreement |  | Char (255) | ABC Bank GMRA | The name or alias of the collateral agreement to which the trade belongs (if it can be supplied by the source system).  
+  
+This must match to either a valid Repo agreement in the database or one of it's aliases for the relevant Alias Group.  
+  
+[Validation message number 134](<validation_messages.html#134>).  
+Base Mkt Value | BaseMarketValue |  | Num (21,8) |  | This is a mark to market present value of the trade after taking into consideration the Haircut and Index Ratio, usually specific to the Tokyo market.  
+Mkt Clean Price | CleanPrice |  | Num (12,8) | 103.25 | The clean price that the bond closed at on the previous day.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Clearing house | ClearingHouse |  | Char (255) | CCP | Free form text. The Central Clearing House that this trades settles through.  
+clearing house reference | ClearingHouseReference |  | Char (30) | TK1223345456 | The Clearing House Trade Identifier for this trade.  
+clearing status | ClearingStatus |  | Char (50) | Cleared | The status of the trade in the clearing house process.  
+Source Counterparty | Counterparty |  | Char (255) | ABC Bank | This is the counterparty with which the trade has been done and must match to either a valid counterparty in the database or one of it's aliases for the relevant Alias Group.  
+  
+[Validation message number 21](<validation_messages.html#21>).  
+| CounterpartyBranch |  | Char (255) | ABC Bank NY | This is the counterparty branch to which the trade is booked.  
+  
+It must correspond to a valid counterparty branch for the supplied Counterparty.  
+  
+[Validation message number 163](<validation_messages.html#163>).  
+  
+[Validation message number 162](<validation_messages.html#162>).  
+Coupon Accrual Interest | CouponAccrualInterest |  | Num (21,6) |  | The amount of coupon interest accrued from the last coupon payment date until the margin call settlement date for the trade.  
+Mkt Dirty Price | DirtyPrice |  | Num (12,8) | 104.36 | The dirty price (that is, including accrued interest) that the bond closed at on the previous day.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Exposure Amount | ExposureAmount |  | Num (21,6) | 1,500,000 | This is the current exposure of the trade taking into consideration any haircut (that is MarketValue - TradeValue). This is the value that will be used in the Exposure Calculation.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+  
+If a blank ExposureAmount is supplied, the trade will still be loaded. However, be aware that this will affect the exposure calculations.  
+  
+[Validation message number 123](<validation_messages.html#123>).  
+Exposure Ccy | ExposureAmountCurrency |  | Char (3) | EUR | This is the currency that the ExposureAmount is represented in and must correspond to an existing currency in the database.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Exposure Date | ExposureAmountDate |  | Date  
+  
+Any short date format accepted in a any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 02/03/2007 | The date to which the ExposureAmount corresponds.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+Extension Label name | < ExtensionName >  
+  
+Note - if values are to be loaded into Extensions, then the mapping file must include the ExtensionName exactly as it has been defined in the OTC Trade Extension Reference Data Object.  
+  
+Additionally, the mapping file must explicitly define that the field is an extension.  
+  
+For an example of this syntax see Example of Agreement Mapping File with Extensions | No - But see notes. | Various, but must be one of the following data types:  
+  
+**Alphanumeric**  
+  
+**Numeric**  
+  
+**Date**  
+  
+**Boolean**  
+  
+(Y, Yes, 1, True, T  
+  
+F, No, 0, False, F) |  | Although these fields are not mandatory, there are some specific rules if the fields are mapped in the mapping file:  
+  
+1\. The **ExtensionName** specified in the Import File must be identical to the Extension Name on the Repo Exposure Trade Extension Reference Data Object.  
+  
+Additionally, the mapping file must state that the field is an Extension.  
+  
+If not, then the [validation message 8](<validation_messages.html#8>) will be raised, and the file will not load.  
+  
+The corresponding Extensions must already exist in the database before the file is loaded.  
+  
+2\. If the extension has been defined as **AlphaNumeric** , then any values on the import file should be within the lower and upper character limits defined. If Not then  
+  
+[validation message 232](<validation_messages.html#232>) will be raised, and the value will be not be loaded.  
+  
+3\. If the Extension is defined as a **Numeric Data Type** , any values on the import file for this Extension must also be numeric, otherwise [validation message 11](<validation_messages.html#11>) will be raised, and the value will be set to NULL.  
+  
+4\. If the Extension field defined is **Numeric** , the values on the import file must be within the minimum and maximum numbers defined on the reference data object. If not, then [validation message 233](<validation_messages.html#233>) will be raised and the value will not be loaded.  
+  
+5\. If the extension field is defined as a **Boolean** , the values on the import file must be one of the following (**Yes,Y, 1, True, T, No, N, 0, False, F**) otherwise [validation message 19](<validation_messages.html#19>) will be raised, and the value will not be loaded.  
+  
+6\. If the extension field is defined as a **Date** , then the values on the import file must be in a recognized date format, otherwise [validation message 10](<validation_messages.html#10>) is raised, and the value ignored.  
+Factor | Factor |  | Num (12,8) | 1.00 | The factor represents that part of the bond which has been paid down by the lender.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Haircut % | Haircut |  | Num (12,8) | 95 | This is the haircut on the trade. The haircut is effectively the initial margin. If this field shows 95, for example, then the cash lender is paying 5% less than the value of the bond. If it is 105% the cash lender is paying 5% more for the bond.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Haircut Value | HaircutValue |  | Num (21,6) | 528,100.00 | This is the monetary value of the Haircut percentage (that is, the amount that the market value of the trade is adjusted by).  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Index Ratio | IndexRatio |  | Num (12,8) |  | Used for Consumer Price Index securities, usually specific to the Tokyo market.  
+Instr Ccy | InstrumentCurrency |  | Char (3) | EUR | This is the currency of the bond being traded and must correspond to an existing currency in the database.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Instr Coupon | InstrumentCoupon |  | Num (14,8) | 4.75 | The coupon of the bond being traded.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Instrument Description | InstrumentDescription |  | Char (100) | Deutschland Pfandbrief 6 | A description of the bond being traded.  
+Instr Identifier | InstrumentIdentifier |  | Char (30) | DE0001135077 | The unique ID for the bond being traded (for example, the ISIN, CUSIP, SEDOL etc). There is currently no link between this ID and the Instruments stored in TLM Collateral for the purposes of using as collateral.  
+Instr Maturity | InstrumentMaturityDate |  | Date  
+  
+Any short date format accepted in a any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 07/04/2008 | Maturity Date of the bond being traded.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+Lower Mkt Value | LowerMarketValue |  | Num (21,6) |  | This is a reporting field which could be used, for example, to compare the current market value to a lower trigger or threshold value specified in the repo agreement.  
+Mkt Closing Yield | MarketClosingYield |  | Num (21,6) |  | This could be used to store the yield information for the relevant security. (This is common practice in the Japanese Repo Market where the JSDA Closing Yield is used).  
+Mkt Value | MarketValue |  | Num (21,6) | 1,352,686 | This is the market value of the bond based on it's closing price. It is represented in Instrument Currency.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Notional | Notional |  | Money  
+  
+99,999,999,999,999,999 to 99,999,999,999,999,999  
+  
+Can be negative.  
+  
+Decimal places truncated. | 10000000.00 | The number of bonds traded.  
+  
+[Validation message number 11](<validation_messages.html#11>).  
+Source Principal | Principal |  | Char (255) | Prin Bank | This is the principal which executed the trade and must match to either a valid principal in the database or one of it's aliases for the relevant Alias Group.  
+  
+[Validation message number 20](<validation_messages.html#20>).  
+| PrincipalBranch |  | Char (255) | Prin Bank London | This is the principal branch to which the trade is booked.  
+  
+It must correspond to a valid principal branch for the supplied Principal.  
+  
+[Validation message number 160](<validation_messages.html#160>).  
+  
+[Validation message number 161](<validation_messages.html#161>).  
+Repo Rate | RepoRate |  | Num (12,8) | 3.25 | This is the repo rate (that is, the interest rate that accrues on the cash portion of the trade.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Repo Description | RepoRateDescription |  | Char (100) | Eonia-1 | This field can be used to store a description of the repo rate. For example, it could be a reference to a market rate such as Eonia.  
+Secondary Trade Ref | SecondaryTradeReference |  | Char (100) | 123 | This field can be used to store a secondary trade identifier. This could be, for example, a back office system number.  
+Trade Ccy | TradeCurrency |  | Char (3) | USD | This is the currency of the cash leg of the trade and must correspond to an existing currency in the database.  
+  
+[Validation message number 18](<validation_messages.html#18>).  
+Traded Clean Price | TradedCleanPrice |  | Num (12,8) | 103.25 | This is the clean price that the trade was done at (that is, the clean price on the start leg of the repo.)  
+Traded Dirty Price | TradedDirtyPrice |  | Num (12,8) | 104.36 | This is the dirty price that the trade was done at (that is, the dirty price on the start leg of the repo.)  
+Trade End | TradeEndDate |  | Date  
+  
+Any short date format accepted in any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 12/10/2010 | The date the trade matures and hence is no longer included in the corresponding portfolio.  
+  
+If the trade is booked on an Open basis (that is, without a fixed maturity) this date can be left blank.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+  
+A warning message is displayed if this date is equal to or before the current date.  
+  
+[Validation message number 14](<validation_messages.html#14>).  
+Trade Execution Date | TradeExecutionDate |  | Date  
+  
+Any short date format accepted in any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 20/02/2006 | The date on which the trade was done.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+Trade Ref | TradeReference | YES | Char (100) | 12345678 | The Trade ID as supplied by the corresponding source system.  
+  
+Trade IDs must be unique per Import Configuration.  
+  
+[Validation message number 112](<validation_messages.html#112>).  
+Trade Start | TradeStartDate |  | Date  
+  
+Any short date format accepted in a any common locale. For example, 10-May-2006, 10-Mai-2006, 10/22/06, 22/10/2006 | 22/02/2006 | The start date of the repo trade.  
+  
+[Validation message number 10](<validation_messages.html#10>).  
+Trade Type | TradeType | YES | Char (100) | Repo | The trade type or trade type alias.  
+  
+[Validation message number 108](<validation_messages.html#108>).  
+Trade Value | TradeValue |  | Num (21,6) | 1,256,252 | This is the value of the trade which represents the start cash plus accrued interest to date. This value is represented in the TradeCurrency.  
+  
+If more digits are supplied after the decimal point than are allowed the system will round to the nearest.  
+  
+If more digits are supplied before the decimal point than are allowed the value will be set to NULL.  
+  
+[Validation message number 113](<validation_messages.html#113>).  
+Upper Mkt Value | UpperMarketValue |  | Num (21,6) |  | This is a reporting field which could be used, for example, to compare the current market value to an upper trigger or threshold value specified in the repo agreement.  
+  
+**Note:** Where field sizes are shown for "Num" types in the above table, the number before the comma indicates the total number of digits allowed to be supplied. The number after the comma indicates the number of digits that can be supplied after the decimal point.
+
+When a Repo Trades import task is run a series of informational Messages are created to help determine the validity of the file.
+
+A message is created for each of the following items:
+
+  * Number of Trades with Stale Exposure Date
+  * Number of Trades with Null Exposure Date
+  * Number of Trades with Zero Exposure
+  * Number of Trades with Invalid or Null Exposure
+
+
+
+These messages can be seen in the Task Status screen.

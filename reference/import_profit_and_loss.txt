@@ -1,0 +1,222 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_profit_and_loss.html
+
+# File Format for Profit and Loss
+
+## Background
+
+TLM® Collateral Management allows the import of Profit and Loss (P&L) information for Agreements.
+
+P&L information is made up of:
+
+  * A P&L _type_. 
+  * The cash _currency_ and _amount_ of the P&L. 
+  * The _Party_ to whom the P&L should be paid. 
+  * The _Settlement Date_ on which the P&L should be paid
+
+
+
+Specifically, six types of P&L can be imported.
+
+  * _CashFlow_
+  * _CCPFee_
+  * _ClearingMemberFees_
+  * _Consideration_
+  * _Coupon_
+  * _Price Aligned Interest_
+
+
+
+P&L amounts, once imported, are converted into collateral movements for the corresponding Agreement. See [Understanding How Collateral Movements are Created from P&L](<understanding_p_and_l.html>) import for more information regarding this process.
+
+## Scope of Applicability
+
+The Profit and Loss Import can be used to import P&L for Agreements in the following Business Lines:
+
+**Central Clearing** \- But only where the Margin Type of the Agreement is Variation. 
+
+**Client Clearing** \- But only where the Margin Type of the Agreement is Variation. 
+
+**OTC** \- Imported P&L amounts will create movements with a margin type of Variation. 
+
+## Restrictions
+
+P&L cannot be imported for:
+
+  * Repo or Securities Lending Agreements. 
+  * Central Clearing and Client Clearing Agreements with a Margin Type other than Variation. 
+  * Agreements that have simultaneous held and posted Collateral positions in the cash currency of the P&L amount to be imported. 
+  * Closed Interest Periods. That is P&L amounts for an Agreement / CCY combination cannot be imported with a settlement date that falls within a closed interest period for the same Agreement / CCY combination. 
+
+
+
+**Note:** The system does not validate the posting party on an Agreement when importing P&L Information and creating the corresponding collateral movements. Therefore for Unilateral Agreements this could, under certain circumstances, lead to erroneous collateral positions (for example creation of delivery collateral movement to the Posting Party), and potentially margin calculation anomalies. It is therefore recommended that P&L amounts are not imported for Unilateral Agreements.
+
+## Import Type
+
+When importing Profit and Loss Information, no previously imported records (or their corresponding collateral movements) are deleted.
+
+## Import Process
+
+When the Profit and Loss Import task runs, the following processes occur:
+
+  1. The system validates the P&L details defined in the import file. 
+  2. Where a P&L amount is successfully validated, the system creates a corresponding collateral movement for the Agreement. 
+
+Note that each data row in the import file can contain up to six P&L types and amounts for a Single Agreement.
+
+During the Import Process the system applies logic in determining whether to create the corresponding collateral movements as delivery or return movements (Based on whether the current collateral position** is held or posted and which Party's favor the P&L movements are in). This can result in a single P&L amount being split into two collateral movements as the collateral position flips from Held to Posted or vice versa.
+
+See [Understanding Collateral Movements created from P&L import](<understanding_p_and_l.html>).
+
+Conceptually the key point to understand is that although each data row in the import file can contain up to six P&L types and amounts for a Single Agreement, it can create up to a maximum of seven collateral movements.
+
+**Posted Collateral Positions for Asset Pools are ignored in this determination. Only Internal (i.e. no defined Asset Pool) are considered.
+
+  3. Collateral Movements created from imported P&L are created with a Settlement State of In Transit, and are therefore included in Margin Calculations for the corresponding Agreements. Similarly, they are subject to processing by the settle movements task. 
+
+  4. Collateral Movements created from imported P&L are identifiable as they have a Movement Type of **Profit and Loss**. Additionally, the field P&L type denotes what type of P&L the Collateral Movement originates from. 
+
+
+
+## File Format for Profit and Loss Import
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Agreement Name | AgreementName | Yes | Char (255) | A Bank | This is the Agreement which the P&L amounts belong to.  
+  
+Agreement Name must be populated otherwise [validation error 9](<validation_messages.html#9>) will be raised.  
+  
+The Agreement Name specified must be for an Agreement in one of the following Business Lines:  
+  
+1\. **_Central Clearing._**  
+  
+2\. Client Clearing  
+  
+3\. OTC  
+  
+and additionally if in a) or b) the Agreement must have a defined Margin Type of "Variation", otherwise [validation message 319](<validation_messages.html#319>) will be raised.  
+  
+Either of the above validation failures will prevent the records on the row being loaded.  
+Notional | CashFlow | Optional, unless the corresponding field is defined.  
+  
+See Description. | Money | 15670012 | Any other cash flows that may occur for a derivative transaction.  
+  
+This field is optional, unless CashFlowApplyTo is defined, in which case it is mandatory.  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_CashFlow_** and **_CashFlowApplyTo_** will not be imported.  
+Direction | CashFlowApplyTo | Optional, unless the corresponding field is defined.  
+  
+See Description. | Char (50) | Principal  
+  
+Counterparty | Party to whom the cash flow is due. This field is mandatory if CashFlow is defined.  
+  
+Permissible values are Principal or Counterparty.  
+Notional | CCPFees | Optional, unless the corresponding field is defined.  
+  
+See Description. | Money | 15670012 | Represents Fee amounts charged by the Central Counterparty.  
+  
+This field is optional, unless **_CCPFeesApplyTo_** is defined, in which case it is mandatory  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_CCPFees_** and **_CCPFeesApplyTo_** will not be imported.  
+Direction | CCPFeesApplyTo | Optional, unless the corresponding field is defined.  
+  
+See Description. | Char (50) | Principal  
+  
+Counterparty | Party on the Agreement to whom CCPFees amount should be paid.  
+  
+Permissible values are Principal or Counterparty.  
+Notional | ClearingMemberFees | Optional, unless the corresponding field is defined.  
+  
+See Description. | Money | 15670012 | Represents Fee amounts charged by a Clearing Member  
+  
+The field is optional unless **_ClearingMemberFeesApplyTo_** is applied.  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_ClearingMemberFees_** and **_ClearingMemberFeesApplyTo_** will not be imported.  
+Direction | ClearingMemberFeesApplyTo | Optional, unless the corresponding field is defined.  
+  
+See Description. | Char (50) | Principal  
+  
+Counterparty | Party on the Agreement to whom the ClearingMemberFees amount should be paid.  
+  
+Permissible values are Principal or Counterparty.  
+  
+The field is optional unless **_ClearingMemberFees_**.  
+< Not shown in GUI > | COBDate | Optional, unless the corresponding field is defined.  
+  
+See Description. | datetime | 02/04/2012 | The COB date to which the row record applies.  
+Notional | Consideration | Optional, unless the corresponding field is defined.  
+  
+See Description. | Money | 15670012 | This represents a cash flow that may occur between the two parties.  
+  
+The field is optional unless **_ConsiderationApplyTo_** is populated.  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_Consideration_** and **_ConsiderationApplyTo_** will not be imported.  
+Direction | ConsiderationApplyTo | Optional, unless the corresponding field is defined.  
+  
+See Description. | Char (50) |  | The Party to whom the Consideration is due to.  
+  
+Permissible values are Principal or Counterparty.  
+  
+The field is optional unless **_Consideration_** is populated.  
+Notional | Coupon | Optional, unless the corresponding field is defined.  
+  
+See Description. | Money | 15670012 | This represents a cash flow amount that originates from the coupon payment on a trade.  
+  
+The field is optional unless **CouponApplyTo** is populated.  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_Coupon_** and **_CouponApplyTo_** will not be imported.  
+Direction | CouponApplyTo | Optional, unless the corresponding field is defined.  
+  
+See Description. | Char (50) |  | The Party to whom the coupon amount should be paid.  
+  
+Permissible values are Principal or Counterparty.  
+  
+The field is optional unless **_Coupon_** is populated.  
+Instrument Reference | Currency | Yes | Char(3) | GBP | The Currency for the amounts specified in  
+  
+ _CashFlow_  
+  
+CCPFee  
+  
+ _ClearingMemberFees_  
+  
+Consideration  
+  
+Coupon  
+  
+Price Aligned Interest  
+  
+A corresponding cash instrument for the specified currency must exist, otherwise [validation 321](<validation_messages.html#321>) will be raised and all records on the row will not imported.  
+  
+**Note:** If the equivalent cash instrument for the currency defined here does not exist as eligible collateral on the corresponding agreement, then the market value of any created movements will be zero.  
+< Not shown in GUI > | Description | No | Char (500) | Coupon amount on Trade | This is a textual field which can be used to provide additional information regarding the various P&L type amounts.  
+< Not shown in GUI > | ExchangeRate | No | Decimal (21,6) | 1259.12575 | This represents the exchange rate used to convert any of the P&L amounts into the amounts specified in currency.  
+< Not shown in GUI > | ExchangeTradeReference | No | Char (100) | LCH089-TKSW02568741 | This is the Central counterparties trade reference for the transaction to which the P&L amount(s) correspond to.  
+< Not shown in GUI > | MarketIndex | No | Char (100) | EONIA | This is the market index used to determine the PriceAlignedInterest amount.  
+  
+If the value specified here does not match a Market Index Reference data item in the system [Validation Message 210](<validation_messages.html#210>) will be raised, but the record will be imported.  
+Notional | PriceAlignedInterest | Optional, unless the corresponding field is defined. See Description | Money | 15670012 | This represents the Price Aligned Interest amount paid on collateral balances.  
+  
+This field is optional unless **_PriceAlignedInterestApplyTo_** has been populated.  
+  
+If included, the amount cannot be specified as zero, otherwise [validation message 322](<validation_messages.html#322>) will be raised and **_PriceAlignedInterest_** and **_PriceAlignedInterestApplyTo_** will not be imported.  
+Amount | PriceAlignedInterestApplyTo | Optional, unless the corresponding field is defined. See Description | Char (50) |  | The Party to whom the PriceAlignedInterest amount should be paid.  
+  
+Permissible values are Principal or Counterparty.  
+  
+The field is optional unless **_PriceAlignedInterest_** is populated.  
+< Not shown in GUI > | PriceAlignedInterestRate |  | Decimal (9,6) | 4.125 | The rate of interest per the Market Index that is used to calculate the **_PriceAlignedInterest_** amount.  
+Settlement Date | SettlementDate | Yes | Datetime | 02/06/2012 | The value date on which the P&L amounts will be settled.  
+  
+This date will form the settlement date on the corresponding created collateral movements.  
+  
+This date cannot fall within a closed Interest Payment period for the Agreement and Currency, otherwise [validation message 329](<validation_messages.html#329>) will be raised, and all records on the row will not imported.  
+< Not shown in GUI > | Tax |  | Money | 15670012 | This field is used to record any tax components  
+Trade Reference | TradeReference |  | Char (100) | TKSW02568741 | This is an informational field.  
+  
+**Note:** The following additional import validations that occur: 
+
+  1. At least one P&L type/amount and corresponding "applies to" party must be specified per row otherwise [validation message 320](<validation_messages.html#320>) will be raised, and the record not imported. 
+  2. If an Agreement has both held and posted collateral positions for the same cash instrument, P&L amounts for that currency cannot be imported. If this is attempted, [validation message 324](<validation_messages.html#324>) will be raised and the row will not be loaded. In order to load the P&L record, the collateral positions for the agreement should be updated to be **either** Held **or** Posted for the respective cash instrument. 
+
+

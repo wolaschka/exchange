@@ -1,0 +1,264 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_demand_workflow.html
+
+# Demand Workflow
+
+## Behavior for Messaging Margin Calls
+
+This topic outlines the behavior for Demands in the standard margin call Workflow that are subject to electronic processing with Acadia via the TLM® Collateral Management Messaging Adapter - "Messaging Eligible Demands".
+
+The following Demand Workflow states have specific behavior exhibited when processing [messaging eligible](<messaging_margincalls.html#messaging-eligibility>) demands:
+
+## Unsent State
+
+Initially, all [Messaging Eligible](<messaging_margincalls.html#messaging-eligibility>) Demands are contained within the Unsent Demands Workflow state.
+
+When one or more Demands are selected and the "Send Call(s) button is clicked, the following happens:
+
+  1. TLM Collateral Management Collateral publishes margin call notification message for the selected items.
+  2. In turn, the TLM Collateral Management Messaging Adapter ("Adapter") subscribes to the notification messages.
+  3. For any margin calls where the [Agreement has been configured with an Agreement Short Name plus Agreement Currency](<messaging_agmt_link.html>) against a group alias the Adapter takes the Margin Call information and sends an electronic Margin Call message to Acadia.
+  4. Demands from step 3) are tagged with an external Id number.
+  5. An email margin call notice is also sent to any of the [contacts for the Agreement](<contactinfo.html#contact-information>) which are defined to receive it. That is, even messaging eligible margin calls will send email margin call notices if there are contacts configured to receive them.
+  6. Simultaneously, within TLM Collateral Management, the selected margin call(s) are transitioned to the [Sent Demands](<margin_calls_workflow.html#in-progress>) Workflow queue to await, and process, the Counterparty's message response.
+  7. If the Waive or Already Notified transitions are selected from this queue, it will not cause any notifications to be published.
+  8. If the Dispute transition are selected from this queue, it will cause a notification to be published.
+
+
+
+**Note:** When TLM Collateral Management publishes a margin call notification, it is Acadia agnostic. This means notifications will always generate for any margin call as per the definition of the underlying event within TLM Collateral Management. The Adapter will filter these messages and process only those notifications that are configured with an Agreement Short Name plus Agreement Currency against a group alias that is known to Acadia.
+
+## Sent Demands State
+
+It is expected that Messaging Eligible calls will remain in this Workflow state until a response is received from the Counterparty via the Adapter.
+
+If the original demand message was not received by the Counterparty, the Resend Call(s) button can be used to send the margin call notification message again. However, when this button is clicked, TLM Collateral Management will not check whether it has already been sent, which may potentially result in duplicate call notifications being issued, so it is recommended to use this with caution.
+
+## Receiving an Agreed Response
+
+In the _Awaiting Collateral Details_ , the Counterparty can provide an "**Agree** " response message. There are three response scenarios:
+
+**Counterparty Sends a Full Agreement Message**
+
+In which case the Agreed Total on the Demand is updated to reflect full agreement - i.e. it is equal to the Principal Call Amount.
+
+**Counterparty Sends a Partially Agreed Message**
+
+In which case the following happens:
+
+  1. The **Agreed Total** in TLM Collateral Management is updated to reflect the amount that the counterparty has agreed to.
+  2. TLM Collateral Management evaluates [_If_ (**Prin Call Amount - Total Agreed**) >= **Dispute Tolerance**] whether a _partial dispute_ should be created.
+  3. If a Partial dispute is created:
+     * The _dispute categories_ and _dispute comments_ received from Acadia will be appended to the _categories_ and _comments_ defined in TLM Collateral Management's _Windows service config file_.
+     * The partial dispute is transitioned to the **Disputes** state, and **Dispute Amount** is set as the difference between **Principal Call Amount** and **Agreed Total**.
+     * The partially agreed demand remains in the **Agreed Awaiting Collateral Details** state.
+
+
+
+**Counterparty Sends a Fully Disputed Message**
+
+In which case the following happens:
+
+  1. The **Agreed Total** in TLM Collateral Management is updated to zero.
+  2. The _dispute categories_ and _dispute comments_ received from Acadia will be appended to the _categories and comments_ defined in TLM Collateral Management's _Windows service config file_.
+  3. The Demand is transitioned to the **Disputes** state.
+  4. **Dispute Amount** is set as the difference between **Principal Call Amount** and **Agreed Total**.
+
+
+
+For all disputes, the Counterparty Margin Details will be populated as per details received from Acadia:
+
+**Acadia Margin Call Data updated in TLM Collateral Management**
+
+Acadia Value | TLM Collateral Management Value  
+---|---  
+Counterparty Mark to Market | Net Exposure; Net Exposure favour of  
+Counterparty Initial Margin | Lock Up Margin; Lock Up Margin favour of  
+Counterparty Collateral Balance | Held / Posted Collateral  
+  
+## Receiving Collateral Pledge Information
+
+For an Agreed call, it is expected that the counterparty will provide collateral pledge information through Acadia.
+
+Once pledge information is received from Acadia the following occurs:
+
+  1. The collateral pledge data is validated within TLM Collateral Management. TLM Collateral Management checks that the instrument exists, as well as whether the pledge direction is valid. If there are any validation errors, TLM Collateral Management does not create the collateral movements, but publishes error messages so that they can be seen in TLM Collateral Management Messaging Intervention Tool.
+  2. TLM Collateral Management converts the collateral pledge data into Collateral Movements on the Demand.
+  3. Collateral Movements will only be saved on a Demand, if all of the pledge information for the Demand can be converted into Collateral Movements. If one or more Collateral Movements cannot be created then no Collateral Movements will be saved, and an error will be published.
+  4. Collateral Movements in TLM Collateral Mangement are created from the pledge data using TLM Collateral Management pricing data, namely: * Price details per the Agreements defined price source.
+
+     * FX details per the Agreements defined Fx Source.
+     * Valuation percentages per the Agreement Basic Eligibility definitions.
+
+However, the price data received on the collateral pledge is written to the **Movement Reason** field for the corresponding TLM Collateral Management Collateral Movement for further analysis if need be.
+
+  5. Collateral pledge data will also include three flags from Acadia that will be appended and updated directly on the Demand in a single field called Workflow STP Status. The individual flags are as follows:
+
+     * AutoApprovable - true / false
+     * Exceptions - true / false
+
+The Workflow STP Status field is viewable from the Demand margin call workflow grid. The field is used by TLM Collateral Management to determine if the Demand can be auto approved.
+
+See **Confirmed to be Approved state** section below for more details.
+
+**Note:** These flags are derived solely by Acadia and passed onto TLM Collateral Management via the collateral pledge message. Please consult the Acadia documentation for details on how these flags are derived.
+
+  6. TLM Collateral Management then saves the Collateral Movements created against the Demand.
+
+**Note:** For returns, the system checks the value populated in the STPReturnAssetPoolMatching configuration key in < V5install>\CollateralWinService\Algo.Collateral.Services.WindowsServiceHost.exe.config. This is to prioritize creating the return for an asset pool.
+
+     * If the value is **True** :
+       * The system will check if there is a position (internal and/or asset pool) that is sufficient to book the return.
+       * If no sufficient position can be found, the system will return a validation error.
+       * If there is a pool (internal and/or asset) that could accept the return movement then the asset pool with the most recent settlement date for that instrument will be selected.
+       * If no asset pools are found with sufficient position to return, then the system will select the internal pool.
+       * If multiple asset pools, with the same settlement date, for the instrument are found, the system will return an error stating that multiple pools were found and alert the user that they will need to determine how the movement should booked.
+     * If the value is **False** :
+       * The system will only check if there is a position for the internal pool that is sufficient to book the return.
+       * If no sufficient position can be found, the system will return a validation error.
+  7. TLM Collateral Management then performs the following validations in the order listed:
+
+     * Existing Movements - checks whether movements already exist on the Demand.
+     * Insufficient Collateral - checks whether the @Sum **Mkt Value(Agreement Ccy)** value of the created movements is less than the Agreed Total Amount.
+  8. If Existing Movements and Insufficient Collateral checks pass, the process moves on to step 11).
+  9. If Existing Movements check fails:
+     * The Demand will not transition out of the state. 
+  10. If Insufficient Collateral check fails, TLM Collateral Management checks the value populated in the NotifyCounterpartyForInsufficientCollateral configuration key in _< \V5install>\CollateralWinServices\Algo.Collateral.Services.WindowsServiceHost.exe.config_
+     * If the value is **True** :
+       * An insufficient collateral email notice will be sent to those Agreement contacts defined to receive it.
+       * The Demand will not transition out of the state.
+     * The expectation is that the email notice will notify the counterparty to take remedial action. Nothing will pass through Acadia, at this point.
+     * The Counterparty can cancel their movements and resend new movements with @sum value = **Agreed Total** to satisfy the call.
+       * TLM Collateral Management will process the new pledges, as a new event.
+     * When the value is set as false, movements will be saved and the process moves onto step 11).
+  11. Assuming no further processing or validation errors, the Demand with attached Collateral Movements is automatically transitioned to the **Confirmed to be Approved** state.
+
+
+
+## Processing Received Pledge Amend Messages
+
+Demands that are in this workflow state with movements in a rejected status, can be updated with **Pledge Amend** messages. (To have movements in a rejected status, the margin call was rejected by a user in the Confirmed to be Approved state.)
+
+When a Pledge Amend Message is received, the system does the following:
+
+  * Analyzes the **Pledge Amend** message to determine what has changed from the original **Collateral Pledge** message.
+  * _Edit_ any movements which are changed in the **Pledge Amend** message.
+  * _Add_ any movements that are included in the **Pledge Amend** message, but were not in the original **Collateral Pledge** message.
+  * _Delete_ any movements which were included in the original Pledge message, but are omitted in the **Pledge Amend** message.
+
+
+
+Assuming no validation errors occurs, the demand and its revised movements are transitioned to the **Confirmed to be Approved** state.
+
+**Note** : Collateral Pledges booked via the Pledge Amend message are not subject to Auto Approval. The process to amend existing pledges is deemed an exception process requiring manual approval of the pledges.
+
+## Receiving Pledge Cancel Messages
+
+Demands can be processed by receiving a Pledge Cancel message from Acadia. Should this occur, the margin call is processed as follows:
+
+  1. Movements that are in a rejected status in the [Agreed](<margin_calls_workflow.html#in-progress>) state will be set to a status of ignored.
+  2. The Demand can then be re-processed in that state via **Pledge Amend** messages.
+
+
+
+## Resetting Agreed Amount
+
+Unless absolutely necessary, it is not recommended to use the reset the agreed amount for demands in this margin call workflow state. The agreed amount will be reset in TLM Collateral Management. Depending on whether there were collateral pledges booked onto the call, one of the following corrective actions may have to be taken:
+
+  * If there are no collateral pledges, the Agreed Amount can be re-entered.
+  * If there were collateral pledges on the call in TLM Collateral Management, these would be removed from the call and put to an ignored state. Should the counterparty send / resend collateral pledges, TLM Collateral Management will attempt to book the corresponding movements but publish an error that the agreed amount is not set. From the TLM Collateral Management Messaging Intervention Tool, the user could see the error and reprocess the action, once the agreed amount has been set.
+  * As an alternative, the counterparty can be asked to cancel the pledge, which will cause the call in TLM Collateral Management to revert to an Agreed state. TLM Collateral Management will get the agreed state from Acadia and update the Agreed amount. The Counterparty can then resend their collateral pledge details.
+
+
+
+**Note** :
+
+  1. In the **Agreed** state, the user should avoid resetting the **Agreed amount**. TLM Collateral Management will not be able to book any movements supplied by the Counterparty through Acadia, if the margin call is not in this state with a set agreed amount.
+  2. Demands in this Workflow state can be affected by margin recalculations on the same day that generate differing Margin Calculation Results. If the New Margin Result is selected - see [Recalculations for Messaging Margin Calls](<messaging_recalc_mc.html>) for messaging specific behavior.
+
+
+
+## Confirmed Approval State
+
+Messaging eligible Demands in this **Workflow state** are subject to either automatic or manual approval as follows:
+
+  1. If the messaging agreement is not eligible for Auto Approvals, the Demand will remain in the **Confirmed Approval** state awaiting manual approval.
+  2. If the messaging agreement is eligible for Auto Approvals, TLM Collateral Management then performs the following validations _in the order_ listed:
+
+     * Eligibility - checks whether basic, advanced, ratings based and/or wrong way risk eligibility rules pass.
+     * Concentration - checks whether Counterparty Concentration rules pass.
+     * Workflow STP Status - checks whether the flags received from Acadia allow for the automatic approval of the Demand
+
+
+
+**Note** : All failures from the above validations will be reported under the Demand's Status field within the margin call workflow grid. It cannot be determined if the Demand should have transitioned to Confirmed Sent to Settlements just from the Workflow STP Status field. The Demand's Status field also has to be reviewed to understand why it has not transitioned.
+
+The following table lists the possible combinations of the above validations and their outcome:
+
+Eligibility Check | Concentration Check | Workflow STP Status field | TLM Collateral Management Transition Behavior  
+---|---|---|---  
+Fail | n/a  
+  
+**Note** : Concentration check is executed, but TLM Collateral Management will only report on the first failure. | n/a  
+  
+**Note** : Workflow STP Status field will have values when provided, but TLM Collateral Management will only report on the first failure. | Demand does not auto approve and remains in the **Confirmed Approval** state.  
+Pass | Fail | n/a  
+  
+**Note** : Workflow STP Status field will have values when provided, but TLM Collateral Management will only report on the first failure. | Demand does not auto approve and remains in the **Confirmed Approval** state.  
+Pass | Pass |  | Demand does not auto approve and remains in the **Confirmed Approval** state.  
+Pass | Pass |  | Demand does not auto approve and remains in the **Confirmed Approval** state.  
+Pass | Pass |  | Demand auto approves and transitions to the **Confirmed** state. See below **Note**.  
+  
+**Note** : Messaging eligible Demand auto approvals are only valid within First level movement approvals. This means, if the system is configured for [High Value Movement Approvals](<high_value_movement.html#configure-high-value-movement-approval-evaluation-to-a-business-line>), then all [Second level movement approvals](<high_value_movement.html#understanding-high-value-movement-approval-controls>) will require to be manually approved in order to progress the Demand to the **Confirmed** state and the movements to an **In Transit** state.
+
+When a Messaging Eligible Demand is **approved** (manually or automatically) in this workflow state, the following occurs:
+
+  1. The Demand and its attached Collateral Movements are transitioned to [Confirmed](<margin_calls_workflow.html#approvals>) state, and the movements updated to an In Transit settlement state.
+  2. A Pledge Accepted message is sent to the Counterparty via Acadia. This completes the margin call processing cycle for a Demand in Acadia.
+  3. TLM Collateral Management will email collateral confirmation notices to those [Agreement Contacts](<contactinfo.html#contact-information>) which are configured to receive them.
+
+
+
+When a Messaging Eligible Demand is rejected (manually only) in this workflow state, the following occurs:
+
+  1. The Demand and its attached Collateral Movements are transitioned to [Agreed](<margin_calls_workflow.html#in-progress>) state, and the movements updated to a Rejected settlement state.
+  2. TLM Collateral Management publishes a message that the Margin Call and associated movements have been rejected.
+  3. The Messaging Adapter listens for messages, and will therefore consequently, send a **Pledge Reject** message to the Counterparty via Acadia.
+
+
+
+## Waived Approval State
+
+Standard Workflow behavior applies to messaging eligible Demands in this **Workflow** state with the following exceptions.
+
+**Approving the Waive:** causes the following behavior to occur:-
+
+  1. The Agreed amount on the Demand is set to zero.
+  2. transitioned to [Waived](<margin_calls_workflow.html#approvals>) workflow state.
+  3. Simultaneously, TLM Collateral Management publishes a message that the margin call (and any associated calls if they exist) have been cancelled.
+  4. The TLM Collateral Management Messaging Adapter in turn, listens for messages, and sends a **Cancel Margin Call** message via Acadia to the Counterparty.
+
+
+
+**Rejecting the Waive**
+
+When rejecting the waive, the demand is transitioned back to the **Sent Demands** state.
+
+**Note** : When the **Waive** a Demand is elected, the **Agreed Amount** will be reset.
+
+If the waive is **rejected** , an agreed amount will need to be set again and then book the movements. The call can then be transitioned to the approve state as needed.
+
+**Note** : Rejecting may not work. When pledges are rejected, the pledge amp ids that are rejected are sent to Acadia. The pledge amp ids that are being rejected are will be sent to Acadia.  This would have been set as the external movement id when the movements were originally created. As the movements that were reprocessed were not the same as the ones that had been set to Ignored when the agreed amount was reset when Waive was selected, a reject at this point would not be communicated properly to Acadia, but would transition in TLM Collateral Management. If there is a need to reject the movements at this point (after the Waive and rejection are tried), it is best to coordinate with the counterparty, directly.
+
+**Note** : Demands in this Workflow state can be affected by margin recalculations on the same day that generate differing Margin Calculation Results. If the New Margin Result is selected - see [Recalculations for Messaging Margin Calls](<messaging_recalc_mc.html#recalculations-for-messaging-margin-calls>) for messaging specific behavior.
+
+## Waived State
+
+**Note** : Demands in this Workflow state can be affected by margin recalculations on the same day that generate differing Margin Calculation Results. If the New Margin Result is selected - see [Recalculations for Messaging Margin Calls](<messaging_recalc_mc.html#recalculations-for-messaging-margin-calls>) for messaging specific behavior.
+
+## Disputes State
+
+**Resetting Agreed Amount**
+
+Unless absolutely necessary, it is not recommended to reset the agreed amount for Demands in this margin call state. The agreed amount will be reset in TLM Collateral Management. The user may have to manually re-agree the call to continue processing.
+
+**Note** : Demands in this Workflow state can be affected by margin recalculations on the same day that generate differing Margin Calculation Results. If the New Margin Result is selected - see [Recalculations for Messaging Margin Calls](<messaging_recalc_mc.html#recalculations-for-messaging-margin-calls>) for messaging specific behavior.

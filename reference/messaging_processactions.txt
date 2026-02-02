@@ -1,0 +1,64 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_processactions.html
+
+# Processing Actions
+
+Actions can be independently initiated in Acadia that may affect Messaging Eligible Margin Calls in TLM® View Collateral. This topic outlines what those actions are, and how they are processed.
+
+## Cancel Agreed / Cancel Dispute
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Cancel Agreed** or **Cancel Dispute** , a message will be published to reset the agreed amount. Provided that the Margin Call in TLM Collateral Management is in a workflow state that allows the agreed amount to be reset, it will.
+
+## Cancel Margin Call
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Cancel Margin Call** a message will be published to reset the agreed amount of the corresponding call in TLM Collateral Management. Provided that the Margin Call TLM Collateral Management is in a workflow state that allows the agreed amount to be reset, it will.
+
+## Pledge Amend
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Pledge Amend** a Demand the system does the following:
+
+  * Analyses the **Pledge Amend** message to determine what has changed from the original **Collateral Pledge** message.
+  * _Edit_ any movements which are changed in the **Pledge Amend** message.
+  * _Add_ any movements that are _included_ in the **Pledge Amend** message, but were not in the original **Collateral Pledge** message.
+  * Conversely, _delete_ any movements which were included in the original Pledge message, but are _omitted_ in the **Pledge Amend** message.
+
+
+
+Assuming no validation errors occur, the Demand and its revised collateral movements are transitioned to the **Confirmed to be Approved** state.
+
+## Pledge Cancel
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Pledge Cancel** a Demand, the system does the following:
+
+  1. Movements that are in a rejected status in the **Demand Workflow - Agreed Awaiting Collateral Details** state will be set to a status of ignored.
+  2. The Demand can then be re-processed in that state via **Pledge Amend** messages.
+
+
+
+## Pledge Accept
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Pledge Accept** on an Anticipated Demand, the system does the following:
+
+  1. If the Counterparty sends a Pledge Accept message, the Margin Call and its attached Collateral Movements are transitioned to **Antic Demands - Confirmed sent to Settlements** state. The movements are updated to a status of In Transit. This completes the margin call processing cycle for the Anticipated Demand in Acadia.
+
+
+
+## Pledge Reject
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to **Pledge Reject** on an Anticipated Demand, the system does the following:
+
+  1. If the Counterparty sends a Pledge Reject message, the Margin Call and its attached Collateral Movements are transitioned to **Antic Demands - Agreed Awaiting Collateral Details** state. The movements are updated to a status of Rejected, and a message is sent to the Counterparty via Acadia cancelling the movements. The movements are cancelled so that any changes that are made by the user in the _Agreed-Awaiting Collateral Details_ state and then approved will send the movements as new movements to the Counterparty via Acadia.
+
+
+
+## Initial Margin Exposure Details
+
+When the TLM Collateral Management Messaging Adapter receives a message from Acadia to initiate an **Anticipated Demand** margin call, the system does the following:
+
+  1. TLM Collateral Management will [match](<messaging_margincalls.html#margin-call-matching-criteria>) the margin call and automatically [process](<messaging_anticdemand_workflow.html#anticipated-demands-state>) the message accordingly.
+  2. The Initial Margin Exposure details cannot be processed within TLM Collateral Management. These details will be published as an exception to the TLM Collateral Management Messaging Intervention Tool.
+
+
+
+For example:
+
+![Initial_Margin_Exposure_Details.jpg](Images/Initial_Margin_Exposure_Details.jpg)

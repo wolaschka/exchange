@@ -1,0 +1,109 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/contacts_approvals.html
+
+# Approvals Process for Contacts
+
+## Overview
+
+When Approvals for contacts is [enabled](<system_configuration.html#database-approvals>), and a Contact record is subject to a change, that is, the Contact is:
+
+  * Newly Created on an Agreement.
+  * Edited
+  * Exists and is Added to an Agreement
+  * Removed from an Agreement(s)
+  * Deleted
+
+
+
+the action does not occur immediately. Instead, the contact record is locked for approval with the changes held in a pending state on an approval record.
+
+The contact remains locked for approval with the changes pending until the record is either:
+
+  * **approved** \- in which case the pending changes are applied
+  * **rejected** \- in which case the pending changes discarded
+
+
+
+While locked for approval, the contact record cannot be further edited. The pending changes that exist for a contact can be viewed.
+
+**Note:** In order to maintain data integrity, should margin calculation or interest task be run which encounters one or more contacts locked for approval on any of the agreements subject to the task, then warnings will be raised to alert users that there are pending changes which should be processed.
+
+The following sections outline how each of the above actions are processed in terms of approvals.
+
+## Creating a New Contact
+
+When agreement approvals are enabled, when a contact is created, the contact will be in a pending state. The contact will not be able to be used anywhere in TLM Collateral Management until it is approved. The new contact will appear on the associated agreement with the "warning" icon in “Action” column of the contact grid.
+
+If during the contact creation, multiple agreements were selected, the contact will appear on each agreement and they will all have the “warning” icon in the “Action” column of the contact grid.
+
+The contact cannot be further edited until it is approved.
+
+Newly created contacts that are locked for approval appear in the **Pending** screen in the **Approvals** workspace with an Action of Insert.
+
+The action column with have a value of “insert” for a new creation.
+
+The “name” column will contain the name of the agreement followed by the name of the contact.
+
+The read only report will contain all of the relevant information for this contact. It will include the name of the contact, e-mail address, phone numbers, types of e-mail notification to be sent, and the set of associated agreements which this contact was added to.
+
+It will also have details of who created the contact and when.
+
+The pending approval record for the contact will remain in the Pending Approval type under the Approvals screen until it is approved by a user with appropriate permissions. The approving user cannot be the creator or the editor of the contact.
+
+Once **approved** , the following happens:
+
+  1. The Pending approval record moves to the **Approved** screen in the Approvals Workspace.
+  2. The contact is no longer in a locked state, and the locked icon will no longer appear against it.
+  3. Simultaneously, the new contact will be available in TLM Collateral Management and associated to the agreement (and any other agreements it was associated to when initially created).
+
+
+
+Should the pending approval record be **rejected** in the **Approvals** workspace, then:
+
+  1. A rejection reason is required.
+  2. The pending approval record moves to the Rejected screen.
+  3. The pending changes are discarded, when on a newly created contact effectively means the creation never occurred.
+
+
+
+## Editing a Contact
+
+When [editing a contact](<contactinfo.html#contact-information>), the Approvals process largely follows that of a creation with the following differences:
+
+  * The edited contacts are locked and cannot be further edited.
+  * The original (unedited) values on the contact are used until the pending changes are approved.
+
+
+
+The **Action** in the pending approval record is an Update. Once approved, the pending changes are applied, and the original values updated.
+
+If rejected in the Approvals workspace, the original values are retained, and the pending values discarded.
+
+## Adding Existing Contacts to an Agreement
+
+TLM Collateral Management allows a user to add a one of more existing contacts to an agreement by clicking on the [_Add Existing_](<contactinfo.html#adding-an-existing-contact>) button.
+
+A pop-up screen will appear where the user can filter by Agreement to narrow down the number of contacts or select one or multiple contacts from the drop-down menu from the Available Contacts field.
+
+**Note:** Contacts that are already locked or newly created contacts that have not been approved will not appear in the list of contacts to be chosen in the “Add to Existing” dialog box
+
+Each contact added will be locked and cannot be edited or added to other agreements until the lock is released.
+
+Each contact added will create its own approval record and will be treated individually. Consequently, it is possible to approve one contact but reject another.
+
+## Removing Contacts from an Agreement
+
+Removing a contact from the current agreement will lock that contact.
+
+The lock will prevent removing the contact from other agreements, or from editing or removing. The previous lock must first be released.
+
+Removing a contact from the current agreement and other agreements also locks the contact.
+
+**Note:** Despite being removed from several agreements, this action will only generate one contact approval for all of the agreements which the contact association is being removed from.
+
+The removal of a contact from an Agreement is considered an Update action. It is updating the contact record in terms of which agreements it is associated to.
+
+## Deleting Contacts
+
+When [removing](<contactinfo.html#removing-or-deleting-contacts>) a contact from an agreement, it is also possible to select that the contact is deleted from the system and removed from all agreements to which it is referenced.
+
+By selecting this option, it causes the contact to lock the contact and create an approval record with a type of “delete”.

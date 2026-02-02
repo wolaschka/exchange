@@ -1,0 +1,27 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreements_misc.html
+
+# Misc
+
+The Miscellaneous tab contains data that can be used throughout the system and for reporting purposes.
+
+Section | Definition  
+---|---  
+Agreement Identification | This section has three read only fields for information purposes and will only appear once the agreement is created.  
+  
+**Identifier** \- a unique numeric value assigned to the Agreement record when it is first created in the underlying database tables. Should the Agreement's name subsequently change, the Identifier will remain constant. Identifier cannot be altered.  
+  
+**Reference Identifier** \- This is the identifier used with Acadia in identifying the agreement.  
+  
+**Source Reference** \- If an agreement has been imported, it may also have a unique Source reference Typically this represents the unique id for the Agreement in an external system. Source references must be unique. Source reference can only be populated on an Agreement via import - it cannot be entered or updated from the GUI.  
+Aliases | Aliases are used primarily for importing and matching of data items from external systems to TLM Collateral data items.  
+  
+For example, a Counterparty known in a user's collateral system as ABC Bank Ltd may be referenced in another trading systems as ABC. ABC would therefore be an alias for ABC Bank Ltd.  
+  
+**Note:** If the [Alias Group](<reference_related_data.html#alias-groups>) selected is the _default_ alias group, then the Alias Name entered will be seen when the Agreement appears on [Margin Call Summary Notices](<margin_calls_statements.html#margin-call-notice>).  
+Tri-Party Custodians | Indicate Collateral settles via [Tri-Party Custodians](<triparty_custodian.html#tri-party-custodians>)  
+Settlement Information | [Settlement Instructions](<agreements_settleinstr.html#settlement-instructions>)  
+Contact Information | [Contact Information](<contactinfo.html#contact-information>)  
+Extension Data | The system provides the flexibility for users to create their own parameters on the Agreement Object. These parameters are termed "Extensions".  
+  
+[Agreement Extensions](<reference_related_data.html#extensions>) are created in [Reference Data](<reference.html>). Once created, they can be seen, and their values are updated on the Extensions Section on the Misc tab.  
+Notes | The system allows a user to make notes on an agreement. The section will store the note, the date that is entered and the user who entered it.

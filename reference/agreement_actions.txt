@@ -1,0 +1,667 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_actions.html
+
+# Agreement Actions
+
+## Create Agreements
+
+**Note:** TLM® Collateral Management license use is governed by Business Line. Before proceeding, please ensure that the correct license in place to use each Business Line (OTC, Repo, Securities Lending, Central Clearing). The use of Client Clearing functionality may require an additional license. Please check with a SmartStream representative for any questions related to license entitlement.
+
+**Procedure**
+
+  1. To create a new agreement, select the ![agreement_create_button.jpg](Images/agreement_create_button.jpg) button.
+  2. Select the appropriate business line for the agreement to be created.
+
+The current choices are:
+
+     * [Central Clearing](<agreements_define.html#define-central-clearing-agreement>)
+     * [Client Clearing CL facing CM](<agreements_define.html#clearing-member-to-client>)
+     * [Client Clearing CM facing CL](<agreements_define.html#client-to-clearing-member>)
+     * [OTC](<agreements_define.html#otc>)
+     * [OTC Lock Up Only](<agreements_define.html#otc-lock-up-only>)
+     * [Repo](<agreements_define.html#repo>)
+     * [Securities Lending](<agreements_define.html#securities-lending>)
+
+The choice of agreement determines which default agreement screen opens.
+
+  3. All required fields must be filled in before the ![agmt_save_button.jpg](Images/agmt_save_button.jpg) button becomes enabled. The required fields are noted by the red star next to the label.
+
+  4. Click the **Save** button to commit the changes to the database or select the **Cancel** button to discard the changes.
+
+     * If the **Cancel** button is selected or the user exits from the screen, a pop-up window will appear with the following message: "It looks like you have unsaved changes. Are you sure you want to discard them?" If **Cancel** is selected, the user can still edit the agreement. If **Yes, discard** is selected, then all changes will be lost.
+
+
+
+## Editing Agreements
+
+Use the [Search Criteria](<#search-criteria>) to find the agreement that needs modification.
+
+**Procedure**
+
+  1. Click on **View Details** button under the _Action_ column for the agreement that needs to be modified.
+  2. Select the **Edit** button in the top right corner and to make the agreement editable.
+  3. Make the required changes and click the **Save** button or select the **Cancel** button to discard the changes.
+
+     * If the **Cancel** button is selected or the user exits from the screen, a pop-up window will appear with the following message: "It looks like you have unsaved changes. Are you sure you want to discard them?" If **Cancel** is selected, the user can still edit the agreement. If **Yes, discard** is selected, then all changes will be lost.
+
+
+
+**Notes:**
+
+  1. The **Save** button will be disabled until all required fields have a value. 
+  2. [Agreement Margins](<agreements_marginterms.html#agreementmargins>), [Specific Trade Coverage](<agreements_tradecoverage.html#specific-trade-coverage>), [Standard Settlement Instructions](<agreements_settleinstr.html#settlement-instructions>) and [Contacts](<contactinfo.html#contact-information>) are disabled until the agreement is saved.
+
+
+
+### Create a Grid Row
+
+Data for these specific areas can be added to the agreement by following the procedure below:
+
+  * [Agreement Margins](<agreements_marginterms.html#OTCAgmtMargins>)
+  * [Eligible Collateral](<basiceligibility.html#basic-eligibility>)
+  * [Advanced Eligiblity Rules](<advancedeligrules.html#advanced-eligibility-rules>)
+  * [Rating Based Eligibility Rules](<ratingbasedeligrules.html#rating-based-eligibility-rules>)
+  * [Wrong Way Risk](<wrongwayrisk.html#wrong-way-risk>)
+  * [Concentration Rules](<agreements_concentrationrules.html#concentration-rules>)
+  * [Trade Assignment](<agreements_tradecoverage.html#trade-assignment>)
+  * [Specific Trade Coverage](<agreements_tradecoverage.html#specific-trade-coverage>)
+  * [Settlement Information](<agreements_settleinstr.html#settlement-instructions>)
+  * [Contact Information](<contactinfo.html#contact-information>)
+
+
+
+**Procedure**
+
+  1. Click on the ![concrule_add_button.jpg](Images/concrule_add_button.jpg) button and a create window will appear.
+  2. Fill in the fields accordingly.
+  3. To save the changes, click on the ![save_button.jpg](Images/save_button.jpg) button. To discard the changes, click on the ![cancel_button.jpg](Images/cancel_button.jpg) button or press the **X** in the top right corner of the pop up window.
+
+
+
+### Edit a Grid Row
+
+Data can be edited for these specific areas by following the procedure below:
+
+When the agreement is in edit mode:
+
+  * [Eligible Collateral](<basiceligibility.html#basic-eligibility>)
+  * [Advanced Eligiblity Rules](<advancedeligrules.html#advanced-eligibility-rules>)
+  * [Rating Based Eligibility Rules](<ratingbasedeligrules.html#rating-based-eligibility-rules>)
+  * [Wrong Way Risk](<wrongwayrisk.html#wrong-way-risk>)
+  * [Concentration Rules](<agreements_concentrationrules.html#concentration-rules>)
+  * [Trade Assignment](<agreements_tradecoverage.html#trade-assignment>)
+
+
+
+When the agreement is not in edit mode:
+
+  * [Settlement Information](<agreements_settleinstr.html#settlement-instructions>)
+  * [Contact Information](<contactinfo.html#contact-information>)
+
+
+
+**Procedure**
+
+  1. Click on the ![edit_icon.jpg](Images/edit_icon.jpg) icon located next the row that needs to be modified. 
+  2. The pop up window will appear and the changes can then be made. 
+  3. To save the changes, click on the ![save_button.jpg](Images/save_button.jpg) button.
+  4. To discard the changes, click on the ![cancel_button.jpg](Images/cancel_button.jpg) button or press the **X** in the top right corner of the pop up window.
+
+
+
+### Delete a Grid Row
+
+To delete a row from any of these areas, follow the procedure below:
+
+  * [Agreement Margins](<agreements_marginterms.html#margin-terms>)
+  * [Eligible Collateral](<basiceligibility.html#basic-eligibility>)
+  * [Advanced Eligiblity Rules](<advancedeligrules.html#advanced-eligibility-rules>)
+  * [Rating Based Eligibility Rules](<ratingbasedeligrules.html#rating-based-eligibility-rules>)
+  * [Wrong Way Risk](<wrongwayrisk.html#wrong-way-risk>)
+  * [Concentration Rules](<agreements_concentrationrules.html#concentration-rules>)
+  * [Trade Assignment](<agreements_tradecoverage.html#trade-assignment>)
+  * [Specific Trade Coverage](<agreements_tradecoverage.html#specific-trade-coverage>)
+  * [Aliases](<agreements_settleinstr.html#settlement-instructions>)
+  * [Settlement Information](<agreements_settleinstr.html#settlement-instructions>)
+  * [Contact Information](<contactinfo.html#contact-information>)
+
+
+
+**Procedure**
+
+  1. Click on the ![delete_icon.jpg](Images/delete_icon.jpg) icon located next the row that needs to be deleted.
+  2. The user will be prompted with a warning message asking to confirm the deletion or cancel the action.
+  3. To delete the changes, click on the ![delete_button.jpg](Images/delete_button.jpg) button.
+  4. To discard the changes, click on the ![cancel_button.jpg](Images/cancel_button.jpg) button or press the **X** in the top right corner of the pop up window.
+
+
+
+**Note:** If Approvals is enabled, values on the Agreement are subject to approval. If they are added/changed, the values require approval before they are committed to the database. They are said to be pending approval while an Agreement has pending approval values, it is said to be [Locked For Approval](<agreements_approvals.html>). An Agreement that is Locked For Approval cannot be edited (or copied) until the values that are pending are either agreed or rejected.
+
+Agreements that are Locked for approval are identifiable from the Agreements grid, as the Locked for Approval field is populated with a locked icon. Additionally, the whole Agreement form will be grayed out.
+
+## View Agreement
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Click on the view icon, the screen will open up for the selected agreement in read-only mode.
+
+
+
+The user can view [agreement details](<agreements_general.html>), [edit the agreement](<agreements.html#editing-agreements>) or run a [single margin calculation](<agreements.html#run-single-margin-calculation>).
+
+**Note:** In the read-only mode, the following information can be edited. If the **Edit** button is clicked, these areas will be disabled until the agreement is saved.
+
+  * Margin Terms Tab - [Agreement Margins](<agmtmargins_otc.html>)
+  * Trade Coverage Tab - [Specific Trade Coverage](<agreements_tradecoverage.html#specific-trade-coverage>)
+  * Misc Tab - [Settlement Information](<agreements_settleinstr.html#settlement-instructions>)
+  * Misc Tab - [Contact Information](<contactinfo.html#contact-information>)
+
+
+
+## View Exposure Trades
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon and a menu will appear.
+  3. Select the **View Exposure Trades** ; the trade information will be displayed below the Agreements grid.
+
+**Note:** This option is grayed out for Central and Client Clearing Agreements defined Margin Type other than "Variation".
+
+
+
+
+The user will be prompted with "Would you like to continue and retrieve the trades?" when the number of trades are between 500 and 5000.
+
+If there are more than 5000 trades, the user will be prompted with "Would you like to continue and retrieve the first 5,000 trades?".
+
+**Last Calculation Details**
+
+The data displayed under the Last Calculation Details area is a summary of the position based upon the last time the Margin Calculation task was run, except for exchange rate. The "System to Agreement Ccy" rate is the latest FX Rate loaded on or before the "Exposure Calculation Date" for the relevant currency.
+
+The grid at the bottom displays the trades currently assigned to the agreement with the "Agreement Exposure Total" being calculated on the fly using the latest FX Rate loaded on or before the "Exposure Calculation Date".
+
+Field | Description  
+---|---  
+Exposure Amount | This is the total of the current exposure trades taking into consideration any haircut (that is MarketValue - TradeValue). This is the value that was used in the Margin Calculation.  
+System to Agreement Ccy | This is the latest FX Rate loaded on or before the "Exposure Calculation Date" for the relevant currency.  
+Exposure Calculation Date | The last date and time that the margin calculation was run on the agreement.  
+Lock Up Margin Due To Principal | This is the total of the current lock up margin due to principal that was used in the last margin calculation.  
+Lock Up Margin Due To Counterparty | This is the total of the current lock up margin due to counterparty that was used in the last margin calculation.  
+Additional Margin Due To Principal | This is the total of the current additional margin due to principal that was used in the last margin calculation.  
+Additional Margin Due To Counterparty | This is the total of the current additional margin due to counterparty that was used in the last margin calculation.  
+Agreement Exposure Total | This is the total exposure currently assigned to the agreement being calculated on the fly using the latest FX Rate loaded on or before the "Exposure Calculation Date".  
+  
+The grid at the bottom displays the trades currently assigned to the agreement with the "Exposure Amount (Agmt Ccy)", "Lock Up (Agmt Ccy)" and "Additional (Agmt Ccy)" fields being calculated on the fly using the latest FX Rate loaded on or before the Exposure Calculation Date. 
+
+**Note:** The data displayed in the grid could be different to the results of the margin calculation if one of the following actions have been performed and the exposure calculation has not be re-run.
+
+  * Additional trades have been assigned to the agreement.
+  * New FX Rates have been imported.
+
+
+
+**Note:**
+
+  1. Exposure Trades imported via OTC Exposure Trades Import can be for OTC Agreements, Central Clearing or Client Clearing Agreements. However, exposure trades are only eligible on Central and Client Clearing Agreements that have a Margin Type of Variation. Furthermore, it is possible that exposure trades for central and client clearing agreements are imported with Lock Up and Additional Margin Amounts. It is also possible that these values can be overridden. However, although these values will be displayed against the corresponding trade in the lower grid, they are not taken into consideration in Margin Calculations for Client Clearing Agreements. 
+  2. Margin Calculations for Central Clearing Agreements are imported, so do not use trade exposure figures shown here. 
+
+
+
+**Exposure Trades**
+
+The fields of the trades that are displayed in the grid are listed below in the default display order:
+
+Field | Description  
+---|---  
+Trade Ref | The Trade ID as supplied by the corresponding source system.  
+Trade Type | The trade type or trade type alias.  
+Source Trade Type | The trade type.  
+Notional 1 Ccy | The currency that Notional 1 is specified in.  
+Notional 1 | The notional value of the trade.  
+Notional 2 Ccy | The currency that Notional 2 is specified in.  
+Notional 2 | The notional value of the trade.  
+Trade Date | The date on which the trade was done.  
+Effective Date | The start date of the trade.  
+Maturity Date | The date on which the trade matures.  
+Exposure Ccy | The currency that Exposure is specified in.  
+Exposure Amount | The exposure represents the PV or MtM of the trade.  
+Exposure Date | The date to which the Exposure Amount corresponds.  
+Exposure FX Rate | FX rate for Exposure Ccy to Agreement Ccy.  
+Exposure Amount (Agmt Ccy) | The exposure amount in agreement currency.  
+Quantity | The quantity of the underlying which was traded.  
+Strike Price | Strike Price for Option Trades.  
+Spread | The spread for an option or credit derivative transaction.  
+Buy/Sell | Buy or Sell flag for Option Trades.  
+Put/Call | Put or Call flag for Option Trades.  
+Option Type | The type of the option.  
+Underlying | A description of the underlying asset or reference entity in the transaction.  
+Underlying Instr Identifier | The underlying instrument/asset identifier.  
+Lock Up Method | The method applied to the Lock Up value. The methods are Flat, Percent Notional 1, Percent Notional 2, and Percent Exposure.  
+Lock Up | The value of the lock up applied.  
+Lock Up Ccy | The currency of the Lock Up requirement.  
+Lock Up (Agmt Ccy) | Lock Up expressed in Agreement Currency.  
+Lock Up Due To | Party that the Lock Up Amount is Due to.  
+Additional Method | The method applied to the Additional value. The methods are Flat, Percent Notional 1, Percent Notional 2, and Percent Exposure.  
+Additional | The trade level Additional Margin for the trade.  
+Additional Ccy | The currency in which the Additional Margin amount is quoted.  
+Additional (Agmt Ccy) | Additional Margin expressed in Agreement Currency.  
+Additional Due To | The party to which the trade level Additional Margin is due.  
+Source Principal | This is the principal which executed the trade.  
+Principal Branch | This is the principal branch to which the trade is booked.  
+Source Principal Branch | This is the principal branch to which the trade is booked.  
+Source Counterparty | This is the Counterparty with which the trade has been done.  
+Counterparty Branch | This is the Counterparty branch to which the trade is booked.  
+Source Counterparty Branch | This is the Counterparty branch to which the trade is booked.  
+Source Agreement | The name or alias of the collateral agreement to which the trade belongs (if it can be supplied by the source system).  
+Trade Name | The name of the trader who executed the trade.  
+Book | The internal trading book to which the trade has been booked.  
+Desk | The internal trading desk which executed the trade.  
+Secondary Trade Ref | This is an optional trade reference field allowing a secondary identifier for the trade to be stored.  
+DTCC Trade Ref | The trade ID for any trades which have been matched by DTCC if it can be supplied by the source system.  
+Import Configuration | This is the name of the import that the trade was imported under.  
+Deal Ref | This is an optional field and can be used to store the deal group id.  
+CLIPS Code | This is a 9 digit code which is mandatory for dealers using DTCC to match trades. It is used to uniquely identify the reference entity in a credit derivative transaction.  
+Counterparty Trade Ref | The ID of the Counterparty's Trade reference.  
+Exposure Trade Comment | Allows for narrative entered with the trade to be received from the source system and stroked against the trade.  
+Clearing House Reference | The Clearing House Trade Identifier for this trade.  
+Clearing House | The Central Clearing House that this trades settles through.  
+Clearing Status | The status of the trade in the clearing house process.  
+  
+### Exposure Trade Overrides
+
+This override includes OTC, Central Clearing and Client Clearing Trades.
+
+  1. Click the ![dotdotdot.jpg](Images/dotdotdot.jpg) next to the relevant trade in the grid.
+  2. Select _Edit Trade Overrides_. 
+  3. The Exposure Trade Overrides screen will open.
+  4. Make the necessary changes then click the **OK** button to save the changes.
+  5. When the changes are saved, the trade will have a symbol next to the Trade Ref field.
+
+
+
+If changes are made, if the user selects the ![dotdotdot.jpg](Images/dotdotdot.jpg) again, the user has a choice to reset the values be selecting **Reset Override Values**. When this is selected, the values will go back to the original values of the trade before any modification were made.
+
+The screen is split into three specific sections for each of the groups of data which can currently be overwritten:
+
+Section | Fields | Description  
+---|---|---  
+Exposure Overrides | Source | This will display the source system of where the trade originated from.  
+| Exposure Amount | Under the Original Value, this will be the original PV or MtM of the trade. The user can enter a new value under the Updated column.  
+| Exposure Currency | Under the Original value, this will be the currency that the original exposure is specified in. The user can select from the drop down a new currency under the Updated column.  
+| Exposure Date | The exposure date to which the Exposure Amount corresponds can be amended by selected a date under the Updated column.  
+| Exposure Overrides Expire On | When a manual update is made, a corresponding **Expiration Date** must be entered. This is to determine whether the update should remain attached to the trade or whether it should be allowed to be overwritten the next time a Trades or Overrides file (containing the corresponding trade) is loaded.  
+  
+Once an override has been locked against a particular trade it will not be updated if a subsequent overrides file contains a value for the locked override field(s) for that trade. See [validation message number 158](<validation_messages.html#158>).  
+|  |   
+Additional Margin Overrides | Source | This will display the source system of where the trade originated from.  
+| Additional Amount | The original additional amount and method will be displayed under the original column. The user can select from the drop down to modify the method and specify a new additional amount under the Updated column.  
+| Additional Currency | The currency in which the original additional margin is quoted. The user can select from the drop down a new currency under the Updated column.  
+| Additional Due To | The party to which the original additional margin is due. The user can select from the drop down and select a new value, either Principal or Counterparty, under the Updated column.  
+| Additional Overrides Expire On | When a manual update is made, a corresponding **Expiration Date** must be entered. This is to determine whether the update should remain attached to the trade or whether it should be allowed to be overwritten the next time a Trades or Overrides file (containing the corresponding trade) is loaded.  
+  
+Once an override has been locked against a particular trade it will not be updated if a subsequent overrides file contains a value for the locked override field(s) for that trade. See [validation message number 158](<validation_messages.html#158>).  
+Lock Up Overrides | Source | This will display the source system of where the trade originated from.  
+| Lock Up Amount | The original lock up amount and method will be displayed under the original column. The user can select from the drop down to modify the method and specify a new lock up amount under the Updated column.  
+| Lock Up Currency | The currency in which the original lock up margin is quoted. The user can select from the drop down a new currency under the Updated column.  
+| Lock Up Due To | The party to which the original lock up margin is due. The user can select from the drop down and select a new value, either Principal or Counterparty, under the Updated column.  
+| Lock Up Overrides Expire On | When a manual update is made, a corresponding **Expiration Date** must be entered. This is to determine whether the update should remain attached to the trade or whether it should be allowed to be overwritten the next time a Trades or Overrides file (containing the corresponding trade) is loaded.  
+  
+Once an override has been locked against a particular trade it will not be updated if a subsequent overrides file contains a value for the locked override field(s) for that trade. See [validation message number 158](<validation_messages.html#158>).  
+Comment | Comment | When a manual update is performed, a comment is required. The comment is added to the audit record.  
+  
+The **Original Value** column displays the values for the above parameters which were loaded by an OTC Trades Import Configuration file. The Source field identifies the name of that Import Configuration.
+
+The **Updated Value** column displays the amended values for those parameters which have been changed, either by an Exposure Trade Overrides Import Configuration file or manually by a user. Where the override was made as a result of an import, the name of the Exposure Trade Override Import Configuration which made the last change is displayed. Where the change was made manually this field displays the word "Manual".
+
+**Date Considerations**
+
+  * Override values on exposure trades can be imported. During import, a validation is done to establish that the exposure trade has not already been manually overridden. This is done by looking at the expiration date of the override.
+  * When an override is entered manually, the expiration date that is entered is based on the date on the Principal Managing location of the agreement that the trade is assigned to.
+
+For example, if trade 10005 is assigned to Agreement A Bank which has a Principal Managing Location of Tokyo, then a manually entered expiration date of 5th Feb 2009 means 5th Feb 2009 in Tokyo.
+
+This has the following considerations:
+
+    * If the Principal Managing Location on the Agreement that the Trade is assigned to is changed to a Principal Managing Location with a different time zone, the expiration date that is used for import validation is as per the original Principal Managing Location.
+
+To exemplify, Trade 10005 is assigned to Agreement A Bank The manually entered expiration date was 6th Feb 2023, which equates to 6th Feb 2023 Tokyo time due to A Bank Agreement Principal Managing Location being Tokyo.
+
+If the Principal Managing Location of A Bank was changed to London - the override maintains the 6th Feb 2023 Tokyo time expiration for import validation purposes.
+
+    * If the trade gets assigned to a different Agreement which has a Principal Managing Location with a different time zone, then again the expiration date used during import validation remains based on the original Agreement's Principal Managing Location when the manual input was done.
+
+
+
+
+**Note:** Exposure Trades can be imported for Central Clearing and Client Clearing Agreements (when the corresponding Agreement is defined with Margin Type of Variation) However Margin Calculations for Client Clearing Agreements always ignore Additional Margin and Lock Up Amounts defined on exposure trades. Therefore, although it is possible to override Additional Margin and Lock Up amounts, the value will not be used in Margin Calculations. It is worth noting that Margin Calls are not calculated within the system for Central Clearing Agreements, but are imported.
+
+## View Repo Exposure Trades
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon and a menu will appear.
+  3. Select the **View Exposure Trades** ; the trade information will be displayed below the Agreements grid.
+
+
+
+The user will be prompted with "Would you like to continue and retrieve the trades?" when the number of trades are between 500 and 5000.
+
+If there are more than 5000 trades, the user will be prompted with "Would you like to continue and retrieve the first 5,000 trades?".
+
+**Last Calculation Details**
+
+The data displayed under the Last Calculation Details area is a summary of the position based upon the last time the Margin Calculation task was run, except for exchange rate. The "System to Agreement Ccy" rate is the latest FX Rate loaded on or before the "Exposure Calculation Date" for the relevant currency.
+
+The grid at the bottom displays the trades currently assigned to the agreement with the "Agreement Exposure Total" being calculated on the fly using the latest FX Rate loaded on or before the "Exposure Calculation Date".
+
+Field | Description  
+---|---  
+Exposure Amount | This is the total of the current exposure trades taking into consideration any haircut (that is MarketValue - TradeValue). This is the value that was used in the Margin Calculation.  
+System to Agreement Ccy | This is the latest FX Rate loaded on or before the "Exposure Calculation Date" for the relevant currency.  
+Exposure Calculation Date | The last date and time that the margin calculation was run on the agreement.  
+Start Date Calling Time |   
+End Date Calling Time |   
+Agreement Exposure Total | This is the total exposure currently assigned to the agreement being calculated on the fly using the latest FX Rate loaded on or before the "Exposure Calculation Date".  
+  
+The grid at the bottom displays the trades currently assigned to the agreement with the "Exposure Amount (Agmt Ccy)" field being calculated on the fly using the latest FX Rate loaded on or before the Exposure Calculation Date.
+
+**Note:** The data displayed in the grid could be different to the results of the margin calculation if one of the following actions have been performed and the exposure calculation has not be re-run.
+
+  * Additional trades have been assigned to the agreement.
+  * New FX Rates have been imported.
+
+
+
+**Repo Trades**
+
+The fields of the trades that are displayed in the grid are listed below in the default display order:
+
+Field | Description  
+---|---  
+Trade Ref | The Trade ID as supplied by the corresponding source system.  
+Trade Type | The trade type or trade type alias.  
+Source Trade Type | The trade type.  
+Notional | The notional value of the trade.  
+Trade Ccy | This is the currency of the cash leg of the trade.  
+Instr Identifier | The unique ID for the bond being traded (i.e. ISIN, Cusip, Sedol).  
+Instrument Description | A description of the bond being traded.  
+Instr Coupon | The coupon of the bond being traded.  
+Instr Maturity | Maturity Date of the bond being traded.  
+Instr Ccy | This is the currency of the bond being traded.  
+Coupon Accrual Interest | The amount of coupon interest accrued from the last coupon payment date until the margin call settlement date for the trade.  
+Trade Execution Date | The date on which the trade was done.  
+Trade Start | The start date of the repo trade.  
+Trade End | The date the trade matures and hence is no longer included in the corresponding portfolio.  
+Repo Rate | This is the repo rate which is the interest rate that accrues on the cash portion of the trade.  
+Repo Rate Description | Explanatory description of the repo rate.  
+Traded Clean Price | The clean price on the start leg of the repo.  
+Traded Dirty Price | The dirty price on the start leg of the repo.  
+Trade Value | This is the value of the trade which represents the start cash plus accrued interest to date. This value is represented in the TradeCurrency.  
+Mkt Clean Price | The clean price that the bond closed at on the previous day.  
+Mkt Dirty Price | The dirty price, which includes accrued interest, that the bond closed at on the previous day.  
+Factor | The factor represents that part of the bond which has been paid down by the lender.  
+Haircut % | This is the haircut on the trade. The haircut is effectively the initial margin.  
+Haircut Value | This is the monetary value of the Haircut percentage. That is, the amount that the market value of the trade is adjusted by.  
+Mkt Value | This is the market value of the bond based on it's closing price. It is represented in Instrument Currency.  
+Exposure Amount | The exposure represents the PV or MtM of the trade.  
+Exposure Date | The date to which the Exposure Amount corresponds.  
+Exp Ccy | This is the currency that the ExposureAmount is represented in.  
+Exposure FX Rate | FX rate for Exposure Ccy to Agreement Ccy.  
+Exposure Amount (Agmt Ccy) | The exposure amount in agreement currency.  
+Excluded |   
+Source Agreement | The name or alias of the collateral agreement to which the trade belongs (if it can be supplied by the source system).  
+Source Principal | This is the principal which executed the trade.  
+Principal Branch | This is the principal branch to which the trade is booked.  
+Source Principal Branch | This is the principal branch to which the trade is booked.  
+Source Counterparty | This is the Counterparty with which the trade has been done.  
+Counterparty Branch | This is the Counterparty branch to which the trade is booked.  
+Source Counterparty Branch | This is the Counterparty branch to which the trade is booked.  
+Base Mkt Value | This is a mark to market present value of the trade after taking into consideration the Haircut and Index Ratio.  
+Lower Mkt Value | This is a reporting field which could be used, for example, to compare the current market value to a lower trigger or threshold value specified in the repo agreement.  
+Upper Mkt Value | This is a reporting field which could be used, for example, to compare the current market value to an upper trigger or threshold value specified in the repo agreement.  
+Index Ratio | Used for Consumer Price Index securities, usually specific to the Tokyo market.  
+Mkt Closing Yield | This could be used to store the yield information for the relevant security.  
+Secondary Trade Ref | This field can be used to store a secondary trade identifier.  
+Import Configuration | This is the name of the import that the trade was imported under.  
+Clearing House Reference | The Clearing House Trade Identifier for this trade.  
+Clearing House | The Central Clearing House that this trades settles through.  
+Clearing Status | The status of the trade in the clearing house process.  
+  
+### Repo Exposure Trade Overrides
+
+**Procedure**
+
+  1. Click the ![dotdotdot.jpg](Images/dotdotdot.jpg) next to the relevant trade in the grid.
+  2. Select _Edit Trade Overrides_.
+  3. The Exposure Trade Overrides screen will open.
+  4. Make the necessary changes then click the **OK** button to save the changes.
+  5. When the changes are saved, the trade will have a symbol next to the Trade Ref field.
+
+
+
+If changes are made, if the user selects the ![dotdotdot.jpg](Images/dotdotdot.jpg) again, the user has a choice to reset the values be selecting **Reset Override Values**. When this is selected, the values will go back to the original values of the trade before any modification were made.
+
+Section | Field | Description  
+---|---|---  
+Exposure Overrides | Source | This will display the source system of where the trade originated from.  
+| Exposure Amount | Under the Original Value, this will be the original exposure of the trade taking into consideration any haircut. The user can enter a new value under the Updated column.  
+| Exposure Currency | Under the Original value, this will be the currency that the original exposure is specified in. The user can select from the drop down a new currency under the Updated column.  
+| Exposure Date | The exposure date to which the Exposure Amount corresponds can be amended by selected a date under the Updated column.  
+| Exposure Overrides Expire On | Exposure Overrides Expire On  
+Comment | Comment | When a manual update is performed, a comment is required. The comment is added to the audit record.  
+  
+The **Original Value** column displays the values for the above parameters which were loaded by a Repo Trades Import Configuration file. The Source field identifies the name of that Import Configuration.
+
+The **Updated Value** column displays the amended values for those parameters which have been changed, either by an Exposure Trade Overrides Import Configuration file or manually by a user. Where the override was made as a result of an import, the name of the Exposure Trade Override Import Configuration which made the last change is displayed. Where the change was made manually this field displays the word "Manual".
+
+**Date Considerations**
+
+  * Override values on exposure trades can be imported. During import, a validation is done to establish that the exposure trade has not already been manually overridden. This is done by looking at the expiration date of the override.
+
+  * When an override is entered manually, the expiration date that is entered is based on the date based on the Principal Managing location of the agreement that the trade is assigned to.
+
+For example, if trade 10005 is assigned to Agreement A Bank which has a Principal Managing Location of Tokyo, then a manually entered expiration date of 6th Feb 2023 means 5th Feb 2023 in Tokyo.
+
+This has the following considerations:
+
+    * If the Principal Managing Location on the Agreement that the Trade is assigned to is changed to a Principal Managing Location with a different timezone, the expiration date that is used for import validation is as per the original Principal Managing Location.
+
+To exemplify, Trade 10005 above is assigned to Agreement A Bank The manually entered expiration date was 5th Feb 2009, which equates to 5th Feb 2009 Tokyo time due to A Bank Agreement Principal Managing Location being Tokyo.
+
+If the Principal Managing Location of A Bank was changed to London - the override maintains the 6th Feb 2023 Tokyo time expiration for import validation purposes.
+
+    * If the trade gets assigned to a different Agreement which has a Principal Managing Location with a different time zone, then again the expiration date used during import validation remains based on the original Agreement's Principal Managing Location when the manual input was done.
+
+
+
+## View Collateral Positions
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon and a menu will appear.
+  3. Select the **View Collateral Positions** and a grid will open up at the bottom of the page.
+
+
+
+The grid contains a "live" view of the Collateral Position and Movements for the Agreement. It includes "Settled" positions as well as collateral movements with a settlement state of "In Transit" and "Failed". The market values displayed are calculated using the latest eligibility state and the latest price and FX rate data.
+
+Positions are grouped according to Instrument Reference, Held/Posted, State, Margin Type and Asset Pool.
+
+The fields displayed in the grid are listed below in the default display order:
+
+Field | Description  
+---|---  
+Actions | There are two options under the Actions column.| Action| Description  
+---|---  
+[View Eligibility Breaches](<view_eligibility_breaches.html>)| Clicking on the magnifying glass will open a window below the positions and movements grid to view the [Eligibility Breaches](<view_eligibility_breaches.html>).  
+[View Instrument](<instruments.html>)| When this is selected, a new window will open up in the browser and will display the instrument details of the position that was selected.  
+State | The Settlement state of the Position or movement.  
+Eligibility | This provides a live eligibility evaluation of the instrument on the position/movement. [Basic terms](<basiceligibility.html>), and additionally if they exist, rules for [Advanced Eligibility](<advancedeligrules.html>), [Ratings Based Eligibility](<ratingbasedeligrules.html>) and [Wrong Way Risk Eligibility](<wrongwayrisk.html>) are evaluated.  
+  
+If there are no eligibility breaches, that is the instrument is **eligible** ![eligibility.jpg](Images/eligibility.jpg) is shown.  
+  
+If there are any eligibility breaches for the instrument, that is, it is **ineligible** ![ineligible.jpg](Images/ineligible.jpg) is displayed.  
+  
+Details of the specific breaches can be viewed. See [View Eligibility Breaches](<#view-eligibility-breaches>) for more details.  
+Position | This will be Held or Posted.  
+Instrument | The instrument id on the position.  
+Description | The textual description of the instrument on the collateral position.  
+Ccy | The currency of the instrument.  
+Instrument Type | The [type](<reference_related_data.html#instrument-types>) of the instrument.  
+Issuer | The Instrument Issuer.  
+Maturity Date | The date that the instrument will mature.  
+Cost of Funding | The cost of Funding value recorded on the Instrument.  
+Next Coupon Date | The next coupon date of the instrument on that position.  
+Notional | The notional quantity of the instrument on the position.  
+Mkt Val (Agmt) | This is calculated as [Notional * Price * Valuation % tage * FX conversion Rate].  
+  
+**Note:** If there is an eligibility breach, the valuation %tage is zero, and therefore the value shown here will be zero.  
+Mkt Val (Sys) | This is Mkt Val (Agmt) expressed in system currency.  
+Collateral Bucket | The bucket that the instrument falls into for eligibility.  
+Issuer Industry Sector | The [industry sector](<reference.html>) of the issuer.  
+Issuer Domicile | The domicile country of the issuer of the instrument on the position.  
+Issuer Type | The type of the issuer. An issuer type can be [added](<reference.html#adding-reference-data>) through [reference data](<reference_related_data.html#instrument-types>).  
+Amount Issued | The amount of the instrument that was originally issued.  
+Amount Outstanding | The amount of the instrument remaining in circulation.  
+Dirty Price | The price that was used in the calculation of Market Value.  
+Valuation % | The Valuation Percentage that has been applied to the collateral position based on Basic Eligibility on the Agreement.  
+FX Rate | (This is the FX rate for the system Ccy to the agreement Ccy - system Ccy is USD)  
+FX Rate (System) | (This is the FX rate for the Instrument Ccy to the system Ccy)  
+Margin Type | For OTC Agreements, where Collateral Allocation is defined as Segregate Lock up and Variation, this value identifies whether the collateral trade is allocated toward the Variation or Lock Up margin requirement.  
+  
+See [Working with OTC Agreements that Segregate Lock](<segregate_lockup_varmargin.html>) for more details.  
+  
+For OTC Agreements, where Collateral Allocation is defined as Lock Up Only, this value identifies the collateral trade as allocated toward a Lock Up margin requirement only.  
+  
+See [How to Define an OTC Lock Up Only Agreement](<agreements_define.html#otc-lock-up-only>) for more details.  
+  
+For all other OTC Agreements, and for Repo and Securities Lending Business lines, the type value here is ignored for Margin Calculation purposes  
+Asset Pool | will display the name of the Asset Pool for those posted movements / Positions that were sourced from an Asset Pool balance. Where the field is blank it means that the posted movement / position was not sourced from an Asset Pool.  
+Pool Factor |   
+  
+Optionally, the following fields can be selected for display. See [Grid Features](<agreements.html#grid-features>) for more details.:
+
+  * Clean Price
+  * Coupon Interest Accrued to Date
+  * Is Dirty Price Calculated
+  * Price Adjustment
+  * Price Date
+  * Price Quote
+  * Price Source
+  * Tri-Party Custodian
+
+
+
+At the bottom of the grid, **Total Held** and **Total Posted** provide sum totals of the Mkt Val (Agmt) values for Held and Posted by Instrument. (Settlement State and Margin Type delineations are ignored.)
+
+**Note:** The positions displayed in this grid use the latest Dirty Prices and Price Quote types for the Price Source defined in the agreement, together with the latest FX rates, and Valuation Percentages to calculate Market Value figures.
+
+## View Concentration Results
+
+When Principal or Counterparty Concentration Results is selected, it will present a new grid below the agreements and display all concentration rules that are applicable.
+
+When the agreement has the "Applies to Party" option set to either Principal or Both, this will be applied to the collateral being held by the Principal. If the "Applies to Party" is set to Counterparty or Both, this will be applied to the collateral being held by the Counterparty.
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon for a specific agreement and a menu will appear.
+  3. Select either the **Principal Concentration Results** or **Counterparty Concentration Results**.
+  4. The data will be displayed in the grid below the agreements.
+
+Each rule, which has been defined for the relevant party, is displayed with its status using the following symbols:
+
+Symbol | Status | Description  
+---|---|---  
+![failed_icon.jpg](Images/failed_icon.jpg) | Failed | The limit has not been calculated due to one of the following items of data being missing:  
+  
+\- FX Rate required in the calculation  
+\- Amount Issued or Amount Outstanding (only where these parameters are used in the calculation)  
+![warning_icon_mc.jpg](Images/warning_icon_mc.jpg) | Breached | The limit has been calculated and has resulted in a breach situation.  
+![run_task_success.jpg](Images/run_task_success.jpg) | Passed | The limit has been calculated and no breach has occurred.  
+  
+The fields are sorted by the status and displayed in the grid in the following order:
+
+     * Status
+     * Rule
+     * Description
+  5. To view the **Result Details** of the concentration rule, click on the magnifying glass. This will return the status, result and context which are calculated live and displayed below the concentration grid.
+
+
+
+
+**Note:** When calculating concentration results, collateral movements that are in-transit, in progress or failed are considered.
+
+## Run Single Margin Calculation
+
+Typically Margin Calculations are run via a [Margin Calculation task](<task_status.html#margin-calculation>) that uses a Margin Calculation configuration.
+
+Margin Calculation configurations are applicable to at least one business line. They can be additionally filtered by Principal Managing Location(s) or Principal Entities.
+
+While this level of configuration is sufficient for the majority of situations, there may be occasions where it is desirable to run a Margin Calculation for a single Agreement.
+
+TLM® Collateral Management provides this flexibility to run a single Margin Calculation from two places:
+
+  1. Directly from the Agreements screen.
+  2. From the [Margin Calculation Task Status](<task_status.html#overview>) screen (provided a single Margin Calculation task for the Agreement in question exists).
+
+
+
+**Note:**
+
+  1. There are some restrictions regarding eligibility of certain Business Line's agreements for this functionality.
+
+This functionality is not available to Agreements with the following characteristics:
+
+     * Agreements with a status of Inactive.
+     * Agreements for the Central Clearing Business Line.
+     * Agreements for the Client Clearing Business Lines which are not associated to a Combined Business Lines Agreement Group.
+  2. Changes to agreement group are subject to a caching delay before this information is available to the Agreement screen and this function. If any changes are made to agreement groups, it is recommended to log off and back onto the system to see these reflected.
+
+Should an Agreement have any of the above characteristics, the option for Run Single Margin Calculation will be grayed out.
+
+
+
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the Agreement that needs to be calculated.
+  2. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon and a menu will appear. Select the **Run Single Margin calculation**.
+  3. A _Margin Calculation Task_ for the selected Agreement is created and queued to be run. 
+  4. The Status of the Single Margin Calculation Task can be viewed in the Task Status Screen. 
+  5. The Single Margin Calculation Task also saves the exposure trades and collateral positions against the Margin Result. 
+
+
+
+**Note:** For Repo and Securities Lending there are two options available to run a single margin calculation. The user can choose **Agreement** which will use values defined under the agreement parameters section of the margin terms during the calculation. Or the user can choose **Internal** which use the values defined under the internal parameters section of the margin terms during the calculation. See [Repo Margin Terms](<marginterms_repo.html>) or [Securities Lending](<marginterms_seclending.html>) for more information.
+
+## New From
+
+The capability of copying an agreement with just a few modifications is possible to do within the system.
+
+**Procedure**
+
+  1. In the Navigation Pane, click Agreements and search for the specific Agreement.
+  2. Select the agreement by clicking the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon.
+  3. A popup window will appear with all the same data that the copied agreement has except for the following fields/areas:
+     1. Agreement Name
+     2. Counterparty
+     3. Agreement Margins
+     4. Contacts
+     5. Settlement Instructions
+
+
+
+If the "source" agreement that was selected is included in a [Combined Business Lines Agreement Group](<reference_related_data.html#agreement-group>), then the newly created agreement will also be included in the same Agreement Group.
+
+When an Agreement is copied in the above manner, configuration settings determine how the values in the Agreement extension fields are copied over. For example, if the [Copy On New From](<reference_related_data.html#extensions>) check box has been checked as enabled on an [Agreement Extension Reference Data object](<reference_related_data.html#extensions>), then the value that exists on the Agreement selected for copying will be copied over to the new Agreement.
+
+If, however, the same _Copy on New From_ check box, is not checked, then the extension on the new agreement will be populated only with the default value for the extension as defined on the Agreement Extension Reference Data object.
+
+**Note:** If **New From...** is grayed out, it is likely that the Agreement is [Locked for Approval](<agreements.html#agreements-grid-view>) as it contains values that require approval.
+
+An Agreement that is Locked for Approval, cannot be copied. See [Approvals](<approvals.html>) for more details.

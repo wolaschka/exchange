@@ -1,0 +1,422 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_movements.html
+
+# Movements
+
+## Create Movement(s) on a Margin Call
+
+Once a margin call has been agreed, enter the corresponding details of the pieces of collateral that will be used to meet the margin requirement.
+
+**Procedure**
+
+  1. Click the check box associated with the margin call or click on the margin call to drill down to the details. The **Create Movement** button will become available.
+  2. Click the **Create Movement** button.
+  3. A new window will appear where the user will fill in the following required information:
+
+     * Direction
+     * Instrument
+     * Target - this can be adjusted to be either Notional or Market Value
+     * Amount
+  4. Once the Amount has been entered, press the **Calculate** button or tab out of the Amount Field.
+
+  5. Additionally, the user has the option to fill in or modify the following information:
+
+     * Asset Pool
+     * Receiving Instructions
+     * Adjust Settlement Date
+     * Trade Date
+  6. The movement can now be created by clicking on the **Create Movement** Button.
+
+
+
+
+If more collateral is still needed then click on the **Create Movement** button and start the process again.
+
+**Description of Movement Dialog Fields**
+
+**Note:** Fields in red are required.
+
+Section | Field Name | Comment  
+---|---|---  
+Instrument | Direction | If the call is a Demand, the options are **Deliver To Principal** or **Return To Principal**.  
+  
+If the call is an Anticipated Demand, the options are **Deliver to Counterparty** or **Return to Counterparty**.  
+| Instrument Ref | A Debt Instrument can store four different Instrument Identifiers [ISIN, CUSIP, SEDOL and Internal ID]. One of these must be populated and defined as the Primary Id Type.  
+  
+As each character is entered, a drop down list will appear with matching instruments. The more characters typed, the more specific the list will become.  
+  
+Once the instrument ID has been entered or selected, the screen will expand with the following fields populated: Description, Currency, Minimum Lot, Lot Increment, Price, Price Date, Is Eligible.  
+  
+**Note:** Irrespective of the Instrument Identifier Type that was entered or selected, it is the Primary ID Reference of an Instrument that is saved against the collateral movement and used elsewhere throughout the application.  
+| Description | This is automatically populated by the system once a valid instrument has been selected.  
+| Currency | This is automatically populated by the system with the currency of the instrument that was entered.  
+| Minimum Lot | This is automatically populated from the value entered on the Debt Instrument.  
+| Lot Increment | This is automatically populated from the value entered on the Debt Instrument.  
+| Price | The price field is automatically populated by the system. The process for deriving this differs slightly depending on the Business Line of the Agreement:  
+  
+\- For OTC Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method that have been stipulated on the agreement.  
+\- For Repo and Securities Lending Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method and price adjustment that have been.  
+  
+**Note:** If no dirty price is available using the determining criteria then a tooltip will appear warning _No price available for this Instrument_.  
+  
+If a price is missing, a zero price will be used to calculate the value of the collateral movement.  
+  
+See [How to Manually Add or Edit Debt Instrument Prices](</instruments_debt.md#addedit-prices>) for more details.  
+| Price Date | This field is automatically populated by the system and shows the price date for the instrument ref. Please note that the price date shown here is for the Instrument price for the specific price source and price quote method defined on the agreement.  
+  
+The price date can be derived from 2 sources:  
+  
+The Price Date field included on the [Instrument Price Import File](<import_debt_instrument_prices.html>).  
+  
+If the Price was manually added or edited, it will be the date that the user manually added/edited the price records.  
+| Is Eligible | The instrument selected is subject to the following eligibility rules defined on the Agreement:  
+Basic Eligibility  
+Advanced Eligibility  
+Ratings Based Eligibility  
+Wrong Way Risk Eligibility  
+  
+If the selected instrument passes all the above eligibility checks, then a green check will appear. If one or more eligibility checks are failed, then a red X will appear.  
+  
+Then Eligibility Breaches will become visible for review by click on the red arrow.  
+  
+The screen contains information regarding the failure:  
+  
+**Rule Name** \- This will read "Basic Eligibility" if that is the eligibility evaluation that has failed. If the failure is due to an Advanced,Ratings Based and/or Wrong Way Risk evaluation then this field will list the actual Rule Names that the instrument failed.  
+  
+**Reason** \- This provides additional information as to the nature of eligibility failure.  
+  
+For Basic Eligibility breaches, the cause may be due to no eligible buckets set up on the Agreement for the instrument to fall into.  
+  
+Or because the instrument on the movement could fall into more than one collateral bucket assigned to the Agreement.  
+  
+For Advanced and Ratings Based Eligibility rule, the failure is typically because one or more eligibility criteria on the rules have not been met.  
+  
+For Wrong Way Risk eligibility rule, the failure is due to Instrument Issuer matching an Issuer that exits in the same Entity Group as the Principal or Counterparty, depending on how the rule is defined.  
+  
+The Rule Name field outlines which eligibility rules have been breached, while the criteria field provides information as to what the specific breached criteria within the rules are.  
+  
+**Note:**  
+\- If the movement fails basic eligibility evaluation, then advanced, ratings based eligibility and wrong way risk evaluations are not conducted.  
+  
+\- If the movement fails any eligibility evaluation, then it will receive a 0 Valuation Percentage and be effectively assigned zero market value.  
+Notional | Target | Collateral Movements can be entered as either notional amounts or market value amounts. If notional amount is entered, the system will calculate the market value and vice versa.  
+| Amount | Enter here the amount of the movement, including decimals if required. Shortcuts of k, m and b are acceptable, and up to 3 decimal places will be taken into consideration if using shortcuts.  
+  
+The amount can be entered as either a market value amount or a notional amount, as denoted by the Enter Target drop down selection.  
+  
+Once the amount is entered, click on the word **calculate** to calculate the reciprocal value.  
+  
+\- If Notional is selected, the amount is applied to the notional field, and Market Value (Agmt Ccy) is calculated and populated in the Market Value (Agmt Ccy) field.  
+  
+**Note:** Any notional entered must meet any defined Minimum Lot and Lot Increment values. Such that the notional entered must be equal to or greater than the Minimum Lot. And, the notional entered must be divisible by the Lot Increment.  
+  
+\- If the notional entered does not meet the two criteria above, then the system will adjust the notional to meet the criteria.  
+  
+See [Understanding Notional Rounding on Collateral Movements](<understand_notional_rounding_mvmts.html>) for more information  
+  
+\- If Market Value was selected, the amount entered is applied to the Market Value Applied (Agmt Ccy) field, and Notional is calculated and populated in the Notional field.  
+  
+This calculated amount will be automatically rounded to ensure that it is greater than minimum lot and divisible by minimum increment amount.  
+| Notional | The Notional amount of the movement. This is automatically populated once the **Calculate** has been clicked. This field is populated directly with the amount entered if Target field is Notional (subject to rounding if necessary), or with a calculated notional equivalent to a market value amount.  
+  
+If calculated from market value, the calculation is Market Value / FX Conversion rate / Valuation percentage / Price.  
+  
+The calculated amount will be automatically rounded to ensure that it is greater than minimum lot and divisible by minimum increment amount.  
+| Market Value (Agmt Ccy) | The Market value of the movement in the currency of the agreement before any valuation percentage has been applied. This is automatically populated once the **Calculate** has been clicked.  
+| Valuation % | The system will populate this field with the appropriate Valuation percentage for the collateral as defined in the Basic Eligibility tab of the agreement.  
+  
+The valuation percentages that are used depend on the movement type being entered, and are as follows:  
+  
+**Deliver to Principal** \- Uses Held Valn%  
+  
+**Return to Principal** \- Uses Posted Valn%  
+  
+**Deliver to Cpty** \- Uses Posted Valn %  
+  
+**Return to Cpty** \- Uses Held Valn%  
+  
+If the collateral is ineligible, that is:  
+  
+\- no eligible collateral bucket or instrument exists on the agreement  
+or  
+\- the security selected can potentially fall within more several eligible buckets on the agreement  
+or  
+\- the collateral being selected fails an [Advanced Eligibility](<advancedeligrules.html#advanced-eligibility-rules>) rule defined on the agreement  
+\- the collateral selected fails a [Ratings Based Eligibility](<ratingbasedeligrules.html#rating-based-eligibility-rules>) rule defined on the agreement.  
+\- the collateral selected fails a [Wrong Way Risk Eligibility](<wrongwayrisk.html#wrong-way-risk>) rule defined on the agreement.  
+  
+Then the valuation percentage will default to zero, and the movement will be calculated as having zero market value.  
+  
+Similarly, if the actual collateral bucket or instrument has been set up with a zero % value, then the collateral movement will be calculated with a market value of zero.  
+| Market Value Applied (Agmt Ccy) |   
+| Concentration Status | Similar to eligibility, the system checks whether the movement will cause a breech of any Concentration rules that are defined on the agreement.  
+  
+The process works in the following way, once is clicked:  
+  
+In order for a green **x** to be displayed, no concentration rules exist on the agreement. Or, concentration rules are defined but no concentration breaches exist, nor will be caused when the movement is added.  
+  
+If the concentration rule is breached, a red x will be displayed and the user can click on the arrow to view the breaches.  
+A breach will occur if on of the following conditions is true:  
+\- One or more of the concentration rules for the Agreement is currently in breach and this movement does not correct the breach.  
+\- The movement being added will cause a concentration breach.  
+  
+The screen contains information regarding the concentration breech:  
+**Rule Name** \- the Agreement's concentration Rule Name that the movement will breech if it is booked.  
+**Reason** \- this provides information on what aspect of the Rule has been breached.  
+  
+**Note:** Failed is displayed when a concentration breach exists, and the movement being added does not remedy this.  
+Settlement | Settlement Date | Click on the calendar field and select the required settlement date.  
+  
+This date will default according to settlement offsets defined in the system. Settlement offset values can be defined in three areas in the application. Specifically, the system will seek values in the following locations in this order:  
+\- Settlement offsets defined on receiving party's relevant Agreement or Entity SSI.  
+\- If not found, then any settlement offsets that are defined on the agreement.  
+If no agreement level offsets exist, it will default to [system level default settings](<settlement_dates.html#system-level-default-settlement-date-offsets>).  
+If no values are defined at the system level either, the date will defaults to Today +1 business day  
+  
+"Today" is defined as the current date in the Principal Managing Location of the Agreement. See [Understanding Settlement Date Defaults](<settlement_dates.html#settlement-date-defaults>) for more information.  
+| Trade Date | By default, the field is disabled and not populated. Click the check box to enable the field if Trade Date is needed.  
+  
+Trade Date is not validated to ensure that it is equal to or prior to Settlement Date.  
+| Physical Settlement | This field indicates whether the collateral movement should be physically settled or not. By default, the check box is set, indicating that the collateral movement should be physically settled.  
+  
+To indicate that the collateral movement should not be physically settled, clear the check box.  
+  
+If the Settlement Date is changed to a date prior to today, then the field will automatically be unchecked.  
+  
+The field is indicative and designed to be read by downstream settlement systems.  
+  
+## Creating Allocated Movements
+
+Collateral that is shown in the **Asset Allocation** tab can be selected for allocation to meet the **Agreed Delivery Amount** requirement on an Antic Demand.
+
+**Procedure**
+
+  1. From the Available to Allocate page, select the asset to be allocated to an Antic Demand or a substitution.
+  2. To assist in the selection, a five settlement date range of available balances is shown, with the balance corresponding to the default settlement offset date.
+  3. To select the asset, select the dialog on the left side of the asset then click the **Asset Allocation** button.
+
+
+
+A new screen will appear and the below table describes each field. Enter the required information and click the **Create Movement** button.
+
+**Creating Movement**
+
+All fields are pre-populated and non-editable except for the fields noted in blue or red.
+
+Fields in Blue are editable. Fields in Red are editable and required.
+
+Section | Field Name | Description  
+---|---|---  
+Instrument | Direction | Default value is "Deliver to Counterparty"  
+| Instrument Ref | Primary ID of the Instrument selected for Allocation.  
+| Asset Pool | If the selected asset is sourced from an Asset Pool, this will be populated with Asset Pool Name.  
+| Description | The Instrument Description.  
+| Ccy | The Currency of the Instrument selected.  
+| Minimum Lot | Minimum Lot defined on the instrument.  
+| Lot Increment | Lot Increment defined on the instrument.  
+| Price | The price field is automatically populated by the system. The process for deriving this differs slightly depending on the Business Line of the Agreement:  
+  
+\- For OTC Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method that have been stipulated on the agreement.  
+\- For Repo and Securities Lending Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method and price adjustment that have been.  
+  
+**Note:** If no dirty price is available using the determining criteria then a tooltip will appear warning _No price available for this Instrument_.  
+  
+If a price is missing, a zero price will be used to calculate the value of the collateral movement.  
+| Price Date | This field is automatically populated by the system and shows the price date for the instrument ref. Please note that the price date shown here is for the Instrument price for the specific price source and price quote method defined on the agreement.  
+| Is Eligible | The instrument selected is subject to the following eligibility rules defined on the Agreement:  
+Basic Eligibility  
+Advanced Eligibility  
+Ratings Based Eligibility  
+Wrong Way Risk Eligibility  
+  
+If the selected instrument passes all the above eligibility checks, then a green check will appear. If one or more eligibility checks fail, then a red X will appear.  
+Notional | Target | Movements can be created as either notional amounts or market value amounts.  
+  
+In order for the system to determine which value to calculate, select from the drop down box and select either Notional or Market Value.  
+  
+If Notional is selected, the system will calculate the market value. If Market Value is selected, the system will calculate the notional.  
+  
+When entering the values, shortcuts of k, m and b are acceptable, and up to 3 decimal places will be taken into consideration if using shortcuts.  
+  
+**Note:** Any notional entered must meet any defined Minimum Lot and Lot Increment values. Meaning, notional entered must be equal to or greater than Minimum Lot and must be divisible by the Lot Increment. If the notional entered does not meet, then the system will adjust the notional to meet the criteria.  
+| Amount | Available asset balances for a date range of five settlement dates are displayed in the Available to Allocate Pane. The amount allocated of the selected asset limited to that necessary to meet the Antic Demand Delivery Requirement. The particular available asset balance that gets selected corresponds to the default settlement date for the asset. The available asset balance that is displayed in bold is selected.  
+  
+Example: The available asset selected has a notional of 1mm available for a default settlement date of 21st August. It has a market value of USD 973,000 in USD (Agreement Currency).  
+  
+The amount of this selected available asset balance that gets allocated towards the Anticipated Demand is known as the Allocated Notional.  
+  
+The Allocated Notional of the selected available asset balance is limited to that amount necessary to meet the Antic Demand Delivery Requirement. The remaining to deliver amount is 500,000, and thus allocated notional of the 1mm selected available asset is 514,000.  
+  
+Allocated Notional Amounts are rounded so that it meets the Minimum Lot and Lot Increment values defined on the Instrument. Any amount of an asset in Pending Allocation grid is by definition no longer available for allocation.  
+| Notional | This is the notional amount of the movement. It is automatically populated once the amount is entered.  
+  
+If calculated from market value, the calculation is Market Value / FX Conversion rate / Valuation percentage / Price.  
+  
+The calculated amount will be automatically rounded to ensure that it is greater than minimum lot and divisible by minimum increment amount.  
+| Market Value (Agmt Ccy) | The Market value of the movement in the currency of the agreement before any valuation percentage has been applied.  
+| Valuation % | The system will populate this field with the appropriate Valuation percentage for the collateral as defined in the Basic Eligibility tab of the agreement. The system will use Posted Valuation %.  
+  
+If the collateral is ineligible, that is:  
+  
+\- no eligible collateral bucket or instrument exists on the agreement or  
+\- the security selected can potentially fall within more several eligible buckets on the agreement or  
+\- the collateral being selected fails an Advanced Eligibility rule defined on the agreement  
+\- the collateral selected fails a Ratings Based Eligibility rule defined on the agreement.  
+\- the collateral selected fails a Wrong Way Risk Eligibility rule defined on the agreement.  
+  
+Then the valuation percentage will default to zero, and the movement will be calculated as having zero market value.  
+  
+Similarly, if the actual collateral bucket or instrument has been set up with a zero % value, then the collateral movement will be calculated with a market value of zero.  
+| Market Value Applied |   
+| Concentration Status | Similar to eligibility, the system checks whether the movement will cause a breach of any Concentration rules that are defined on the agreement.  
+  
+The process works in the following way:  
+  
+It will display a green check mark (pass) if any of the following conditions are true:  
+  
+\- No concentration rules are defined on the Agreement.  
+  
+\- Concentration rules are defined, but no concentration breaches exist, nor will be caused when this movement is added.  
+  
+It will display a red x (fail) if one of the following conditions is true:  
+  
+\- One or more of the concentration rules for the Agreement is currently in breach and this movement does not correct the breach.  
+  
+\- The movement being added will cause a concentration breach.  
+Settlement | Settlement Date | Taken from the date shown at the top of the column of the available balance that is displayed in bold. It is derived from settlement offset values that have been defined within the application. See [Understanding Settlement Date Defaults](<understand_date_times.html#settlement-date-defaults>) for details on how this is derived.  
+  
+If no offset values have been defined, settlement date will default to Today +1 business day.  
+  
+"Today" is defined as the current date in the Principal Managing Location of the Agreement.  
+| Trade Date | Not Populated but can be overridden.  
+| Physical Settlement | Defaults to Yes.  
+  
+[Video Demonstration](<video_margincalls.html#Asset-Allocations>)
+
+#### Creating Collateral Movements
+
+The margin call must be agreed before this action becomes available under the Live Positions and Movements tab.
+
+When a user selects a movement or position, the actions available will be different depending on the state of position or movement.
+
+To select a position or movement, select the box at the beginning of the position or movement.
+
+If the user selects more than movement and/or selects more than one position with different position types, no action will become available.
+
+State | Actions Available  
+---|---  
+In Progress | [Delete Movement](<#delete-movements>)  
+In Transit (Held Position) | [Deliver Additional](<#deliver-additional>)  
+In Transit (Posted Position) | [Return from Position](<#return-from-position>)  
+Settled | [Full Return Position(s)](<#full-return-positions>)  
+[Return from Position](<#return-from-position>)  
+  
+##### Full Return Position(s)
+
+If a position or movement is selected with a status of _Settled_ , the **Full Return Position(s)** button becomes available. When the button is selected, a popup screen will appear where the user needs to make a decision to either create a return for the position or cancel the return.
+
+If the **Cancel** button is selected, no changes will occur.
+
+If the **Full Return Position(s)** is clicked, a movement will be created. If the position is **Held** , a **Return to Cpty** movement will be created with a status of _In-Progress_. If the position is **Posted** , a _Return to Prin_ movement will be created with a status of _In-Progress_.
+
+##### Return From Position
+
+When the **Return From Position** button is selected, a popup screen will appear for the user to enter the information of the return.
+
+There are several fields that are automatically filled in. These fields are the following:
+
+  * Direction
+  * Instrument Ref
+
+
+  * Description
+  * Currency
+  * Minimum Lot
+  * Lot Increment
+  * Price
+  * Price Date
+  * Is Eligible
+
+
+
+The following fields are defaulted and/or are required but can be changed:
+
+  * Target
+  * Amount
+  * Settlement Date
+  * Trade Date
+  * Physical Settlement - This is defaulted as being on. If the Settlement Date is changed to a date prior to today, then the field will automatically be unchecked.
+
+
+
+Once an amount is entered, click the calculate button right next to the **Amount** field. This will calculate the market value and perform a series of validation checks on the movement. Please see [Validation of Collateral Movements](<movement_validation.html>).
+
+When the **Create** button is clicked, a movement will get created as an _In Progress_ state with a movement type of **Return to Prin**
+
+##### Deliver Additional
+
+When the **Deliver Additional** button is selected, a popup screen will appear for the user to enter the information of the deliver.
+
+There are several fields that are automatically filled in. These fields are the following:
+
+  * Direction
+  * Instrument Ref
+
+
+  * Description
+  * Currency
+  * Minimum Lot
+  * Lot Increment
+  * Price
+  * Price Date
+  * Is Eligible
+
+
+
+The following fields are defaulted and/or are required but can be changed:
+
+  * Target
+  * Amount
+  * Settlement Date
+  * Trade Date
+  * Physical Settlement - This is defaulted as being on. If the Settlement Date is changed to a date prior to today, then the field will automatically be unchecked.
+
+
+
+Once an amount is entered, click the calculate button right next to the **Amount** field. This will calculate the market value and perform a series of validation checks on the movement. Please see [Validation of Collateral Movements](<movement_validation.html>).
+
+When the **Create** button is clicked, a movement will get created as an _In Progress_ state with a movement type of **Deliver to Prin**.
+
+## Delete Collateral Movement(s) on Margin Call
+
+Collateral Movements on a Margin can only be deleted when they are in one of the following settlement states:
+
+  * Rejected
+  * In Progress
+
+
+
+That is, the Margin Call to which the Collateral Movements are attached, is in one of the following Margin Call Workflow states:
+
+  * Demand Workflow - Agreed
+  * Antic Demands Workflow - Agreed
+  * Grouped Calls Workflow - Agreed
+
+
+
+**Procedure**
+
+  1. Select the required Margin Call by clicking on it which will drill down to the details. 
+  2. Select the _Live Positions and Movements_ tab. The screen will display all live positions and movements that exist for the Margin Call.
+  3. Select the movement(s) that need to be removed from the call by clicking the checkbox on the left side of the movement(s). Multiple movements can be selected at one time.
+  4. Click the **Delete Movement** button.
+  5. The user will be prompted with a message asking "Are you sure you want to delete this movement(s)?". The options are to **Cancel** or **Delete Movement**.
+
+
+
+**Note:** The user can only delete collateral movements that have not yet been sent to the Confirmed Workflow state. Movements in the in-transit or settled status cannot be deleted from this screen.
+
+**Considerations for Segregated OTC Agreements**
+
+Where a collateral movement is for an OTC Agreement that separates Lock Up and variation requirements or has a Lock Up Only Calculation type, it should be noted that the Margin Type of the Collateral Movement cannot be edited and will be the same as the Margin Type of the margin call requirement in the upper grid.
+
+See [Working with OTC Agreements that Segregate Lock Up and Variation Margin](<segregate_lockup_varmargin.html>) or [How to Define an OTC Lock Up Only Agreement](<agreements_define.html#otc-lock-up-only>) for more details.

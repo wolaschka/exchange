@@ -1,0 +1,107 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/task_margin_calc.html
+
+# Margin Calculation Task
+
+## Overview
+
+The Margin Calculation task is responsible for calculating various components of a margin call for all agreements which meet the criteria of the corresponding Margin Calculation Configuration.
+
+For example:
+
+  * Net exposure in Agreement Currency per agreement.
+  * Percentage of Notional Additional or Lock Up margin requirements.
+  * Converts all Additional and Lock Up margin requirements to Agreement Currency.
+  * Aggregates Settled collateral positions using latest prices and valuation percentages.
+  * Aggregates In Transit Movements using latest prices and valuation percentages.
+  * Incorporates any prior agreed amounts.
+
+
+
+The agreement Margin Terms are then applied to generate a "Demand", "Anticipated Demand" or a "No Action" entry for each agreement.
+
+There are three types of Margin Calculation tasks:
+
+  1. Standard
+  2. Group
+  3. [Single](<agreements.html#run-single-margin-calculation>)
+
+
+
+**Note:** Agreements with a status of Inactive, are not subject to the Margin Calculation task.
+
+Ensure that the required imports (Trades, FX Rates and Instrument Prices) and the Trade Assignment Task have been run before running the Margin Calculation Task.
+
+To optimize performance, the Margin Calculation task uses trade data stored in the start of day cache, and only reads the database for any trade information that has been overridden by an override file or manually altered.
+
+**Note:** While a task is in progress, it is not recommended to process items in the system - specifically, margin calls, substitutions, movements and interest payments. Doing so may result in data inconsistency. It is recommended to wait until the task has completed before processing items.
+
+## Create New Task
+
+**Procedure**
+
+  1. Within the Task Configuration screen, select _Margin Calculations_ Configuration from the filter drop-down.
+  2. To create a new Margin Calculations Task, select the **Create Margin Calculation** button. The user has a choice of selecting _Standard_ or _Grouped_ configuration.
+  3. Based on the selection chosen, a pop-up screen will appear with the following fields made available:
+
+**Note:** Fields in red are required.
+
+Section | Standard or  
+Grouped | Field | Description  
+---|---|---|---  
+Configuration Details | Both | Name | A unique name for the configuration.  
+| Both | Description | A meaningful description for the configuration.  
+Business Line and  
+Calculation Details | Standard | Business Lines  
+(OTC, Repo, Sec Lending) | Select one, multiple or all business line(s) that a margin calculation needs to be run.  
+  
+If selecting Repo or Sec Lending, specific margin terms needs to be selected for the calculation (e.g., Agreement or Internal terms).  
+  
+Agreement is the default margin terms value for Repo and Sec Lending Business Lines.  
+Filter Details | Standard | None | When selected, the calculation will run for all agreements within the selected business line.  
+| Standard | Principal | To have a more refined margin calculation based on Principal, a selection of one, multiple or all principals can be selected.  
+| Standard | Managing Location | To have a more refined margin calculation based on Managing Location, a selection of one, multiple or all managing locations can be selected.  
+| Standard | Agreements | To have a more refined margin calculation based on Agreements, a selection of one, multiple or all agreements can be selected.  
+| Grouped | Agreement Groups | Select one, multiple or all [Combined Business Line Agreement Group(s)](<agreement_groups.html#combined-business-line-agreement-group>) to be applied to the configuration.  
+  4. Click the **Save** button when all the required and additional fields needed have been filled in.
+
+
+
+
+## Edit Task
+
+  1. Within the Task Configuration screen, select _Margin Calculation Configuration_ from the filter drop-down.
+  2. Select the configuration that needs modification by clicking on the configuration.
+  3. A pop-up screen will appear where the data can be modified.
+  4. Click the **Save** button when all the changes have been made.
+
+
+
+## Delete Task
+
+**Procedure**
+
+  1. Within the Task Configuration screen, select Margin Calculation Configuration from the filter drop-down.
+  2. From the results from the prior step, select a configuration that needs to be deleted by clicking in on a radial button. The **Delete** button will become visible.
+  3. Click the **Delete** button.
+  4. A popup window will appear confirming the deletion. Select _Cancel_ if this was pressed in mistake or select **Delete** to delete the configuration.
+
+
+
+**Note:**
+
+  * It is currently not possible to delete a Margin Calculation Configuration while it is being referenced elsewhere. If the configuration does need to be deleted it would be necessary to first remove it from the relevant places. If the Margin Calculation Configuration is being referenced, the user will receive a message stating that the configuration is being referenced and inform the user where the configuration is being used.
+  * When a Margin Calculation is deleted, any history relating to the running of that configuration will remain in the Task Status view however it will be displayed in italics.
+
+
+
+## Run Task
+
+**Procedure**
+
+  1. Within the Task Configuration screen, select _Margin Calculation Configuration_ from the filter drop-down.
+  2. Select the configuration that needs to be run by clicking the radial button next to the configuration.
+  3. The **Run** button will become enabled and available to be clicked.
+  4. Click the **Run** button.
+  5. The results can be viewed from the [Task Status](<task_status.html#results-of-the-task>) screen.
+
+

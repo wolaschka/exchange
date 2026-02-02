@@ -1,0 +1,105 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_replacement_example.html
+
+# Recalculated Workflow Examples
+
+## Standard Workflow Examples
+
+**1\. Margin Call in Unsent state is recalculated**
+
+A Margin Call for a Demand of USD $10mm for Demo Bank is calculated on 19th November
+
+It remains in the Demand Workflow - Unsent Demands Queue
+
+Margin Calculations are re-run at 10:00 and the new result is a Demand for USD $12mm for Demo Bank.
+
+The USD $12mm call is placed in the Demand Workflow - Unsent Demands state and simultaneously the original $10mm call is cancelled.
+
+The USD $12mm is not defined as a replacement call
+
+This result happens because the original $10mm call was not progressed from the Unsent Workflow state. In short, it was never communicated to the client.
+
+**2\. Margin Call in Sent state is recalculated**
+
+A Margin Call for a Demand of USD $15mm for Demo Bank is calculated on 20th November
+
+It is sent via the margin call workflow at 09:00 and remains in the Demand Workflow - Sent state.
+
+Margin Calculations are re-run at 10:00 and the new result is a Demand for USD $17mm for Demo Bank.
+
+The user is presented with a side by side comparison of the existing $15mm call and the new $17mm call, and must elect whether to process the original or replacement call.
+
+The user elects to process the new $17mm call.
+
+As a consequence the original $15mm call is cancelled, and the $17mm call is the replacement call.
+
+The USD $17mm call is a replacement call.
+
+This result happens because it replaces the $15mm which has been sent to the Counterparty.
+
+## Grouped Workflow Examples
+
+**1\. Agreement Not Eligible for Intraday Calls. Margin Call in Sent Awaiting Collateral Details Queue is recalculated**
+
+A Margin Call for a Demand of USD $25mm for Big Bank is calculated on 20th November
+
+It is sent via the margin call workflow at 09:00 and remains in the Grouped Margin Calls Workflow - Sent state.
+
+Margin Calculations are re-run at 10:00 and the new result is a Demand for USD$27mm for Big Bank.
+
+The USD $27mm call is placed in the Grouped Margin Calls Workflow - Unsent Calls Queue and simultaneously the original $25mm call is cancelled.
+
+The USD $27mm call is a replacement call.
+
+This result happens because it replaces the $25mm which has been sent to the Counterparty.
+
+**2\. Agreement Is Eligible for Intraday Calls. Margin Call in Sent Awaiting Collateral Details Queue is recalculated. No Agreed Amount**
+
+A Margin Call for a Demand of USD $5mm for ABC Bank is calculated on 20th November
+
+It is sent via the margin call workflow at 09:00 and remains in the Grouped Margin Calls Workflow - Sent state.
+
+The Margin Call has not yet been agreed, i.e No Agreed Amount has been recorded on the Call.
+
+Margin Calculations are re-run at 10:00 and the new result is a Demand for USD $7mm for ABC Bank.
+
+The USD $7mm call is placed in the Grouped Margin Calls Workflow - Unsent Calls Queue and simultaneously the original $5mm call is cancelled.
+
+The USD $7mm call is a replacement call.
+
+This result happens because it replaces the $5mm which has been sent to the Counterparty.
+
+Why isn't an intraday call generated ? - Because the original start of Day call for $5mm has been sent but not yet agreed.
+
+Contrast this with the next example.
+
+This example is identical to example 4, with the exception that the start of day call is agreed.
+
+A Margin Call for a Demand of USD $5mm for Small Bank is calculated on 20th November
+
+It is sent via the margin call workflow at 09:00 and remains in the Grouped Margin Calls Workflow - Sent Awaiting Collateral Details Queue
+
+Small bank are contacted, and agree the call in full. An agreed amount of $5mm is recorded, but as the form of collateral to satisfy this call has not yet been informed, collateral movements have not yet been booked, and the call remains in the Grouped Margin Calls Workflow - Sent Awaiting Collateral Details Queue
+
+Margin Calculations are re-run at 10:00. The new result is a total requirements of USD$7mm for Small Bank, which is partially offset by delivery to the principal of $5mm agreed on the 9:00 call.
+
+The USD$2mm call is placed in the Grouped Margin Calls Workflow - Unsent Calls Queue.
+
+The USD$2mm call is an intraday call.
+
+Why is this an intraday and not replacement? - Because the $5mm call has already been agreed with the Counterparty, and therefore the intraday call increments this call.
+
+See [Intraday Margin Calculations](<intraday_mc.html#intraday-margin-calculations>) for more information.
+
+Intraday calls can also be replaced.
+
+Consider for example 5, the $2mm intraday call is sent to Small Bank, and therefore advanced to the Grouped Margin Calls Workflow - Sent Awaiting Collateral Details Queue.
+
+Small Bank has not yet confirmed their agreement to the $2mm call.
+
+At 11:00 Margin Calculations are run again, and the total requirement for Small Bank is $11mm,which is partially offset by the delivery to the principal of $5mm agreed on the 9:00 call.
+
+An Intraday call of $6mm is generated and placed in the Grouped Margin Calls Workflow - Unsent Calls Queue, and simultaneously the USD$2mm Intraday call is cancelled outright.
+
+The USD $6mm Call is an intraday replacement call.
+
+Why? - The call is a replacement call as it replaces the earlier issued USD$2mm as that had been sent to the counterparty. It is also an intraday call, as it is incrementing calls that have been agreed earlier on the same calculation date.

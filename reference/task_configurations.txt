@@ -1,0 +1,54 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/task_configurations.html
+
+# Task Configurations
+
+## Grid Search
+
+Import Configurations are grouped together by the type of data that the import relates to.
+
+Searching for configurations can be performed through the drop-downs of **Configuration** and **Type** located at the top of the screen.
+
+Depending on the **Configuration** selected, the available **Type** will change accordingly and the user can further refine the search.
+
+Configuration | Type  
+---|---  
+Imports | Agreement Cash Interest Terms  
+Agreement Margins  
+Agreement Replication  
+Agreements  
+Agreements Lockup Only  
+Alias  
+Asset Pool Balances  
+Basic Eligibility  
+Collateral Buckets  
+Collateral Positions  
+Contact Assignment  
+Counterparty Contacts  
+Debt Instrument Prices  
+Entities  
+Entity Ratings  
+Equity Instrument Prices  
+Interest Calculations | All  
+Margin Calculations | All  
+Margin Calculation Analysis | All  
+Settle Movements | All  
+Extracts | Collateral Eligibility Extract  
+Exposure Statement Extract  
+  
+## Grid Features
+
+The task configuration grid can be [sorted](<grid_features.html#sorting>), [paged](<grid_features.html#paging>), [exported](<grid_features.html#export-grid>), [reorder columns](<grid_features.html#reorder-columns>), and fields can be [disabled or resized](<grid_features.html#display-and-resizing-columns>).
+
+## Grid View
+
+When data is returned after executing the search criteria, the main page will display the following fields in a grid format depending on the **Configuration** type that was searched upon.
+
+Configuration | Fields | Description  
+---|---|---  
+All | Name | The name of the import configuration.  
+Imports | Mapping File Path | The path and the file that maps the data to the corresponding fields within the system.  
+Imports | Data File Path | The path and the data file that is to be imported into the system.  
+All | Created By | The name of the user who created the configuration.  
+All | Created On | The date the configuration was created.  
+All | Last Modified By | The name of the user who last made changes to the configuration.  
+All | Last Modified On | The date of the last modification to the configuration.

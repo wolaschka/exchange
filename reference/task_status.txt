@@ -1,0 +1,613 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/task_status.html
+
+# Task Status
+
+## Overview
+
+A task is a predefined process used for data adjustment (e.g. trade assignment or movement settling) or calculation purposes or for importing/extracting data. The results of a task will usually be persisted to be accessed either by a report or an online screen.
+
+**Note:** While a task is in progress, it is not recommended to process items in the system - specifically, margin calls, substitutions, movements, interest payments and Reporting Data Extractor. Doing so may result in data inconsistency. It is recommended to wait until the task has completed before processing items. 
+
+## Task Status Filters
+
+Upon entering the screen, the default filter is **Import**. All import tasks will get returned.
+
+To filter the list to a specific area, status and/or date, select from the menu at the top of the screen.
+
+  * **Task Status** \- To filter based on the area, click the drop-down and select one of the below areas:
+
+    * [Imports](<#imports>)
+    * [Trade Assignments](<#trade-assignments>)
+    * [Margin Calculations](<#margin-calculation>)
+    * [Margin Calculation Analysis](<#margin-calculation-analysis>)
+    * [Interest](<#interest>)
+    * [Settle Movements](<#settle-movements>)
+    * [Collateral Eligibility Extract](<#collateral-eligibility-extract>)
+    * [Exposure Statement Extract](<#exposure-statement-extract>)
+    * [Full Eligibility and Concentration Checks](<#full-eligibility-and-concentration-checks>)
+    * [Triparty Eligibility and Concentration](<#triparty-eligibility-and-concentration>)
+
+**Note:** The data displayed in the Task Status grid varies slightly according to the task which has been run.
+
+  * **Status Filters** \- To filter on status, click the drop-down and select one, multiple or all of the statuses. If no selection is made, then all statuses will be returned.
+
+Symbol | Status | Description  
+---|---|---  
+![run_task_fail.jpg](Images/run_task_fail.jpg) | Fail | A Task will have a failed status if it has not successfully run.  
+  
+For an Import Task, this would imply no records have been imported and the data from the previous successful import will remain as current.  
+  
+Such examples of this are when the specified file cannot be found or the file is locked.  
+  
+A failed Import Process will have a corresponding Exception message against it.  
+![run_task_warning.jpg](Images/run_task_warning.jpg) | Attention | A Task will have an Attention status if there exists one or more corresponding Exception or Warning validation messages against it.  
+![run_task_success.jpg](Images/run_task_success.jpg) | Success | A Task will have a Success status when it has completed without any associated Exceptions or Warnings. Note: There may exist Information level validation messages.  
+![run_task_in_progress.jpg](Images/run_task_in_progress.jpg) | In Progress | A Task will have an In Progress status if it is currently running.  
+![run_task_queued.jpg](Images/run_task_queued.jpg) | Queued | A Task will have a Queued status if it has been requested but another Task is currently In Progress.  
+![run_task_not_run.jpg](Images/run_task_not_run.jpg) | Not Run | A Task will have a Not Run status if it has not been run for the date selected. If no date has been selected this status indicates that the task has never been run. The date used is the server date.  
+  * **Task Run Date** \- To filter on date, click on the Task Run Date and select a date from the date picker. If no date is selected, then the default will be today's date.
+
+
+
+
+The screen will automatically refresh with each change to the filters.
+
+The **Refresh** button can be clicked to update the screen if a task is running.
+
+The **Clear Filter** button will remove any data that is exists in the _Status Filters_ or the _Task Run Date_.
+
+fields.
+
+## Grid Features
+
+The task status grid can be [sorted](<grid_features.html#sorting>), [paged](<grid_features.html#paging>), [exported](<grid_features.html#export-grid>), [reorder columns](<grid_features.html#reorder-columns>), and fields can be [disabled or resized](<grid_features.html#display-and-resizing-columns>)..
+
+## Run Task
+
+**Procedure**
+
+  1. To run a task, click on a radial button next to the configuration that needs to be run.
+  2. The **Run** button will appear on the upper right corner of the screen.
+  3. Click the **Run** button.
+  4. To refresh the screen, click the **Refresh** button.
+
+
+
+All tasks will have the following fields displayed on the Task Status screen. Additional fields will be displayed based on the specific task that has been run.
+
+Field Name | Field Description  
+---|---  
+Status | See [Task Status - Filters](<#task-status-filters>) Pane for further details. The default order of Import Configurations depends on this column, in order of highest severity first as follows: Fail, Attention, Not Run, In Progress, Success.  
+Start Time | This is the time that the task was started. This time will correspond to the server the process is being run on.  
+End Time | This is the time that the task completed or failed. This time will correspond to the server the process is being run on.  
+Elapsed Time | The time the task has taken. This will be updated when the refresh button is clicked.  
+User | This will display the user name of the user who last ran the Task.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Collateral Eligibility Extract
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | The name of the Extract Configuration.  
+Agreements Extracted | The total number of agreements that were extracted that have been set up to use TLM Collateral Management Messaging Adapter.  
+Exceptions | The total number of Exceptions created as a result of running this task. There are currently three situations which result in an Exception for the Repo Statement Extract Task:  
+  
+\- An invalid path has been defined as the output path on the Extract Configuration.  
+\- The server running the task does not have access to the path defined as the output path on the Extract Configuration.  
+  
+In these first two cases no statements can be created and the Task will complete with a Status of "Fail".  
+  
+\- The file that the task is trying to write to is already being used by another process (for example, another user already has the statement open. This would occur in the case of a task being re-run for the same day.  
+  
+In this situation that particular statement will not be created but the task will continue and create any other statements that it can and complete with a Status of "Attention".  
+  
+All of these exceptions result in the Validation message number 8 with appropriate descriptions displayed as the "Value".  
+Warnings | There are currently no warnings associated with Repo Statement Extract Tasks.  
+Messages | There are currently no informational messages generated as a result of running this task.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Exposure Statement Extract
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | The name of the Extract Configuration.  
+Agreements Extracted | The total number of statements created. It should be noted that if an agreement currently has no trades a blank statement will be created.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+Start Time | This is the time that the task was started. This time will correspond to the server the process is being run on.  
+End Time | This is the time that the task completed or failed. This time will correspond to the server the process is being run on.  
+Elapsed Time | The time the task has taken. This will be updated when the refresh button is clicked.  
+Exceptions | The total number of Exceptions created as a result of running this task. There are currently three situations which result in an Exception for the Repo Statement Extract Task:  
+  
+\- An invalid path has been defined as the output path on the Extract Configuration.  
+\- The server running the task does not have access to the path defined as the output path on the Extract Configuration.  
+  
+In these first two cases no statements can be created and the Task will complete with a Status of "Fail".  
+  
+\- The file that the task is trying to write to is already being used by another process (for example, another user already has the statement open. This would occur in the case of a task being re-run for the same day.  
+  
+In this situation that particular statement will not be created but the task will continue and create any other statements that it can and complete with a Status of "Attention".  
+  
+All of these exceptions result in the Validation message number 8 with appropriate descriptions displayed as the "Value".  
+Warnings | There are currently no warnings associated with Repo Statement Extract Tasks.  
+Messages | There are currently no informational messages generated as a result of running this task.  
+  
+The statements generated as a result of running the task can be found in the location specified as the output path for the corresponding Extract Configuration. Within this location there will be a separate folder for each date. If a task is run which would result in a statement being re-created for the same agreement on the same date, then the existing statement will be overwritten.
+
+It is also possible to view the [history of the task](<#history-of-the-task>). See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Full Eligibility and Concentration Checks
+
+This is a task which calculates Eligibility and Concentration breaches for all agreements which have Advanced Eligibility, Ratings Based Eligibility, Wrong Way Risk Eligibility or Concentration Rules defined. The calculation will apply all currently assigned eligibility rules (basic rules in the form of buckets associated to an agreement, advanced eligibility rules, ratings based eligibility rules and wrong way risk eligibility rules) together with concentration rules and calculate whether a breach has occurred on any Held or Posted collateral positions. The collateral positions are retrieved from the Collateral Positions table. The calculation takes into account any position in the table at the time of running.
+
+Collateral Position values are calculated by using instrument prices and valuation percentages, and converted to any relevant currencies using the latest applicable FX rates.
+
+The results from the calculation are stored away for later use by the Full Eligibility and Concentration Report, Eligibility Service and the Full E&C Results Service.
+
+The task has no corresponding configuration screen and can be run either externally from the DOS command line or using the Task Status screen. To run the Full Eligibility and Concentration Breaches Calculation Task click the radial button and the **Run** button will become enabled then click the run button to run the full check.
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+# agreements checked | The number of agreements checked by the Task.  
+# agreements failed | The number of agreement for which the calculation failed for some reason.  
+Exceptions | The number of exceptions created for all agreements.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Imports
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Type | The Import Configuration type. For example, OTC Trades, FX Rates, Instruments and so on.  
+Configuration | The name of the corresponding Import Configuration.  
+Exceptions | The total number of individual Import Configuration and Record Level validation Exception messages.  
+Warnings | The total number of individual Import Configuration and Record Level validation Warning messages.  
+Records Imported | This is the total number of successfully imported records.  
+Records Imported COB-1 | This is the total number of successfully imported records from the last successful run on the previous business day.  
+Records Imported COB-2 | This is the total number of successfully imported records from the last successful run two business days ago.  
+Total Records | This is the total number of records received on the file.  
+Requested Time | This is the time that the Import was requested. Imports are currently queued until the previous one has completed so this will not necessarily correspond to the Start Time.  
+  
+Where an Import Status record relates to an Import Configuration which has subsequently been deleted, the details will be displayed in _italics_.
+
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Interest
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | The name of the corresponding Import Configuration.  
+Open Accruals |   
+Payment Generated |   
+Exceptions | The total number of individual Import Configuration and Record Level validation Exception messages.  
+Warnings | The total number of individual Import Configuration and Record Level validation Warning messages.  
+Requested Time | This is the time that the Import was requested. Imports are currently queued until the previous one has completed so this will not necessarily correspond to the Start Time.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Margin Calculation
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration Name | The name of the Margin Calculation configuration.  
+Agmts Calculated | The number of agreements calculated by the Task.  
+Exceptions | The number of different exceptions generated as a result of running the task.  
+Warnings | The number of informational messages generated as a result of running the task.  
+Messages | There are currently no informational messages generated as a result of running this task.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+  
+A whole series of [validations are performed when the Margin Calculation task is run](<validation_margin_calculation_task.html>).
+
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Margin Calculation Analysis
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | The name of the Margin Calculation Analysis configuration.  
+Exceptions | The number of different exceptions generated as a result of running the task.  
+Warnings | The number of different warnings generated as a result of running the task.  
+Messages | There are currently no informational messages generated as a result of running this task.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+  
+It is also possible to view the [history of the task](<#history-of-the-task>).
+
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Settle Movements
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | The name of the Settle Movements Configuration.  
+Exceptions | The number of informational messages generated as a result of running the task.  
+Warnings | There are currently no warnings associated with Settle Movements task.  
+Messages | There are currently no informational messages generated as a result of running this task.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+### Trade Assignments
+
+There are currently three types of Trade Assignment Task:
+
+  1. **Full** \- The "Full" trade assignment task assigns all trades that have been imported into the Trades table (for the relevant Business Line **) regardless of whether they have previously been assigned. The OTC Full trade assignment tasks actually pertains to both OTC and Client Clearing trades, as these are imported into the OTC trades table.
+  2. **Unassigned** \- The "Unassigned" trade assignment task assigns only those trades which have been imported into the Trades table (for the relevant Business Line**) that have yet to be assigned. This includes any trade which has been imported using any Trades import configuration (for the relevant Business Line**) that has not yet been matched. The OTC Unassigned trade assignment tasks actually pertains to both OTC and Client Clearing trades, as these are both imported into the OTC trades table.
+  3. **Segregated** \- The "Segregated" trade assignment task assigns only those trades which have been imported for a specific trade import configuration (for the relevant Business Line**) regardless of whether they have previously been assigned. The Segregated trade assignment task pertains to both OTC and Client Clearing trades, as these are imported into the OTC trades table. 
+
+
+
+These tasks can be run for one of the two following types of trades.
+
+  * **OTC Trades** \- The OTC Trades import can import trades for OTC , Central Clearing and Client Clearing Agreements. Therefore the OTC trade assignment tasks actually pertains to both OTC, Central Clearing and Client Clearing trades. Only Central and Client Clearing Agreements with a Margin Type of Variation are eligible to have exposure trades assigned to them. Exposure trades cannot be assigned to Central or Client Clearing Agreements with a Margin Type of Guarantee, Lock Up or Surplus. (please see important footnote below regarding Client Clearing and Central Clearing Agreements)
+
+**Note:** Exposure trades cannot be assigned to OTC Lock Up Only Agreements.
+
+  * **Repo Trades** \- These tasks have no corresponding configuration screens and can be run either externally from the DOS command line or using the Task Status screen. When the task is run, trades are assigned to agreements using the following methods, in the order shown below:
+
+    1. Trades which have been specifically [Included](<agreements_tradecoverage.html#trade-coverage_1>) for agreements are assigned first using the Trade Parameter and other associated trade value details recorded in the [specific trade coverages](<agreements_tradecoverage.html#specific-trade-coverage>) form.
+
+Should the same trade be defined as [specifically included against multiple agreements](<agreements_tradecoverage.html#trade-coverage_1>), the system will raise [validation message 250](<validation_messages.html#250>), and the trade will be set as unassigned.
+
+    2. Trades are then assigned to agreements using the Agreement name (or alias) included in the file, (assuming that the Agreement name/alias supplied on the file matches a valid agreement in the system, and therefore populates an Agreement name on the trades table) 
+
+If the Agreement name is populated the trade is assigned to an agreement on that basis only. If the agreement name given is not found either as an Agreement or as an Agreement alias then the system will not assign the trade (i.e. there is no fall back to then look for the Principal or Counterparty).
+
+    3. If an agreement name is not supplied the system will then try to assign the trade using the Counterparty and Principal names (or aliases) together with the Trade Assignment Rules defined on an Agreement: 
+
+The system will find all agreements with matching Principal, Counterparty and Trade Assignment Rules that the trade can potentially be assigned to.
+
+Then any agreements which have the trade specifically Excluded in their specific trade coverages form are removed from that list of potential agreements.
+
+If the trade can be assigned to a single agreement based on matching Principal, Counterparty and Trade Assignment Rules, then it assigned.
+
+If the trade can be assigned to multiple agreements based on the same criteria, then it cannot be assigned and a validation warning is given ([validation message number 118](<validation_messages.html#118>))
+
+If no agreement exists with matching Principal, Counterparty and Trade Assignment rule, then the trade remains unassigned, and [validation message number 111](<validation_messages.html#111>)
+
+Unassigned trades can be seen in the Unassigned Trades Report.
+
+    4. Where the trade is assigned to a Repo or Securities Lending Agreement, the assignment task determines whether the trade should be marked for inclusion in the corresponding Agreement's margin calculations based on any defined Trades Filters. 
+
+
+
+
+The OTC trade assignment task attempts to assign exposure trades to agreements in the following Business Lines:
+
+  * OTC
+  * Central Clearing
+  * Client Clearing
+
+
+
+However, exposure trades are valid only for Agreements in Central and Client Clearing Business Lines when the Agreements are defined with a Margin Type of Variation and for Agreements in the OTC Business Line when the Agreements are not defined with a Lock Up Only Calculation type.
+
+If an exposure trade is imported with an Agreement name for Central or Client Clearing Agreement with a Margin Type not equal to Variation, or with an OTC Agreement name for an agreement with a Lock Up Only Calculation type [validation message 309](<validation_messages.html#309>) is raised.
+
+Similarly, the same exception is raised during the trade assignment process if an exposure trade would be assigned to Central or Client Clearing Agreement with a Margin Type other than Variation or to an OTC agreement with a Lock Up Only Calculation type.
+
+Once the Trade Assignment task has completed, its results are stored in the [start of day cache](<#start-of-day-cache-load>).
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Configuration | **Full -** The "Full" trade assignment task assigns all trades that have been imported into the trades table for the relevant Business Line regardless of whether they have previously been assigned.  
+  
+**Unassigned -** The "Unassigned" trade assignment task assigns only those trades which have been imported into the trades table for the relevant Business Line that have yet to be assigned.  
+  
+**Segregated (Full + Import Configuration) -** The Segregated trade assignment assigns only those trades which have been imported into the trades table for the relevant Business Line for a specified trades import configuration regardless of whether they have previously been assigned.  
+Number of Trades Assigned | The total number of trades which were assigned to agreements as a result of this task. Note that this can result in a negative number if more trades were excluded from agreements that assigned to them.  
+Requested Time | The time at which the task was requested to be run. This time will correspond to the server the process is being run on.  
+  
+Trades are currently assigned to collateral agreements in one of two ways.
+
+  1. Using The Agreement name (or alias) included in the file. Assuming that the Name/Alias supplied were valid.
+  2. Using Trade Coverage Rules that are defined on an Agreement. Trade coverage rules are created using Counterparty and Principal names, Trade Types and optionally Branches, and additional criteria.
+
+
+
+If the agreement name is not supplied, then the application will attempt to assign the trade based on the Trade Coverage Rules. It will check that an agreement with a matching trade coverage rule does exist for the supplied Counterparty, Principal and Trade Type combination ([validation message number 135/114](<validation_messages.html#135>)).
+
+It will also check to make sure that the supplied Counterparty, Principal, Branch and Trade Type combination can only match the Trade Coverage Rule on a single Agreement ([validation message number 118](<validation_messages.html#118>)).
+
+The failure of these validation checks results in "Warning" messages and the corresponding trades are not assigned to an agreement.
+
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+#### Understanding Segregated Trade Assignment
+
+**Overview**
+
+The Trade Assignment functionality has been enhanced to allow the assigning of trades on an Import configuration basis. This means only those trades imported by a specified import configuration will be assigned to agreements.
+
+Segregated Trade Assignment is only supported for OTC and Repo Trade import configurations. 
+
+**Functionality**
+
+In order to be able to run a segregated trade assignment, the import configuration must be of OTC Trades or Repo Trades type.
+
+There are several considerations to bear in mind when deciding to use the segregated trade assignment functionality:
+
+  * The Task Status **Configuration** grid column will include the trade assignment configuration name plus the Import configuration name, separated by a colon (:).
+  * Segregated Trade Assignment always uses the full trade assignment logic.
+  * Once segregated trade assignment feature is used, the Task Status will no longer show the OTC and/or Repo Full Trade Assignment configuration name; it will always show the trade assignment configuration name plus the import configuration name. The full trade assignment configuration name without an import configuration name. This means when that particular trade assignment was executed, the task assigned trades for the **entire** system. 
+
+It is possible to retrieve the standard OTC and/or Repo Full Trade Assignment tasks from the Task Status screen by searching past assignments using the Date filter. Any date prior to executing the first segregated trade assignment is valid. However, the following additional considerations need to be noted:
+
+    * OTC and/or Repo Full Trade Assignment tasks cannot be run when the system is configured for [concurrent task execution](<#concurrent-task-execution>).
+    * OTC and/or Repo Full Trade Assignment task will assign trades for the entire system.
+  * Each time a segregated trade assignment is executed, the Trade Assignment Status grid will be replaced with the new import configuration name. In order to view all segregated trade assignment tasks executed, a date will need to be selected within the search criteria pane. This will show all the trade assignments run for the specified date.
+
+
+
+
+### Triparty Eligibility and Concentration
+
+This is a task which calculates Eligibility and Concentration breaches for all agreements with imported Triparty positions and have [Basic Eligibility](<basiceligibility.html>), [Advanced Eligibility](<advancedeligrules.html>), [Ratings Based Eligibility](<ratingbasedeligrules.html>), [Wrong Way Risk Eligibility](<wrongwayrisk.html>) or [Concentration Rules](<agreements_concentrationrules.html>) defined. The calculation will apply all currently assigned eligibility rules (basic rules in the form of buckets associated to an agreement, advanced eligibility rules, ratings based eligibility rules and wrong way risk eligibility rules) together with concentration rules and calculate whether a breach has occurred on any Held or Posted imported Triparty collateral positions.
+
+The Triparty collateral positions are retrieved from the [Triparty Collateral Positions](<import_triparty_positions.html>) table. The calculation takes into account any position in the table at the time of running and does not include true positions and in-transit movements. The notional for the positions are taken from the imported data. The task will calculate the market value using the prices, FX Rates, valuation percentage and other data needed from TLM Collateral Management System.
+
+The task has no corresponding configuration screen and can be run either externally from the DOS command line or using the Task Status screen.
+
+To run the Triparty Eligibility and Concentration Task, select the radial button next to any result then click the **Run** button.
+
+**Note:** The results of the calculation can be viewed in a TLM Collateral Management system as a web plug-in module after Triparty Eligibility and Concentration Task has been run. The task does not impact Margin Calls, Interest Calls, Inventory or Collateral Positions within TLM Collateral Management.
+
+The following columns are displayed on the task status screen in addition to the fields displayed across all tasks.
+
+Field Name | Field Description  
+---|---  
+Exceptions | The number of exceptions created for all agreements.  
+# Agreements Checked | The number of agreements checked by the Task.  
+# Agreements Failed | The number of agreement for which the calculation failed for some reason.  
+  
+See the [task status results](<#results-of-the-task>) to view the details of the run.
+
+## Results of the Task
+
+After a task is run, the results can be viewed by clicking on the task. A window will slide out from the right side of the screen.
+
+Messages are grouped into three severity categories:
+
+Symbol Example | Severity | Description  
+---|---|---  
+![task_status_exceptions.jpg](Images/task_status_exceptions.jpg) | Exception | An Exception message relating to an Import Configuration means that the Import itself has failed and NO records have been imported.  
+  
+An exception message relating to an actual Record means that the record will NOT be imported.  
+![task_status_warnings.jpg](Images/task_status_warnings.jpg) | Warning | A Warning message relating to a Record is for information purposes only. The record is still loaded. Generally a severity of Warning will require some user attention.  
+![task_status_messages.jpg](Images/task_status_messages.jpg) | Message | A Message is supplied for informational purposes only. Currently these messages are only available for OTC Trades and Repo Trades imports.  
+  
+Three columns are displayed for each message as follows:
+
+Field Name | Field Description  
+---|---  
+Total | This column shows the total number of validation messages with the corresponding Message and Value.  
+Message | This column shows the actual validation message of the Import Process or Record as per Validation Messages.  
+Value | This column shows the value of the column or the column name(s) in question, depending on the context of the message.  
+  
+Within each severity category, validation messages are grouped together by Message and Value. Thus, a user will only see one line where a group of validation messages have failed the same validation check and have the same value.
+
+When an Import Configuration is run, there are certain [validation checks](<validation_messages.html>) that are performed against it. These may correspond to validations performed against the Import Configuration itself. For example, the validity of the file or to the data within the data set being imported. According to the Import Configuration currently selected, the corresponding validation messages will be displayed. To view the messages for each severity category click on the corresponding filter toggle buttons.
+
+## History of the Task
+
+To view the history of a task that has been run, do the following:
+
+  1. Click on the required Task Configuration. A window will appear from the right side of the screen.
+  2. Select the **History** tab to view. The fields displayed correspond to those shown in the Task Status Pane for the relevant task type.
+
+
+
+**Note:** The history is displayed till the data is purged.
+
+## Concurrent Task Execution
+
+**Overview**
+
+The execution of "start of day" tasks has been enhanced to allow multiple tasks to execute concurrently.
+
+Start of Day tasks are defined as follows:
+
+  1. Trade Import (OTC and Repo only)
+  2. Trade Assignment
+  3. Margin Calculation
+  4. Margin Calculation Analysis
+
+
+
+All other [task](<#overview>) types will continue to run as per existing functionality.
+
+**Scope of Functionality**
+
+**Note:** Concurrent task execution is a system level configuration that must be turned on in order to be able to run "start of day" tasks concurrently. This configuration is not accessible from the application UI. Please consult with the local CRM IT application team in order to determine if the system is configured for concurrent task executions before proceeding.
+
+Additionally, when concurrent task execution is enabled, [Start of Day Cache](<#start-of-day-cache-load>) is automatically disabled.
+
+When the system is suitably configured, the ability to run "start of day" task configurations concurrently is supported.
+
+Also, new functionality to assign trades on an import configuration basis has been added to aid with data parity described below.
+
+**Application of Functionality**
+
+In order for a task to run concurrently, the following must be true:
+
+  1. System level configuration is enabled
+  2. The Task configuration must be a "start of day" task
+  3. The Task configuration must be unique within the same task type
+
+
+
+**Considerations of Functionality**
+
+When concurrency is enabled, the "start of day" tasks will no longer queue. This means the order in which the different task types are executed becomes significantly more important in order to ensure data integrity is maintained. 
+
+The below task types should be executed in the order listed and only when the previous task type has completed successfully: 
+
+  1. Trade Import
+  2. Trade Assignment
+  3. Margin Calculation
+  4. Margin Calculation Analysis
+
+
+
+In order to ensure data integrity, it is highly recommend that data parity between the above four tasks is maintained as follows:
+
+  1. Trade import file should only have trades for those agreements that fall within the margin calculation and analysis task configurations.
+  2. If trade volumes are too large to maintain parity on a one to one configuration basis, it is possible to break down trade import files into multiple configurations that may be executed concurrently, provided the margin calculation and analysis tasks are executed sequentially **_after_** all the trade import files have completed successfully.
+
+
+
+When data parity is successfully maintained across a group of task types, it is possible to execute multiple task types concurrently for different underlying data sets. It is highly recommended this type of multiple task execution is managed using the Task Execution Requester utility from an external application scheduler.
+
+**Note:** Please see the common_modules.chm help file provided with the released TLM Collateral Management software for more information on the Task Execution Requester.
+
+Segregated Trade Assignment is the only method of assigning trades when concurrent task execution is enabled. 
+
+**Functionality Example**
+
+A global organization has delineated their business process within the application on a Principal Managing Location basis. This means data imported, calculations and user interaction within the application has been separated in such a manner that only those agreements within the specified managing location will be processed by a specific set of users within the same region.
+
+However, due to high volumes within the organization's hedge fund business stream, they have further delineated their data by using multiple Principal Managing Locations for the same time zone, London and Bristol.
+
+For this example, the following is set up:
+
+  1. Two trade import configurations for the hedge fund business stream, each representing the data specific to the London and Bristol managing locations Note: External to the TLM Collateral application, the organization has ensured there will be two underlying data import files, each representing the data specific to the London and Bristol managing locations.
+  2. Two margin calculation configurations, each representing the data specific to the London and Bristol managing locations.
+  3. Two margin calculation analysis configurations, each representing the data specific to the London and Bristol managing locations.
+
+
+
+**With the above set up, the organization can now process their data and perform their calculations within the TLM Collateral application concurrently without conflict as follows:**
+
+**Note:** The below task execution time line is strictly for illustrative purposes. Task execution timings are subject to volume and system resource capabilities. Within the environment, timings will vary.
+
+Additionally, the below illustration assumes serial execution within each managing location and concurrent execution across managing location irrespective of executing the tasks via the UI or external application scheduler.
+
+![understanding_concurrent_task_execution_timeline.jpg](Images/understanding_concurrent_task_execution_timeline.jpg)
+
+## Start of Day Cache Load
+
+**Background**
+
+Each day, the TLM® Collateral Windows™ Service (CollateralWinServicePrimary5.X.Y), runs a start of day cache process to load the following information from the database into cache memory:
+
+  * Trades Imported by OTC Trades Task
+  * Trades Assigned by OTC Trade assignment tasks
+  * Trades Imported by Repo Trades Task
+  * Trades Assigned by Repo Trade assignment tasks
+
+
+
+When tasks or queries are requested that require information in any of the above records (e.g. Margin Calculation task, Margin Calculation Analysis tasks), the TLM Collateral Windows Service uses the cache as opposed to the database to optimize performance.
+
+**Implications of Restarting the TLM® Windows Service**
+
+If the Windows service is restarted (for any reason), the following occurs:
+
+  1. The existing cache records are lost.
+  2. Upon successfully restarting the Windows Service will rebuild the cache by loading the above 4 record sets into memory.
+  3. While the cache is being rebuilt, any task execution requested via TLM Collateral Management, will be queued.
+  4. Once the start of day cache building process has completed, the any requested tasks that are queued, will be executed.
+
+
+
+What is important to note is that once the windows service restarts, that the cache rebuild process takes precedence over any requested task, and therefore all tasks requests will show as queued in the application until the cache build is completed.
+
+Therefore if the TLM Windows Service is running, but the requested tasks in a queued state, and no current active running task in TLM Collateral Management with an In progress state, it is recommended to first establish:
+
+  1. whether the TLM Windows Service has been recently restarted
+  2. whether the start of day cache load process has begun
+
+
+
+before troubleshooting further.
+
+**Identifying Start of Day Cache Load Process has begun**
+
+TLM Collateral Management can be configured so that it produces log information as to the progress of the start of day cache process. By default, the application ships with this logging configuration disabled.
+
+To enable start of day cache logging, alter the following emboldened setting in the Algo.Collateral.Services.WindowsServiceHost.exe.config file:
+    
+    
+    <listeners>
+      <add switchValue="Off" name="Start of Day Cache Load">
+      </add>
+    </listeners>
+    
+
+to be **All** \- will log all message types (eg warnings, errors, information) regarding start of day cache (note, as of 5.2.3 only information messages are is logged)
+
+or
+
+Information (will log only information messages)
+
+Once the value has been updated, and the service started, start of day cache logging is enabled.
+
+When the start of day cache loading process begins, an entry is made to the trace.log file in the <\installPath>\CollateralWinService directory
+
+The entry has a message stating "Loading start of day data into cache during Windows Service restart."
+    
+    
+      Start of Day Cache Load Information: 1100 : Timestamp: 5/7/2021 9:25:33 AM
+      Message: Loading start of day data into cache during Windows Service restart.
+      Category: Start of Day Cache Load
+      Priority: 0
+      EventId: 1100
+      Severity: Information
+      Title:
+      Machine: P8CHBUAAG3E
+      App Domain: Algo.Collateral.Services.WindowsServiceHost.exe
+      ProcessId: 9632
+      Process Name: C:\TLM\5.13\CollateralWinService\Algo.Collateral.Services.WindowsServiceHost.exe
+      Thread Name:
+      Win32 ThreadId:9844
+      Extended Properties:Start of Day Cache component Loading
+    
+
+**Start of Day Cache component Loading**
+
+As each of the four components of the start of day cache **completes** loading, an entry is made to the trace log.
+
+Example for Assigned Repo Trades:
+    
+    
+      Logging Errors & Warnings Error: 6352 : Timestamp: 4/18/2021 1:52:48 PM
+      Message: There is no explicit mapping for the categories 'Start of Day Cache Load'. The log entry was: Timestamp: 4/18/2021 1:52:48 PM
+      Message: Loading Assigned Repo Trades for start of day data into cache during Windows Service restart. Execution time: 00:00:00.0169949
+      Category: Start of Day Cache Load
+      Priority: 0
+      EventId: 1100
+      Severity: Information
+      Title:Machine: PHIITT
+    
+
+The key point to note is the second _Message_ line which states which of the four cache components has been loaded and the execution time duration.
+
+There are four elements loaded into the start of day cache, in order, and a separate message is created upon the successful loading of each.
+
+For example:
+
+  * Message: Loading **_OTC Trades_** for start of day data into cache during Windows Service restart. Execution time: 00:00:00.3460198
+  * Message: Loading **_Assigned OTC Trades_** for start of day data into cache during Windows Service restart. Execution time: 00:00:00.0090006
+  * Message: Loading **_Repo Trades_** for start of day data into cache during Windows Service restart. Execution time: 00:00:00.1960112
+  * Message: Loading **_Assigned Repo Trades_** for start of day data into cache during Windows Service restart. Execution time: 00:00:00.0070004
+
+

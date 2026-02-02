@@ -1,0 +1,206 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_debt_instrument_prices.html
+
+# File Format for Debt Instrument Prices
+
+When importing Debt Instrument Prices, all previous records are not deleted when a new import is run. The import is done on an insert and update basis.
+
+Debt Instrument Prices are unique per Instrument ID, Price date, Price Source and Price Date Adjustment combination, and are independent of the Import Configuration used to import them. That is, if two different Debt Instrument Price Import Configurations exist and contain prices for the same set of instrument ID's, Price Sources, Price Date adjustments, and Price Date combinations, then the later import will overwrite the corresponding prices that were loaded in the earlier import.
+
+Debt Instrument Prices can be subject to approval (if defined so in the system level configuration file.) If that is the case, no changes to the Debt Instrument Prices can be made manually or via an import. If a Debt Instrument Prices import is run while the prices are pending approval, a [validation message 355](<validation_messages.html#355>) is raised.
+
+If Approvals for Instruments is enabled, and a Newly created Instrument is awaiting approval, any instrument price imported for that instrument will not find it, as it does not yet appear as approved in the database.
+
+When the import is run, the system checks to see whether the price entry on the file matches an instrument price record in the system in three key areas:
+
+Instrument Identifier ID
+
+Price Source
+
+Price Date Adjustment
+
+If it does, then the prices contained on the import file for that instrument updates the corresponding instrument prices in the system (subject to other validation criteria)
+
+There are some important aspects to note regarding this import file:
+
+  1. Debt Instrument price records are considered unique based on the combination of four fields from the import file: Instrument Identifier
+
+Price Source
+
+Price Date
+
+Price Date Adjustment
+
+not the actual prices for the instrument.
+
+Therefore, the following example entries would be considered as multiple entries for the same instrument and date, and only one set of prices (not determinable in advance) would be imported.
+
+![InstrumentPriceFileExample.jpg](Images/InstrumentPriceFileExample.jpg)
+
+**Note:** It is therefore strongly recommended that the file contains all prices for a "unique" record on one row.
+
+Similarly, the following two records would be considered duplicates as not only are the unique keys identical but all prices are identical too.
+
+This would result in a duplicate error.
+
+![InstrumentPriceFileDuplicateExample.jpg](Images/InstrumentPriceFileDuplicateExample.jpg)
+
+  2. Dirty Price will be calculated if it is not supplied on the file.
+
+The formula used to calculate this is (Clean Price + Coupon accrual) * Pool Factor
+
+If a Dirty Price is calculated by the system this will be indicated in the Debt Instrument Prices Tab under the Calculated field.
+
+In the below file example, the dirty prices that would get calculated and recorded by the system are highlighted in yellow, while their constituent components are highlighted in green.
+
+![PriceImport_DirtyCalculation_Example.jpg](Images/PriceImport_DirtyCalculation_Example.jpg)
+
+  3. If Dirty Price is supplied on the file for a Debt instrument, it is assumed to be correct and will be loaded.
+
+This occurs even if the file includes Clean Prices, Pool Factors and Coupon Accruals which would not result in the same Dirty Price calculation.
+
+Similarly if Dirty Price is supplied, and no Clean Prices, Pool Factors or Coupon Accruals are supplied, the Dirty Price will load without validation errors.
+
+For example, in the below file a Dirty Bid Price of 101 would be loaded for bond DE0001135234 even though a calculated Dirty Price would be 102.3.
+
+Similarly, for bond DE0001135242 a Dirty Bid Price of 105 would be loaded.
+
+![PriceImport_DirtySupply_Example.jpg](Images/PriceImport_DirtySupply_Example.jpg)
+
+  4. If a Debt instrument price is included on the file with prices for multiple dates, only the most recent dated prices will be loaded.
+
+In the below file example, there are prices for two price dates for the bond AU0000XCLWE2. However, only the prices for the price date of 16/4/08 will be loaded as they are identified by the system as the most recent.
+
+![PriceImport_MultiplePricesMultipledatesExample.jpg](Images/PriceImport_MultiplePricesMultipledatesExample.jpg)
+
+  5. Checks for prices being unchanged is only carried out if the price date on the file is current.
+
+For example, assume today is May 6th 2008. 
+
+If a file was loaded that contained price dates for April 30th 2008, the system would raise a warning that the price date is old - but the system would not check that prices are unchanged.
+
+If the price date is current, the system will check for prices that have not changed between loads.
+
+
+
+
+The file format for the Debt Instrument Prices is per the below table:
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Instrument | InstrumentIdentifier | Yes | Char (30) | AT0000383864 | The instrument Identifier on the file must match one of the following ID types for the instrument in the system:  
+  
+ISIN  
+  
+CUSIP  
+  
+SEDOL  
+  
+Internal  
+  
+otherwise,  
+  
+[Validation Message 25](<validation_messages.html#25>) and  
+  
+[Validation Message 198](<validation_messages.html#198>)  
+  
+are raised.  
+  
+if Instrument Identifier is blank, then  
+  
+[validation message 9](<validation_messages.html#9>).  
+Price Source | PriceSource | Yes | Char (100) | Reuters | Price source must match a price source that exists in the system, otherwise  
+  
+[Validation Message 196](<validation_messages.html#196>).  
+  
+The price source that cannot be matched will be shown in [validation message 9](<validation_messages.html#9>).  
+  
+Additionally, if price source is missing, [validation message 9](<validation_messages.html#9>) will occur.  
+Date | PriceDate | Yes | Date Time | 12/04/2008 | The date can either be contained in the file or set as a default value in the mapping file. See [How to Import Data Using a Mapping File](<mapping_file.html>).  
+  
+If Price Date is included on the file, and it is missing on any row,   
+  
+[validation message 9](<validation_messages.html#9>) will occur.  
+  
+if price date is supplied, but is < COB-1, then [Validation Message 190](<validation_messages.html#190>) will be seen.  
+  
+If price date is supplied and is > today, then   
+  
+[validation message 14](<validation_messages.html#14>) will occur.  
+Price Quote** | N/A |  |  |  |   
+Clean Price** | BidCleanPrice  
+  
+MidCleanPrice  
+  
+AskCleanPrice | No - but see description | Decimal (12,8) | 101.7525 | At least one price (bid/mid/ask) needs to be supplied, otherwise  
+  
+[Validation Message 189](<validation_messages.html#189>)  
+  
+Additionally all prices for an instrument need to be included in the file in the same row, otherwise the system will raise a duplicate prices warning.  
+  
+[Validation Message 200](<validation_messages.html#200>)  
+  
+The system calculates the uniqueness of an instrument price using the following fields:  
+  
+InstrumentID  
+  
+Price Date  
+  
+Price Source  
+  
+Price Adjustment.  
+  
+If two records are included in the file for an instrument with identical values for the above 4 fields, but differing prices, only one record (and the prices associated for that record) will be loaded.  
+  
+Similarly, if duplicate rows exist, i.e.  
+  
+InstrumentID  
+  
+Price Date  
+  
+Prices  
+  
+Price Source  
+  
+Price Adjustment.  
+  
+are identical, this will be regarded as a duplicate and generate Validation Error 199 and one of the record sets will be load.  
+  
+If the price for any Instrument loaded today are identical to the previous day's price, [Validation message 192](<validation_messages.html#192>) will be seen.  
+Dirty Price** | BidDirtyPrice  
+  
+MidDirtyPrice  
+  
+AskDirtyPrice | No - but see description | Decimal (12,8) | 102.3755 | See the above description for Clean Price  
+Pool Factor | PoolFactor | No | Decimal (12,8) | 0.75 | If pool factor is not on the file, and a Dirty Price has not been supplied, then the system will default the value to be 1, and will generate  
+  
+[Validation message 194](<validation_messages.html#194>)  
+Coupon Accrual | CouponInterestAccruedToDate | No | Decimal (12,8) | 0.3125  
+  
+0.35 | This represents the accrual factor to date for the instrument and is added to the clean price to form part of the calculation of dirty price.  
+  
+If the coupon interest is not included on the file, and a Dirty Price has not been supplied, then the system will assume a zero interest amount for calculating dirty prices and will generate  
+  
+[Validation message 195](<validation_messages.html#195>)  
+  
+**Note:** This value can be negative (as happens during the ex dividend period for certain Instruments)  
+  
+However, if this negative coupon accrual number is sufficiently large to result in the calculation of a negative dirty price, [valuation message 275](<validation_messages.html#275>) is thrown and the record will not be updated.  
+Price Adjustment | PriceDateAdjustment | Yes | Char (3) | T  
+  
+T+1  
+  
+T+2  
+  
+T+3 | This is mandatory field, and forms part of the unique keys for a instrument price record.  
+  
+If it is not supplied for an instrument price, then [validation message 9](<validation_messages.html#9>) and the price record will not be imported.  
+  
+Additionally, if the value is included on the file, but not equal to T, T+, T+2 or T+3 then  
+  
+[Validation Message 204](<validation_messages.html#204>)  
+  
+and validation message 9 will be raised, and the price record will not be imported.  
+  
+** Although Price Quote type (Bid, Mid, Ask) is displayed in the Instrument Prices Grid, together with the relevant Clean and Dirty Price for that Quote Type, it is actually imported as one field value. E.G. A Clean Price with Quote Type Mid, is imported via one field MidCleanPrice on the source file. 
+
+**Note:** This import is for importing prices on Debt Instruments only. To import prices for Equity Instruments, a separate Equity Instrument Prices should be used.

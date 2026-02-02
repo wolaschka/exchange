@@ -1,0 +1,102 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/substitutions.html
+
+# Substitutions
+
+## Background
+
+Substitution recalls are created through the [Positions](<positions.html#create-substitutions>) screen by selecting an Agreement or an Instrument Ref. When selecting an available position, the **Substitute Position** button will be enabled. Once the substitution is created, a notification will appear with a link to the event in the [workflow](<substitutions_workflow.html>). Following this link, the user can then add replacement movements to the substitution.
+
+Created substitutions can be viewed through pre-defined filters: 
+
+  * All
+  * Pending 
+  * Proposed 
+  * In Progress 
+  * Approvals 
+  * Pending Cpty
+  * Confirmed
+
+
+
+**Note:** The contents of each of the Substitution Workflow state are filtered according to the following:
+
+  * User's Agreement Scope
+  * User's Agreement Responsibility Group
+  * User's Agreement Group
+
+
+
+In order to be able to see items in Substitution Workflow screens the Agreement must be for a Principal that falls within the user's scope, and is covered by their Agreement Responsibility and/or Agreement Group memberships.
+
+## Search Criteria
+
+Within each workflow filter, the user can view a subset of the substitutions by selecting specific data in the search criteria.
+
+The fields available for searching are the following:
+
+Field | Description  
+---|---  
+Workflow State | The fields will automatically be selected based on the workflow filter that the user is currently on. The user has the ability to select one, multiple or all of the states. The states available are Pending, Pending Rejected, Proposed, Proposal Rejected, Proposal Accepted, Rejected Internally, Rejected Externally, To Be Approved, Pending Cpty, Confirmed and Cancelled.  
+Agreement Name | Enter all or part of an Agreement Name. An asterisk (*) can be used as a wild card. The field is case insensitive.  
+Position | The user has the ability to select one or all of the positions which is Held and Posted.  
+Margin Type | The user has the ability to select one all of the margin types. The values available are Guarentee, Lock Up, Surplus, and Variation.  
+Business Line | The user has the ability to select one or all of the business lines. The values available are OTC, Repo, Securities Lending, Central Clearing and Client Clearing.  
+Principal Managing Location | The user has the ability to select one or all of the principal managing location defined on the agreement.  
+Active Only/Created Date | This allows the user to search for active or historical substitutions that have been completed or cancelled. By default, active substitutions are returned. The historical substitutions can be filtered on a date range.| Field| Description  
+---|---  
+Active Only| Displays the substitutions that are active within the workflow. The field is checked by default. If unchecked, a calculation date range is required.  
+From| When the Active Only field is disabled, a created start date is required for the start of the range.  
+To| When the Active Only field is disabled, a created end date is required for the end of the range. If multiple filters are applied then all criteria must be met in order for data to be returned. To clear the search criteria, click the **Clear Filters** button.
+
+## Grid Features
+
+The substitution grid can be [sorted](<grid_features.html#sorting>), [paged](<grid_features.html#paging>), [exported](<grid_features.html#export-grid>), [reorder columns](<grid_features.html#reorder-columns>), and fields can be [disabled or resized](<grid_features.html#display-and-resizing-columns>).
+
+## Substitutions Grid View
+
+The fields that exist on the Substitution screen are noted below. The fields that data can be filtered on are highlighted in red. | Field Name | Comments  
+---|---  
+View Icon | When the magnifying icon is selected, the [substitution details](<substitutions_detail.html>) can be viewed.  
+Workflow State | The current state of the Substitution. A substitution can only have one current state as follows:  
+  
+| State| Filter| Description  
+---|---|---  
+Pending| Pending| Opening state for the substitution events that have been created.  
+Pending Rejected| Pending| Substitution that has been rejected internally and has not been sent.| Proposed| Proposed| Recalls that have been proposed.| Proposal Rejected| Proposed| Proposed recalls that have been rejected.| Proposal Accepted| In Progress| Proposals that have been accepted and are awaiting replacement collateral.| Rejected Internally| In Progress| Substitutions that have been rejected internally.| Rejected by Counterparty| In Progress| Substitutions that have been rejected externally by the counterparty.| To Be Approved - Unsent| Approvals| Unsent substitutions that have been sent for approval.| To Be Approved - Substitution| Approvals| Accepted proposals that have been updated with reaplcement collateral and that have been sent for approval. Amended/updated substitutions that have been sent for approval.| Pending Cpty| Pending Cpty| Substitutions that have been approved pending counterparty acceptance.| Confirmed - Sent to Settlements| Confirmed| Substitutions that have been approved, accepted and/or cancelled.  
+Agreement Name | The Agreement on which the substitution is occurring  
+Positions | Indicating whether the position that is being subject to a substitution is either Held by the Principal, or Posted to the Counterparty  
+Return Mkt Val | The Total Value of the Return Movements that were created on the substitution. This equates to the Entered Returns figure in the Returning Collateral Section  
+Substitute Mkt Val | The Total Value of the Delivery Movements entered on the substitution. This equates to the Entered Substitutes figure in the Substitute Collateral Section  
+Difference Mkt Val | Calculated as Substitute Mkt Val minus Return Mkt Val. This field quickly enables the user to see whether:  
+  
+The delivery movements that they have entered on the substitution are worth less than the value of collateral being returned on the substitution. If this is the case the number will be displayed as a negative.  
+or  
+The delivery movements that they have entered on the substitution are worth more than the value of collateral being returned on the substitution. If this is the case the number will be displayed as a positive.  
+  
+It is market practice that substitute collateral is of equal value to the collateral that will be returned.  
+Status | The status of the last action that was performed on the payment.  
+  
+Hovering the mouse pointer over the icon will display a Tooltip pop-up that will provide more details.  
+  
+| Symbol  
+---  
+Description  
+![completed_successfully_icon.jpg](Images/completed_successfully_icon.jpg)| Represents a successful action of the substitution.| ![warning_icon_workflow.jpg](Images/warning_icon_workflow.jpg)| Represents a warning that the action needs attention.| ![inprogress_icon.jpg](Images/inprogress_icon.jpg)| Represents that an action is currently processing.  
+![rejected_status.jpg](Images/rejected_status.jpg)|  Represents a rejected action. By hovering over the icon, it will display the user id and timestamp along with the reject reason.  
+![failed_icon.jpg](Images/failed_icon.jpg)| Represents an action has failed. | Delivery Status | This field details whether the substitution notice has been sent to the Counterparty.  
+  
+![](Images/queued_icon.jpg) \- Queued,   
+![not_sent_icon.jpg](Images/not_sent_icon.jpg)\- Not sent, meaning that the user has not yet requested that the Notice be sent to the Counterparty.  
+\- In Progress, meaning that the Notice is queued up to be sent.  
+![completed_successfully_icon.jpg](Images/completed_successfully_icon.jpg)\- Notice sent, meaning that the Notice has been successfully communicated to the SMTP server  
+![failed_icon.jpg](Images/failed_icon.jpg)\- Failed, meaning the Notice could not be sent, either due to missing contacts on the agreement, missing contacts' email address, or a problem communicating with the firm's SMTP email server.  
+  
+Hovering the mouse pointer over the icon will display a Tooltip pop-up that will provide more details.  
+Sent Date / Time | Time-stamp of when a user requested a Notice, by clicking on Send Substitution Notice  
+Creator | Create User The name of the user whom initiated the substitution by creating return movements.  
+Note that this user ID is not taken from the user ID which created the Delivery Movement(s).  
+Created Date/Time | Time-stamp of when the substitution was initiated.  
+Margin Type | The Margin Type of the collateral position. Will be either LockUp or Variation  
+Approval Level | Allows a user to filter the substitutions based on it's approval level. See [Understanding High Value Movement Approval Controls](<high_value_movement.html#understanding-high-value-movement-approval-controls>).  
+Business Line |   
+Principal Managing Location | 

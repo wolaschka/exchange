@@ -1,0 +1,57 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_index_rates.html
+
+# File Format for Index Rates
+
+Index Rate data (i.e. the actual interest rates themselves) can be imported into the respective Index
+
+When importing rates into an index, all previous records are not deleted when a new import is run. The import is done on an insert and update basis.
+
+Index can be subject to approval (if defined so in the system level configuration file.) If that is the case, no changes to the Index Rates can be made manually or via an import. If an Index Rates import is run while an Index is pending approval, a [validation message 354](<validation_messages.html#354>) is raised.
+
+Index Rates are independent of the Import Configuration used to import them. That is, if two different Index import configurations exist and contain the same Index Rate information for the same Index then the later import will overwrite any matching Index Rate information that was loaded in the earlier import.
+
+The file format is as follows:
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Name | IndexName | Yes | Char (255) | Fed Funds | The Index Name specified in the file must exist as a Index name or alias on an Index Reference Data object in TLM® Collateral, otherwise:  
+  
+[Validation Message 210](<validation_messages.html#210>) and  
+  
+[Validation Message 9](<validation_messages.html#9>)  
+  
+The record will not be imported if this occurs.  
+Rates Tab - Rate | Rate | Yes | NUM (9,6)  
+  
+Allow 6DP  
+  
+Can be negative | 4.123555 | This is the actual interest rate for the Index for the RateDate as specified in the file.  
+  
+It is a compulsory field, if not there, [Validation Message 9](<validation_messages.html#9>)  
+  
+and the record will not import.  
+  
+The rate on the file is then validated against any tolerances that are set up on the Index.  
+  
+If supplied rate is below minimum tolerance, [Validation message number 96](<validation_messages.html#96>)  
+  
+If above maximum tolerance: [Validation message number 97](<validation_messages.html#97>)  
+  
+If Percentage change is breached:  
+  
+[Validation message number 98](<validation_messages.html#98>)  
+  
+Tolerance breaches will not prevent the record loading.  
+Rates Tab - Date | RateDate | Yes | Date Time | 24/07/2008 | This is the actual date for the Index Rate. It is a compulsory field.  
+  
+If missing, [Validation Message 9](<validation_messages.html#9>)  
+  
+will be raised, and the record will not import.  
+  
+If the date supplied is prior to the COB date then the system will raise Validation Message 211, but the rate will be loaded.  
+  
+  
+  
+**Note on Multiple and Duplicate Records**
+
+If there are multiple entries for the same date and same index in the file, Validation Message 212 will be raised, and the last of the same date / index entries will be loaded.

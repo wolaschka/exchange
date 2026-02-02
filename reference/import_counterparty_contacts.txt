@@ -1,0 +1,61 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_counterparty_contacts.html
+
+# File Format for Counterparty Contacts
+
+The import is done on an insert basis. When importing Counterparty Contacts all previous records are not deleted with each import. There can be multiple contacts with the same name but they must have different counterparties with each contact.
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Contact Name | ContactName | Yes | Char (50) | John Doe | The name of the contact.  
+  
+[Validation message number 383](<validation_messages.html#383>)  
+  
+[Validation message number 388](<validation_messages.html#388>)  
+Entity Name | EntityName | Yes | Char(255) | Apollo Group | The counterparty entity name that is association with the contact.  
+  
+[Validation message number 13](<validation_messages.html#13>)  
+  
+[Validation message number 371](<validation_messages.html#371>)  
+Email Address | EmailAddress | No (unless any of the Receive reports has been selected) | Char (2000) | JDoe@anyemail.com | Email address for the contact. It must be properly formatted. [Validation message number 382](<validation_messages.html#382>)  
+  
+This field is necessary if one would want to distribute various notices from the application. [Validation message number 389](<validation_messages.html#389>)  
+  
+Multiple Email Addresses can be imported by separating the email addresses with commas "," or semi colons ";" based on the delimiter of the file.  
+Phone Number | PhoneNumber | No | Char (30) | 555-555-5555 | The Phone Number can be digits and/or characters.  
+Fax Number | FaxNumber | No | Char (30) | 555-555-5555 | The Fax Number can be digits and/or characters.  
+Margin Call Notice | MarginCallNotice | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | This field is needed if one wishes the contact to receive Margin Call Notices.  
+Include Exposure Statement MC | IncludeExposureStatementMC | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | This will allow an Exposure Statement to be on the same email as Margin Call Notices that a contact will receive. [Validation message number 387](<validation_messages.html#387>)  
+Include Position Statement MC | IncludePositionStatementMC | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | This will allow a Position Statement to be on the same email as Margin Call Notices that a contact will receive. [Validation message number 387](<validation_messages.html#387>)  
+Include Custom Statement MC | IncludeCustomStatementMC | No | Bit | 001 MC XYZ Bank Statement | Custom Statement that the contact should receive when a Margin Call Notice is sent.  
+  
+[Validation message number 380](<validation_messages.html#380>)  
+  
+[Validation message number 387](<validation_messages.html#387>)  
+Receive Exposure Statement | ReceiveExposureStatement | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | This defines whether the contact can receive an exposure statement that can be manually requested from within the Margin Call Workflow screens.  
+Receive Position Statement | ReceivePositionStatement | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | This defines whether the contact can receive a Collateral Position statement that can be manually requested from within the Margin Call Workflow screens.  
+Receive Custom MC Notice | ReceiveCustomMCNotice | No | Bit | 001 MC XYZ Bank Notice | This defines whether the contact can receive a custom Margin Notice statement that can be manually requested from within the Margin Call Workflow screens.  
+Receive Collateral Confirm Notice | ReceiveCollateralConfirmNotice | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | The contact(s) should receive notices that pertain to collateral movements entered on Margin Calls.If the contact should receive a Collateral Movement Confirmation Notice when Collateral Movements are approved in the Demand and Antic Demand Workflow, then select the Collateral Confirmation Notice check box.  
+Receive Insufficient Notice | ReceiveInsufficientNotice | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | The contact(s) should receive notices that pertain to collateral movements entered on Margin Calls. If the contact should receive an Insufficient Collateral Notice when requested via the Demand Workflow, then select the Insufficient Collateral Notice check box.  
+Receive Substitution Notice | ReceiveSubstitutionNotice | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+T, F, True, False, Y, N, Yes, No, 1, 0 | If the contact should receive a Substitution Notice when a user elects to send/resend a substitution notice in the Substitution Workflow Queue, then select the Substitution Notice check box.  
+Receive Interest Statement | ReceiveInterestStatement | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+Variation, Lock Up, Both | If the contact should receive an Interest Statement when Interest Payments are being processed through the Interest Workflow, select the Interest Statement check box It is possible to define whether a contact should receive interest statements according to the interest payment's margin type [Validation message number 381](<validation_messages.html#381>).  
+Receive Interest Distribution Notice | ReceiveInterestDistributionNotice | No | Bit | Any of the following values can be loaded: (case insensitive)  
+  
+Variation, Lock Up,Both | If the contact should receive an Interest Distribution Confirmation Notice when Interest Distribution Payments are approved in the Interest Distribution Workflow, then select the Interest Distribution Notice check box. It is possible to define whether a contact should receive interest statements according to the interest payment's margin type. [Validation message number 381](<validation_messages.html#381>)

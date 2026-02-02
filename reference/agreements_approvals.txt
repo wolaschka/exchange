@@ -1,0 +1,68 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreements_approvals.html
+
+# Approvals for Agreements
+
+## Background
+
+In many institutions, when a user (with sufficient privileges) creates or amends an Agreement (and other reference data items) an approval of these changes is required which is known among Collateral Practitioners as Approvals.
+
+This control prevents Agreements (and other static data) being created or changed by one user, and for these changes to have immediate effect in margin results.
+
+## Configuration
+
+Approvals requirement is not mandatory. It can be [enabled / disabled](<system_configuration.html#database-approvals>) from an external configuration setting.
+
+## Application
+
+Generally any field on the Agreement is approved as part of the Agreement as a whole. There is one approval required for all Agreement fields that have been populated for the first time or updated. Henceforward these items will be referred to as "**Agreement Data Items** ".
+
+There are a few exceptions whereby certain Agreement data is treated separately from the Agreement and has its own approval process. That is, it needs to be approved separately from the Agreement. Henceforward, these items will be referred to as "**Agreement _Related_ Data Items**". These exceptions are:
+
+  * [Specific Trade Coverage](<specifictradecoverage_approvals.html>)
+  * [Standard Settlement Instructions](<agreement_ssi_approvals.html>)
+  * [Agreement Margins](<agreement_margin_approvals.html>)
+  * [Contacts](<contacts_approvals.html>)
+
+
+
+## Approvals Process
+
+When Approvals is [enabled](<system_configuration.html#database-approvals>), the following behavior occurs:
+
+Step | Behavior Process  
+---|---  
+1 | When any of the Agreement / Agreement Related Data / or other Items that are capable of being approved are populated for the first time, or have their values changed by a user, the values are not directly applied to the database when the **Save** button is clicked. The values are put into a state of **Pending Approval**.  
+2 | When Agreement Data Items are Pending Approval, the Agreement Data Items are non editable for all users. The Agreement is now in a state of **Locked for Approval**. This is to maintain data integrity.  
+  
+**Note:** At this point Agreement Related Data Items can still be edited.  
+3 | When Agreement Related Data Items are **Pending Approval** , only those items are locked. The Agreement as a whole is not considered to be Locked for Approval even though when the user enters the locked agreement, a message will appear stating "Locked due to pending approval". The Agreement Data Items can still be edited for Agreement Margins, SSIs and Specific Trade Coverage.  
+4 | Locked for Approval Agreements cannot be copied, or edited.  
+5 | Locked Agreements can be identified via the Agreements grid by the column with the lock icon.  
+6 | A user can view the Agreement Data Item changes which are Pending Approval.  
+7 | No further changes or updates can be made to any of the Agreement Data Items while it is **Locked for Approval**.  
+8 | If one of the following data imports  
+  
+\- Agreement Cash Interest Terms  
+\- Agreements  
+\- Aliases  
+\- Basic Eligibility  
+\- Margin Terms  
+  
+is run and contains a record for an Agreement that is in a Locked for Approval state, the record will fail to be imported and a validation message will be raised.  
+9 | The Agreement remains in a state of Locked for Approval until there are no longer any values that are pending approval.  
+10 | Details of the Agreement's Pending Approval changes are placed into the [Pending screen](<approvals.html#pending>). There will be one record for all Agreement Data Items and separate records for the Agreement Related Data Items.  
+11 | Clicking on the record in [Pending screen](<approvals.html#pending>) will allow a user to see the Agreement's pending changes on a field by field "before" and "after" basis.  
+12 | Should a Margin Calculation task be run while an Agreement is Locked for Approval, **no** Pending Approval values will be used in the calculation.  
+  
+That is, data values **_prior_** to the changes made in step 1) will be used.  
+  
+A warning status message will be raised on the margin calculation task to make the user aware of this.  
+13 | Pending Approval records can be:  
+  
+a) **Approved** \- at which point the Pending Approval values are applied to the Agreement Data object as **approved** values.  
+  
+b) **Rejected** \- at which point the pending approval values are discarded.  
+  
+then the Agreement is no longer Locked for Approval and can now be edited and/or copied.  
+14 | [Agreement Data Items are validated](<agreement_valid_approvals.html>) when they are approved to ensure that the data being approved is still valid.  
+15 | When Pending values are approved, a record of the change, together with the users whom updated and approved the values is created in [audit](<audit.html>).

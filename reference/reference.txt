@@ -1,0 +1,145 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/reference.html
+
+# Reference Data Types
+
+## Overview
+
+To create, edit or view reference data, locate **Reference Data** in the navigation pane.
+
+In the Reference data page, the data is broken down by high level Data Types.
+
+These data types are the following:
+
+  * Agreements
+  * Aliases
+  * Entities
+  * Exposures
+  * Instruments
+  * Ratings
+  * Reports
+  * System
+
+
+
+When the user selects the drop down on each category, more data associated with each category can be accessed.
+
+Agreements | Aliases | Entities | Exposures | Instruments | Ratings | Reports | System  
+---|---|---|---|---|---|---|---  
+[Agreement Extension](<reference_related_data.html#extensions>) | [Alias Group](<reference_related_data.html#alias-groups>) | City | [OTC Trade Extension](<reference_related_data.html#extensions>) | Bond Purpose | [Rating Agency](<reference_related_data.html#rating-agency>) | [Custom Statement](<reference_related_data.html#custom-statements>) | [Agreement Scope](<reference_related_data.html#agreement-scope>)  
+[Agreement Group](<reference_related_data.html#agreement-group>) |  | Country | [Repo Trade Extension](<reference_related_data.html#extensions>) | CMOABS Asset Class | Short Term Rating Equivalency |  | [Dispute Category](<reference_related_data.html#dispute-category>)  
+[Agreement Responsibility](<reference_related_data.html#agreement-responsibility-group>) |  | [Entity Extension](<reference_related_data.html#extensions>) | [Trade Type](<reference_related_data.html#trade-types>) | Collateral Type | Long Term Rating Equivalency |  | [Holiday Calendar](<reference_related_data.html#holiday-calendars>)  
+Agreement Status Detail |  | [Entity Group](<reference_related_data.html#entity-groups>) |  | Coupon Type | Financial Strength Rating Equivalency |  | User  
+[Agreement Type](<reference_related_data.html#agreement-types>) |  | Industry Sector |  | Country | Internal Rating Equivalency |  | [Waive Category](<reference_related_data.html#waive-category>)  
+City |  | Issuer Type |  | [Currency](<reference_related_data.html#currencies-and-fx-rates>) |  |  |   
+Country |  | [Organization Type](<reference_related_data.html#organization-type>) |  | Exchange |  |  |   
+[Currency](<reference_related_data.html#currencies-and-fx-rates>) |  |  |  | Fund Source |  |  |   
+FX Rate Source |  |  |  | FX Rate Source |  |  |   
+[Holiday Calendar](<reference_related_data.html#holiday-calendars>) |  |  |  | [Index](<reference_related_data.html#index>) |  |  |   
+[Trade Type](<reference_related_data.html#trade-types>) |  |  |  | Industry Group |  |  |   
+|  |  |  | Industry Sector |  |  |   
+|  |  |  | [Instrument Extension](<reference_related_data.html#extensions>) |  |  |   
+|  |  |  | [Instrument Type](<reference_related_data.html#instrument-types>) |  |  |   
+|  |  |  | [Instrument Type Extension](<reference_related_data.html#extensions>) |  |  |   
+|  |  |  | Instrument Underlying Sector |  |  |   
+|  |  |  | Issuer Type |  |  |   
+|  |  |  | Municipal Region |  |  |   
+|  |  |  | Municipal State |  |  |   
+|  |  |  | Place of Settlement |  |  |   
+|  |  |  | [Price Source](<reference_related_data.html#price-source>) |  |  |   
+|  |  |  | Seasoning |  |  |   
+|  |  |  | Rating Watch |  |  |   
+|  |  |  | Stock Index |  |  |   
+  
+**Note:** Certain related data items appear in more than one reference data type.
+
+**Example:**  
+Holiday Calendars appears under both the Agreement and System Data type. Irrespective of whether the item appears more than once, it is actually one single list.
+
+## Add Reference Data
+
+For all reference data except [Ratings Equivalencies](<reference_related_data.html#ratings-equivalencies>), follow these steps for creating new data:
+
+  1. Click on the **Create** button located on the right side of the screen and a pop up window will appear.
+  2. At a minimum, fill in the required fields which are noted by a red asterisks next to the field label.
+  3. The **Save** button will become visible when all the required fields are entered. Click the **Save** button when complete.
+
+
+
+## Edit Reference Data
+
+  1. Click on the **Edit** ![edit_icon.jpg](Images/edit_icon.jpg) icon next to the item that needs to be modified.
+  2. Make the necessary changes and click the **Save** button to save the changes.
+
+
+
+## Delete Reference Data
+
+Click on the **Delete** ![delete_icon.jpg](Images/delete_icon.jpg) icon.
+
+**Note:** The delete icon is not available on all reference data.
+
+The following reference data is available for deletion:
+
+Area | Comments  
+---|---  
+[Agreement Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated agreements.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to Agreement Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+[Agreement Groups](<reference_related_data.html#agreement-group>) | When deleting **Combined Business Lines** , the system will check to see whether any Margin Calls and/or Interest Payments for any of the Agreements in the Combined Business Line Agreement Groups are in an "actioned" state and therefore prevent the Combined Business Line Agreement Groups being deleted.  
+  
+If the Combined Business Line Agreement Groups cannot be deleted because restriction criteria has been met, the system will list those Agreements and the items that have met the restriction criteria.  
+  
+When a Combined Business Line Agreement Group is deleted, all open margin calls and all open interest payments that exist for the listed Agreements are cancelled. The system will warn the user.  
+  
+After the user confirms, all open margin calls for the listed agreements will be cancelled. All open interest payments for the listed agreements will be cancelled.  
+  
+Margin Calls and Interest Payments deleted for those agreements are not automatically regenerated. The respective Margin Calculation and Interest Calculation tasks will need to be run.  
+[Agreement Scope](<reference_related_data.html#agreement-scope>) | The delete action is not reversible so the system will provide the user with a warning of "Are you sure you want to delete this Agreement Scope?"  
+  
+Should the Agreement Scope be currently referenced by any User Object, then the system will provide an additional warning of "This agreement scope is currently being referenced. Deleting it will remove these references. Would you like to continue?"  
+  
+If the delete process is executed, then the Agreement Scope will be deleted.  
+  
+The Agreement Scope will be removed from all User Data objects that were referencing it. This will cause those users to have no Agreement Scope and therefore not be able to see any Agreement or Agreement related data in the system.  
+  
+It is therefore recommended not to delete an active Agreement scope until all users who reference it are updated to an alternate Agreement Scope. See [Agreement Scope Matrix](<understand_scope_responsibility.html#agreement-scope-and-responsibility-areas-applied>) for areas where this will impact.  
+[Alias Group](<reference_related_data.html#alias-groups>) | Deleting alias groups will remove all Aliases that are defined for the group.  
+Dispute Category | When the Dispute Category is deleted, it will not be available for selection when a user next invokes a dispute on a margin call.  
+  
+Existing Margin Calls that have already been disputed with this category selected will still reflect this category in their comments field. The category is "stamped" to the margin call when the demand was last disputed.  
+  
+Exercise caution in deleting dispute Categories.  
+  
+Selecting at least one dispute category is mandatory when a user enters an agreed amount that triggers a dispute. If no dispute categories exist, the user will be unable to proceed with processing the margin call.  
+  
+Changes to Dispute Category reference data are audited in the standard way.  
+[Entity Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated entities.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to Entity Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+[Instrument Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated instruments.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to Instrument Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+[Instrument Type Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated instrument types.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to Instrument Type Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+[OTC Trade Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated OTC Exposure Trades.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to OTC Exposure Trade Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+[Repo Trade Extension](<reference_related_data.html#extensions>) | The system will warn the user that proceeding with the action will delete not only the extension reference data item, but also all the data held in the extension field in all associated Repo Exposure Trades.  
+**Note:** This action is not reversible.  
+  
+The system administrator must be informed if any changes or additions are made to Repo Exposure Trade Extension Reference Data and the TLM® Collateral Reporting Layer is being used. Alterations will be needed to the Reporting Database & Universe.  
+Waive Category | When the Waive Category is deleted, it will not be available for selection when a user next invokes the Waive Demand function.  
+  
+Existing Demands that have already been waived with this category selected will still reflect this category in their comments field. The category is "stamped" to the margin call when the demand is first waived.  
+  
+Exercise caution in deleting Waive Categories.  
+  
+Selecting at least one waive category is mandatory when a user requests that a demand be waived. If no waive categories exist, the user will be unable to proceed with requesting the waive.  
+  
+Changes to Waive Category reference data are [audited](<audit.html>) in the standard way.

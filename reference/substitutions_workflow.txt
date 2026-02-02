@@ -1,0 +1,164 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/substitutions_workflow.html
+
+# Substitution Workflow
+
+## Overview
+
+There are six preset filters for Substitutions. 
+
+  * **All** \- Displays the substitutions in all states.
+  * [**Pending**](<#pending>) \- Contains all substitutions that have been [created](<positions.html#create-substitutions>). Within this filter, returns (recalls) and delivers (replacements) may be added, full substitutions can be sent for internal approval, returns may be proposed or pending events can be cancelled.
+    * This filter will display the following search criteria workflow states:
+      * Pending
+      * Pending Rejected
+  * [**Proposed**](<#proposed>) \- Contains all proposed substitutions recalls that have only return movement(s) and a substitution notice is sent to the counterparty for review.
+    * This filter will display the following search criteria workflow states:
+      * Proposed
+      * Proposal Rejected
+  * [**In Progress**](<#in-progress>) \- Contains all substitutions that have been accepted by the counterparty and now need substitute deliver movement(s).
+    * This filter will display the following search criteria workflow states:
+      * Proposal Accepted
+      * Rejected Internally
+      * Rejected by Counterparty
+  * [**Approvals**](<#approvals>) \- Contains all substitutions that have both return and deliver movements. From here, a substitution can be approved or rejected.
+    * This filter will display the following search criteria workflow states:
+      * To Be Approved - Unsent (Full substitution sent for approval from Pending state. Once approved, the counterparty will be notified.)
+      * To Be Approved - Substitution (Prior notification has been sent to the counterparty. For example, through a recall proposal.)
+  * [**Pending Cpty**](<#pending-cpty>) \- Contains all substitutions that require acceptance from the counterparty.
+    * This filter will display the following search criteria workflow states:
+      * Pending Cpty Response
+  * [**Confirmed**](<substitutions_workflow.html#confirmed>) \- Contains all substitutions that have been approved and are waiting for settlement. Cancelled substitutions will also display here for the current day.
+    * This filter will display the following search criteria workflow states:
+      * Confirmed - Sent to Settlemen
+      * Cancelled
+
+
+
+While viewing substitutions in any of the preset filter screens, the user can do the following:
+
+  * Further filter within the [grid](<substitutions.html#search-criteria>)
+  * View the [Positions and Movements](<substitutions_detail.html#positions-and-movements>)
+  * View [Transition History](<substitutions_detail.html#transition-history>)
+  * View [Concentration Status](<substitutions_detail.html#concentration-status>)
+  * View [Eligibility Breaches](<substitutions_detail.html#view-eligibility-breaches>)
+  * [Edit Movement(s)](<substitutions_detail.html#edit-movements>) of the substitution
+  * View [Asset Allocation](<substitutions_detail.html#asset-allocation>) to determine which asset inventory may be available to substitute as replacements for posted collateral.
+
+
+
+## Pending
+
+The Pending workflow filter will show all substitution workflow events in a Pending or Pending Rejected state. When a substitution has been initiated, it will appear in a _Pending_ state. From here, additional return movements may be added, as well as substitute delivery movements. The user can also inspect movement details of the substitution by clicking the magnifying class icon. The user can also see a substitution movement and its related movements from the [**_Movements_**](<movements.html>) module.
+
+From this state the user can propose a substitution return to their counterparty, which will send a notice of return (recall) and transition the event to the Proposed state. Note, that a proposal will only contain returns at this state. Delivers can be added once the proposal has been accepted.
+
+Alternatively, the user can send a full substitution for internal approval. This substitution event will contain both returns and deliver (recalls and replacements). Once approved, the substitution notice will be sent to the counterparty. Full substitutions that are rejected will transition back to Pending with a state of _Pending Rejected_. From here, the user will need to either amend the substitution movements or cancel the event.
+
+## Proposed
+
+When the substitution is _Proposed_ , a notice with the return movement(s) being proposed for substitution is sent to the counterparty for review. The status of the delivery notice can be seen by checking the **Status** and **Delivery Status** fields in the grid. If the icon is not green for success, then by hovering over the icon, the user can see the reason that a warning or an error had occurred.
+
+After the Counterparty has reviewed the statement, there are three actions that can be performed within this state:
+
+  * The substitution proposal can be [resent](<substitutions_workflow_actions.html#resend>) to the Counterparty. This action may need to be selected as another return movement was added, a movement was edited or the notice had failed to send.
+
+  * The substitution proposal with all its return movement(s) can be [accepted](<substitutions_workflow_actions.html#accept>) by the Counterparty. When this action is selected, the substitution is transitioned to **_In Progress_** awaiting for a delivery movement(s) with a workflow state of **Proposal Accepted**.
+
+  * The substitution proposal with all of its return movement(s) can be [rejected](<substitutions_workflow_actions.html#reject>) by the Counterparty. When this action is selected, the substitution is transitioned to a **_Proposed Rejected_** workflow state.
+
+
+
+
+Actions from this state are:
+
+  * [Accept](<substitutions_workflow_actions.html#accept>) the substitution proposal, when then moves to In Progress with a workflow state of _Proposed Accepted_.
+  * [Reject](<substitutions_workflow_actions.html#reject>) the substitution proposal. The movement(s) may be modified, and the updated proposal resent to the Counterparty.
+  * [Resend](<substitutions_workflow_actions.html#resend>) the substitution proposal. The proposal is resent, including any movement updates.
+  * [Cancel](<substitutions_workflow_actions.html#cancel>) the substitution proposal. This button will become available when the substitution proposal is in in the _Proposed Rejected_ state.
+
+
+
+**Note:** The accept and reject functions are limited to those users who have these access privileges. Substitution items remain in this state and do not expire at the end of the day
+
+## In Progress
+
+Substitutions events within this state have workflow states of:
+
+  * Proposal Accepted - transitioned from _Proposed_ and is awaiting the substitute deliver movements that will replace what is being recalled.
+  * Rejected Internally – transitioned from _To Be Approved_ where a user has rejected the substitution from within TLM Collateral Management.
+  * Rejected by Counterparty – transitioned from _Pending Cpty_ where the counterparty has rejected the substitution.
+
+
+
+The user may do the following:
+
+  * Modify the substitution.
+    * [Add the substitution deliver movement(s)](<substitutions_workflow_actions.html#add-substitute-movement>) \- add the substitute replacements to an accepted return proposal or update the substitution.
+    * [Add additional return movements](<positions.html#create-substitutions>).
+    * [Edit](<substitutions_detail.html#edit-movements>) / [Delete](<substitutions_workflow_actions.html#delete-a-movements>) movements from the substitution details.
+  * [Cancel](<substitutions_workflow_actions.html#cancel-substitution>) the substitution.
+  * [Send for Approval](<substitutions_workflow_actions.html#send-for-approval>) which will transition the substitution for approval. The **Send for Approval** button will only become enabled once a deliver movement has been added to the substitution.
+
+
+
+## Approvals
+
+Substitution events within in this state have workflow states of:
+
+  * To Be Approved – Unsent : Transitioned from _Pending_. This is a full substitution (returns and delivers) that has not yet been sent to the counterparty. Approve Pending Counterparty will be the only approval transition, as the notice will first be sent to the counterparty upon approval.
+  * To Be Approved – Substitution: Transition from _In Progress_. This a full substitution (returns and delivers) where the counterparty has been notified. It may be an accepted return proposal with addition of the substitute deliver movements, or a previously rejected substitution that has been modified and sent for approval, again.
+
+
+
+The available actions that can be performed are the following:
+
+  * [Approve](<substitutions_workflow_actions.html#approve>)
+    * Approve a substitution and the corresponding movements.
+    * An approved substitution will transition to _Confirmed_ , which is an end state. A substitution notice will be sent out to any contacts set to receive substitution notices.
+  * [Reject](<substitutions_workflow_actions.html#reject>)
+    * Reject a substitution and the corresponding movements. A reject comment is required.
+    * A rejected substitution will transition to where it originated: _Pending_ or _In Progress_.
+  * [Approve Pending Counterparty](<substitutions_workflow_actions.html#approve-pending-counterparty>)
+    * Approve a substitution and the corresponding movements.
+    * The substitution will be approved, transition to _Pending Cpty_ and will be in a _To Be Approved_ state until the counterparty accepts or rejects.
+    * As with the approved substitution, a substitution notice will be sent out to any contacts set to receive substitution notices.
+  * [View Eligibility](<view_eligibility_breaches.html>)
+    * View the eligibility results of an instrument on a movement.
+  * [View Instrument](<substitutions_detail.html#view_instrument>)
+    * View the [Instrument](</instruments.md>) details for a movement.
+
+
+
+**Note:** If Substitution Movements are subject to a **Second** level of approvals, they will not yet be transitioned to the next state and remain in the _To be Approved_ state. Follow the guides on [Understanding High Value Movement Approval Controls](<high_value_movement.html>) and [How to Approve High Value Substitution Movements](<high_value_movement.html#understanding_high_value_movement_approval_controls>) for further information.
+
+## Pending Cpty
+
+When the substitution is in the _Pending Counterparty Response_ workflow state, it is waiting for acceptance by the counterparty. When the substitution transitions to this state, a substitution notice is sent to the Counterparty.
+
+The available actions that can be performed are the following:
+
+  * [Counterparty Accepts](<substitutions_workflow_actions.html#counterparty-accepts>) \- The counterparty has accepted the substitution and it now transitions to the [_Confirmed - Sent to Settlement_](<#confirmed>) workflow state.
+  * [Counterparty Rejects](<substitutions_workflow_actions.html#counterparty-rejects>) \- The counterparty has rejected the substitution and it transitions to _In Progress_ with the _Rejected by Counterparty_ workflow state. The rejected substitution will have a reject comment that can be seen either through the substitution details via the magnifying glass icon or by hovering on the reject status icon on the grid. The substitution may then be modified to be resent for approval or may be cancelled.
+
+
+
+## Confirmed
+
+Substitutions are in this state only once they have been approved, accepted by the counterparty or cancelled.
+
+Once the collateral movements on an approved or accepted substitution have been advanced into this state, they are in an _In-Transit_ settlement state, so their market values are taken into consideration in the collateral balance values that form a component of Margin Calculations. Collateral movements for cancelled substitutions will have their status set to _Ignored_. Cancelled substitutions will expire and be filtered from the workflow based on the principal managing location of the agreement. Historical substitutions, including cancelled, can be view through the [advanced workflow filters](<substitutions.html#search-criteria>).
+
+It is worth stating that the values of the substitution movements are applied to the margin calculation according to the collateral movements' margin type, and the Collateral Allocation type of the Collateral Agreement.
+
+Margin Type | Collateral Allocation Type | Applied to  
+---|---|---  
+Lock Up | Segregated Lock Up and Variation or Lock Up Only | Lock Up Margin Requirements only  
+Variation | Segregated Lock Up and Variation | Variation margin requirements only  
+Lock Up or Variation | Auto Allocate | Automatically allocated first to any lock up requirement (if exists), and then any surplus allocated to variation requirements.  
+Lock Up or Variation | N/A | Automatically allocated first to any lock up requirement (if exists), and then any surplus allocated to variation requirements.  
+  
+**Note:** Only OTC Agreements have a defined Collateral Allocation Type. Repo and Securities Lending agreements do not.
+
+The movements on the Substitution can be seen also via the Movements screen by searching for _In-Transit_ movements.
+
+Typically, Substitutions are performed for securities of equal market value, but should there be an inequality between the market values of each side of the Substitution, the Margin Calculations would be affected.

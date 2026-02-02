@@ -1,0 +1,146 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_agreement_cash_interest_terms.html
+
+# File Format for Agreement Cash Interest Terms
+
+When importing Agreement Cash Interest Terms all previous records are not deleted when a new import is run.
+
+However, if a file contains an Interest Cash Term for a currency **_and_** agreement pairing which already exists in the database, that record is deleted, and the record on the file is inserted (subject to validation)
+
+If the file contains an interest cash term record for a currency for an agreement pairing which does not yet exist in the database, that record is added.
+
+The file can therefore be considered as being a full refresh at the level of Agreement Cash Interest Terms / Currency pairing.
+
+**_Please see notes and example at the end of the format table for more details on this._**
+
+This import can be used for Agreements of the following Business Lines:
+
+  * Client Clearing
+  * OTC
+  * Repo
+  * Securities Lending
+
+
+
+The file format is as follows:
+
+Display Name | Mapping File Column Name | Mandatory | Type, Length and comments | Example | Description  
+---|---|---|---|---|---  
+Agreement Name | Agreement | Yes | Char (255) | A Bank Csa | Agreement (or alias) must be specified on the file otherwise Validation Message 9 and that record will not import.  
+  
+If the Agreement name/alias on the file doesn't match any in the system [validation message 28](<validation_messages.html#28>) is raised and the record will not import.  
+  
+**Note:** If the Agreement is [Locked for Approval](<agreements_approvals.html>), [validation message 263](<validation_messages.html#263>) will be raised, and the record for the corresponding agreement will not be imported.  
+  
+If the Agreement Name defined has a Business Line of Central Clearing, then [Validation message 317](<validation_messages.html#317>) is raised, and the record is not imported.  
+Margin Types | AppliesToCollateralMargin | Yes | Char (255) | Acceptable Values:  
+  
+Variation  
+  
+LockUp  
+  
+Both | This field defines which collateral Margin Type the interest terms should apply to  
+  
+**For OTC Agreements**  
+  
+The Value must be supplied and be a valid entry otherwise [validation message 9](<validation_messages.html#9>) will be raised and the record will not be imported - or if an existing record exists the index, spread & compounding holidays values will be erased and the calculation will be set to No term Defined.  
+  
+Value of LockUp is only permissible for agreements where collateral allocation type is Segregate Lock Up and Variation or Lock Up Only. If this is not the case, [validation message 248](<validation_messages.html#248>) and [validation message 9](<validation_messages.html#9>) and will be raised, and the **_record will not be imported, or if an existing record exists the index, spread & compounding holidays values will be erased and the calculation will be set to No term Defined_**.  
+  
+**For Client Clearing Agreements**  
+  
+The value defined here must match Margin Type value defined on the Agreement. If Not, [validation message 318](<validation_messages.html#318>) will be raised and _the record will not be imported, or if an existing record exists the index, spread & compounding holidays values will be erased and the calculation will be set to No term Defined_.  
+  
+**A Value of Both is interpreted as follows:**  
+  
+1\. For OTC Agreements  
+  
+If Collateral Allocation type on the Agreement is Segregate Lock Up, then the interest terms will be applied to margin type of LockUp and Variation.  
+  
+If Collateral Allocation type on the Agreement is Lock Up Only, then the interest terms will be applied to margin type of Lock Up only.  
+  
+If Collateral Allocation <> Segregated Lock Up and Variation, the interest terms will be applied to Variation margin type.  
+  
+2\. For Client Clearing Agreements  
+  
+Client clearing agreements have a single margin type only - e.g (Variation, or Lock Up)  
+  
+Both is interpreted as being identical to the Agreement Margin Type.  
+  
+For example, if the Margin Type of the Agreement is Lock Up, and AppliesToCollateralMargin is defined as Both, it will be interpreted as if it were defined as Lock Up.  
+Applies To | AppliesToPositionType | Yes | Char (250) | Acceptable Values:  
+  
+Held  
+  
+Posted  
+  
+Both | This field defines whether the Interest Terms will be applied to Held, Posted, or Both held and Posted cash balances when calculating interest.  
+  
+The Value must be supplied and be a valid entry otherwise [validation 252](<validation_messages.html#252>) and [validation message 9](<validation_messages.html#9>) will be raised and **_the record will not be imported - or if an existing record exists the index, spread & compounding holidays values will be erased and the calculation will be set to No term Defined_**.  
+  
+A Value of **Both** is interpreted as being applicable to Held and Posted positions, and the same cash interest term details will be inserted into the held and posted record.  
+Calculation Type | CalculationType | Yes | Char (50) | Acceptable Values:  
+  
+Simple  
+  
+Simple Allows Negative  
+  
+Compound Business Days  
+  
+Compound Business Days Allows Negative  
+  
+Compound Calendar Days  
+  
+Compound Calendar Days Allows Negative  
+  
+Do Not Calculate Accrual | The value on the file should match a calculation type in the system.  
+  
+**Note:** If it does not match - [validation message 225](<validation_messages.html#225>) will be raised. The record will import and will default the value to Do Not Calculate Accrual. Any existing value will be overwritten with this.  
+Currency | Currency | Yes | Char (3) | USD | **Note:** If a Currency is included on the file, but that currency is not eligible for the agreement, [validation message 226](<validation_messages.html#226>) is raised and the record is not imported.  
+  
+If a currency is specified that doesn't exist in the database [validation message 18](<validation_messages.html#18>) is raised and record is not imported.  
+Compounding Holiday Calendar | HolidayCalendar | No | Char (100) | UK Holidays | [Although not mandatory, if mapped, the value on the file should match a Holiday Calendar reference data item in the system.](<validation_messages.html#9>)  
+  
+**Note:** [If the entry on the import file does not match any Holiday calendar in the system](<validation_messages.html#9>) \- [validation message 205](<validation_messages.html#205>) will be raised, and the field will be set to blank (the record will load) irrespective of any existing value.  
+Index | MarketIndex | Yes | Char (100) | EONIA | If missing, Validation Message 9 and that record will not import.  
+  
+If included, but doesn't match any existing Index reference data items in system, [validation message 210](<validation_messages.html#210>) and record not imported.  
+Spread | Spread | Yes | Decimal (10,6) | 0.000125 | [Must be numeric.](<validation_messages.html#9>)  
+  
+**Note:**
+
+  1. The import is done on a full refresh basis **per agreement/currency pair level**.
+
+That is, the import first checks to see if cash interest terms for a currency for an agreement that are on the file exist in the database. If they do, then the cash interest terms for that particular currency for that agreement are deleted in the database and the replaced with the record on the file (subject of course to validation)
+
+**_Example_**
+
+Agreement A Bank exists in the database with the following Cash Interest Terms
+
+![AgreementCashInterestExample.jpg](Images/AgreementCashInterestExample.jpg)
+
+The following Agreement Cash Interest Terms file is loaded.
+
+![AgreementCashInterestExample1.jpg](Images/AgreementCashInterestExample1.jpg)
+
+This will result in the following Cash Interest Terms for A Bank in the database
+
+![AgreementCashInterestExample2.jpg](Images/AgreementCashInterestExample2.jpg)
+
+See the following:
+
+a. USD and GBP records were not included on the record so they are unaffected.
+
+b. As the file contained a record for EUR for A Bank, the EUR record(s) in the database were deleted in entirety.
+
+c. The EUR record on the import file had an Applies To Position Type value of Held, so inserts a record for the EUR cash interest terms that will be applicable to held balances only.
+
+d. As there were no entries in the file for EUR Cash Interest terms applicable to Posted balances, the details for EUR posted cash are defaulted to be - Null Index; zero spread; Calculation Type of No Term Defined and Null Compound Holidays.
+
+It is therefore highly recommended that the file is carefully constructed.
+
+  2. If there are duplicate entries on the file, the system will raise [validation message 228](<validation_messages.html#228>), and the record will not be updated. However, existing entries will be deleted, and therefore the default record for the currency concerned will be:
+
+Index: Null; Spread Null; Calculation Type: No Term Defined; Compounding Holiday: Null; and be applicable to both held and posted balances, and Lock Up and Variation balances (if the agreement supports segregation)
+
+
+
