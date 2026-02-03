@@ -8,9 +8,11 @@
 # Usage (from Eclipse EPIC or VDI shell):
 #   perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/
 #   perl algo-schema-export.pl --db RPT --schema OWNER --output /path/to/output/
+#   perl algo-schema-export.pl --db SEC --output /path/to/output/
+#   perl algo-schema-export.pl --db APPR --output /path/to/output/
 #
 # Options:
-#   --db       Database: OP (operational, default), RPT (reporting)
+#   --db       Database: OP (operational, default), RPT, SEC, APPR
 #   --schema   Schema owner to export (default: connected user)
 #   --output   Output directory for markdown files (required)
 #
@@ -52,8 +54,17 @@ usage() if $help;
 usage("--output is required") unless $output_dir;
 
 $db_type = uc($db_type);
-unless ($db_type =~ /^(OP|RPT)$/) {
-    usage("--db must be OP or RPT (got: $db_type)");
+
+my %db_config = (
+    OP   => [ \&get_DB_OP,       \&get_DB_OP_USER,       \&get_DB_OP_PWD       ],
+    RPT  => [ \&get_DB_RPT,      \&get_DB_RPT_USER,      \&get_DB_RPT_PWD      ],
+    SEC  => [ \&get_DB_SEC,      \&get_DB_SEC_USER,       \&get_DB_SEC_PWD      ],
+    APPR => [ \&get_DB_APPROVAL, \&get_DB_APPROVAL_USER,  \&get_DB_APPROVAL_PWD ],
+);
+
+unless (exists $db_config{$db_type}) {
+    my $valid = join(', ', sort keys %db_config);
+    usage("--db must be one of: $valid (got: $db_type)");
 }
 
 # ---------------------------------------------------------------------------
@@ -61,15 +72,10 @@ unless ($db_type =~ /^(OP|RPT)$/) {
 # ---------------------------------------------------------------------------
 my ($sid, $user, $pass);
 
-if ($db_type eq 'RPT') {
-    $sid  = get_DB_RPT();
-    $user = get_DB_RPT_USER();
-    $pass = get_DB_RPT_PWD();
-} else {
-    $sid  = get_DB_OP();
-    $user = get_DB_OP_USER();
-    $pass = get_DB_OP_PWD();
-}
+my $cfg = $db_config{$db_type};
+$sid  = $cfg->[0]->();
+$user = $cfg->[1]->();
+$pass = $cfg->[2]->();
 
 print "Connecting to $db_type database $sid as $user...\n";
 
@@ -450,8 +456,10 @@ print "  Found $idx_count indexes\n";
     print $fh "## How to Regenerate\n\n";
     print $fh "Run from UCB_ALGO517 project (Bin/batch/) on VDI:\n\n";
     print $fh "```\n";
-    print $fh "perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/\n";
-    print $fh "perl algo-schema-export.pl --db RPT --schema OWNER --output /path/to/exchange/algo-schema/\n";
+    print $fh "perl algo-schema-export.pl --db OP   --output /path/to/exchange/algo-schema/\n";
+    print $fh "perl algo-schema-export.pl --db RPT  --schema OWNER --output /path/to/output/\n";
+    print $fh "perl algo-schema-export.pl --db SEC  --output /path/to/output/\n";
+    print $fh "perl algo-schema-export.pl --db APPR --output /path/to/output/\n";
     print $fh "```\n\n";
     print $fh "Credentials are resolved automatically via AlgoEnvironment.\n";
 
@@ -518,13 +526,15 @@ Required:
   --output, -o  Output directory for markdown files
 
 Optional:
-  --db, -d      Database: OP (operational, default) or RPT (reporting)
+  --db, -d      Database: OP (operational, default), RPT, SEC, APPR
   --schema      Schema owner to export (default: connected user)
   --help, -h    Show this help
 
 Examples:
-  perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/
-  perl algo-schema-export.pl --db RPT --schema REPORTING_OWNER -o output/
+  perl algo-schema-export.pl --db OP   --output /path/to/exchange/algo-schema/
+  perl algo-schema-export.pl --db RPT  --schema REPORTING_OWNER -o output/
+  perl algo-schema-export.pl --db SEC  -o output/
+  perl algo-schema-export.pl --db APPR -o output/
 USAGE
     exit($msg ? 1 : 0);
 }
