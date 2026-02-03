@@ -1,0 +1,2196 @@
+# Algo Database Schema — Foreign Keys
+
+Generated: 2026-02-03 13:04 | Schema: TUQCEUCBCORE01 | Database: PDQCEQ10
+
+**740 foreign keys**
+
+## AGREEMENTALIASES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_AGREEMENTALIASES_AGREEM | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_5_AGREEMENTALIASES_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_6_AGREEMENTALIASES_UPDATE | UPDATEDBY | USERS | USERID |
+| FK_D_1_3_AGREEMENTALIASES_AGRE | AGREEMENTALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+
+## AGREEMENTEXPOSUREDIFFERENCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTEXPOSUREDIFFER | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## AGREEMENTGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_23_AGREEMENTGROUPS_ALIASG | ALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_7_AGREEMENTGROUPS_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_9_AGREEMENTGROUPS_UPDATED | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTGROUPSXUSERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_AGREEMENTGROUPSXUSERS_A | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+| FK_1_2_AGREEMENTGROUPSXUSERS_U | USERID | USERS | USERID |
+
+## AGREEMENTMARGINS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTMARGINS_AGREEM | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_8_AGREEMENTMARGINS_IMPORT | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_9_AGREEMENTMARGINS_CURREN | CURRENCYID | CURRENCIES | CURRENCYID |
+
+## AGREEMENTMARGINSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_12_AGREEMENTMARGINSBULK_I | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## AGREEMENTNOTES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_AGREEMENTNOTES_AGREEMEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_AGREEMENTNOTES_CREATEDB | CREATEDBY | USERS | USERID |
+| FK_1_5_AGREEMENTNOTES_UPDATEDB | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTRESPBUSINESSLINES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_AGREEMENTRESPBUSINESS | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPONSIBILITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_AGREEMENTRESPONSIBILITI | CREATEDBY | USERS | USERID |
+| FK_1_5_AGREEMENTRESPONSIBILITI | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTRESPXCOUNTERPARTIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXCOUNTERPA | COUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_D_1_1_AGREEMENTRESPXCOUNTER | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXCPTYORGANIZATION
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXCPTYORGAN | ORGANIZATIONTYPEID | ORGANIZATIONTYPES | ORGANIZATIONTYPEID |
+| FK_D_1_1_AGREEMENTRESPXCPTYORG | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXEXCLUDEDAGREEMEN
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXEXCLUDEDA | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_1_AGREEMENTRESPXEXCLUDE | RESPID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXINCLUDEDAGREEMEN
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXINCLUDEDA | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_1_AGREEMENTRESPXINCLUDE | RESPID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXPRINCIPALS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXPRINCIPAL | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_D_1_1_AGREEMENTRESPXPRINCIP | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXPRINMANAGINGLOCA
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTRESPXPRINMANAG | CITYID | CITIES | CITYID |
+| FK_D_1_1_AGREEMENTRESPXPRINMAN | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_AGREEMENTS_CREATEDBY_R | CREATEDBY | USERS | USERID |
+| FK_1_12_AGREEMENTS_AGREEMENTCU | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_18_AGREEMENTS_PRINCIPALCR | PRINCIPALCREDITPROVIDERID | ENTITIES | ENTITYID |
+| FK_1_19_AGREEMENTS_COUNTERPART | COUNTERPARTYCREDITPROVIDERID | ENTITIES | ENTITYID |
+| FK_1_21_AGREEMENTS_MARGINVALUA | MARGINVALUATIONTIMINGID | DATETIMINGS | DATETIMINGID |
+| FK_1_23_AGREEMENTS_NOTIFICATIO | NOTIFICATIONTIMECITYID | CITIES | CITYID |
+| FK_1_25_AGREEMENTS_COUNTERPART | COUNTERPARTYMANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_28_AGREEMENTS_DISPUTECURR | DISPUTECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_30_AGREEMENTS_COLLATERALP | COLLATERALPRICESOURCEID | PRICESOURCES | PRICESOURCEID |
+| FK_1_33_AGREEMENTS_INTERESTPAY | INTERESTPAYMENTCALENDARID | HOLIDAYCALENDARS | HOLIDAYCALENDARID |
+| FK_1_34_AGREEMENTS_INTERESTPAY | INTERESTPAYMENTTIMINGID | DATETIMINGS | DATETIMINGID |
+| FK_1_3_AGREEMENTS_AGREEMENTTYP | AGREEMENTTYPEID | AGREEMENTTYPES | AGREEMENTTYPEID |
+| FK_1_40_AGREEMENTS_AGREEMENTST | AGREEMENTSTATUSDETAILID | AGREEMENTSTATUSDETAILS | AGREEMENTSTATUSDETAILID |
+| FK_1_41_AGREEMENTS_GOVERNINGLA | GOVERNINGLAWID | COUNTRIES | COUNTRYID |
+| FK_1_47_AGREEMENTS_TRIPARTYVAR | TRIPARTYVARIATIONCUSTODIANID | ENTITIES | ENTITYID |
+| FK_1_48_AGREEMENTS_TRIPARTYLOC | TRIPARTYLOCKUPCUSTODIANID | ENTITIES | ENTITYID |
+| FK_1_4_AGREEMENTS_PRINCIPALID_ | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_58_AGREEMENTS_FXRATESOURC | FXRATESOURCEID | FXRATESOURCES | FXRATESOURCEID |
+| FK_1_59_AGREEMENTS_CLEARINGCLI | CLEARINGCLIENTID | ENTITIES | ENTITYID |
+| FK_1_5_AGREEMENTS_COUNTERPARTY | COUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_62_AGREEMENTS_CENTRALCOUN | CENTRALCOUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_65_AGREEMENTS_AGREEMENTGR | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+| FK_1_68_AGREEMENTS_SPLITTOLERA | SPLITTOLERANCECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_6_AGREEMENTS_PRINCIPALMAN | PRINCIPALMANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_8_AGREEMENTS_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_AGREEMENTSBULK_IMPORT | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## AGREEMENTSCOPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_AGREEMENTSCOPES_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_7_AGREEMENTSCOPES_UPDATED | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTSCOPESXENTITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AGREEMENTSCOPESXENTITIE | ENTITYID | ENTITIES | ENTITYID |
+| FK_D_1_1_AGREEMENTSCOPESXENTIT | AGREEMENTSCOPEID | AGREEMENTSCOPES | AGREEMENTSCOPEID |
+
+## AGREEMENTSTATUSDETAILS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_AGREEMENTSTATUSDETAILS_ | CREATEDBY | USERS | USERID |
+| FK_1_5_AGREEMENTSTATUSDETAILS_ | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTSXCONTACTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_AGREEMENTSXCONTACTS_AGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_2_AGREEMENTSXCONTACTS_CON | CONTACTID | CONTACTS | CONTACTID |
+
+## AGREEMENTSXEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_AGREEMENTSXEXTDATAOVERR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_2_AGREEMENTSXEXTDATAOVE | EXTENSIONDATAOVERRIDEID | EXTENSIONDATAOVERRIDES | EXTENSIONDATAOVERRIDEID |
+
+## AGREEMENTSXHOLIDAYCALENDARS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_AGREEMENTSXHOLIDAYCALEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_2_AGREEMENTSXHOLIDAYCALEN | HOLIDAYCALENDARID | HOLIDAYCALENDARS | HOLIDAYCALENDARID |
+
+## AGREEMENTTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_AGREEMENTTYPES_JURISDI | JURISDICTIONID | COUNTRIES | COUNTRYID |
+| FK_1_4_AGREEMENTTYPES_CREATEDB | CREATEDBY | USERS | USERID |
+| FK_1_5_AGREEMENTTYPES_UPDATEDB | UPDATEDBY | USERS | USERID |
+
+## AGREEMENTTYPESXTRADETYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_AGREEMENTTYPESXTRADETYP | AGREEMENTTYPEID | AGREEMENTTYPES | AGREEMENTTYPEID |
+| FK_1_2_AGREEMENTTYPESXTRADETYP | TRADETYPEID | TRADETYPES | TRADETYPEID |
+
+## ALIASESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ALIASESBULK_IMPORTRECOR | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## ALIASGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_ALIASGROUPS_CREATEDBY_R | CREATEDBY | USERS | USERID |
+| FK_1_5_ALIASGROUPS_UPDATEDBY_R | UPDATEDBY | USERS | USERID |
+
+## ANALYSISCONFIGSXMARGINCONFIGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_ANALYSISCONFIGSXMARGINC | MARGINANALYSISCONFIGURATIONID | MARGINANALYSISCONFIGURATIONS | MARGINANALYSISCONFIGURATIONID |
+| FK_1_2_ANALYSISCONFIGSXMARGINC | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+
+## APPROVALCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_APPROVALCHANGES_APPROVA | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## APPROVALRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_APPROVALRECORDS_PRINCI | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_12_APPROVALRECORDS_PARENT | PARENTAPPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+| FK_1_4_APPROVALRECORDS_AMENDED | AMENDEDBY | USERS | USERID |
+| FK_1_6_APPROVALRECORDS_REVIEWE | REVIEWEDBY | USERS | USERID |
+
+## APPROVALTRANSITIONHISTORY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_APPROVALTRANSITIONHISTO | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+| FK_1_5_APPROVALTRANSITIONHISTO | AMENDEDBY | USERS | USERID |
+| FK_1_7_APPROVALTRANSITIONHISTO | REVIEWEDBY | USERS | USERID |
+
+## ASSETPOOLBALANCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ASSETPOOLBALANCES_ASSET | ASSETPOOLID | ASSETPOOLS | ASSETPOOLID |
+| FK_1_3_ASSETPOOLBALANCES_INSTR | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_5_ASSETPOOLBALANCES_IMPOR | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+
+## ASSETPOOLBALANCESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ASSETPOOLBALANCESBULK_I | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## ASSETPOOLS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_ASSETPOOLS_PRINCIPALID_ | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_5_ASSETPOOLS_CREATEDBY_RE | CREATEDBY | USERS | USERID |
+| FK_1_6_ASSETPOOLS_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+
+## ASSIGNEDOTCTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_ASSIGNEDOTCTRADES_IMPOR | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_D_1_2_ASSIGNEDOTCTRADES_AGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_3_ASSIGNEDOTCTRADES_OTC | OTCTRADEID | OTCTRADES | OTCTRADEID |
+
+## ASSIGNEDREPOTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_ASSIGNEDREPOTRADES_IMPO | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_D_1_2_ASSIGNEDREPOTRADES_AG | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_3_ASSIGNEDREPOTRADES_RE | REPOTRADEID | REPOTRADES | REPOTRADEID |
+
+## AUDITCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_AUDITCHANGES_AUDITRECOR | AUDITRECORDID | AUDITRECORDS | AUDITRECORDID |
+
+## AUDITRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_8_AUDITRECORDS_PARENTAUDI | PARENTAUDITRECORDID | AUDITRECORDS | AUDITRECORDID |
+
+## BASICELIGIBILITYBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_BASICELIGIBILITYBULK_ | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## BASICELIGIBILITYCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_BASICELIGIBILITYCHANGES | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_5_BASICELIGIBILITYCHANGES | CHANGEDBY | USERS | USERID |
+
+## BATCH_JOB_EXECUTION
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| JOB_INST_EXEC_FK | JOB_INSTANCE_ID | BATCH_JOB_INSTANCE | JOB_INSTANCE_ID |
+
+## BATCH_JOB_EXECUTION_CONTEXT
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| JOB_EXEC_CTX_FK | JOB_EXECUTION_ID | BATCH_JOB_EXECUTION | JOB_EXECUTION_ID |
+
+## BATCH_JOB_EXECUTION_PARAMS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| JOB_EXEC_PARAMS_FK | JOB_EXECUTION_ID | BATCH_JOB_EXECUTION | JOB_EXECUTION_ID |
+
+## BATCH_STEP_EXECUTION
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| JOB_EXEC_STEP_FK | JOB_EXECUTION_ID | BATCH_JOB_EXECUTION | JOB_EXECUTION_ID |
+
+## BATCH_STEP_EXECUTION_CONTEXT
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| STEP_EXEC_CTX_FK | STEP_EXECUTION_ID | BATCH_STEP_EXECUTION | STEP_EXECUTION_ID |
+
+## BONDPURPOSES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_BONDPURPOSES_CREATEDBY_ | CREATEDBY | USERS | USERID |
+| FK_1_5_BONDPURPOSES_UPDATEDBY_ | UPDATEDBY | USERS | USERID |
+
+## BOOKDIFFERENCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_BOOKDIFFERENCES_AGREEME | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## BOOKEDSETTLEMENTINSTRUCTIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_16_BOOKEDSETTLEMENTINSTRU | RECEIVINGPLACEOFSETTLEMENTID | PLACEOFSETTLEMENTS | PLACEOFSETTLEMENTID |
+| FK_1_17_BOOKEDSETTLEMENTINSTRU | SENDINGPLACEOFSETTLEMENTID | PLACEOFSETTLEMENTS | PLACEOFSETTLEMENTID |
+| FK_1_2_BOOKEDSETTLEMENTINSTRUC | SENDINGCUSTODIANID | ENTITIES | ENTITYID |
+| FK_1_7_BOOKEDSETTLEMENTINSTRUC | RECEIVINGCUSTODIANID | ENTITIES | ENTITYID |
+
+## BRANCHALIASES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_BRANCHALIASES_BRANCHALI | BRANCHALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_D_1_4_BRANCHALIASES_BRANCHI | BRANCHID | BRANCHES | BRANCHID |
+
+## BRANCHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_BRANCHES_ENTITYID_REFER | ENTITYID | ENTITIES | ENTITYID |
+
+## CACHEDAGREEMENTXAGREEMENTRESP
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_AGREEMENTID_REF_AGREEMENT | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_AGREERESPID_REF_AGREERESP | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## CBREACHESXECPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_CBREACHESXECPOSITIONS_C | CONCENTRATIONBREACHID | CONCENTRATIONBREACHES | CONCENTRATIONBREACHID |
+| FK_D_1_2_CBREACHESXECPOSITIONS | ECPOSITIONID | ECPOSITIONS | ECPOSITIONID |
+
+## CITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_CITIES_PAYMENTTOLERA | PAYMENTTOLERANCECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_4_CITIES_CREATEDBY_REFERE | CREATEDBY | USERS | USERID |
+| FK_1_5_CITIES_UPDATEDBY_REFERE | UPDATEDBY | USERS | USERID |
+
+## CMOABSASSETCLASSES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_CMOABSASSETCLASSES_CREA | CREATEDBY | USERS | USERID |
+| FK_1_5_CMOABSASSETCLASSES_UPDA | UPDATEDBY | USERS | USERID |
+
+## COLLATERALBUCKETRATINGBANDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_COLLATERALBUCKETRATINGB | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_1_7_COLLATERALBUCKETRATINGB | REFERENCEAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_1_8_COLLATERALBUCKETRATINGB | UPPERORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+| FK_1_9_COLLATERALBUCKETRATINGB | LOWERORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+
+## COLLATERALBUCKETS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_16_COLLATERALBUCKETS_CREA | CREATEDBY | USERS | USERID |
+| FK_1_17_COLLATERALBUCKETS_UPDA | UPDATEDBY | USERS | USERID |
+
+## COLLATERALBUCKETSXEXCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETSXEXCHA | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_1_2_COLLATERALBUCKETSXEXCHA | EXCHANGEID | EXCHANGES | EXCHANGEID |
+
+## COLLATERALBUCKETSXSTOCKINDEXES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETSXSTOCK | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_1_2_COLLATERALBUCKETSXSTOCK | STOCKINDEXID | STOCKINDEXES | STOCKINDEXID |
+
+## COLLATERALBUCKETXCURRENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETXCURREN | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_2_COLLATERALBUCKETXCURREN | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXINSTRUMENTTYP
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETXINSTRU | INSTRUMENTTYPEID | INSTRUMENTTYPES | INSTRUMENTTYPEID |
+| FK_1_2_COLLATERALBUCKETXINSTRU | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXISSUERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETXISSUER | ENTITYID | ENTITIES | ENTITYID |
+| FK_1_2_COLLATERALBUCKETXISSUER | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXRAINSTRUMENT
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETXRAINST | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_1_2_COLLATERALBUCKETXRAINST | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+
+## COLLATERALBUCKETXRAISSUER
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALBUCKETXRAISSU | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_1_2_COLLATERALBUCKETXRAISSU | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+
+## COLLATERALGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_COLLATERALGROUPS_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_7_COLLATERALGROUPS_UPDATE | UPDATEDBY | USERS | USERID |
+
+## COLLATERALGROUPXCOLLATERALBUCK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_COLLATERALGROUPXCOLLATE | COLLATERALGROUPID | COLLATERALGROUPS | COLLATERALGROUPID |
+| FK_1_2_COLLATERALGROUPXCOLLATE | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+
+## COLLATERALPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_COLLATERALPOSITIONS_SY | SYSTEMCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_12_COLLATERALPOSITIONS_AS | ASSETPOOLID | ASSETPOOLS | ASSETPOOLID |
+| FK_1_2_COLLATERALPOSITIONS_INS | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_3_COLLATERALPOSITIONS_AGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_COLLATERALPOSITIONS_IMP | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_8_COLLATERALPOSITIONS_AGR | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+
+## COLLATERALPOSITIONSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_16_COLLATERALPOSITIONSBUL | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## COLLATERALTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_COLLATERALTYPES_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_5_COLLATERALTYPES_UPDATED | UPDATEDBY | USERS | USERID |
+
+## COLLELIGEXTRACTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_COLLELIGEXTRACTCONFIGUR | CREATEDBY | USERS | USERID |
+| FK_1_6_COLLELIGEXTRACTCONFIGUR | UPDATEDBY | USERS | USERID |
+
+## COLLELIGEXTRACTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_COLLELIGEXTRACTMESSAG | COLLELIGEXTRACTRECORDID | COLLELIGEXTRACTRECORDS | COLLELIGEXTRACTRECORDID |
+
+## COLLELIGEXTRACTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_COLLELIGEXTRACTRECORDS | COLLELIGEXTRACTCONFIGURATIONID | COLLELIGEXTRACTCONFIGURATIONS | COLLELIGEXTRACTCONFIGURATIONID |
+| FK_1_5_COLLELIGEXTRACTRECORDS_ | REQUESTEDBY | USERS | USERID |
+
+## COLLEXTRACTXCITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_COLLEXTRACTXCITIES_CITY | CITYID | CITIES | CITYID |
+| FK_D_1_1_COLLEXTRACTXCITIES_CO | COLLCONFIGID | COLLELIGEXTRACTCONFIGURATIONS | COLLELIGEXTRACTCONFIGURATIONID |
+
+## CONCENTRATIONBREACHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_CONCENTRATIONBREACHES | ECAGREEMENTRESULTID | ECAGREEMENTRESULTS | ECAGREEMENTRESULTID |
+
+## CONCENTRATIONRULECHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_CONCENTRATIONRULECHANGE | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_7_CONCENTRATIONRULECHANGE | CHANGEDBY | USERS | USERID |
+
+## CONCENTRATIONRULES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_CONCENTRATIONRULES_AGRE | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_9_CONCENTRATIONRULES_CURR | CURRENCYID | CURRENCIES | CURRENCYID |
+
+## CONTACTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_14_CONTACTS_CUSTOMSTATEME | CUSTOMSTATEMENTID | CUSTOMSTATEMENTS | CUSTOMSTATEMENTID |
+| FK_1_15_CONTACTS_MARGINCALLCUS | MARGINCALLCUSTOMSTATEMENTID | CUSTOMSTATEMENTS | CUSTOMSTATEMENTID |
+| FK_1_3_CONTACTS_ENTITYID_REFER | ENTITYID | ENTITIES | ENTITYID |
+| FK_1_7_CONTACTS_UPDATEDBY_REFE | UPDATEDBY | USERS | USERID |
+| FK_1_9_CONTACTS_CREATEDBY_REFE | CREATEDBY | USERS | USERID |
+
+## COUNTERPARTYMARGINDETAILS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_12_COUNTERPARTYMARGINDETA | CREATEDBY | USERS | USERID |
+| FK_1_14_COUNTERPARTYMARGINDETA | UPDATEDBY | USERS | USERID |
+| FK_1_16_COUNTERPARTYMARGINDETA | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+
+## COUNTRIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_COUNTRIES_CREATEDBY_REF | CREATEDBY | USERS | USERID |
+| FK_1_5_COUNTRIES_UPDATEDBY_REF | UPDATEDBY | USERS | USERID |
+
+## COUPONTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_COUPONTYPES_CREATEDBY_R | CREATEDBY | USERS | USERID |
+| FK_1_5_COUPONTYPES_UPDATEDBY_R | UPDATEDBY | USERS | USERID |
+
+## CREDITRATINGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_CREDITRATINGS_AGENCYID_ | AGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_1_4_CREDITRATINGS_CREATEDBY | CREATEDBY | USERS | USERID |
+| FK_1_6_CREDITRATINGS_UPDATEDBY | UPDATEDBY | USERS | USERID |
+| FK_1_9_CREDITRATINGS_CREDITRAT | CREDITRATINGORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+
+## CURRENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_CURRENCIES_CREATEDBY_RE | CREATEDBY | USERS | USERID |
+| FK_1_5_CURRENCIES_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+
+## CUSTOMSTATEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_CUSTOMSTATEMENTS_TOPCU | TOPCUSTOMSTATEMENTWRITERID | CUSTOMSTATEMENTWRITERS | CUSTOMSTATEMENTWRITERID |
+| FK_1_12_CUSTOMSTATEMENTS_BOTTO | BOTTOMCUSTOMSTATEMENTWRITERID | CUSTOMSTATEMENTWRITERS | CUSTOMSTATEMENTWRITERID |
+| FK_1_4_CUSTOMSTATEMENTS_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_5_CUSTOMSTATEMENTS_UPDATE | UPDATEDBY | USERS | USERID |
+
+## DEBTINSTRUMENTPRICES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_15_DEBTINSTRUMENTPRICES_I | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_19_DEBTINSTRUMENTPRICES_C | CREATEDBY | USERS | USERID |
+| FK_1_20_DEBTINSTRUMENTPRICES_U | UPDATEDBY | USERS | USERID |
+| FK_1_2_DEBTINSTRUMENTPRICES_IN | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_3_DEBTINSTRUMENTPRICES_PR | PRICESOURCEID | PRICESOURCES | PRICESOURCEID |
+
+## DEBTINSTRUMENTPRICESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_18_DEBTINSTRUMENTPRICESBU | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## DISPUTECATEGORIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_DISPUTECATEGORIES_CREAT | CREATEDBY | USERS | USERID |
+| FK_1_5_DISPUTECATEGORIES_UPDAT | UPDATEDBY | USERS | USERID |
+
+## DISTRIBUTIONHISTORY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_DISTRIBUTIONHISTORY_INS | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_8_DISTRIBUTIONHISTORY_UPD | UPDATEDBY | USERS | USERID |
+| FK_D_1_2_DISTRIBUTIONHISTORY_D | DISTRIBUTIONID | DISTRIBUTIONS | DISTRIBUTIONID |
+
+## DISTRIBUTIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_DISTRIBUTIONS_CREATEDB | CREATEDBY | USERS | USERID |
+| FK_1_12_DISTRIBUTIONS_UPDATEDB | UPDATEDBY | USERS | USERID |
+| FK_1_14_DISTRIBUTIONS_AGREEMEN | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_16_DISTRIBUTIONS_INSTRUME | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_17_DISTRIBUTIONS_AGREEMEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_18_DISTRIBUTIONS_BOOKEDSE | BOOKEDSETTLEMENTINSTRUCTIONID | BOOKEDSETTLEMENTINSTRUCTIONS | BOOKEDSETTLEMENTINSTRUCTIONID |
+| FK_1_2_DISTRIBUTIONS_INTERESTP | INTERESTPAYMENTID | INTERESTPAYMENTS | INTERESTPAYMENTID |
+| FK_1_8_DISTRIBUTIONS_REVIEWEDB | REVIEWEDBY | USERS | USERID |
+
+## ECAGREEMENTRESULTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ECAGREEMENTRESULTS_AGRE | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_ECAGREEMENTRESULTS_MANA | MANAGINGLOCATIONID | CITIES | CITYID |
+| FK_D_1_4_ECAGREEMENTRESULTS_EC | ECRECORDID | ECRECORDS | ECRECORDID |
+
+## ECPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_ECPOSITIONS_ECAGREEME | ECAGREEMENTRESULTID | ECAGREEMENTRESULTS | ECAGREEMENTRESULTID |
+
+## ECRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_ECRECORDS_REQUESTEDBY_R | REQUESTEDBY | USERS | USERID |
+
+## ELIGIBILITYBREACHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_ELIGIBILITYBREACHES_E | ECAGREEMENTRESULTID | ECAGREEMENTRESULTS | ECAGREEMENTRESULTID |
+
+## ELIGIBILITYBREACHESXECPOSITION
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_ELIGIBILITYBREACHESXECP | ELIGIBILITYBREACHID | ELIGIBILITYBREACHES | ELIGIBILITYBREACHID |
+| FK_D_1_2_ELIGIBILITYBREACHESXE | ECPOSITIONID | ECPOSITIONS | ECPOSITIONID |
+
+## ELIGIBILITYRULEBUCKETCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_ELIGIBILITYRULEBUCKETCH | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_D_1_2_ELIGIBILITYRULEBUCKET | ELIGIBILITYRULECHANGEID | ELIGIBILITYRULECHANGES | ELIGIBILITYRULECHANGEID |
+
+## ELIGIBILITYRULECHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ELIGIBILITYRULECHANGES_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_7_ELIGIBILITYRULECHANGES_ | CHANGEDBY | USERS | USERID |
+
+## ELIGIBILITYRULECRITERIA
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_ELIGIBILITYRULECRITER | ELIGIBILITYRULEID | ELIGIBILITYRULES | ELIGIBILITYRULEID |
+
+## ELIGIBILITYRULES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_ELIGIBILITYRULES_AGREEM | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## ELIGIBILITYRULESXCOLLATBUCKETS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ELIGIBILITYRULESXCOLLAT | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_D_1_1_ELIGIBILITYRULESXCOLL | ELIGIBILITYRULEID | ELIGIBILITYRULES | ELIGIBILITYRULEID |
+
+## ELIGIBLECOLLATERALS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_ELIGIBLECOLLATERALS_AGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_ELIGIBLECOLLATERALS_INS | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_4_ELIGIBLECOLLATERALS_COL | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+
+## ENTITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_ENTITIES_UPDATEDBY_REF | UPDATEDBY | USERS | USERID |
+| FK_1_13_ENTITIES_ORGANIZATIONT | ORGANIZATIONTYPEID | ORGANIZATIONTYPES | ORGANIZATIONTYPEID |
+| FK_1_14_ENTITIES_PARENTENTITYI | PARENTENTITYID | ENTITIES | ENTITYID |
+| FK_1_4_ENTITIES_DOMICILEID_REF | DOMICILEID | COUNTRIES | COUNTRYID |
+| FK_1_5_ENTITIES_INDUSTRYSECTOR | INDUSTRYSECTORID | INDUSTRYSECTORS | INDUSTRYSECTORID |
+| FK_1_9_ENTITIES_CREATEDBY_REFE | CREATEDBY | USERS | USERID |
+
+## ENTITIESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_ENTITIESBULK_IMPORTRE | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## ENTITIESXCREDITRATINGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_ENTITIESXCREDITRATINGS_ | ENTITYID | ENTITIES | ENTITYID |
+| FK_1_2_ENTITIESXCREDITRATINGS_ | CREDITRATINGID | CREDITRATINGS | CREDITRATINGID |
+
+## ENTITIESXEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_ENTITIESXEXTDATAOVERRID | ENTITYID | ENTITIES | ENTITYID |
+| FK_D_1_2_ENTITIESXEXTDATAOVERR | EXTENSIONDATAOVERRIDEID | EXTENSIONDATAOVERRIDES | EXTENSIONDATAOVERRIDEID |
+
+## ENTITYALIASES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_ENTITYALIASES_ENTITYID_ | ENTITYID | ENTITIES | ENTITYID |
+| FK_1_5_ENTITYALIASES_CREATEDBY | CREATEDBY | USERS | USERID |
+| FK_1_6_ENTITYALIASES_UPDATEDBY | UPDATEDBY | USERS | USERID |
+| FK_D_1_3_ENTITYALIASES_ENTITYA | ENTITYALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+
+## ENTITYGROUPALIASES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_ENTITYGROUPALIASES_EGID | ENTITYGROUPID | ENTITYGROUPS | ENTITYGROUPID |
+| FK_1_6_EGALIASES_CREATEDBY | UPDATEDBY | USERS | USERID |
+| FK_1_8_EGALIASES_UPDATEDBY | CREATEDBY | USERS | USERID |
+| FK_D_1_3_EGROUPALIASES_ENTITYG | ENTITYGROUPALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+
+## ENTITYGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_EGROUPS_CREATEDBY | UPDATEDBY | USERS | USERID |
+| FK_1_8_EGROUPS_UPDATEDBY | CREATEDBY | USERS | USERID |
+
+## ENTITYGROUPSXENTITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_ENTITYGROUPSXENTITIE | ENTITYGROUPID | ENTITYGROUPS | ENTITYGROUPID |
+| FK_2_1_ENTITYGROUPSXEGROUPS | ENTITYID | ENTITIES | ENTITYID |
+
+## ENTITYRATINGSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_8_ENTITYRATINGSBULK_IMPOR | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## EQUITYINSTRUMENTPRICES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_EQUITYINSTRUMENTPRICES | UPDATEDBY | USERS | USERID |
+| FK_1_15_EQUITYINSTRUMENTPRICES | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_2_EQUITYINSTRUMENTPRICES_ | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_3_EQUITYINSTRUMENTPRICES_ | PRICESOURCEID | PRICESOURCES | PRICESOURCEID |
+| FK_1_9_EQUITYINSTRUMENTPRICES_ | CREATEDBY | USERS | USERID |
+
+## EQUITYINSTRUMENTPRICESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_EQUITYINSTRUMENTPRICES | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## EXACTDATETIMINGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_EXACTDATETIMINGS_DATE | DATETIMINGID | DATETIMINGS | DATETIMINGID |
+
+## EXCHANGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_EXCHANGES_CREATEDBY_REF | CREATEDBY | USERS | USERID |
+| FK_1_5_EXCHANGES_UPDATEDBY_REF | UPDATEDBY | USERS | USERID |
+
+## EXPOSURESTATEMENTHISTORIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_EXPOSURESTATEMENTHIST | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## EXPOSURETRADEOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_12_EXPOSURETRADEOVERRIDES | ADDITIONALMARGINIMPORTID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_14_EXPOSURETRADEOVERRIDES | LOCKUPMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_17_EXPOSURETRADEOVERRIDES | LOCKUPMARGINIMPORTID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_19_EXPOSURETRADEOVERRIDES | TRADEIMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_20_EXPOSURETRADEOVERRIDES | CREATEDBY | USERS | USERID |
+| FK_1_21_EXPOSURETRADEOVERRIDES | UPDATEDBY | USERS | USERID |
+| FK_1_4_EXPOSURETRADEOVERRIDES_ | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_7_EXPOSURETRADEOVERRIDES_ | EXPOSUREIMPORTID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_9_EXPOSURETRADEOVERRIDES_ | ADDITIONALMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+
+## EXPOSURETRADEOVERRIDESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_EXPOSURETRADEOVERRIDESB | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## EXTENSIONDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_EXTENSIONDATAOVERRIDES | EXTENSIONLISTITEMID | EXTENSIONLISTITEMS | EXTENSIONLISTITEMID |
+| FK_D_1_2_EXTENSIONDATAOVERRIDE | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## EXTENSIONFIELDDEFINITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_EXTENSIONFIELDDEFINITIO | CREATEDBY | USERS | USERID |
+| FK_1_6_EXTENSIONFIELDDEFINITIO | UPDATEDBY | USERS | USERID |
+
+## EXTENSIONLISTITEMS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_EXTENSIONLISTITEMS | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## EXTRACTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_EXTRACTCONFIGURATIONS_ | MANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_12_EXTRACTCONFIGURATIONS_ | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_6_EXTRACTCONFIGURATIONS_C | CREATEDBY | USERS | USERID |
+| FK_1_8_EXTRACTCONFIGURATIONS_U | UPDATEDBY | USERS | USERID |
+
+## EXTRACTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_5_EXTRACTMESSAGES_EXTRA | EXTRACTRECORDID | EXTRACTRECORDS | EXTRACTRECORDID |
+
+## EXTRACTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_EXTRACTRECORDS_REQUEST | REQUESTEDBY | USERS | USERID |
+| FK_1_2_EXTRACTRECORDS_EXTRACTC | EXTRACTCONFIGURATIONID | EXTRACTCONFIGURATIONS | EXTRACTCONFIGURATIONID |
+
+## FUNDSOURCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_FUNDSOURCES_CREATEDBY_R | CREATEDBY | USERS | USERID |
+| FK_1_5_FUNDSOURCES_UPDATEDBY_R | UPDATEDBY | USERS | USERID |
+
+## FXRATES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_FXRATES_CURRENCYID_REFE | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_5_FXRATES_FXRATESOURCEID_ | FXRATESOURCEID | FXRATESOURCES | FXRATESOURCEID |
+
+## FXRATESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_FXRATESBULK_IMPORTRECOR | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## FXRATESOURCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_FXRATESOURCES_CREATEDBY | CREATEDBY | USERS | USERID |
+| FK_1_8_FXRATESOURCES_UPDATEDBY | UPDATEDBY | USERS | USERID |
+
+## GLOBALLIMITMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_GLOBALLIMITMESSAGES_G | GLOBALLIMITRECORDID | GLOBALLIMITRECORDS | GLOBALLIMITRECORDID |
+
+## GLOBALLIMITPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_15_GLOBALLIMITPOSITIONS | GLOBALLIMITMESSAGEID | GLOBALLIMITMESSAGES | GLOBALLIMITMESSAGEID |
+
+## GLOBALLIMITRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_GLOBALLIMITRECORDS_REQU | REQUESTEDBY | USERS | USERID |
+| FK_D_1_2_GLOBALLIMITRECORDS_CO | CONCENTRATIONRULEID | CONCENTRATIONRULES | CONCENTRATIONRULEID |
+
+## HOLIDAYCALENDARS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_HOLIDAYCALENDARS_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_5_HOLIDAYCALENDARS_UPDATE | UPDATEDBY | USERS | USERID |
+| FK_HOLIDAYCALENDARS_CURRENCYID | CURRENCYID | CURRENCIES | CURRENCYID |
+
+## HOLIDAYS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_HOLIDAYS_HOLIDAYCALENDA | HOLIDAYCALENDARID | HOLIDAYCALENDARS | HOLIDAYCALENDARID |
+
+## HOLIDAYSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_HOLIDAYSBULK_IMPORTRECO | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## IMPORTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_IMPORTCONFIGURATIONS_U | UPDATEDBY | USERS | USERID |
+| FK_1_17_IMPORTCONFIGURATIONS_E | ENTITYALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_18_IMPORTCONFIGURATIONS_A | AGREEMENTALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_18_IMPORTCONFIG_EGAG | ENTITYGROUPALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_19_IMPORTCONFIGURATIONS_T | TRADETYPEALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_21_IMPORTCONFIGURATIONS_B | BRANCHALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+| FK_1_5_IMPORTCONFIGURATIONS_FI | FILEFORMATID | FILEFORMATS | FILEFORMATID |
+| FK_1_6_IMPORTCONFIGURATIONS_FI | FILEDELIMITERID | FILEDELIMITERS | FILEDELIMITERID |
+| FK_1_8_IMPORTCONFIGURATIONS_CR | CREATEDBY | USERS | USERID |
+
+## IMPORTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_6_IMPORTMESSAGES_IMPORT | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## IMPORTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_IMPORTRECORDS_REQUESTE | REQUESTEDBY | USERS | USERID |
+| FK_1_2_IMPORTRECORDS_IMPORTCON | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+
+## INDUSTRYGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_INDUSTRYGROUPS_CREATEDB | CREATEDBY | USERS | USERID |
+| FK_1_5_INDUSTRYGROUPS_UPDATEDB | UPDATEDBY | USERS | USERID |
+
+## INDUSTRYSECTORS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_INDUSTRYSECTORS_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_5_INDUSTRYSECTORS_UPDATED | UPDATEDBY | USERS | USERID |
+
+## INSTRUCTIONXDEBTLOCINSTRUMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_INSTRUCTIONXDEBTLOCINST | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_D_1_1_INSTRUCTIONXDEBTLOCIN | SETTLEMENTINSTRUCTIONID | SETTLEMENTINSTRUCTIONS | SETTLEMENTINSTRUCTIONID |
+
+## INSTRUCTIONXINSTRUMENTTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_INSTRUCTIONXINSTRUMENTT | INSTRUMENTTYPEID | INSTRUMENTTYPES | INSTRUMENTTYPEID |
+| FK_D_1_1_INSTRUCTIONXINSTRUMEN | SETTLEMENTINSTRUCTIONID | SETTLEMENTINSTRUCTIONS | SETTLEMENTINSTRUCTIONID |
+
+## INSTRUMENTRATINGSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_9_INSTRUMENTRATINGSBULK_I | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## INSTRUMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_15_INSTRUMENTS_INSTRUMENT | INSTRUMENTTYPEID | INSTRUMENTTYPES | INSTRUMENTTYPEID |
+| FK_1_17_INSTRUMENTS_COUPONTYPE | COUPONTYPEID | COUPONTYPES | COUPONTYPEID |
+| FK_1_19_INSTRUMENTS_COLLATERAL | COLLATERALTYPEID | COLLATERALTYPES | COLLATERALTYPEID |
+| FK_1_20_INSTRUMENTS_ISSUERINDU | ISSUERINDUSTRYGROUPID | INDUSTRYGROUPS | INDUSTRYGROUPID |
+| FK_1_25_INSTRUMENTS_INSTRUMENT | INSTRUMENTUNDERLYINGSECTORID | INSTRUMENTUNDERLYINGSECTORS | INSTRUMENTUNDERLYINGSECTORID |
+| FK_1_26_INSTRUMENTS_MUNICIPALS | MUNICIPALSTATEID | MUNICIPALSTATES | MUNICIPALSTATEID |
+| FK_1_27_INSTRUMENTS_MUNICIPALR | MUNICIPALREGIONID | MUNICIPALREGIONS | MUNICIPALREGIONID |
+| FK_1_28_INSTRUMENTS_BONDPURPOS | BONDPURPOSEID | BONDPURPOSES | BONDPURPOSEID |
+| FK_1_29_INSTRUMENTS_FUNDSOURCE | FUNDSOURCEID | FUNDSOURCES | FUNDSOURCEID |
+| FK_1_37_INSTRUMENTS_ASSETCOUNT | ASSETCOUNTRYID | COUNTRIES | COUNTRYID |
+| FK_1_38_INSTRUMENTS_MOODYWATCH | MOODYWATCHID | RATINGWATCHES | RATINGWATCHID |
+| FK_1_39_INSTRUMENTS_SPWATCHID_ | SPWATCHID | RATINGWATCHES | RATINGWATCHID |
+| FK_1_40_INSTRUMENTS_FITCHWATCH | FITCHWATCHID | RATINGWATCHES | RATINGWATCHID |
+| FK_1_41_INSTRUMENTS_SEASONINGI | SEASONINGID | SEASONINGS | SEASONINGID |
+| FK_1_44_INSTRUMENTS_ISSUERDOMI | ISSUERDOMICILEID | COUNTRIES | COUNTRYID |
+| FK_1_45_INSTRUMENTS_ISSUERINDU | ISSUERINDUSTRYSECTORID | INDUSTRYSECTORS | INDUSTRYSECTORID |
+| FK_1_46_INSTRUMENTS_ISSUERTYPE | ISSUERTYPEID | ISSUERTYPES | ISSUERTYPEID |
+| FK_1_53_INSTRUMENTS_CREATEDBY_ | CREATEDBY | USERS | USERID |
+| FK_1_55_INSTRUMENTS_UPDATEDBY_ | UPDATEDBY | USERS | USERID |
+| FK_1_6_INSTRUMENTS_CURRENCYID_ | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_71_INSTRUMENTS_CONFIRMING | CONFIRMINGBANKID | ENTITIES | ENTITYID |
+| FK_1_73_INSTRUMENTS_ADVISINGBA | ADVISINGBANKID | ENTITIES | ENTITYID |
+| FK_1_76_INSTRUMENTS_EXCHANGEID | EXCHANGEID | EXCHANGES | EXCHANGEID |
+| FK_1_88_INSTRUMENTS_DIVIDENDCU | DIVIDENDCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_8_INSTRUMENTS_ISSUERID_RE | ISSUERID | ENTITIES | ENTITYID |
+
+## INSTRUMENTSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_18_INSTRUMENTSBULK_IMPORT | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## INSTRUMENTSXCMOABSASSETCLASSES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INSTRUMENTSXCMOABSASSET | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_2_INSTRUMENTSXCMOABSASSET | CMOABSASSETCLASSID | CMOABSASSETCLASSES | CMOABSASSETCLASSID |
+
+## INSTRUMENTSXCREDITRATINGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INSTRUMENTSXCREDITRATIN | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_2_INSTRUMENTSXCREDITRATIN | CREDITRATINGID | CREDITRATINGS | CREDITRATINGID |
+
+## INSTRUMENTSXEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INSTRUMENTSXEXTDATAOVER | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_D_1_2_INSTRUMENTSXEXTDATAOV | EXTENSIONDATAOVERRIDEID | EXTENSIONDATAOVERRIDES | EXTENSIONDATAOVERRIDEID |
+
+## INSTRUMENTSXSTOCKINDEXES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INSTRUMENTSXSTOCKINDEXE | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_2_INSTRUMENTSXSTOCKINDEXE | STOCKINDEXID | STOCKINDEXES | STOCKINDEXID |
+
+## INSTRUMENTTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_INSTRUMENTTYPES_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_6_INSTRUMENTTYPES_UPDATED | UPDATEDBY | USERS | USERID |
+
+## INSTRUMENTUNDERLYINGSECTORS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_INSTRUMENTUNDERLYINGSEC | CREATEDBY | USERS | USERID |
+| FK_1_5_INSTRUMENTUNDERLYINGSEC | UPDATEDBY | USERS | USERID |
+
+## INSTTYPESXEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INSTTYPESXEXTDATAOVERRI | INSTRUMENTTYPEID | INSTRUMENTTYPES | INSTRUMENTTYPEID |
+| FK_D_1_2_INSTTYPESXEXTDATAOVER | EXTENSIONDATAOVERRIDEID | EXTENSIONDATAOVERRIDES | EXTENSIONDATAOVERRIDEID |
+
+## INTERESTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_INTERESTCONFIGURATIONS_ | CREATEDBY | USERS | USERID |
+| FK_1_9_INTERESTCONFIGURATIONS_ | UPDATEDBY | USERS | USERID |
+
+## INTERESTCONFIGXCITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INTERESTCONFIGXCITIES_I | INTERESTCONFIGURATIONID | INTERESTCONFIGURATIONS | INTERESTCONFIGURATIONID |
+| FK_1_2_INTERESTCONFIGXCITIES_C | CITYID | CITIES | CITYID |
+
+## INTERESTCONFIGXGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INTERESTCONFIGXGROUPS_I | INTERESTCONFIGURATIONID | INTERESTCONFIGURATIONS | INTERESTCONFIGURATIONID |
+| FK_1_2_INTERESTCONFIGXGROUPS_A | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+
+## INTERESTCONFIGXINSTRUMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_INTERESTCONFIGXINSTRUME | INTERESTCONFIGURATIONID | INTERESTCONFIGURATIONS | INTERESTCONFIGURATIONID |
+| FK_1_2_INTERESTCONFIGXINSTRUME | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+
+## INTERESTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_INTERESTMESSAGES_INTE | INTERESTRECORDID | INTERESTRECORDS | INTERESTRECORDID |
+
+## INTERESTPAYMENTPERIODS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_INTERESTPAYMENTPERIODS | MARKETINDEXID | MARKETINDEXES | MARKETINDEXID |
+| FK_1_17_INTERESTPAYMENTPERIODS | MANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_2_INTERESTPAYMENTPERIODS_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_INTERESTPAYMENTPERIODS_ | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_4_INTERESTPAYMENTPERIODS_ | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+
+## INTERESTPAYMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_INTERESTPAYMENTS_WORKF | WORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_11_INTERESTPAYMENTS_MANAG | MANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_23_INTERESTPAYMENTS_TRANS | TRANSITIONEDBY | USERS | USERID |
+| FK_1_25_INTERESTPAYMENTS_MOVEM | MOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_26_INTERESTPAYMENTS_INSTR | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_2_INTERESTPAYMENTS_AGREEM | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_36_INTERESTPAYMENTS_HELDP | HELDPERIODID | INTERESTPAYMENTPERIODS | INTERESTPAYMENTPERIODID |
+| FK_1_37_INTERESTPAYMENTS_POSTE | POSTEDPERIODID | INTERESTPAYMENTPERIODS | INTERESTPAYMENTPERIODID |
+| FK_1_3_INTERESTPAYMENTS_CURREN | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_40_INTERESTPAYMENTS_AGREE | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+
+## INTERESTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_INTERESTRECORDS_INTERES | INTERESTCONFIGURATIONID | INTERESTCONFIGURATIONS | INTERESTCONFIGURATIONID |
+| FK_1_9_INTERESTRECORDS_REQUEST | REQUESTEDBY | USERS | USERID |
+
+## INTERESTTERMS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_INTERESTTERMS_AGREEMENT | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_INTERESTTERMS_CURRENCYI | CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_4_INTERESTTERMS_MARKETIND | MARKETINDEXID | MARKETINDEXES | MARKETINDEXID |
+| FK_1_7_INTERESTTERMS_HOLIDAYCA | HOLIDAYCALENDARID | HOLIDAYCALENDARS | HOLIDAYCALENDARID |
+
+## INTERESTTERMSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_INTERESTTERMSBULK_IMPOR | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## ISSUERTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_ISSUERTYPES_CREATEDBY_R | CREATEDBY | USERS | USERID |
+| FK_1_5_ISSUERTYPES_UPDATEDBY_R | UPDATEDBY | USERS | USERID |
+
+## MAINTENANCECONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_MAINTENANCECONFIGURATIO | CREATEDBY | USERS | USERID |
+| FK_1_8_MAINTENANCECONFIGURATIO | UPDATEDBY | USERS | USERID |
+
+## MAINTENANCERECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_MAINTENANCERECORDS_MAIN | MAINTENANCECONFIGURATIONID | MAINTENANCECONFIGURATIONS | MAINTENANCECONFIGURATIONID |
+| FK_1_7_MAINTENANCERECORDS_REQU | REQUESTEDBY | USERS | USERID |
+
+## MARGINANALYSISCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_MARGINANALYSISCONFIGURA | CREATEDBY | USERS | USERID |
+| FK_1_6_MARGINANALYSISCONFIGURA | UPDATEDBY | USERS | USERID |
+
+## MARGINANALYSISMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_5_MARGINANALYSISMESSAGE | MARGINANALYSISRECORDID | MARGINANALYSISRECORDS | MARGINANALYSISRECORDID |
+
+## MARGINANALYSISPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_15_MARGINANALYSISPOSITION | PRICESOURCEID | PRICESOURCES | PRICESOURCEID |
+| FK_1_26_MARGINANALYSISPOSITION | INSTRUMENTTYPEID | INSTRUMENTTYPES | INSTRUMENTTYPEID |
+| FK_1_27_MARGINANALYSISPOSITION | INSTRUMENTISSUERID | ENTITIES | ENTITYID |
+| FK_1_28_MARGINANALYSISPOSITION | INSTRUMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_33_MARGINANALYSISPOSITION | ASSETPOOLID | ASSETPOOLS | ASSETPOOLID |
+| FK_1_6_MARGINANALYSISPOSITIONS | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_9_MARGINANALYSISPOSITIONS | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_D_1_19_MARGINANALYSISPOSITI | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+
+## MARGINANALYSISRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MARGINANALYSISRECORDS_ | REQUESTEDBY | USERS | USERID |
+| FK_1_12_MARGINANALYSISRECORDS_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_2_MARGINANALYSISRECORDS_M | MARGINANALYSISCONFIGURATIONID | MARGINANALYSISCONFIGURATIONS | MARGINANALYSISCONFIGURATIONID |
+
+## MARGINCALCULATIONRESULTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_17_MARGINCALCULATIONRESUL | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_18_MARGINCALCULATIONRESUL | MARGINRECORDID | MARGINRECORDS | MARGINRECORDID |
+| FK_1_24_MARGINCALCULATIONRESUL | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_71_MARGINCALCULATIONRESUL | AGREEMENTTYPEID | AGREEMENTTYPES | AGREEMENTTYPEID |
+| FK_1_73_MARGINCALCULATIONRESUL | PRINCIPALMANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_74_MARGINCALCULATIONRESUL | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_75_MARGINCALCULATIONRESUL | COUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_95_MARGINCALCULATIONRESUL | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+| FK_1_97_MARGINCALCULATIONRESUL | FXRATESOURCEID | FXRATESOURCES | FXRATESOURCEID |
+| FK_1_98_MARGINCALCULATIONRESUL | CENTRALCOUNTERPARTYID | ENTITIES | ENTITYID |
+
+## MARGINCALLS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MARGINCALLS_AGREEMENTC | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_130_MARGINCALLS_AGREEMENT | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+| FK_1_134_MARGINCALLS_FXRATESOU | FXRATESOURCEID | FXRATESOURCES | FXRATESOURCEID |
+| FK_1_135_MARGINCALLS_WAIVEDBY_ | WAIVEDBY | USERS | USERID |
+| FK_1_137_MARGINCALLS_CLEARINGC | CLEARINGCLIENTID | ENTITIES | ENTITYID |
+| FK_1_138_MARGINCALLS_IMPORTCON | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_150_MARGINCALLS_CENTRALCO | CENTRALCOUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_156_MARGINCALLS_STARTOFDA | PREVIOUSAGREEMENTCCYID | CURRENCIES | CURRENCYID |
+| FK_1_159_MARGINCALLS_ASSOCIATE | ASSOCIATEDPARTIALAGREEID | MARGINCALLS | MARGINCALLID |
+| FK_1_44_MARGINCALLS_WORKFLOWST | WORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_51_MARGINCALLS_MARGINCALC | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+| FK_1_52_MARGINCALLS_NEWCALCULA | NEWCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+| FK_1_72_MARGINCALLS_HELDMOVEME | HELDMOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_73_MARGINCALLS_POSTEDMOVE | POSTEDMOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_7_MARGINCALLS_AGREEMENTID | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_82_MARGINCALLS_TRANSITION | TRANSITIONEDBY | USERS | USERID |
+| FK_1_85_MARGINCALLS_REVIEWEDBY | REVIEWEDBY | USERS | USERID |
+| FK_1_93_MARGINCALLS_AGREEMENTT | AGREEMENTTYPEID | AGREEMENTTYPES | AGREEMENTTYPEID |
+| FK_1_95_MARGINCALLS_PRINCIPALM | PRINCIPALMANAGINGLOCATIONID | CITIES | CITYID |
+| FK_1_97_MARGINCALLS_PRINCIPALI | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_98_MARGINCALLS_COUNTERPAR | COUNTERPARTYID | ENTITIES | ENTITYID |
+
+## MARGINCALLSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_MARGINCALLSBULK_IMPORTR | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## MARGINCALLTRANSITIONHISTORY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_MARGINCALLTRANSITIONHIS | FROMWORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_4_MARGINCALLTRANSITIONHIS | TOWORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_6_MARGINCALLTRANSITIONHIS | TRANSITIONEDBY | USERS | USERID |
+| FK_D_1_2_MARGINCALLTRANSITIONH | MARGINCALLID | MARGINCALLS | MARGINCALLID |
+
+## MARGINCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MARGINCONFIGURATIONS_U | UPDATEDBY | USERS | USERID |
+| FK_1_8_MARGINCONFIGURATIONS_CR | CREATEDBY | USERS | USERID |
+
+## MARGINCONFIGURATIONXAGREEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_MARGINCONFIGURATIONXAGR | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+| FK_1_2_MARGINCONFIGURATIONXAGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## MARGINCONFIGURATIONXCITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_1_MARGINCONFIGURATIONXC | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+| FK_D_1_2_MARGINCONFIGURATIONXC | MANAGINGLOCATIONID | CITIES | CITYID |
+
+## MARGINCONFIGURATIONXPRINCIPALS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_1_MARGINCONFIGURATIONXP | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+| FK_D_1_2_MARGINCONFIGURATIONXP | PRINCIPALID | ENTITIES | ENTITYID |
+
+## MARGINCONFIGXGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_MARGINCONFIGXGROUPS_MAR | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+| FK_1_2_MARGINCONFIGXGROUPS_AGR | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+
+## MARGINMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_MARGINMESSAGES_AGREEMEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_5_MARGINMESSAGES_MARGIN | MARGINRECORDID | MARGINRECORDS | MARGINRECORDID |
+
+## MARGINRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MARGINRECORDS_REQUESTE | REQUESTEDBY | USERS | USERID |
+| FK_1_12_MARGINRECORDS_MARGINCO | MARGINCONFIGURATIONID | MARGINCONFIGURATIONS | MARGINCONFIGURATIONID |
+| FK_1_13_MARGINRECORDS_AGREEMEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## MARGINTERMS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_14_MARGINTERMS_REFERENCEA | REFERENCEAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_1_18_MARGINTERMS_OVERRIDECU | OVERRIDECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_8_MARGINTERMS_AGREEMENTID | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## MARGINTERMSBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_14_MARGINTERMSBULK_IMPORT | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## MARGINTERMSXRATINGAGENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_MARGINTERMSXRATINGAGENC | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_D_1_1_MARGINTERMSXRATINGAGE | MARGINTERMID | MARGINTERMS | MARGINTERMID |
+
+## MARKETINDEXES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_MARKETINDEXES_UPDATEDB | UPDATEDBY | USERS | USERID |
+| FK_1_9_MARKETINDEXES_CREATEDBY | CREATEDBY | USERS | USERID |
+
+## MARKETINDEXRATES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_MARKETINDEXRATES_MARKET | MARKETINDEXID | MARKETINDEXES | MARKETINDEXID |
+
+## MARKETINDEXRATESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_8_MARKETINDEXRATESBULK_IM | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## MOVEMENTCONCENTRATIONBREACHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_MOVEMENTCONCENTRATION | MOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+
+## MOVEMENTELIGIBILITYBREACHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_MOVEMENTELIGIBILITYBR | MOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+
+## MOVEMENTGROUPS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_MOVEMENTGROUPS_AGREEMEN | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_2_MOVEMENTGROUPS_MOVEME | MOVEMENTVERIFICATIONRECORDID | MOVEMENTVERIFICATIONRECORDS | MOVEMENTVERIFICATIONRECORDID |
+
+## MOVEMENTHISTORY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MOVEMENTHISTORY_INSTRU | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_12_MOVEMENTHISTORY_ASSETP | ASSETPOOLID | ASSETPOOLS | ASSETPOOLID |
+| FK_1_3_MOVEMENTHISTORY_ROOTID_ | ROOTID | MOVEMENTS | MOVEMENTID |
+| FK_1_4_MOVEMENTHISTORY_PARENTM | PARENTMOVEMENTID | MOVEMENTS | MOVEMENTID |
+| FK_1_9_MOVEMENTHISTORY_UPDATED | UPDATEDBY | USERS | USERID |
+| FK_D_1_2_MOVEMENTHISTORY_MOVEM | MOVEMENTID | MOVEMENTS | MOVEMENTID |
+
+## MOVEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_MOVEMENTS_AGREEMENTCUR | AGREEMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_11_MOVEMENTS_SYSTEMCURREN | SYSTEMCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_13_MOVEMENTS_CREATEDBY_RE | CREATEDBY | USERS | USERID |
+| FK_1_15_MOVEMENTS_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+| FK_1_30_MOVEMENTS_REVIEWEDBY_R | REVIEWEDBY | USERS | USERID |
+| FK_1_35_MOVEMENTS_BOOKEDSETTLE | BOOKEDSETTLEMENTINSTRUCTIONID | BOOKEDSETTLEMENTINSTRUCTIONS | BOOKEDSETTLEMENTINSTRUCTIONID |
+| FK_1_36_MOVEMENTS_AGREEMENTID_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_38_MOVEMENTS_PREVIOUSMOVE | PREVIOUSMOVEMENTID | MOVEMENTS | MOVEMENTID |
+| FK_1_3_MOVEMENTS_INSTRUMENTID_ | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_40_MOVEMENTS_ROOTID_REFER | ROOTID | MOVEMENTS | MOVEMENTID |
+| FK_1_47_MOVEMENTS_ASSETPOOLID_ | ASSETPOOLID | ASSETPOOLS | ASSETPOOLID |
+| FK_D_1_2_MOVEMENTS_MOVEMENTGRO | MOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+
+## MOVEMENTSXPANDLMARGINRESULTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_MOVEMENTSXPANDLMARGINRE | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+| FK_1_2_MOVEMENTSXPANDLMARGINRE | MOVEMENTID | MOVEMENTS | MOVEMENTID |
+
+## MOVEMENTTRANSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_MOVEMENTTRANSITIONS_WOR | WORKFLOWID | WORKFLOWS | WORKFLOWID |
+| FK_1_4_MOVEMENTTRANSITIONS_WOR | WORKFLOWSTATETRANSITIONID | WORKFLOWSTATETRANSITIONS | WORKFLOWSTATETRANSITIONID |
+
+## MOVEMENTVERIFICATIONRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_MOVEMENTVERIFICATIONREC | REQUESTEDBY | USERS | USERID |
+
+## MUNICIPALREGIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_MUNICIPALREGIONS_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_5_MUNICIPALREGIONS_UPDATE | UPDATEDBY | USERS | USERID |
+
+## MUNICIPALSTATES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_MUNICIPALSTATES_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_5_MUNICIPALSTATES_UPDATED | UPDATEDBY | USERS | USERID |
+
+## ORGANIZATIONTYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_ORGANIZATIONTYPES_DISP | DISPUTECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_4_ORGANIZATIONTYPES_CREAT | CREATEDBY | USERS | USERID |
+| FK_1_5_ORGANIZATIONTYPES_UPDAT | UPDATEDBY | USERS | USERID |
+
+## OTCANALYSISEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_OTCANALYSISEXTDATAOVERR | OTCANALYSISTRADEID | OTCANALYSISTRADES | OTCANALYSISTRADEID |
+| FK_D_1_2_OTCANALYSISEXTDATAOVE | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## OTCANALYSISTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_18_OTCANALYSISTRADES_EXPO | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_20_OTCANALYSISTRADES_EXCH | EXCHANGEDNOTIONAL1CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_22_OTCANALYSISTRADES_EXCH | EXCHANGEDNOTIONAL2CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_34_OTCANALYSISTRADES_IMPO | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_39_OTCANALYSISTRADES_ADDI | ADDITIONALMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_42_OTCANALYSISTRADES_LOCK | LOCKUPMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_D_1_48_OTCANALYSISTRADES_MA | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+
+## OTCCOMPARISONTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_28_OTCCOMPARISONTRADES_IM | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_54_OTCCOMPARISONTRADES_EX | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_55_OTCCOMPARISONTRADES_EX | EXCHANGEDNOTIONAL1CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_56_OTCCOMPARISONTRADES_EX | EXCHANGEDNOTIONAL2CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_57_OTCCOMPARISONTRADES_AD | ADDITIONALMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_58_OTCCOMPARISONTRADES_LO | LOCKUPMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+
+## OTCCOMPARISONTRADESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_OTCCOMPARISONTRADESBULK | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## OTCEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_OTCEXTDATAOVERRIDES_OTC | OTCTRADEID | OTCTRADES | OTCTRADEID |
+| FK_1_8_OTCEXTDATAOVERRIDES_IMP | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_D_1_2_OTCEXTDATAOVERRIDES_E | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## OTCTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_19_OTCTRADES_EXPOSUREAMOU | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_21_OTCTRADES_EXCHANGEDNOT | EXCHANGEDNOTIONAL1CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_23_OTCTRADES_EXCHANGEDNOT | EXCHANGEDNOTIONAL2CURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_35_OTCTRADES_IMPORTCONFIG | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_3_OTCTRADES_AGREEMENTID_R | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_40_OTCTRADES_ADDITIONALMA | ADDITIONALMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_43_OTCTRADES_LOCKUPMARGIN | LOCKUPMARGINCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_45_OTCTRADES_PRINCIPALBRA | PRINCIPALBRANCHID | BRANCHES | BRANCHID |
+| FK_1_46_OTCTRADES_COUNTERPARTY | COUNTERPARTYBRANCHID | BRANCHES | BRANCHID |
+| FK_1_5_OTCTRADES_TRADETYPEID_R | TRADETYPEID | TRADETYPES | TRADETYPEID |
+| FK_1_7_OTCTRADES_PRINCIPALID_R | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_9_OTCTRADES_COUNTERPARTYI | COUNTERPARTYID | ENTITIES | ENTITYID |
+
+## PENDINGAGREEMENTMARGINS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PENDINGAGREEMENTMARGINS | AGREEMENTMARGINID | AGREEMENTMARGINS | AGREEMENTMARGINID |
+| FK_1_3_PENDINGAGREEMENTMARGINS | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_PENDINGAGREEMENTMARGINS | REQUESTEDBY | USERS | USERID |
+| FK_1_7_PENDINGAGREEMENTMARGINS | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## PENDINGAGREEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_PENDINGAGREEMENTS_AGRE | AGREEMENTTYPEID | AGREEMENTTYPES | AGREEMENTTYPEID |
+| FK_1_14_PENDINGAGREEMENTS_AGRE | AGREEMENTSTATUSDETAILID | AGREEMENTSTATUSDETAILS | AGREEMENTSTATUSDETAILID |
+| FK_1_15_PENDINGAGREEMENTS_APPR | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+| FK_1_2_PENDINGAGREEMENTS_AGREE | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_PENDINGAGREEMENTS_REQUE | REQUESTEDBY | USERS | USERID |
+| FK_1_7_PENDINGAGREEMENTS_PRINC | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_8_PENDINGAGREEMENTS_COUNT | COUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_9_PENDINGAGREEMENTS_PRINC | PRINCIPALMANAGINGLOCATIONID | CITIES | CITYID |
+
+## PENDINGCONTACTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PENDINGCONTACT | CONTACTID | CONTACTS | CONTACTID |
+| FK_1_3_PENDINGCONTACT | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_PENDINGCONTACT | REQUESTEDBY | USERS | USERID |
+| FK_1_8_PENDINGCONTACT | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## PENDINGENTITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PENDINGENTITY | ENTITYID | ENTITIES | ENTITYID |
+| FK_1_4_PENDINGENTITY | REQUESTEDBY | USERS | USERID |
+| FK_1_8_PENDINGENTITY | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## PENDINGSETTLEMENTINSTRUCTIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PENDINGSETTLEMENTINSTRU | SETTLEMENTINSTRUCTIONID | SETTLEMENTINSTRUCTIONS | SETTLEMENTINSTRUCTIONID |
+| FK_1_3_PENDINGSETTLEMENTINSTRU | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_PENDINGSETTLEMENTINSTRU | REQUESTEDBY | USERS | USERID |
+| FK_1_8_PENDINGSETTLEMENTINSTRU | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## PENDINGTRADECOVERAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PENDINGTRADECOVERAGES_S | SPECIFICTRADECOVERAGEID | SPECIFICTRADECOVERAGE | SPECIFICTRADECOVERAGEID |
+| FK_1_3_PENDINGTRADECOVERAGES_R | REQUESTEDBY | USERS | USERID |
+| FK_1_6_PENDINGTRADECOVERAGES_A | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_7_PENDINGTRADECOVERAGES_A | APPROVALRECORDID | APPROVALRECORDS | APPROVALRECORDID |
+
+## PLACEOFSETTLEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_PLACEOFSETTLEMENTS_CREA | CREATEDBY | USERS | USERID |
+| FK_1_5_PLACEOFSETTLEMENTS_UPDA | UPDATEDBY | USERS | USERID |
+
+## POSITIONSTATEMENTHISTORIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_POSITIONSTATEMENTHIST | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## PRICESOURCES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_PRICESOURCES_CREATEDBY_ | CREATEDBY | USERS | USERID |
+| FK_1_5_PRICESOURCES_UPDATEDBY_ | UPDATEDBY | USERS | USERID |
+
+## PROFITANDLOSSES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_PROFITANDLOSSES_MARKET | MARKETINDEXID | MARKETINDEXES | MARKETINDEXID |
+| FK_1_22_PROFITANDLOSSES_HELDMO | HELDMOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_23_PROFITANDLOSSES_POSTED | POSTEDMOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_27_PROFITANDLOSSES_INSTRU | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_4_PROFITANDLOSSES_AGREEME | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_N_1_24_PROFITANDLOSSES_IMPO | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## PROFITANDLOSSESBULK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_PROFITANDLOSSESBULK_IMP | IMPORTRECORDID | IMPORTRECORDS | IMPORTRECORDID |
+
+## RATINGAGENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_RATINGAGENCIES_CREATEDB | CREATEDBY | USERS | USERID |
+| FK_1_7_RATINGAGENCIES_UPDATEDB | UPDATEDBY | USERS | USERID |
+
+## RATINGBASEDMARGINTERMS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_8_RATINGBASEDMARGINTERMS_ | CREDITRATINGORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+| FK_D_1_2_RATINGBASEDMARGINTERM | MARGINTERMID | MARGINTERMS | MARGINTERMID |
+
+## RATINGELIGIBILITYRULEBANDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_RATINGELIGIBILITYRULEBA | PARTYORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+| FK_1_4_RATINGELIGIBILITYRULEBA | INSTRUMENTORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+| FK_1_5_RATINGELIGIBILITYRULEBA | ISSUERORDINALID | CREDITRATINGORDINALS | CREDITRATINGORDINALID |
+| FK_D_1_2_RATINGELIGIBILITYRULE | RATINGELIGIBILITYRULEID | RATINGELIGIBILITYRULES | RATINGELIGIBILITYRULEID |
+
+## RATINGELIGIBILITYRULES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_RATINGELIGIBILITYRULES | PARTYREFERENCEAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_1_19_RATINGELIGIBILITYRULES | ISSUERREFERENCEAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_1_2_RATINGELIGIBILITYRULES_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_7_RATINGELIGIBILITYRULES_ | INSTRUMENTREFERENCEAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+
+## RATINGRULEXCOLLATERALBUCKETS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_RATINGRULEXCOLLATERALBU | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_D_1_1_RATINGRULEXCOLLATERAL | RATINGELIGIBILITYRULEID | RATINGELIGIBILITYRULES | RATINGELIGIBILITYRULEID |
+
+## RATINGRULEXINSTRUMENTAGENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_RATINGRULEXINSTRUMENTAG | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_D_1_1_RATINGRULEXINSTRUMENT | RATINGELIGIBILITYRULEID | RATINGELIGIBILITYRULES | RATINGELIGIBILITYRULEID |
+
+## RATINGRULEXISSUERAGENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_RATINGRULEXISSUERAGENCI | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_D_1_1_RATINGRULEXISSUERAGEN | RATINGELIGIBILITYRULEID | RATINGELIGIBILITYRULES | RATINGELIGIBILITYRULEID |
+
+## RATINGRULEXPARTYAGENCIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_RATINGRULEXPARTYAGENCIE | RATINGAGENCYID | RATINGAGENCIES | RATINGAGENCYID |
+| FK_D_1_1_RATINGRULEXPARTYAGENC | RATINGELIGIBILITYRULEID | RATINGELIGIBILITYRULES | RATINGELIGIBILITYRULEID |
+
+## RATINGWATCHES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_RATINGWATCHES_CREATEDBY | CREATEDBY | USERS | USERID |
+| FK_1_5_RATINGWATCHES_UPDATEDBY | UPDATEDBY | USERS | USERID |
+
+## REPOANALYSISEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_REPOANALYSISEXTDATAOVER | REPOANALYSISTRADEID | REPOANALYSISTRADES | REPOANALYSISTRADEID |
+| FK_D_1_2_REPOANALYSISEXTDATAOV | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## REPOANALYSISTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_12_REPOANALYSISTRADES_EXP | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_18_REPOANALYSISTRADES_TRA | TRADECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_29_REPOANALYSISTRADES_INS | INSTRUMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_2_REPOANALYSISTRADES_IMPO | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_D_1_46_REPOANALYSISTRADES_M | MARGINCALCULATIONRESULTID | MARGINCALCULATIONRESULTS | MARGINCALCULATIONRESULTID |
+
+## REPOEXTDATAOVERRIDES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_REPOEXTDATAOVERRIDES_RE | REPOTRADEID | REPOTRADES | REPOTRADEID |
+| FK_1_8_REPOEXTDATAOVERRIDES_IM | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_D_1_2_REPOEXTDATAOVERRIDES_ | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## REPOTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_REPOTRADES_TRADETYPEID | TRADETYPEID | TRADETYPES | TRADETYPEID |
+| FK_1_13_REPOTRADES_EXPOSUREAMO | EXPOSUREAMOUNTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_19_REPOTRADES_TRADECURREN | TRADECURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_2_REPOTRADES_IMPORTCONFIG | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_30_REPOTRADES_INSTRUMENTC | INSTRUMENTCURRENCYID | CURRENCIES | CURRENCYID |
+| FK_1_3_REPOTRADES_PRINCIPALID_ | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_43_REPOTRADES_PRINCIPALBR | PRINCIPALBRANCHID | BRANCHES | BRANCHID |
+| FK_1_44_REPOTRADES_COUNTERPART | COUNTERPARTYBRANCHID | BRANCHES | BRANCHID |
+| FK_1_5_REPOTRADES_COUNTERPARTY | COUNTERPARTYID | ENTITIES | ENTITYID |
+| FK_1_7_REPOTRADES_AGREEMENTID_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## RULEFILTERPARAMETERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_RULEFILTERPARAMETERS_ | RULEFILTERID | RULEFILTERS | RULEFILTERID |
+
+## RULEFILTERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_RULEFILTERS_CONCENTRA | CONCENTRATIONRULEID | CONCENTRATIONRULES | CONCENTRATIONRULEID |
+
+## SEASONINGS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_SEASONINGS_CREATEDBY_RE | CREATEDBY | USERS | USERID |
+| FK_1_5_SEASONINGS_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+
+## SETTLEMENTINSTRUCTIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_13_SETTLEMENTINSTRUCTIONS | CASHINSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_14_SETTLEMENTINSTRUCTIONS | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_26_SETTLEMENTINSTRUCTIONS | PLACEOFSETTLEMENTID | PLACEOFSETTLEMENTS | PLACEOFSETTLEMENTID |
+| FK_1_4_SETTLEMENTINSTRUCTIONS_ | CUSTODIANID | ENTITIES | ENTITYID |
+| FK_D_1_2_SETTLEMENTINSTRUCTION | ENTITYID | ENTITIES | ENTITYID |
+
+## SETTLEMENTXCITIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_SETTLEMENTXCITIES_CITYI | CITYID | CITIES | CITYID |
+| FK_D_1_1_SETTLEMENTXCITIES_SET | SETTLEMOVEMENTCONFIGURATIONID | SETTLEMOVEMENTCONFIGURATIONS | SETTLEMOVEMENTCONFIGURATIONID |
+
+## SETTLEMOVEMENTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_SETTLEMOVEMENTCONFIGURA | CREATEDBY | USERS | USERID |
+| FK_1_8_SETTLEMOVEMENTCONFIGURA | UPDATEDBY | USERS | USERID |
+
+## SETTLEMOVEMENTFILTERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_2_SETTLEMOVEMENTFILTERS | SETTLEMOVEMENTCONFIGURATIONID | SETTLEMOVEMENTCONFIGURATIONS | SETTLEMOVEMENTCONFIGURATIONID |
+
+## SETTLEMOVEMENTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_7_SETTLEMOVEMENTMESSAGES_ | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_D_1_2_SETTLEMOVEMENTMESSAGE | SETTLEMOVEMENTRECORDID | SETTLEMOVEMENTRECORDS | SETTLEMOVEMENTRECORDID |
+
+## SETTLEMOVEMENTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_SETTLEMOVEMENTRECORDS_ | REQUESTEDBY | USERS | USERID |
+| FK_D_1_2_SETTLEMOVEMENTRECORDS | SETTLEMOVEMENTCONFIGURATIONID | SETTLEMOVEMENTCONFIGURATIONS | SETTLEMOVEMENTCONFIGURATIONID |
+
+## SPECIFICTRADECOVERAGE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_SPECIFICTRADECOVERAGE_A | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_3_SPECIFICTRADECOVERAGE_I | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_8_SPECIFICTRADECOVERAGE_E | EXTENSIONFIELDDEFINITIONID | EXTENSIONFIELDDEFINITIONS | EXTENSIONFIELDDEFINITIONID |
+
+## STATEMENTDISCLAIMERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_STATEMENTDISCLAIMERS_PR | PRINCIPALID | ENTITIES | ENTITYID |
+| FK_1_5_STATEMENTDISCLAIMERS_AG | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+
+## STOCKINDEXES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_STOCKINDEXES_CREATEDBY_ | CREATEDBY | USERS | USERID |
+| FK_1_5_STOCKINDEXES_UPDATEDBY_ | UPDATEDBY | USERS | USERID |
+
+## SUBSTITUTIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_SUBSTITUTIONS_REVIEWED | REVIEWEDBY | USERS | USERID |
+| FK_1_2_SUBSTITUTIONS_WORKFLOWS | WORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_3_SUBSTITUTIONS_AGREEMENT | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_SUBSTITUTIONS_MOVEMENTG | MOVEMENTGROUPID | MOVEMENTGROUPS | MOVEMENTGROUPID |
+| FK_1_5_SUBSTITUTIONS_CREATEDBY | CREATEDBY | USERS | USERID |
+| FK_1_7_SUBSTITUTIONS_TRANSITIO | TRANSITIONEDBY | USERS | USERID |
+
+## SUBSTRANSITIONHISTORY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_SUBSTRANSITIONHISTORY_F | FROMWORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_4_SUBSTRANSITIONHISTORY_T | TOWORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_6_SUBSTRANSITIONHISTORY_T | TRANSITIONEDBY | USERS | USERID |
+| FK_D_1_2_SUBSTRANSITIONHISTORY | SUBSTITUTIONID | SUBSTITUTIONS | SUBSTITUTIONID |
+
+## TRADEASSIGNMENTCONFIGURATIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_TRADEASSIGNMENTCONFIGUR | CREATEDBY | USERS | USERID |
+| FK_1_8_TRADEASSIGNMENTCONFIGUR | UPDATEDBY | USERS | USERID |
+
+## TRADEASSIGNMENTMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_5_TRADEASSIGNMENTMESSAG | TRADEASSIGNMENTRECORDID | TRADEASSIGNMENTRECORDS | TRADEASSIGNMENTRECORDID |
+
+## TRADEASSIGNMENTRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_10_TRADEASSIGNMENTRECORDS | TRADEASSIGNMENTCONFIGURATIONID | TRADEASSIGNMENTCONFIGURATIONS | TRADEASSIGNMENTCONFIGURATIONID |
+| FK_1_15_IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+| FK_1_5_TRADEASSIGNMENTRECORDS_ | REQUESTEDBY | USERS | USERID |
+
+## TRADEASSIGNMENTRULES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_TRADEASSIGNMENTRULES_AG | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## TRADEASSIGNMENTRULESXCPTYBRANC
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_TRADEASSIGNMENTRULESXCP | TRADEASSIGNMENTRULEID | TRADEASSIGNMENTRULES | TRADEASSIGNMENTRULEID |
+| FK_1_2_TRADEASSIGNMENTRULESXCP | BRANCHID | BRANCHES | BRANCHID |
+
+## TRADEASSIGNMENTRULESXPRINBRANC
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_TRADEASSIGNMENTRULESXPR | TRADEASSIGNMENTRULEID | TRADEASSIGNMENTRULES | TRADEASSIGNMENTRULEID |
+| FK_1_2_TRADEASSIGNMENTRULESXPR | BRANCHID | BRANCHES | BRANCHID |
+
+## TRADEASSIGNMENTRULESXTRADETYPE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_1_TRADEASSIGNMENTRULESXTR | TRADEASSIGNMENTRULEID | TRADEASSIGNMENTRULES | TRADEASSIGNMENTRULEID |
+| FK_1_2_TRADEASSIGNMENTRULESXTR | TRADETYPEID | TRADETYPES | TRADETYPEID |
+
+## TRADETYPEALIASES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_TRADETYPEALIASES_TRADET | TRADETYPEID | TRADETYPES | TRADETYPEID |
+| FK_1_5_TRADETYPEALIASES_CREATE | CREATEDBY | USERS | USERID |
+| FK_1_6_TRADETYPEALIASES_UPDATE | UPDATEDBY | USERS | USERID |
+| FK_D_1_3_TRADETYPEALIASES_TRAD | TRADETYPEALIASGROUPID | ALIASGROUPS | ALIASGROUPID |
+
+## TRADETYPES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_TRADETYPES_CREATEDBY_RE | CREATEDBY | USERS | USERID |
+| FK_1_5_TRADETYPES_UPDATEDBY_RE | UPDATEDBY | USERS | USERID |
+
+## TRIPARTYCOLLPOSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_TRIPARTYPOS_INS | INSTRUMENTID | INSTRUMENTS | INSTRUMENTID |
+| FK_1_3_TRIPARTYPOS_AGR | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_1_4_TRIPARTYPOS_CUS | CUSTODIANID | ENTITIES | ENTITYID |
+| FK_1_5_TRIPARTYPOS_IMP | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+
+## TRIPARTYECAGREEMENTRESULTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_TRIPTYECAGMTRESULTS_AGMTS | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+| FK_TRIPTYECAGMTRESULTS_ECREC | ECRECORDID | TRIPARTYECRECORDS | TRIPARTYECRECORDID |
+
+## TRIPARTYECRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_TECRECORDS_REQUESTEDBY | REQUESTEDBY | USERS | USERID |
+
+## T_AEC_RULES_ASSET_CLASSES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| T_AEC_RULES_ASSET_CLASSES_FK1 | RULE_ID | T_AEC_RULES | RULE_ID |
+| T_AEC_RULES_ASSET_CLASSES_FK2 | RULE_CRITERIA_ID | T_AEC_RULES_CRITERIA | RULE_CRITERIA_ID |
+
+## T_CMS_FAXOUTBOX
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| T_CMS_FAXOUTBOX_FK | COUNTERPARTYID | ENTITIES | ENTITYID |
+
+## T_IMC_ADDITIONAL_INFO
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKJSLOVEKN25OF9GKFBX1LILK7E | STATEMENTID | T_IMC_STATEMENT_OF_HOLDING | PK |
+
+## T_IMC_ALL_SMR
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKE6C7MLWS1KISIOGG2RWMS8JQ8 | PK | T_IMC_EXPSTM_SUMMARY | PK |
+
+## T_IMC_COLLATERAL_STATUS_ADVICE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK25BMVCASNVP2L8GR7USHN8ML5 | FK_COLLATERAL_INSTRUCTION | T_IMC_COLLATERAL_INSTRUCTION | PK |
+
+## T_IMC_COLLEXPOSURE_STM
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK5W9IJU1UD8AMRTC5CP03VGM43 | ALLSUMMY_ID | T_IMC_ALL_SMR | PK |
+| FKOAWNYXYFITL08P2BFT3OYEEQ9 | EXPTYPESUMM_ID | T_IMC_EXP_SMR | PK |
+
+## T_IMC_COLL_TRANSACTION
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_COLL_TRANSACTION_MSG_ID | MOVEMENT_MESSAGE_ID | T_IMC_COLLATERAL_INSTRUCTION | PK |
+
+## T_IMC_CTPY_SMR
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK4AD5NBRXDMYJD1WRH0MA34G25 | PK | T_IMC_EXPSTM_SUMMARY | PK |
+| FK5O66NC3LSFSRM3S1DQ9OOP5IH | EXPTYPEID | T_IMC_EXP_SMR | PK |
+
+## T_IMC_EXP_SMR
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKC27Y928UH0BCC8CYQJNAITVN7 | PK | T_IMC_EXPSTM_SUMMARY | PK |
+
+## T_IMC_FIA
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKCELNV0AJHU8LABXB6P033G9J9 | FINID | T_IMC_FIN | PK |
+
+## T_IMC_FIN
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK2TWFC34FO6KRAXD18RGKARPJP | SUBSAFEID | T_IMC_SUB_SAFE_ACCOUNT | PK |
+
+## T_IMC_LINK
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKQPEOWPVKBJX8GMONEI3HUN239 | LINKID | T_IMC_STATEMENT_OF_HOLDING | PK |
+
+## T_IMC_QUANTITY_BREAKDOWN
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKKMNAAOO5CLPUEQWUOBXTRJTAU | SUBBALANCEID | T_IMC_SUB_BALANCE | PK |
+| FKN9H8NJ689VL46AMQ74JG4NGX7 | FINID | T_IMC_FIN | PK |
+
+## T_IMC_SECURDTL
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK9QCS309JYT190N16N346ERIC7 | VALDTLSID | T_IMC_VALDTL | PK |
+
+## T_IMC_SUB_BALANCE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKWFCKVDGUW5JS9S3RPNJ8FQCY | FINID | T_IMC_FIN | PK |
+
+## T_IMC_SUB_SAFE_ACCOUNT
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKKQOTT479AR5KQ1QIMUKNWAGY5 | STATEMENTID | T_IMC_STATEMENT_OF_HOLDING | PK |
+
+## T_IMC_TRANDTL
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK3EQME1E76H0CN84QRTJUGMAIK | CTPTYSUMMID | T_IMC_CTPY_SMR | PK |
+
+## T_IMC_VALDTL
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKFDA03YTAGKVVN6COCA5FE08C6 | TRANSDTLID | T_IMC_TRANDTL | PK |
+
+## T_QCE_CT_BUCKETREQUESTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKI9TY2KOXC36V6QVU8N251EETV | IMPORT_RECORD_ID | IMPORTRECORDS | IMPORTRECORDID |
+
+## T_QCE_CT_BUCKETREQUESTSXAGREEMENTS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FKI9TY2KOXC36V6QVU8N251EETU | REQUEST_ID | T_QCE_CT_BUCKETREQUESTS | REQUEST_ID |
+| FKOUN4ONFG2CLPKPOS23P19O6IT | AGREEMENT_ID | AGREEMENTS | AGREEMENTID |
+
+## T_WTM_REQUEST
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_WTM_REQUEST_CANCELS_REQ | CANCELS_REQUEST_ID | T_WTM_REQUEST | REQUEST_ID |
+
+## T_WTM_RESPONSE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_WTM_RESPONSE_REQUESTID | REQUEST_ID | T_WTM_REQUEST | REQUEST_ID |
+
+## T_WTM_SENDSTATE
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_WTM_SENDSTATE_REQUESTID | LAST_REQUEST_ID | T_WTM_REQUEST | REQUEST_ID |
+
+## UNASSIGNEDOTCTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_UNASSIGNEDOTCTRADES_IMP | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+
+## UNASSIGNEDREPOTRADES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_UNASSIGNEDREPOTRADES_IM | IMPORTCONFIGURATIONID | IMPORTCONFIGURATIONS | IMPORTCONFIGURATIONID |
+
+## USERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_N_111_USERS_AGREEMENTSCOPE | AGREEMENTSCOPEID | AGREEMENTSCOPES | AGREEMENTSCOPEID |
+
+## USERSTATEMENTCOLUMNFILTERS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_COLUMNFILTER_STATEMENTCOL | USERSTATEMENTCOLUMNID | USERSTATEMENTCOLUMNS | USERSTATEMENTCOLUMNID |
+
+## USERSTATEMENTCOLUMNS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_STATEMENTCOLUMN_STATEMENT | USERSTATEMENTDEFINITIONID | USERSTATEMENTDEFINITIONS | USERSTATEMENTDEFINITIONID |
+
+## USERSTATEMENTDEFINITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_USERSTATEMENT_USER_ID | USERID | USERS | USERID |
+
+## USERSTATEMENTFILLERCOLUMNS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_STATEMENTFILLER_STATEMENT | USERSTATEMENTDEFINITIONID | USERSTATEMENTDEFINITIONS | USERSTATEMENTDEFINITIONID |
+
+## USERSTATEMENTFILTERCHOICES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_USPFC | USERSTATEMENTDEFINITIONID | USERSTATEMENTDEFINITIONS | USERSTATEMENTDEFINITIONID |
+
+## USERSXAGREEMENTRESPONSIBILITY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_USERSXAGREEMENTRESPONSI | USERID | USERS | USERID |
+| FK_D_1_1_USERSXAGREEMENTRESPON | AGREEMENTRESPONSIBILITYID | AGREEMENTRESPONSIBILITIES | AGREEMENTRESPONSIBILITYID |
+
+## USERS_USERNAME_EMPTY
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_N_1_11_USERS_AGREEMENTSCOPE | AGREEMENTSCOPEID | AGREEMENTSCOPES | AGREEMENTSCOPEID |
+
+## WAIVECATEGORIES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_4_WAIVECATEGORIES_CREATED | CREATEDBY | USERS | USERID |
+| FK_1_5_WAIVECATEGORIES_UPDATED | UPDATEDBY | USERS | USERID |
+
+## WORKFLOWS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_3_WORKFLOWS_INITIALSTATEI | INITIALSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+
+## WORKFLOWSTATES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_11_WORKFLOWSTATES_WGID | WORKFLOWGROUPINGID | WORKFLOWGROUPINGS | WORKFLOWGROUPINGID |
+| FK_1_2_WORKFLOWSTATES_WORKFLOW | WORKFLOWID | WORKFLOWS | WORKFLOWID |
+
+## WORKFLOWSTATETRANSITIONS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_WORKFLOWSTATETRANSITION | WORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+| FK_1_3_WORKFLOWSTATETRANSITION | NEXTWORKFLOWSTATEID | WORKFLOWSTATES | WORKFLOWSTATEID |
+
+## WORKFLOWUPLOADDATA
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_WORKFLOWUPLOADDATA_WORK | WORKFLOWUPLOADRECORDID | WORKFLOWUPLOADRECORDS | WORKFLOWUPLOADRECORDID |
+
+## WORKFLOWUPLOADMESSAGES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_6_WORKFLOWUPLOADMESSAGES_ | WORKFLOWUPLOADRECORDID | WORKFLOWUPLOADRECORDS | WORKFLOWUPLOADRECORDID |
+
+## WORKFLOWUPLOADRECORDS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_5_WORKFLOWUPLOADRECORDS_R | REQUESTEDBY | USERS | USERID |
+| FK_1_6_WORKFLOWUPLOADRECORDS_A | AGREEMENTGROUPID | AGREEMENTGROUPS | AGREEMENTGROUPID |
+
+## WRONGWAYRISKRULES
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_D_1_1_WRONGWAYRISKRULES | AGREEMENTID | AGREEMENTS | AGREEMENTID |
+
+## WRONGWAYRISKRULESXBUCKETS
+
+| FK Name | Column(s) | Referenced Table | Referenced Column(s) |
+|---------|-----------|-----------------|---------------------|
+| FK_1_2_WRONGWAYRISKRULESXBUCKE | COLLATERALBUCKETID | COLLATERALBUCKETS | COLLATERALBUCKETID |
+| FK_D_1_1_WRONGWAYRISKRULESXBUC | WRONGWAYRISKRULEID | WRONGWAYRISKRULES | WRONGWAYRISKRULEID |
+

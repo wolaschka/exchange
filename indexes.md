@@ -1,0 +1,2285 @@
+# Algo Database Schema — Indexes
+
+Generated: 2026-02-03 13:04 | Schema: TUQCEUCBCORE01 | Database: PDQCEQ10
+
+**574 indexes**
+
+## ACADIAALIAS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ACADIAALIAS | UNIQUE | ACADIAALIASID |
+
+## AGREEMENTALIASES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IDX$$_C8270006 | NONUNIQUE | AGREEMENTID, AGREEMENTALIASGROUPID |
+| IX_AGREEMENTID_AGREEMENTALIASE | NONUNIQUE | AGREEMENTID |
+| PK_AGREEMENTALIASES | UNIQUE | AGREEMENTALIASID |
+
+## AGREEMENTEXPOSUREDIFFERENCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IDX$$_C8270009 | NONUNIQUE | AGREEMENTID |
+| PK_AGREEMENTEXPOSUREDIFFERENCE | UNIQUE | AGREEMENTEXPOSUREDIFFERENCEID |
+
+## AGREEMENTGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTGROUPS_UUID | UNIQUE | UUID |
+| IX_ALIASGROUPID_AGREEMENTGROUP | NONUNIQUE | ALIASGROUPID |
+| PK_AGREEMENTGROUPS | UNIQUE | AGREEMENTGROUPID |
+
+## AGREEMENTGROUPSXUSERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTGROUPSXUSERS | UNIQUE | AGREEMENTGROUPID, USERID |
+
+## AGREEMENTMARGINS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTMARGINS | UNIQUE | AGREEMENTMARGINID |
+
+## AGREEMENTMARGINSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTMARGINSBULK | UNIQUE | AGREEMENTMARGINSBULKID |
+
+## AGREEMENTNOTES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTNOTES | UNIQUE | AGREEMENTNOTEID |
+
+## AGREEMENTRESPBUSINESSLINES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTRESPBUSINESSLINES | UNIQUE | AGREEMENTRESPBUSINESSLINEID |
+
+## AGREEMENTRESPONSIBILITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTRESPONSIBILITIES_UUID | UNIQUE | UUID |
+| PK_AGREEMENTRESPONSIBILITIES | UNIQUE | AGREEMENTRESPONSIBILITYID |
+
+## AGREEMENTRESPXCOUNTERPARTIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTRESPXCOUNTERPARTIE | UNIQUE | AGREEMENTRESPONSIBILITYID, COUNTERPARTYID |
+
+## AGREEMENTRESPXCPTYORGANIZATION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTRESPXCPTYORGANIZAT | UNIQUE | AGREEMENTRESPONSIBILITYID, ORGANIZATIONTYPEID |
+
+## AGREEMENTRESPXEXCLUDEDAGREEMEN
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_RESPID_AGREEMENTRESPXEXCLUD | NONUNIQUE | RESPID |
+| PK_AGREEMENTRESPXEXCLUDEDAGREE | UNIQUE | RESPID, AGREEMENTID |
+
+## AGREEMENTRESPXINCLUDEDAGREEMEN
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_RESPID_AGREEMENTRESPXINCLUD | NONUNIQUE | RESPID |
+| PK_AGREEMENTRESPXINCLUDEDAGREE | UNIQUE | RESPID, AGREEMENTID |
+
+## AGREEMENTRESPXPRINCIPALS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTRESPXPRINCIPALS | UNIQUE | AGREEMENTRESPONSIBILITYID, PRINCIPALID |
+
+## AGREEMENTRESPXPRINMANAGINGLOCA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTRESPXPRINMANAGINGL | UNIQUE | AGREEMENTRESPONSIBILITYID, CITYID |
+
+## AGREEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTS_UUID | UNIQUE | UUID |
+| IX_AGREEMENTS_BLAGRMNTID | NONUNIQUE | BUSINESSLINE, AGREEMENTID |
+| IX_COUNTERPARTYID_AGREEMENTID_AGREEMENTS | UNIQUE | COUNTERPARTYID, AGREEMENTID |
+| PK_AGREEMENTS | UNIQUE | AGREEMENTID |
+
+## AGREEMENTSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTSBULK_AGREEMENTID | NONUNIQUE | AGREEMENTID |
+| PK_AGREEMENTSBULK | UNIQUE | AGREEMENTSBULKID |
+
+## AGREEMENTSCOPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTSCOPES_UUID | UNIQUE | UUID |
+| PK_AGREEMENTSCOPES | UNIQUE | AGREEMENTSCOPEID |
+
+## AGREEMENTSCOPESXENTITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTSCOPESXENTITIES | UNIQUE | AGREEMENTSCOPEID, ENTITYID |
+
+## AGREEMENTSTATUSDETAILS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTSTATUSDETAILS_UUID | UNIQUE | UUID |
+| PK_AGREEMENTSTATUSDETAILS | UNIQUE | AGREEMENTSTATUSDETAILID |
+
+## AGREEMENTSXCONTACTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTSXCONTACTS | UNIQUE | AGREEMENTID, CONTACTID |
+
+## AGREEMENTSXEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTSXEXTDATAOVERRIDES | UNIQUE | AGREEMENTID, EXTENSIONDATAOVERRIDEID |
+
+## AGREEMENTSXHOLIDAYCALENDARS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTSXHOLIDAYCALENDARS | UNIQUE | AGREEMENTID, HOLIDAYCALENDARID |
+
+## AGREEMENTTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| AGREEMENTTYPES_UUID | UNIQUE | UUID |
+| PK_AGREEMENTTYPES | UNIQUE | AGREEMENTTYPEID |
+
+## AGREEMENTTYPESXTRADETYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AGREEMENTTYPESXTRADETYPES | UNIQUE | AGREEMENTTYPEID, TRADETYPEID |
+
+## ALIASESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ALIASESBULK | UNIQUE | ALIASESBULKID |
+
+## ALIASGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ALIASGROUPS_UUID | UNIQUE | UUID |
+| PK_ALIASGROUPS | UNIQUE | ALIASGROUPID |
+
+## ANALYSISCONFIGSXMARGINCONFIGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ANALYSISCONFIGSXMARGINCONFI | UNIQUE | MARGINANALYSISCONFIGURATIONID, MARGINCONFIGURATIONID |
+
+## APPROVALCHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_APPROVALCHANGES_RECORDID | NONUNIQUE | APPROVALRECORDID |
+| PK_APPROVALCHANGES | UNIQUE | APPROVALCHANGEID |
+
+## APPROVALRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_1_12_APPROVALRECORDS_PARENT | NONUNIQUE | PARENTAPPROVALRECORDID |
+| IX_APPROVALRECORDS_AMENDEDDATE | NONUNIQUE | AMENDEDDATE |
+| PK_APPROVALRECORDS | UNIQUE | APPROVALRECORDID |
+
+## APPROVALTRANSITIONHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_APPROVALTRANSITIONHISTORY | UNIQUE | APPROVALTRANSITIONHISTORYID |
+
+## ASSETPOOLBALANCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ASSETPOOLBALANCES | UNIQUE | ASSETPOOLBALANCEID |
+
+## ASSETPOOLBALANCESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ASSETPOOLBALANCESBULK | UNIQUE | ASSETPOOLBALANCESBULKID |
+
+## ASSETPOOLS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ASSETPOOLS | UNIQUE | ASSETPOOLID |
+
+## ASSIGNEDOTCTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_ASSIGNEDOTCTRADES | NONUNIQUE | AGREEMENTID |
+| IX_OTCTRADEID_ASSIGNEDOTCTRADE | NONUNIQUE | OTCTRADEID |
+| PK_ASSIGNEDOTCTRADES | UNIQUE | ASSIGNEDOTCTRADEID |
+
+## ASSIGNEDREPOTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_REPOTRADEID_ASSIGNEDREPOTRA | NONUNIQUE | REPOTRADEID |
+| PK_ASSIGNEDREPOTRADES | UNIQUE | ASSIGNEDREPOTRADEID |
+
+## AUDITCHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_AUDITCHANGES | UNIQUE | AUDITCHANGEID |
+
+## AUDITRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_1_8_AUDITRECORDS_PARENTAUDI | NONUNIQUE | PARENTAUDITRECORDID |
+| PK_AUDITRECORDS | UNIQUE | AUDITRECORDID |
+
+## BASICELIGIBILITYBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_BASICELIGIBILIT | NONUNIQUE | AGREEMENTID |
+| IX_AGRID_COLLBUID_BASICELIGIBI | NONUNIQUE | AGREEMENTID, COLLATERALBUCKETID |
+| IX_BAELIGIBILITYB_IMREC_AGRID | NONUNIQUE | IMPORTRECORDID, AGREEMENTID |
+| IX_COLLATERALBUCKETID_BASICELI | NONUNIQUE | COLLATERALBUCKETID |
+| PK_BASICELIGIBILITYBULK | UNIQUE | BASICELIGIBILITYBULKID |
+
+## BASICELIGIBILITYCHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_BASICELIGIBILITYCHANGES | UNIQUE | BASICELIGIBILITYCHANGEID |
+
+## BATCH_JOB_EXECUTION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044380 | UNIQUE | JOB_EXECUTION_ID |
+
+## BATCH_JOB_EXECUTION_CONTEXT
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044325 | UNIQUE | JOB_EXECUTION_ID |
+
+## BATCH_JOB_INSTANCE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| JOB_INST_UN | UNIQUE | JOB_NAME, JOB_KEY |
+| SYS_C0044288 | UNIQUE | JOB_INSTANCE_ID |
+
+## BATCH_STEP_EXECUTION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044798 | UNIQUE | STEP_EXECUTION_ID |
+
+## BATCH_STEP_EXECUTION_CONTEXT
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044707 | UNIQUE | STEP_EXECUTION_ID |
+
+## BONDPURPOSES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| BONDPURPOSES_UUID | UNIQUE | UUID |
+| PK_BONDPURPOSES | UNIQUE | BONDPURPOSEID |
+
+## BOOKDIFFERENCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_BOOKDIFFERENCES | UNIQUE | BOOKDIFFERENCEID |
+
+## BOOKEDSETTLEMENTINSTRUCTIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_BOOKEDSETTLEMENTINSTRUCTION | UNIQUE | BOOKEDSETTLEMENTINSTRUCTIONID |
+
+## BRANCHALIASES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_BRANCHALIASES | UNIQUE | BRANCHALIASID |
+
+## BRANCHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_BRANCHES | UNIQUE | BRANCHID |
+
+## CACHEDAGREEMENTXAGREEMENTRESP
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CACHEDAGREEMENTXRESP | UNIQUE | AGREEMENTRESPONSIBILITYID, AGREEMENTID |
+
+## CBREACHESXECPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CBREACHESXECPOSITIONS | UNIQUE | CONCENTRATIONBREACHID, ECPOSITIONID |
+
+## CITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| CITIES_UUID | UNIQUE | UUID |
+| PK_CITIES | UNIQUE | CITYID |
+
+## CMOABSASSETCLASSES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| CMOABSASSETCLASSES_UUID | UNIQUE | UUID |
+| PK_CMOABSASSETCLASSES | UNIQUE | CMOABSASSETCLASSID |
+
+## COLLATERALBUCKETRATINGBANDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_COLLATERALBUCKETID_COLLATER | NONUNIQUE | COLLATERALBUCKETID |
+| PK_COLLATERALBUCKETRATINGBANDS | UNIQUE | COLLATERALBUCKETRATINGBANDID |
+
+## COLLATERALBUCKETS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COLLATERALBUCKETS_UUID | UNIQUE | UUID |
+| PK_COLLATERALBUCKETS | UNIQUE | COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXCURRENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COLLATERALBUCKETXCURR_2517_IX | NONUNIQUE | COLLATERALBUCKETID |
+| PK_COLLATERALBUCKETXCURRENCIES | UNIQUE | CURRENCYID, COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXINSTRUMENTTYP
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLATERALBUCKETXINSTRUMENT | UNIQUE | INSTRUMENTTYPEID, COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXISSUERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COLLATERALBUCKETXISS_2517_IX | NONUNIQUE | COLLATERALBUCKETID |
+| PK_COLLATERALBUCKETXISSUERS | UNIQUE | ENTITYID, COLLATERALBUCKETID |
+
+## COLLATERALBUCKETXRAINSTRUMENT
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLATERALBUCKETXRAINSTRUME | UNIQUE | COLLATERALBUCKETID, RATINGAGENCYID |
+
+## COLLATERALBUCKETXRAISSUER
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLATERALBUCKETXRAISSUER | UNIQUE | COLLATERALBUCKETID, RATINGAGENCYID |
+
+## COLLATERALGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COLLATERALGROUPS_UUID | UNIQUE | UUID |
+| PK_COLLATERALGROUPS | UNIQUE | COLLATERALGROUPID |
+
+## COLLATERALGROUPXCOLLATERALBUCK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLATERALGROUPXCOLLATERALB | UNIQUE | COLLATERALGROUPID, COLLATERALBUCKETID |
+
+## COLLATERALPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_COLLATERALPOSIT | NONUNIQUE | AGREEMENTID |
+| IX_C_I1_COLLATERALPOSITIONS | NONUNIQUE | AGREEMENTID, INSTRUMENTID, COLLATERALPOSITIONTYPE, COLLATERALMARGINTYPE |
+| PK_COLLATERALPOSITIONS | UNIQUE | COLLATERALPOSITIONID |
+
+## COLLATERALPOSITIONSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLATERALPOSITIONSBULK | UNIQUE | COLLATERALPOSITIONSBULKID |
+
+## COLLATERALTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COLLATERALTYPES_UUID | UNIQUE | UUID |
+| PK_COLLATERALTYPES | UNIQUE | COLLATERALTYPEID |
+
+## COLLELIGEXTRACTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| CONFIGURATIONNAME_UNIQ | UNIQUE | COLLELIGEXTRACTCONFIGNAME |
+| PK_COLLELIGEXTRACTCONFIGURATIO | UNIQUE | COLLELIGEXTRACTCONFIGURATIONID |
+
+## COLLELIGEXTRACTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLELIGEXTRACTMESSAGES | UNIQUE | COLLELIGEXTRACTMESSAGEID |
+
+## COLLELIGEXTRACTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLELIGEXTRACTRECORDS | UNIQUE | COLLELIGEXTRACTRECORDID |
+
+## COLLEXTRACTXCITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COLLEXTRACTXCITIES | UNIQUE | COLLCONFIGID, CITYID |
+
+## CONCENTRATIONBREACHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CONCENTRATIONBREACHES | UNIQUE | CONCENTRATIONBREACHID |
+
+## CONCENTRATIONRULECHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CONCENTRATIONRULECHANGES | UNIQUE | CONCENTRATIONRULECHANGEID |
+
+## CONCENTRATIONRULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_CONCENTRATIONRU | NONUNIQUE | AGREEMENTID |
+| PK_CONCENTRATIONRULES | UNIQUE | CONCENTRATIONRULEID |
+
+## CONTACTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| CONTACTS_UUID | UNIQUE | UUID |
+| PK_CONTACTS | UNIQUE | CONTACTID |
+
+## COUNTERPARTYMARGINDETAILS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_COUNTERPARTYMARGINDETAILS | UNIQUE | COUNTERPARTYMARGINDETAILID |
+| UX_MARGINCALCULATIONRESULTID_C | UNIQUE | MARGINCALCULATIONRESULTID |
+
+## COUNTRIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COUNTRIES_UUID | UNIQUE | UUID |
+| PK_COUNTRIES | UNIQUE | COUNTRYID |
+
+## COUPONTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| COUPONTYPES_UUID | UNIQUE | UUID |
+| PK_COUPONTYPES | UNIQUE | COUPONTYPEID |
+
+## CREDITRATINGORDINALS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CREDITRATINGORDINALS | UNIQUE | CREDITRATINGORDINALID |
+
+## CREDITRATINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CREDITRATINGS | UNIQUE | CREDITRATINGID |
+
+## CURRENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CURRENCIES | UNIQUE | CURRENCYID |
+
+## CUSTOMSTATEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| CUSTOMSTATEMENTS_UUID | UNIQUE | UUID |
+| PK_CUSTOMSTATEMENTS | UNIQUE | CUSTOMSTATEMENTID |
+
+## CUSTOMSTATEMENTWRITERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_CUSTOMSTATEMENTWRITERS | UNIQUE | CUSTOMSTATEMENTWRITERID |
+
+## DATETIMINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_DATETIMINGS | UNIQUE | DATETIMINGID |
+
+## DEBTINSTRUMENTPRICES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| DEBTINSTRUMENTPRICES_2517_IX | NONUNIQUE | PRICEDATEADJUSTMENT, INSTRUMENTID, MIDCLEANPRICE |
+| DEBTINSTRUMENTPRICES_2517_IX2 | NONUNIQUE | PRICEDATEADJUSTMENT, INSTRUMENTID, MIDDIRTYPRICE |
+| DEBTINSTRUMENTPRICES_2517_IX3 | NONUNIQUE | PRICEDATEADJUSTMENT, INSTRUMENTID, COUPONINTERESTACCRUEDTODATE |
+| IX_INSTRUMENTID_INSTRUMENTPRIC | NONUNIQUE | INSTRUMENTID |
+| IX_PRICEDATEADJUSTMENT_INSTRUM | NONUNIQUE | PRICEDATEADJUSTMENT |
+| IX_PRICESOURCEID_INSTRUMPRICES | NONUNIQUE | PRICESOURCEID |
+| PK_DEBTINSTRUMENTPRICES | UNIQUE | DEBTINSTRUMENTPRICEID |
+| UX_INSTRUMENTID_PRICESOURCEID_ | UNIQUE | INSTRUMENTID, PRICESOURCEID, PRICEDATEADJUSTMENT |
+
+## DEBTINSTRUMENTPRICESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_DEBTINSTRUMENTPRICESBULK | UNIQUE | DEBTINSTRUMENTPRICESBULKID |
+
+## DISPUTECATEGORIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| DISPUTECATEGORIES_UUID | UNIQUE | UUID |
+| PK_DISPUTECATEGORIES | UNIQUE | DISPUTECATEGORYID |
+
+## DISPUTECLASSIFICATIONRESULTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_DISPUTECLASSRESULTS | UNIQUE | DISPUTECLASSIFICATIONRESULTID |
+
+## DISTRIBUTIONHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_DISTRIBUTIONHISTORY | UNIQUE | DISTRIBUTIONHISTORYID |
+
+## DISTRIBUTIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_DISTRIBUTIONS_EXTERNALID | UNIQUE | EXTERNALID |
+| PK_DISTRIBUTIONS | UNIQUE | DISTRIBUTIONID |
+
+## ECAGREEMENTRESULTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ECAGREEMENTRESULTS | UNIQUE | ECAGREEMENTRESULTID |
+
+## ECPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ECPOSITIONS | UNIQUE | ECPOSITIONID |
+
+## ECRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ECRECORDS | UNIQUE | ECRECORDID |
+
+## ELIGIBILITYBREACHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ELIGIBILITYBREACHES | UNIQUE | ELIGIBILITYBREACHID |
+
+## ELIGIBILITYBREACHESXECPOSITION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ELIGIBILITYBREACHESXECPOSIT | UNIQUE | ELIGIBILITYBREACHID, ECPOSITIONID |
+
+## ELIGIBILITYRULEBUCKETCHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ELIGIBILITYRULEBUCKETCHANGE | UNIQUE | ELIGIBILITYRULEBUCKETCHANGEID |
+
+## ELIGIBILITYRULECHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ELIGIBILITYRULECHANGES | UNIQUE | ELIGIBILITYRULECHANGEID |
+
+## ELIGIBILITYRULECRITERIA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_ELIGIBILITYRULEID_ELIGIBILI | NONUNIQUE | ELIGIBILITYRULEID |
+| PK_ELIGIBILITYRULECRITERIA | UNIQUE | ELIGIBILITYRULECRITERIAID |
+
+## ELIGIBILITYRULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_ELIGIBILITYRULE | NONUNIQUE | AGREEMENTID |
+| PK_ELIGIBILITYRULES | UNIQUE | ELIGIBILITYRULEID |
+
+## ELIGIBILITYRULESXCOLLATBUCKETS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ELIGIBILITYRULESXCOLLATBUCK | UNIQUE | ELIGIBILITYRULEID, COLLATERALBUCKETID |
+
+## ELIGIBLECOLLATERALS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ELIGIBLECOLLATERALS_2517_IX | NONUNIQUE | AGREEMENTID, INSTRUMENTID |
+| ELIGIBLECOLLATERALS_2517_IX2 | NONUNIQUE | AGREEMENTID, COLLATERALBUCKETID |
+| ELIGIBLECOLLATERALS_2517_IX3 | NONUNIQUE | COLLATERALBUCKETID, AGREEMENTID |
+| IX_AGREEMENTID_ELIGIBLECOLLATE | NONUNIQUE | AGREEMENTID |
+| PK_ELIGIBLECOLLATERALS | UNIQUE | ELIGIBLECOLLATERALID |
+
+## ENTITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ENTITIES_UUID | UNIQUE | UUID |
+| IX_1_14_ENTITIES_PARENTENTITYI | NONUNIQUE | PARENTENTITYID |
+| IX_C_I1_ENTITIES | NONUNIQUE | ENTITYID, PARENTENTITYID, DOMICILEID, ORGANIZATIONTYPEID, INDUSTRYSECTORID |
+| IX_ENTITYTYPE_ENTITIES | NONUNIQUE | ENTITYTYPE |
+| PK_ENTITIES | UNIQUE | ENTITYID |
+
+## ENTITIESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ENTITIESBULK | UNIQUE | ENTITIESBULKID |
+
+## ENTITIESXCREDITRATINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ENTITIESXCREDITRATINGS | UNIQUE | ENTITYID, CREDITRATINGID |
+
+## ENTITIESXEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ENTITIESXEXTDATAOVERRIDES | UNIQUE | ENTITYID, EXTENSIONDATAOVERRIDEID |
+
+## ENTITYALIASES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_ENTITYALIASGROUPID_ENTITYAL | NONUNIQUE | ENTITYALIASGROUPID |
+| PK_ENTITYALIASES | UNIQUE | ENTITYALIASID |
+
+## ENTITYGROUPALIASES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_ENTITYGROUPALGID_ENTITYGA | NONUNIQUE | ENTITYGROUPALIASGROUPID |
+| PK_ENTITYGROUPALIASES | UNIQUE | ENTITYGROUPALIASID |
+
+## ENTITYGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ENTITYGROUPS_UUID | UNIQUE | UUID |
+| PK_ENTITYGROUPS | UNIQUE | ENTITYGROUPID |
+
+## ENTITYRATINGSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_ENTITYRATINGSBULK | UNIQUE | ENTITYRATINGSBULKID |
+
+## ENUMVALUES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ENUMVALUES_2517_IX | NONUNIQUE | ENUMTYPE, ENUMVALUE |
+| IDX$$_C8270001 | NONUNIQUE | ENUMVALUE, ENUMTYPE |
+
+## EQUITYINSTRUMENTPRICES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EQUITYINSTRUMENTPRICES | UNIQUE | EQUITYINSTRUMENTPRICEID |
+
+## EQUITYINSTRUMENTPRICESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EQUITYINSTRUMENTPRICESBULK | UNIQUE | EQUITYINSTRUMENTPRICESBULKID |
+
+## EXACTDATETIMINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXACTDATETIMINGS | UNIQUE | EXACTDATETIMINGID |
+
+## EXCHANGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| EXCHANGES_UUID | UNIQUE | UUID |
+| PK_EXCHANGES | UNIQUE | EXCHANGEID |
+
+## EXPOSURESTATEMENTHISTORIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXPOSURESTATEMENTHISTORIES | UNIQUE | EXPOSURESTATEMENTHISTORYID |
+
+## EXPOSURETRADEOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_ADDITIONALMARGINEXPIRYTIME_ | NONUNIQUE | ADDITIONALMARGINEXPIRYTIME |
+| IX_EXPOSUREEXPIRYTIME_EXPOSURE | NONUNIQUE | EXPOSUREEXPIRYTIME |
+| IX_LOCKUPMARGINEXPIRYTIME_EXPO | NONUNIQUE | LOCKUPMARGINEXPIRYTIME |
+| IX_TRADEREFERENCE_TRADEIMPORTC | NONUNIQUE | TRADEREFERENCE, TRADEIMPORTCONFIGURATIONID |
+| PK_EXPOSURETRADEOVERRIDES | UNIQUE | EXPOSURETRADEOVERRIDEID |
+
+## EXPOSURETRADEOVERRIDESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_BULK_TRADEREFERENCE_TRADEIM | NONUNIQUE | TRADEREFERENCE, TRADEIMPORTCONFIGURATIONID |
+| IX_EXPOSURETRADEOVERRIDEID_ISV | NONUNIQUE | EXPOSURETRADEOVERRIDEID, ISVALIDFORMOVE, IMPORTRECORDID |
+| IX_TRADEREFERENCE_EXPOSURETRAD | NONUNIQUE | TRADEREFERENCE |
+| PK_EXPOSURETRADEOVERRIDESBULK | UNIQUE | EXPOSURETRADEOVERRIDESBULKID |
+
+## EXTENSIONDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IDX$$_C8270007 | NONUNIQUE | EXTENSIONFIELDDEFINITIONID, EXTENSIONDATAOVERRIDEID, DECIMALVALUE |
+| PK_EXTENSIONDATAOVERRIDES | UNIQUE | EXTENSIONDATAOVERRIDEID |
+
+## EXTENSIONFIELDDEFINITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| EXTENSIONFIELDDEFINITIONS_UUID | UNIQUE | UUID |
+| PK_EXTENSIONFIELDDEFINITIONS | UNIQUE | EXTENSIONFIELDDEFINITIONID |
+
+## EXTENSIONLISTITEMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXTENSIONLISTITEMS | UNIQUE | EXTENSIONLISTITEMID |
+
+## EXTRACTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXTRACTCONFIGURATIONS | UNIQUE | EXTRACTCONFIGURATIONID |
+
+## EXTRACTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXTRACTMESSAGES | UNIQUE | EXTRACTMESSAGEID |
+
+## EXTRACTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_EXTRACTRECORDS | UNIQUE | EXTRACTRECORDID |
+
+## FILEDELIMITERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_FILEDELIMITERS | UNIQUE | FILEDELIMITERID |
+
+## FILEFORMATS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_FILEFORMATS | UNIQUE | FILEFORMATID |
+
+## FUNDSOURCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| FUNDSOURCES_UUID | UNIQUE | UUID |
+| PK_FUNDSOURCES | UNIQUE | FUNDSOURCEID |
+
+## FXRATES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| FXRATES_2517_IX | NONUNIQUE | CURRENCYID, FXRATESOURCEID |
+| IDX$$_C8270003 | NONUNIQUE | RATEDATE, CURRENCYID |
+| IX_C_I1_FXRATES | NONUNIQUE | CURRENCYID, RATEDATE, FXRATESOURCEID |
+| PK_FXRATES | UNIQUE | FXRATEID |
+
+## FXRATESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_FXRATESBULK | UNIQUE | FXRATESBULKID |
+
+## FXRATESOURCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| FXRATESOURCES_UUID | UNIQUE | UUID |
+| PK_FXRATESOURCES | UNIQUE | FXRATESOURCEID |
+
+## GLOBALLIMITMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_GLOBALLIMITMESSAGES | UNIQUE | GLOBALLIMITMESSAGEID |
+
+## GLOBALLIMITPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_GLOBALLIMITPOSITIONS | UNIQUE | GLOBALLIMITPOSITIONID |
+
+## GLOBALLIMITRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_GLOBALLIMITRECORDS | UNIQUE | GLOBALLIMITRECORDID |
+
+## HOLIDAYCALENDARS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| HOLIDAYCALENDARS_UUID | UNIQUE | UUID |
+| PK_HOLIDAYCALENDARS | UNIQUE | HOLIDAYCALENDARID |
+
+## HOLIDAYS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_HOLIDAYS | UNIQUE | HOLIDAYID |
+
+## HOLIDAYSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_HOLIDAYSBULK | UNIQUE | HOLIDAYSBULKID |
+
+## IMPORTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_IMPORTCONFIGURATIONS | UNIQUE | IMPORTCONFIGURATIONID |
+
+## IMPORTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_IMPORTMESSAGES | UNIQUE | IMPORTMESSAGEID |
+
+## IMPORTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_IMPORTRECORDS | UNIQUE | IMPORTRECORDID |
+
+## INDUSTRYGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INDUSTRYGROUPS_UUID | UNIQUE | UUID |
+| PK_INDUSTRYGROUPS | UNIQUE | INDUSTRYGROUPID |
+
+## INDUSTRYSECTORS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INDUSTRYSECTORS_UUID | UNIQUE | UUID |
+| PK_INDUSTRYSECTORS | UNIQUE | INDUSTRYSECTORID |
+
+## INSTRUCTIONXDEBTLOCINSTRUMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUCTIONXDEBTLOCINSTRUME | UNIQUE | SETTLEMENTINSTRUCTIONID, INSTRUMENTID |
+
+## INSTRUCTIONXINSTRUMENTTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUCTIONXINSTRUMENTTYPES | UNIQUE | SETTLEMENTINSTRUCTIONID, INSTRUMENTTYPEID |
+
+## INSTRUMENTRATINGSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUMENTRATINGSBULK | UNIQUE | INSTRUMENTRATINGSBULKID |
+
+## INSTRUMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INSTRUMENTS_UUID | UNIQUE | UUID |
+| PK_INSTRUMENTS | UNIQUE | INSTRUMENTID |
+
+## INSTRUMENTSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUMENTSBULK | UNIQUE | INSTRUMENTSBULKID |
+
+## INSTRUMENTSXCMOABSASSETCLASSES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUMENTSXCMOABSASSETCLAS | UNIQUE | INSTRUMENTID, CMOABSASSETCLASSID |
+
+## INSTRUMENTSXCREDITRATINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUMENTSXCREDITRATINGS | UNIQUE | INSTRUMENTID, CREDITRATINGID |
+
+## INSTRUMENTSXEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTRUMENTSXEXTDATAOVERRIDE | UNIQUE | INSTRUMENTID, EXTENSIONDATAOVERRIDEID |
+
+## INSTRUMENTTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INSTRUMENTTYPES_UUID | UNIQUE | UUID |
+| PK_INSTRUMENTTYPES | UNIQUE | INSTRUMENTTYPEID |
+
+## INSTRUMENTUNDERLYINGSECTORS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INSTRUMENTUNDERLYINGSECTORS_UU | UNIQUE | UUID |
+| PK_INSTRUMENTUNDERLYINGSECTORS | UNIQUE | INSTRUMENTUNDERLYINGSECTORID |
+
+## INSTTYPESXEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INSTTYPESXEXTDATAOVERRIDES | UNIQUE | INSTRUMENTTYPEID, EXTENSIONDATAOVERRIDEID |
+
+## INTERESTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTCONFIGURATIONS | UNIQUE | INTERESTCONFIGURATIONID |
+
+## INTERESTCONFIGXCITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTCONFIGXCITIES | UNIQUE | INTERESTCONFIGURATIONID, CITYID |
+
+## INTERESTCONFIGXGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTCONFIGXGROUPS | UNIQUE | INTERESTCONFIGURATIONID, AGREEMENTGROUPID |
+
+## INTERESTCONFIGXINSTRUMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTCONFIGXINSTRUMENTS | UNIQUE | INTERESTCONFIGURATIONID, INSTRUMENTID |
+
+## INTERESTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTMESSAGES | UNIQUE | INTERESTMESSAGEID |
+
+## INTERESTPAYMENTPERIODS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTPAYMENTPERIODS | UNIQUE | INTERESTPAYMENTPERIODID |
+
+## INTERESTPAYMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INTERESTPAYMENTS_2517_IX | NONUNIQUE | AGREEMENTID, INSTRUMENTID, PAYMENTSTATE |
+| IX_INTERESTPAYMENTS_HELDPERIOD | NONUNIQUE | HELDPERIODID |
+| IX_INTERESTPAYMENTS_MOVEMENTGR | NONUNIQUE | MOVEMENTGROUPID |
+| IX_INTERESTPAYMENTS_POSTEDPERI | NONUNIQUE | POSTEDPERIODID |
+| IX_PAYSTATE_INTERESTPAYMENTS | NONUNIQUE | PAYMENTSTATE |
+| PK_INTERESTPAYMENTS | UNIQUE | INTERESTPAYMENTID |
+
+## INTERESTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTRECORDS | UNIQUE | INTERESTRECORDID |
+
+## INTERESTTERMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| INTERESTTERMS_2517_IX | NONUNIQUE | AGREEMENTID, CURRENCYID |
+| PK_INTERESTTERMS | UNIQUE | INTERESTTERMID |
+
+## INTERESTTERMSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_INTERESTTERMSBULK | UNIQUE | INTERESTTERMSBULKID |
+
+## ISSUERTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ISSUERTYPES_UUID | UNIQUE | UUID |
+| PK_ISSUERTYPES | UNIQUE | ISSUERTYPEID |
+
+## MAINTENANCECONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MAINTENANCECONFIGURATIONS | UNIQUE | MAINTENANCECONFIGURATIONID |
+
+## MAINTENANCERECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MAINTENANCERECORDS | UNIQUE | MAINTENANCERECORDID |
+
+## MANUALCREATEMOVEMENTSAGA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MANUALCREATEMOVEMENTSAGA_PK | UNIQUE | ID |
+| SAGAIDX_4B6EEF8B2F56F0F8EFFC38 | UNIQUE | CORR_ORIGINALCOMMANDID |
+
+## MARGINANALYSISCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINANALYSISCONFIGURATION | UNIQUE | MARGINANALYSISCONFIGURATIONID |
+
+## MARGINANALYSISMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINANALYSISMESSAGES | UNIQUE | MARGINANALYSISMESSAGEID |
+
+## MARGINANALYSISPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_MAP_MCRID | NONUNIQUE | MARGINCALCULATIONRESULTID |
+| PK_MARGINANALYSISPOSITIONS | UNIQUE | MARGINANALYSISPOSITIONID |
+
+## MARGINANALYSISRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINANALYSISRECORDS | UNIQUE | MARGINANALYSISRECORDID |
+
+## MARGINCALCULATIONRESULTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_AGREEMENTID_ANALYZED_MARGIN | NONUNIQUE | AGREEMENTID, ANALYZED |
+| IX_AGREEMENTID_MARGINCALCULATI | NONUNIQUE | AGREEMENTID |
+| IX_ANALYZED_MARGINCALCULATI | NONUNIQUE | ANALYZED |
+| IX_C_I1_MARGINCALCULATIONRESUL | NONUNIQUE | MARGINCALCULATIONRESULTID, VALUATIONDATE, PRINCIPALMANAGINGLOCATIONNAME, TIMEZONE |
+| PK_MARGINCALCULATIONRESULTS | UNIQUE | MARGINCALCULATIONRESULTID |
+
+## MARGINCALLS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| DI_UUID | UNIQUE | UUID |
+| IDX$$_94970001 | NONUNIQUE | POSTEDMOVEMENTGROUPID |
+| IDX$$_949A0001 | NONUNIQUE | HELDMOVEMENTGROUPID |
+| IDX$$_C8260001 | NONUNIQUE | DISPUTESTATUS |
+| IDX$$_C8260002 | NONUNIQUE | ISCANCELLED, AGREEMENTID |
+| IX_1_154_MARGINCALLS_ASSOCIATE | NONUNIQUE | ASSOCIATEDPARTIALAGREEID |
+| IX_ACTIVEEXPIRYTIMESTAMP_MARGI | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP |
+| IX_AGREEMENTGROUPID_MARGINCALL | NONUNIQUE | AGREEMENTGROUPID |
+| IX_AGREEMENTID_CALLTYPE_CALCUL | NONUNIQUE | AGREEMENTID, CALLTYPE, CALCULATIONDATE |
+| IX_AGREEMENTID_CALLTYPE_MARGIN | NONUNIQUE | AGREEMENTID, CALLTYPE |
+| IX_CALCULATIONDATE_MARGINCALLS | NONUNIQUE | CALCULATIONDATE |
+| IX_C_I11_MARGINCALLS | NONUNIQUE | ISCANCELLED, CALLTYPE, WORKFLOWSTATEID, ISCOMPLETE, ISINTRADAY, ACTIVEEXPIRYTIMESTAMP, AGREEMENTID |
+| IX_C_I13_MARGINCALLS | NONUNIQUE | DISPUTESTATUS, ISCANCELLED, ISCOMPLETE, ISINTRADAY, CALLTYPE, AGREEDTOTAL |
+| IX_C_I1_MARGINCALLS | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP, AGREEMENTID, WORKFLOWSTATEID |
+| IX_C_I2_MARGINCALLS | NONUNIQUE | AGREEMENTID, WORKFLOWSTATEID, ACTIVEEXPIRYTIMESTAMP, ISCOMPLETE |
+| IX_C_I3_MARGINCALLS | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP, AGREEMENTID, WORKFLOWSTATEID, CALLTYPE, ISCOMPLETE |
+| IX_C_I4_MARGINCALLS | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP, AGREEMENTID |
+| IX_C_I5_MARGINCALLS | NONUNIQUE | AGREEMENTID, ACTIVEEXPIRYTIMESTAMP, WORKFLOWSTATEID, CALLTYPE, ISCOMPLETE |
+| IX_C_I7_MARGINCALLS | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP, AGREEMENTID, CALLTYPE, ISCOMPLETE, ISCANCELLED, WORKFLOWSTATEID |
+| IX_C_I8_MARGINCALLS | NONUNIQUE | AGREEMENTID, PRINCIPALID |
+| IX_C_I9_MARGINCALLS | NONUNIQUE | ACTIVEEXPIRYTIMESTAMP, AGREEMENTID, CALLTYPE, ISCOMPLETE, ISCANCELLED, ISINTRADAY, WORKFLOWSTATEID |
+| IX_C_PRINCIPALID_MARGINCALLS | NONUNIQUE | PRINCIPALID |
+| IX_ISCANCELLED_MARGINCALLS | NONUNIQUE | ISCANCELLED |
+| IX_MARGINCALLS_CNLCOMPLACT | NONUNIQUE | ISCANCELLED, ISCOMPLETE, ACTIVEEXPIRYTIMESTAMP |
+| IX_MARGINCALLS_MCALCRESID | NONUNIQUE | MARGINCALCULATIONRESULTID |
+| IX_MARGINCALLS_NEWCALC_RESID | NONUNIQUE | NEWCALCULATIONRESULTID |
+| MC_EXTERNALID | UNIQUE | EXTERNALID |
+| PK_MARGINCALLS | UNIQUE | MARGINCALLID |
+
+## MARGINCALLSAGA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MARGINCALLSAGA_PK | UNIQUE | ID |
+| SAGAIDX_1018444FE243A908DBAD5B | UNIQUE | CORR_ORIGINALCOMMANDID |
+
+## MARGINCALLSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCALLSBULK | UNIQUE | MARGINCALLSBULKID |
+
+## MARGINCALLTRANSITIONHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCALLTRANSITIONHISTORY | UNIQUE | MARGINCALLTRANSITIONHISTORYID |
+
+## MARGINCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCONFIGURATIONS | UNIQUE | MARGINCONFIGURATIONID |
+
+## MARGINCONFIGURATIONXAGREEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCONFIGURATIONXAGREEME | UNIQUE | MARGINCONFIGURATIONID, AGREEMENTID |
+
+## MARGINCONFIGURATIONXCITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCONFIGURATIONXCITIES | UNIQUE | MARGINCONFIGURATIONID, MANAGINGLOCATIONID |
+
+## MARGINCONFIGURATIONXPRINCIPALS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCONFIGURATIONXPRINCIP | UNIQUE | MARGINCONFIGURATIONID, PRINCIPALID |
+
+## MARGINCONFIGXGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINCONFIGXGROUPS | UNIQUE | MARGINCONFIGURATIONID, AGREEMENTGROUPID |
+
+## MARGINCREATEMOVEMENTSAGA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MARGINCREATEMOVEMENTSAGA_PK | UNIQUE | ID |
+| SAGAIDX_47C9E0E678853BA5FD47AF | UNIQUE | CORR_ORIGINALCOMMANDID |
+
+## MARGINMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINMESSAGES | UNIQUE | MARGINMESSAGEID |
+
+## MARGINRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINRECORDS | UNIQUE | MARGINRECORDID |
+
+## MARGINTERMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MARGINTERMS_2517_IX | NONUNIQUE | AGREEMENTID |
+| PK_MARGINTERMS | UNIQUE | MARGINTERMID |
+
+## MARGINTERMSBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINTERMSBULK | UNIQUE | MARGINTERMSBULKID |
+
+## MARGINTERMSXRATINGAGENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARGINTERMSXRATINGAGENCIES | UNIQUE | MARGINTERMID, RATINGAGENCYID |
+
+## MARGINTRANSITIONSAGA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MARGINTRANSITIONSAGA_PK | UNIQUE | ID |
+| SAGAIDX_937B91534EB212CEACFD70 | UNIQUE | CORR_ORIGINALCOMMANDID |
+
+## MARKETINDEXES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MARKETINDEXES_UUID | UNIQUE | UUID |
+| PK_MARKETINDEXES | UNIQUE | MARKETINDEXID |
+
+## MARKETINDEXRATES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARKETINDEXRATES | UNIQUE | MARKETINDEXRATEID |
+
+## MARKETINDEXRATESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MARKETINDEXRATESBULK | UNIQUE | MARKETINDEXRATESBULKID |
+
+## MISMATCHREASONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MISMATCHREASONS | UNIQUE | MISMATCHREASONID |
+
+## MOVEMENTCONCENTRATIONBREACHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTCONCENTRATIONBREACH | UNIQUE | MOVEMENTCONCENTRATIONBREACHID |
+
+## MOVEMENTELIGIBILITYBREACHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTELIGIBILITYBREACHES | UNIQUE | MOVEMENTELIGIBILITYBREACHID |
+
+## MOVEMENTGROUPS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_C_I1_MOVEMENTGROUPS | NONUNIQUE | MOVEMENTGROUPID, MOVEMENTSTATE, AGREEMENTID, AFFECTEDPOSITION, COLLATERALMARGINTYPE |
+| PK_MOVEMENTGROUPS | UNIQUE | MOVEMENTGROUPID |
+
+## MOVEMENTHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTHISTORY | UNIQUE | MOVEMENTHISTORYID |
+
+## MOVEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_1_38_MOVEMENTS_PREVIOUSMOVE | NONUNIQUE | PREVIOUSMOVEMENTID |
+| IX_1_40_MOVEMENTS_ROOTID_REFER | NONUNIQUE | ROOTID |
+| IX_C_I1_MOVEMENTS | NONUNIQUE | MOVEMENTID, MOVEMENTGROUPID |
+| IX_C_I2_MOVEMENTS | NONUNIQUE | AGREEMENTID, INSTRUMENTID |
+| IX_MOVEMENTS_AGREEMENTID | NONUNIQUE | AGREEMENTID |
+| IX_MOVEMENTS_EXTERNALID | UNIQUE | EXTERNALID |
+| IX_MOVEMENTS_MOVEMENTSTATUS | NONUNIQUE | MOVEMENTSTATUS |
+| IX_MOVEMENTS_ORIGINATION | NONUNIQUE | ORIGINATION |
+| IX_MOVEMENTS_SETTLEMENTDATE | NONUNIQUE | SETTLEMENTDATE |
+| PK_MOVEMENTS | UNIQUE | MOVEMENTID |
+
+## MOVEMENTSXPANDLMARGINRESULTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTSXPANDLMARGINRESULT | UNIQUE | MARGINCALCULATIONRESULTID, MOVEMENTID |
+
+## MOVEMENTTRANSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTTRANSITIONS | UNIQUE | MOVEMENTTRANSITIONID |
+
+## MOVEMENTVERIFICATIONRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_MOVEMENTVERIFICATIONRECORDS | UNIQUE | MOVEMENTVERIFICATIONRECORDID |
+
+## MUNICIPALREGIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MUNICIPALREGIONS_UUID | UNIQUE | UUID |
+| PK_MUNICIPALREGIONS | UNIQUE | MUNICIPALREGIONID |
+
+## MUNICIPALSTATES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| MUNICIPALSTATES_UUID | UNIQUE | UUID |
+| PK_MUNICIPALSTATES | UNIQUE | MUNICIPALSTATEID |
+
+## ORGANIZATIONTYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| ORGANIZATIONTYPES_UUID | UNIQUE | UUID |
+| PK_ORGANIZATIONTYPES | UNIQUE | ORGANIZATIONTYPEID |
+
+## OTCANALYSISEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_OTCANALYSISTRADEID_OTCANALY | NONUNIQUE | OTCANALYSISTRADEID |
+| PK_OTCANALYSISEXTDATAOVERRIDES | UNIQUE | OTCANALYSISEXTDATAOVERRIDEID |
+
+## OTCANALYSISTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_MARGINCALCULATIONRESULTID_O | NONUNIQUE | MARGINCALCULATIONRESULTID |
+| IX_OTCANALYSISTRADES_ADD | NONUNIQUE | ADDITIONALMARGINCURRENCYID |
+| IX_OTCANALYSISTRADES_EXCH1 | NONUNIQUE | EXCHANGEDNOTIONAL1CURRENCYID |
+| IX_OTCANALYSISTRADES_EXCH2 | NONUNIQUE | EXCHANGEDNOTIONAL2CURRENCYID |
+| IX_OTCANALYSISTRADES_IMPCFG | NONUNIQUE | IMPORTCONFIGURATIONID |
+| IX_OTCANALYSISTRADES_LOCK | NONUNIQUE | LOCKUPMARGINCURRENCYID |
+| IX_OTCANALYSISTRADS_EXPO | NONUNIQUE | EXPOSUREAMOUNTCURRENCYID |
+| PK_OTCANALYSISTRADES | UNIQUE | OTCANALYSISTRADEID |
+
+## OTCCOMPARISONTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTCONFIGURATIONID_OTCCO | NONUNIQUE | IMPORTCONFIGURATIONID |
+| PK_OTCCOMPARISONTRADES | UNIQUE | OTCCOMPARISONTRADEID |
+
+## OTCCOMPARISONTRADESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTRECORDID_OTCCOMPARISO | NONUNIQUE | IMPORTRECORDID |
+| PK_OTCCOMPARISONTRADESBULK | UNIQUE | OTCCOMPARISONTRADESBULKID |
+
+## OTCEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTCONFIGURATIONID_OTCEX | NONUNIQUE | IMPORTCONFIGURATIONID |
+| IX_OTCTRADEID_OTCEXTDATAOVERRI | NONUNIQUE | OTCTRADEID |
+| PK_OTCEXTDATAOVERRIDES | UNIQUE | OTCEXTDATAOVERRIDEID |
+
+## OTCTRADEANALYSISEXTDATA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_OTCMARGINANALYSISTRADEID_OT | NONUNIQUE | OTCMARGINANALYSISTRADEID |
+| PK_OTCTRADEANALYSISEXTDATA | UNIQUE | OTCTRADEANALYSISEXTDATAID |
+
+## OTCTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTCONFIGURATIONID_OTCTR | NONUNIQUE | IMPORTCONFIGURATIONID |
+| IX_PRIMARYTRADEREFENENCE_OTCTR | NONUNIQUE | PRIMARYTRADEREFERENCE |
+| IX_PRIMARYTRADEREFERENCE_IMPOR | NONUNIQUE | PRIMARYTRADEREFERENCE, IMPORTCONFIGURATIONID |
+| PK_OTCTRADES | UNIQUE | OTCTRADEID |
+
+## PENDINGAGREEMENTMARGINS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGAGREEMENTMARGINS | UNIQUE | PENDINGAGREEMENTMARGINID |
+| UX_PENDINGAGREEMENTMARGINS_APP | UNIQUE | APPROVALRECORDID |
+
+## PENDINGAGREEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGAGREEMENTS | UNIQUE | PENDINGAGREEMENTID |
+| UX_PENDINGAGREEMENTS_APPROVALR | UNIQUE | APPROVALRECORDID |
+
+## PENDINGCONTACTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGCONTACTID | UNIQUE | PENDINGCONTACTID |
+| UX_PENDINGCONTACTS_APPROVALREC | UNIQUE | APPROVALRECORDID |
+
+## PENDINGENTITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGENTITYID | UNIQUE | PENDINGENTITYID |
+| UX_PENDINGENTITIES_APPROV | UNIQUE | APPROVALRECORDID |
+
+## PENDINGSETTLEMENTINSTRUCTIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGSETTLEMENTINSTRUCTIO | UNIQUE | PENDINGSETTLEMENTINSTRUCTIONID |
+| UX_PENDINGSETTLEMENTINSTRUCTIO | UNIQUE | APPROVALRECORDID |
+
+## PENDINGTRADECOVERAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PENDINGTRADECOVERAGES | UNIQUE | PENDINGTRADECOVERAGEID |
+| UX_PENDINGTRADECOVERAGES_APPRO | UNIQUE | APPROVALRECORDID |
+
+## PLACEOFSETTLEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PLACEOFSETTLEMENTS | UNIQUE | PLACEOFSETTLEMENTID |
+| PLACEOFSETTLEMENTS_UUID | UNIQUE | UUID |
+
+## POSITIONSTATEMENTHISTORIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_POSITIONSTATEMENTHISTORIES | UNIQUE | POSITIONSTATEMENTHISTORYID |
+
+## PRICESOURCES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PRICESOURCES | UNIQUE | PRICESOURCEID |
+| PRICESOURCES_UUID | UNIQUE | UUID |
+
+## PROFITANDLOSSES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTRECORDID_PROFITANDLOS | NONUNIQUE | IMPORTRECORDID |
+| PK_PROFITANDLOSSES | UNIQUE | PROFITANDLOSSID |
+
+## PROFITANDLOSSESBULK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PROFITANDLOSSESBULK | UNIQUE | PROFITANDLOSSESBULKID |
+
+## RATINGAGENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGAGENCIES | UNIQUE | RATINGAGENCYID |
+| RATINGAGENCIES_UUID | UNIQUE | UUID |
+
+## RATINGBASEDMARGINTERMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGBASEDMARGINTERMS | UNIQUE | RATINGBASEDMARGINTERMID |
+
+## RATINGELIGIBILITYRULEBANDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGELIGIBILITYRULEBANDS | UNIQUE | RATINGELIGIBILITYRULEBANDID |
+
+## RATINGELIGIBILITYRULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGELIGIBILITYRULES | UNIQUE | RATINGELIGIBILITYRULEID |
+
+## RATINGRULEXCOLLATERALBUCKETS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGRULEXCOLLATERALBUCKET | UNIQUE | RATINGELIGIBILITYRULEID, COLLATERALBUCKETID |
+
+## RATINGRULEXINSTRUMENTAGENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGRULEXINSTRUMENTAGENCI | UNIQUE | RATINGELIGIBILITYRULEID, RATINGAGENCYID |
+
+## RATINGRULEXPARTYAGENCIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGRULEXPARTYAGENCIES | UNIQUE | RATINGELIGIBILITYRULEID, RATINGAGENCYID |
+
+## RATINGWATCHES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_RATINGWATCHES | UNIQUE | RATINGWATCHID |
+| RATINGWATCHES_UUID | UNIQUE | UUID |
+
+## REPOANALYSISEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_REPOANALYSISTRADEID_REPOANA | NONUNIQUE | REPOANALYSISTRADEID |
+| PK_REPOANALYSISEXTDATAOVERRIDE | UNIQUE | REPOANALYSISEXTDATAOVERRIDEID |
+
+## REPOANALYSISTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_MARGINCALCULATIONRESULTID_R | NONUNIQUE | MARGINCALCULATIONRESULTID |
+| PK_REPOANALYSISTRADES | UNIQUE | REPOANALYSISTRADEID |
+
+## REPOEXTDATAOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTCONFIGURATIONID_REPOE | NONUNIQUE | IMPORTCONFIGURATIONID |
+| IX_REPOTRADEID_REPOEXTDATAOVER | NONUNIQUE | REPOTRADEID |
+| PK_REPOEXTDATAOVERRIDES | UNIQUE | REPOEXTDATAOVERRIDEID |
+
+## REPOTRADEANALYSISEXTDATA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_REPOMARGINANALYSISTRADEID_R | NONUNIQUE | REPOMARGINANALYSISTRADEID |
+| PK_REPOTRADEANALYSISEXTDATA | UNIQUE | REPOTRADEANALYSISEXTDATAID |
+
+## REPOTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_IMPORTCONFIGURATIONID_REPOT | NONUNIQUE | IMPORTCONFIGURATIONID |
+| IX_TRADEREFENENCE_REPOTRADES | NONUNIQUE | TRADEREFERENCE |
+| IX_TRADEREFERENCE_IMPORTCONFIG | NONUNIQUE | TRADEREFERENCE, IMPORTCONFIGURATIONID |
+| PK_REPOTRADES | UNIQUE | REPOTRADEID |
+
+## RULEFILTERPARAMETERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_RULEFILTERID_RULEFILTERPARA | NONUNIQUE | RULEFILTERID |
+| PK_RULEFILTERPARAMETERS | UNIQUE | RULEFILTERPARAMETERID |
+
+## RULEFILTERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_CONCENTRATIONRULEID_RULEFIL | NONUNIQUE | CONCENTRATIONRULEID |
+| PK_RULEFILTERS | UNIQUE | RULEFILTERID |
+
+## SEASONINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SEASONINGS | UNIQUE | SEASONINGID |
+| SEASONINGS_UUID | UNIQUE | UUID |
+
+## SERIALTASKQUEUE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SERIALTASKQUEUE | UNIQUE | SERIALTASKQUEUEID |
+
+## SETAGREEDAMOUNTSAGA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SAGAIDX_E4703220CF61E1300C3443 | UNIQUE | CORR_ORIGINALCOMMANDID |
+| SETAGREEDAMOUNTSAGA_PK | UNIQUE | ID |
+
+## SETTLEMENTINSTRUCTIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMENTINSTRUCTIONS | UNIQUE | SETTLEMENTINSTRUCTIONID |
+| SETTLEMENTINSTRUCTIONS_2517_IX | NONUNIQUE | AGREEMENTID, CASHINSTRUMENTID |
+| SETTLEMENTINSTRUCTIONS_UUID | UNIQUE | UUID |
+
+## SETTLEMENTXCITIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMENTXCITIES | UNIQUE | SETTLEMOVEMENTCONFIGURATIONID, CITYID |
+
+## SETTLEMOVEMENTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMOVEMENTCONFIGURATION | UNIQUE | SETTLEMOVEMENTCONFIGURATIONID |
+
+## SETTLEMOVEMENTFILTERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMOVEMENTFILTERS | UNIQUE | SETTLEMOVEMENTFILTERID |
+
+## SETTLEMOVEMENTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMOVEMENTMESSAGES | UNIQUE | SETTLEMOVEMENTMESSAGEID |
+
+## SETTLEMOVEMENTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SETTLEMOVEMENTRECORDS | UNIQUE | SETTLEMOVEMENTRECORDID |
+
+## SHAREDAPPROVALRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SHAREDAPPROVALRECORDS | UNIQUE | SHAREDAPPROVALRECORDID |
+
+## SPECIFICTRADECOVERAGE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SPECIFICTRADECOVERAGE | UNIQUE | SPECIFICTRADECOVERAGEID |
+
+## STATEMENTDISCLAIMERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_STATEMENTDISCLAIMERS | UNIQUE | STATEMENTDISCLAIMERID |
+
+## STOCKINDEXES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_STOCKINDEXES | UNIQUE | STOCKINDEXID |
+| STOCKINDEXES_UUID | UNIQUE | UUID |
+
+## SUBSTITUTIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_C_I1_SUBSTITUTIONS | NONUNIQUE | SUBSTITUTIONID, WORKFLOWSTATEID, AGREEMENTID, MOVEMENTGROUPID |
+| PK_SUBSTITUTIONS | UNIQUE | SUBSTITUTIONID |
+| SUBSTITUTIONS_UUID | UNIQUE | UUID |
+
+## SUBSTRANSITIONHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_SUBSTRANSITIONHISTORY | UNIQUE | SUBSTRANSITIONHISTORYID |
+
+## SYS_EXPORT_SCHEMA_01
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044362 | UNIQUE | PROCESS_ORDER, DUPLICATE |
+| SYS_MTABLE_0000230BF_IND_1 | NONUNIQUE | OBJECT_SCHEMA, OBJECT_NAME, OBJECT_TYPE |
+| SYS_MTABLE_0000230BF_IND_2 | NONUNIQUE | BASE_PROCESS_ORDER |
+
+## SYS_EXPORT_SCHEMA_02
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044286 | UNIQUE | PROCESS_ORDER, DUPLICATE |
+| SYS_MTABLE_0000230D8_IND_1 | NONUNIQUE | OBJECT_SCHEMA, OBJECT_NAME, OBJECT_TYPE |
+| SYS_MTABLE_0000230D8_IND_2 | NONUNIQUE | BASE_PROCESS_ORDER |
+
+## TLM_EMAIL_OD
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_EMAIL_OD_IX | NONUNIQUE | DISPATCHED, DISPATCHEDAT |
+| TLM_EMAIL_OD_PK | UNIQUE | MESSAGEID |
+
+## TLM_EMAIL_TO
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_EMAIL_TO_PK | UNIQUE | ID |
+| TLM_EMAIL_TO_SK | NONUNIQUE | SAGAID |
+| TLM_EMAIL_TO_TK | NONUNIQUE | EXPIRETIME |
+
+## TLM_FOUNDATION_OD
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_FOUNDATION_OD_IX | NONUNIQUE | DISPATCHED, DISPATCHEDAT |
+| TLM_FOUNDATION_OD_PK | UNIQUE | MESSAGEID |
+
+## TLM_FOUNDATION_TO
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_FOUNDATION_TO_PK | UNIQUE | ID |
+| TLM_FOUNDATION_TO_SK | NONUNIQUE | SAGAID |
+| TLM_FOUNDATION_TO_TK | NONUNIQUE | EXPIRETIME |
+
+## TLM_WORKFLOWAUTOMATION_OD
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_WORKFLOWAUTOMATION_OD_IX | NONUNIQUE | DISPATCHED, DISPATCHEDAT |
+| TLM_WORKFLOWAUTOMATION_OD_PK | UNIQUE | MESSAGEID |
+
+## TLM_WORKFLOWAUTOMATION_TO
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| TLM_WORKFLOWAUTOMATION_TO_PK | UNIQUE | ID |
+| TLM_WORKFLOWAUTOMATION_TO_SK | NONUNIQUE | SAGAID |
+| TLM_WORKFLOWAUTOMATION_TO_TK | NONUNIQUE | EXPIRETIME |
+
+## TRADEASSIGNMENTCONFIGURATIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTCONFIGURATIO | UNIQUE | TRADEASSIGNMENTCONFIGURATIONID |
+
+## TRADEASSIGNMENTMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTMESSAGES | UNIQUE | TRADEASSIGNMENTMESSAGEID |
+
+## TRADEASSIGNMENTRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTRECORDS | UNIQUE | TRADEASSIGNMENTRECORDID |
+
+## TRADEASSIGNMENTRULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTRULES | UNIQUE | TRADEASSIGNMENTRULEID |
+
+## TRADEASSIGNMENTRULESXCPTYBRANC
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASMENTRULESXCPTYBRANC | UNIQUE | TRADEASSIGNMENTRULEID, BRANCHID |
+
+## TRADEASSIGNMENTRULESXPRINBRANC
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTRULESXPRINBR | UNIQUE | TRADEASSIGNMENTRULEID, BRANCHID |
+
+## TRADEASSIGNMENTRULESXTRADETYPE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADEASSIGNMENTRULESXTRADET | UNIQUE | TRADEASSIGNMENTRULEID, TRADETYPEID |
+
+## TRADETYPEALIASES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADETYPEALIASES | UNIQUE | TRADETYPEALIASID |
+
+## TRADETYPES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRADETYPES | UNIQUE | TRADETYPEID |
+| TRADETYPES_UUID | UNIQUE | UUID |
+
+## TRIPARTYCOLLPOSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRIPARTYCOLLPOSITIONS | UNIQUE | TRIPARTYCOLLPOSITIONID |
+
+## TRIPARTYECAGREEMENTRESULTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRIPTYECAGMTRESULTS | UNIQUE | TRIPARTYECAGREEMENTRESULTID |
+
+## TRIPARTYECRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRIPARTYECRECORDS | UNIQUE | TRIPARTYECRECORDID |
+
+## TRIPARTYECREPORTINGDATA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_TRIPARTYECREPORTINGDATA | UNIQUE | TRIPARTYECREPORTINGDATAID |
+
+## T_AEC_ANVIL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_AEC_ANVIL_PK | UNIQUE | COUNTERPARTY_NDG |
+
+## T_AEC_ECB_ELIGBLE_ASSETS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044500 | UNIQUE | ISIN_CODE |
+
+## T_AEC_GCIF
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C00196855 | UNIQUE | COUNTERPARTY_NDG |
+
+## T_AEC_HISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C00197854 | UNIQUE | HISTORY_ID |
+
+## T_AEC_LIQUID_BONDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C00187626 | UNIQUE | ISIN_CODE |
+
+## T_AEC_RULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C00187627 | UNIQUE | RULE_ID |
+
+## T_AEC_RULES_ASSET_CLASSES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_AEC_RULES_ASSET_CLASSES_PK | UNIQUE | RULE_ID, ASSET_CLASS_ORDINAL, RULE_CRITERIA_ID |
+
+## T_AEC_RULES_CRITERIA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C00187628 | UNIQUE | RULE_CRITERIA_ID |
+
+## T_AEC_TOXIC_ISINS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044476 | UNIQUE | ISIN_CODE |
+
+## T_ANVIL_MOVEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_ANVIL_MOVEMENTS | UNIQUE | ANVIL_MOVEMENTSID |
+
+## T_API_LOCK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044277 | UNIQUE | LOCK_ID |
+
+## T_API_MOVEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044636 | UNIQUE | ID |
+
+## T_CMS_FAXOUTBOX
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_CMS_FAXOUTBOX_PK | UNIQUE | T_CMS_FAXOUTBOXID |
+| T_CMS_FAXOUTBOX_UK | UNIQUE | XMLMESSAGEID |
+
+## T_CMS_REPORTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_CMS_REPORTS_PK | UNIQUE | TCR_ID |
+
+## T_CMS_STATIC_DATA_FROM_CMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_CMS_STATIC_DATA_FROM_CMS_PK | UNIQUE | SDFC_AGREEMENT_ID |
+
+## T_CMS_STATIC_DATA_TO_CMS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_CMS_STATIC_DATA_TO_CMS_PK | UNIQUE | SDTC_AGREEMENT_ID |
+
+## T_CMS_WBP_ALGO_RECON
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_CMS_WBP_ALGO_RECON_PK | UNIQUE | SDAR_PK |
+
+## T_CMT_MOVEMENTSENTTOANVIL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_T_CMT_MOVEMENTSENTTOANVIL | UNIQUE | T_CMT_MOVEMENTSENTTOANVILID |
+
+## T_CMT_PAYMENTHISTORY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| EXECUTIONDATE_INDEX | NONUNIQUE | EXECUTIONDATE |
+| SYS_C0044704 | UNIQUE | EVENTGROUPID |
+
+## T_IMC_ADDITIONAL_INFO
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044497 | UNIQUE | PK |
+
+## T_IMC_ALL_SMR
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044357 | UNIQUE | PK |
+
+## T_IMC_COLLATERAL_INSTRUCTION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IN1_T_IMC_COLLATERAL_INSTR | NONUNIQUE | SENDER_MESSAGE_REF |
+| IN2_T_IMC_COLLATERAL_INSTR | NONUNIQUE | AGREEMENTID |
+| IN3_T_IMC_COLLATERAL_INSTR | NONUNIQUE | MOVEMENTID |
+| SYS_C0044495 | UNIQUE | PK |
+
+## T_IMC_COLLATERAL_STATUS_ADVICE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044698 | UNIQUE | PK |
+
+## T_IMC_COLLEXPOSURE_STM
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IN1_T_IMC_COLLEXPOSURE_STM | NONUNIQUE | MESSAGEPREPARATIONDATETIME, CUSTODIAN |
+| SYS_C0044528 | UNIQUE | PK |
+| UK_OIMPM2AUN6YRURBRECWSUQ7VH | UNIQUE | ALLSUMMY_ID |
+| UK_OWAGWA0OT08WT4O3QY78CITHO | UNIQUE | EXPTYPESUMM_ID |
+
+## T_IMC_COLL_TRANSACTION
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_IMC_COLL_TRANSACTION | UNIQUE | PK |
+| UX_IMC_COLL_TRANSACTION | UNIQUE | AGREEMENTID, CUSTODIAN, OUR_TRANSACTION_REF |
+
+## T_IMC_CTPY_SMR
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044596 | UNIQUE | PK |
+
+## T_IMC_CUSTODIAN_WORKFLOW
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044330 | UNIQUE | PK |
+| UX1_IMC_CUSTODIAN_WORKFLOW | UNIQUE | CLIENTCOLLATERALINSTRUCTION, CLIENTCOLLATERALTRANSACTION |
+
+## T_IMC_EXPSTM_SUMMARY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044457 | UNIQUE | PK |
+
+## T_IMC_EXP_SMR
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044308 | UNIQUE | PK |
+
+## T_IMC_FIA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044496 | UNIQUE | PK |
+
+## T_IMC_FIN
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044756 | UNIQUE | PK |
+
+## T_IMC_LINK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044639 | UNIQUE | PK |
+
+## T_IMC_QUANTITY_BREAKDOWN
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044651 | UNIQUE | PK |
+
+## T_IMC_SCHEDULED_CANCEL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IN1_T_IMC_SCHEDULED_CANCEL | NONUNIQUE | PLAN_DATE, CUSTODIAN |
+| IN2_T_IMC_SCHEDULED_CANCEL | NONUNIQUE | IS_DONE |
+| PK_IMC_SCHEDULED_CANCEL | UNIQUE | PK |
+
+## T_IMC_SECURDTL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044687 | UNIQUE | PK |
+
+## T_IMC_STATEMENT_OF_HOLDING
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IN1_T_IMC_STATEMENT_OF_HOLDING | NONUNIQUE | ALGO_IMPORT_DATETIME |
+| SYS_C0044423 | UNIQUE | PK |
+
+## T_IMC_SUB_BALANCE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044601 | UNIQUE | PK |
+
+## T_IMC_SUB_SAFE_ACCOUNT
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044801 | UNIQUE | PK |
+
+## T_IMC_TRANDTL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IN1_T_IMC_TRANDTL | NONUNIQUE | ALGO_IMPORT_DATETIME |
+| SYS_C0044424 | UNIQUE | PK |
+
+## T_IMC_VALDTL
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044608 | UNIQUE | PK |
+
+## T_IMC_VM_LOCKUP_AGREEMENT
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_IMC_VM_LOCKUP_AGREEMENT | UNIQUE | PK |
+| UX_VM_LOCKUP_AGREEMENT | UNIQUE | AGREEMENTID |
+
+## T_JOB_STATUS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_JOB_STATUS_PK | UNIQUE | JOB_STATUSID |
+
+## T_PAS_SENT_MOVEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_PAS_SENT_MOVEMENTS | UNIQUE | DISTRIBUTION, MOVEMENTID |
+
+## T_QCE_CT_BUCKETREQUESTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0045695 | UNIQUE | REQUEST_ID |
+
+## T_QCE_CT_BUCKETREQUESTSXAGREEMENTS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0045698 | UNIQUE | REQUEST_ID, AGREEMENT_ID |
+
+## T_QCE_CT_MOVEMENTOVERRIDES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| T_QCE_CT_MOVEMENTOVERRIDES_PK | UNIQUE | MOVEMENTOVERRIDE_ID |
+
+## T_QCE_CT_TRIOPTIMA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_REPORT_ID | UNIQUE | REPORT_ID |
+
+## T_WTM_LOCK
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| SYS_C0044386 | UNIQUE | LOCK_ID |
+
+## T_WTM_REQUEST
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| I0_WTM_REQUEST_DISTRIBUTIONID | NONUNIQUE | DISTRIBUTIONID |
+| I1_WTM_REQUEST_MOVEMENTID | NONUNIQUE | MOVEMENTID |
+| PK_WTM_REQUEST | UNIQUE | REQUEST_ID |
+| UQ_WTM_REQUEST_TRANSFERREF | UNIQUE | TRANSFER_REFERENCE |
+
+## T_WTM_RESPONSE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WTM_RESPONSE | UNIQUE | RESPONSE_ID |
+
+## T_WTM_SENDSTATE
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WTM_SENDSTATE | UNIQUE | SENDSTATEID |
+| U01_WTM_SENDSTATE | UNIQUE | DISTRIBUTIONID |
+| U02_WTM_SENDSTATE | UNIQUE | MOVEMENTID |
+
+## UNASSIGNEDOTCTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_UNASSIGNEDOTCTRADES | UNIQUE | UNASSIGNEDOTCTRADEID |
+
+## UNASSIGNEDREPOTRADES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_UNASSIGNEDREPOTRADES | UNIQUE | UNASSIGNEDREPOTRADEID |
+
+## USERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERS1 | UNIQUE | USERID |
+| USERS_UUID | UNIQUE | UUID |
+
+## USERSTATEMENTCOLUMNFILTERS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERSTATEMENTCOLUMNFILTERID | UNIQUE | USERSTATEMENTCOLUMNFILTERID |
+
+## USERSTATEMENTCOLUMNS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERSTATEMENTCOLUMNS | UNIQUE | USERSTATEMENTCOLUMNID |
+
+## USERSTATEMENTDEFINITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERSTATEMENTDEFINITIONID | UNIQUE | USERSTATEMENTDEFINITIONID |
+
+## USERSTATEMENTFILLERCOLUMNS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERSTATEMENTFILLERCOLUMNS | UNIQUE | USERSTATEMENTFILLERCOLUMNID |
+
+## USERSTATEMENTFILTERCHOICES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USPFC | UNIQUE | USERSTATEMENTFILTERCHOICEID |
+
+## USERSXAGREEMENTRESPONSIBILITY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERSXAGREEMENTRESPONSIBILI | UNIQUE | AGREEMENTRESPONSIBILITYID, USERID |
+
+## USERS_USERNAME_EMPTY
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_USERS | UNIQUE | USERID |
+
+## WAIVECATEGORIES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WAIVECATEGORIES | UNIQUE | WAIVECATEGORYID |
+| WAIVECATEGORIES_UUID | UNIQUE | UUID |
+
+## WORKFLOWGROUPINGS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWGROUPINGS | UNIQUE | WORKFLOWGROUPINGID |
+
+## WORKFLOWS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWS | UNIQUE | WORKFLOWID |
+| UX_WORKFLOWS_WORKFLOWTYPE | UNIQUE | WORKFLOWTYPE |
+
+## WORKFLOWSTATES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_C_I1_WORKFLOWSTATES | NONUNIQUE | WORKFLOWSTATESHORTNAME, WORKFLOWSTATEID |
+| IX_MARGINCALLS_10BDD0001 | NONUNIQUE | WORKFLOWSTATEIDENTIFIER, WORKFLOWSTATEID |
+| PK_WORKFLOWSTATES | UNIQUE | WORKFLOWSTATEID |
+
+## WORKFLOWSTATETRANSITIONS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWSTATETRANSITIONS | UNIQUE | WORKFLOWSTATETRANSITIONID |
+
+## WORKFLOWUPLOADDATA
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWUPLOADDATA | UNIQUE | WORKFLOWUPLOADDATAID |
+
+## WORKFLOWUPLOADMESSAGES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWUPLOADMESSAGES | UNIQUE | WORKFLOWUPLOADMESSAGEID |
+
+## WORKFLOWUPLOADRECORDS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WORKFLOWUPLOADRECORDS | UNIQUE | WORKFLOWUPLOADRECORDID |
+
+## WRONGWAYRISKRULES
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| IX_WWRAGREEMENT_AGREEMENTID | NONUNIQUE | AGREEMENTID |
+| PK_WRONGWAYRISKRULES | UNIQUE | WRONGWAYRISKRULEID |
+| WRONGWAYRISKRULES_UUID | UNIQUE | UUID |
+
+## WRONGWAYRISKRULESXBUCKETS
+
+| Index Name | Uniqueness | Column(s) |
+|-----------|-----------|----------|
+| PK_WRONGWAYRISKRULESXBUCKETS | UNIQUE | WRONGWAYRISKRULEID, COLLATERALBUCKETID |
+
