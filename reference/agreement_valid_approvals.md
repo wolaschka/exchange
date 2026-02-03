@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_valid_approvals.html
 
 # Validations Performed on Agreement Data During the Approvals Process
 

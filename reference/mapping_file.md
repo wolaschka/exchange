@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/mapping_file.html
 
 # How to Import Data Using a Mapping File
 

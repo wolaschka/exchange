@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/specifictradecoverage_approvals.html
 
 # Approvals Process for Specific Trade Coverage
 

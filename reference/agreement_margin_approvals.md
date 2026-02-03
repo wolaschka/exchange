@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_margin_approvals.html
 
 # Approvals Process for Agreement Margins
 

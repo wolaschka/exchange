@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/rating_for_agency_not_provided.html
 
 # How to Define Ratings for an Agency as Not Provided
 

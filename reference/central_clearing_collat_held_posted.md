@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/central_clearing_collat_held_posted.html
 
 # Understanding Collateral Held and Posted Values on Central Clearing Agreements
 

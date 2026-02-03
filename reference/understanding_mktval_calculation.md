@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understanding_mktval_calculation.html
 
 # Understanding How Mkt Val (Agmt Ccy) is calculated and displayed
 

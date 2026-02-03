@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/eligibility_and_concentration_breaches.html
 
 # Eligibility and Concentration Breaches
 

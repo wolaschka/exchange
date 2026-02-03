@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understand_parent_entity_relate.html
 
 # Understanding Parent Entity Relationships
 

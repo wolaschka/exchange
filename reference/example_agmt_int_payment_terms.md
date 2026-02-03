@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/example_agmt_int_payment_terms.html
 
 # Example Imports for Agreement Interest Payment Terms
 

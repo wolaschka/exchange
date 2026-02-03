@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_holiday_calendars.html
 
 # File Format for Holiday Date Information
 

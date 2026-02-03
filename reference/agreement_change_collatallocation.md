@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_change_collatallocation.html
 
 # Changing Collateral Allocation Type on an OTC Agreement
 

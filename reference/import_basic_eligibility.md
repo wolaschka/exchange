@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_basic_eligibility.html
 
 # File Format for Basic Eligibility
 

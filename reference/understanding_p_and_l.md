@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understanding_p_and_l.html
 
 # Understanding How Collateral Movements are Created from P&L import
 

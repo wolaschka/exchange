@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/segregate_lockup_varmargin.html
 
 # Working with OTC Agreements that Segregate Lock Up and Variation Margin
 

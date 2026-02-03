@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_exposure_trade_overrides.html
 
 # File Format for Exposure Trade Overrides
 

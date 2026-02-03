@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/instruments_loc.html
 
 # Letter of Credit Instrument
 

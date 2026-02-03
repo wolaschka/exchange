@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_otc_comparison_trades.html
 
 # File Format for OTC Comparison Trades
 

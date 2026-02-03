@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/task_margincalc_analysis.html
 
 # Margin Calculation Analysis Task
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/resubmit_fail_cancel_int_pay.html
 
 # Identifying and Resubmitting Interest Payments with Failed or Cancelled Interest Payments
 

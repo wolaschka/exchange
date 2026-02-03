@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/instrument_prices_approvals.html
 
 # Approvals Process for Instrument Prices
 

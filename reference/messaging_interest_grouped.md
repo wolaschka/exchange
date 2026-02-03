@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_interest_grouped.html
 
 # Grouped Interest Payments
 

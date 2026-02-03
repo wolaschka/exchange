@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/movements_approval_pendcancel.html
 
 # Approve Pending Cancellation Movements
 

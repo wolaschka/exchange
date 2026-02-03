@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/movements_short_position_checking.html
 
 # Understanding Short Position Checking on Movements
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_instrument_ratings.html
 
 # File Format for Instrument Ratings
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understanding_mta_round_threshold.html
 
 # Understanding MTA, Rounding Increments, Threshold and Parties
 

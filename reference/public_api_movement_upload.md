@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/public_api_movement_upload.html
 
 # Public API Movement Upload
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/anticipated_demand_examples.html
 
 # Anticipated Demand Examples
 

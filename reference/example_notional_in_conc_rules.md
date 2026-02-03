@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/example_notional_in_conc_rules.html
 
 # Examples of Concentration Rules
 

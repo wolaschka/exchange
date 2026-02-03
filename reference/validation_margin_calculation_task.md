@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/validation_margin_calculation_task.html
 
 # Validations Performed when running Margin Calculation Task
 

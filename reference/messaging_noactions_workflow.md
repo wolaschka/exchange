@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_noactions_workflow.html
 
 # No Actions Workflow
 

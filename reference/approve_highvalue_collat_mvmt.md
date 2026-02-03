@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/approve_highvalue_collat_mvmt.html
 
 # Approve High Value Collateral Movements in Margin Call Workflow
 

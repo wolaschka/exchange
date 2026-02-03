@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/api_manual_mvmt_upload_schematic.html
 
 # API Manual Movement upload schematic
 

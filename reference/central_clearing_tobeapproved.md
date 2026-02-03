@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/central_clearing_tobeapproved.html
 
 # Central Clearing - To be Approved State
 

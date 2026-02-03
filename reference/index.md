@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/index.html
 
 # Collateral Web Application Help Guide
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_ssi_approvals.html
 
 # Approvals Process for SSI's on an Agreement
 

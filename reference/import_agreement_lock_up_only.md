@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_agreement_lock_up_only.html
 
 # File Format for OTC Lock Up Only Agreements
 

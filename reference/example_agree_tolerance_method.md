@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/example_agree_tolerance_method.html
 
 # Examples of Agree Tolerance Method Usage
 

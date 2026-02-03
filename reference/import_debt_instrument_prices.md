@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_debt_instrument_prices.html
 
 # File Format for Debt Instrument Prices
 

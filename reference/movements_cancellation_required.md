@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/movements_cancellation_required.html
 
 # Configuring Approval to be Required on Cancellations
 

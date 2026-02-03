@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/move_agmt_inout_combined_busline.html
 
 # Moving Agreements In and Out of a Combined Business Lines Agreement Group
 

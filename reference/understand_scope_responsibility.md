@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understand_scope_responsibility.html
 
 # Understanding Agreement Scopes and Agreement Responsibility Groups
 

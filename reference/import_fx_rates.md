@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_fx_rates.html
 
 # File Format for FX Rates
 

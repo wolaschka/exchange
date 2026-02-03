@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_example_agmt_mapping_file.html
 
 # Example of Agreement Mapping File with Extensions
 

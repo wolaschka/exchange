@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understand_notional_rounding_mvmts.html
 
 # Understanding Notional Rounding on Collateral Movements
 

@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_using_default_value_rules.html
 
 # How to Define Default Value Rules in a Mapping File
 

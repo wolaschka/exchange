@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/marginterms_otc.html
 
 # OTC Margin Terms
 

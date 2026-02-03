@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/restrict_multi_transitions.html
 
 # Restricting Multiple Transitions in Workflow States
 

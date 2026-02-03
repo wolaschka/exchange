@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/reject_highvalue_collat_mvmt.html
 
 # Reject High Value Collateral Movements in Margin Call Workflow
 

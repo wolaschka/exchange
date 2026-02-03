@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/intraday_mc.html
 
 # Intraday Margin Calculations
 

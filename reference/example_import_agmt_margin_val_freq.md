@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/example_import_agmt_margin_val_freq.html
 
 # Example Imports for Agreement Margin Valuation Frequency
 

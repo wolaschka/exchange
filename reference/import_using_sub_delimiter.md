@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/import_using_sub_delimiter.html
 
 # How to Import Data Using a Sub Delimiter
 

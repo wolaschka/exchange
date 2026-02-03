@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/dispute_tolerance.html
 
 # Dispute Tolerances
 

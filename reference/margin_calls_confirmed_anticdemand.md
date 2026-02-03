@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_confirmed_anticdemand.html
 
 # Antic Demands Workflow - Confirmed State
 

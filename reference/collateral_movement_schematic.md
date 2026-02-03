@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/collateral_movement_schematic.html
 
 # Standalone Collateral Movement Schematic
 

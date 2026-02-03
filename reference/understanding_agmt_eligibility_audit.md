@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/understanding_agmt_eligibility_audit.html
 
 # Understanding Audit Records for Eligibility
 

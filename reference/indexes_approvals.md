@@ -1,4 +1,3 @@
-# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/indexes_approvals.html
 
 # Approvals Process For Indexes
 
