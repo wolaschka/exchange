@@ -1,0 +1,545 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/interest_workflow_actions.html
+
+# Actions
+
+## Cancel Ad-Hoc Payment
+
+All Ad Hoc Payments are processed as Distributions, irrespective of the Distribution Preference specified on the Agreement.
+
+Once an Ad-Hoc Interest Payment has been created, it is placed in the corresponding to be Sent Interest Workflow state according to the following logic:
+
+  * For Grouped Interest, the Ad Hoc payment is placed into a **_Due to be Sent_** state
+  * For Standard Interest, the Ad Hoc Payment is placed into one of the following, depending on the Payment direction:
+
+    * Interest Distribution - Due to Cpty state
+    * Interest Distribution - Due to Prin state
+
+
+
+If the Ad-Hoc Payment has been created in error, it is possible to cancel it.
+
+To cancel the payment, locate the payment to be cancelled. Click on the payment and click on the **More** button. 
+
+Then select **Cancel AdHoc Payment** button.
+
+**Note:** Ad Hoc payments cannot be cancelled when they are in an approved state.
+
+## Changing Distribution Preferences
+
+There are ten key functions that can be performed within this state:
+
+  * Establishing that Interest Statements were sent to Counterparties.
+  * Allowing for Resending Interest Statements to Counterparties.
+  * Allowing the Interest Payment to be amended from a Distribution Payment to a Roll In Payment.
+  * Agreeing to the Interest Payment Amount and Settlement Date.
+  * Creating the Interest Distribution Movement and submitting it for approval (although this is done via Workflow, as opposed to a manual function). This assumes that workflow approval has not been disabled. If workflow approval has been disabled, the items are sent directly to the approved states - see the Submitting the Interest Payment for approval, and creating Interest Movements section below.
+  * Correcting and Resubmitting any rejected Interest Distribution Payments.
+  * Correcting and Resubmitting any Interest Payments where the Interest Movement has been cancelled or failed.
+  * Allowing the cancellation of an Ad-Hoc Interest Payment.
+  * Allowing for the netting type on an Interest Payment to be changed. That is, a net Interest Payment can be recalculated as Gross payments, and conversely, Gross Payments can be recalculated as a single net payment.
+
+
+
+The Distribution preference of an Open Payment can only be amended while the Interest Payment is in the Sent state.
+
+Select the Interest Payment by either clicking on the appropriate row in the grid or clicking the check box on the left side.
+
+The **More** button will become enabled.
+
+When the button is selected, the drop down will have either Process as Distribution or Process as Roll In.
+
+The resulting payment will be displayed in the Movements module with a movement type of Interest Distribution or Interest Roll In.
+
+## Changing a Payment to Net or Gross
+
+Interest Payments for an Agreement are created either "Net" or "Gross" based on how the Net Held and Posted Interest Payments flag has been set.
+
+If the Agreement is configured for Gross Interest Payments - that is, the Net Held and Posted Interest Payments check box is cleared, then separate Interest Payments are generated for held and posted cash positions for the Interest Payment Period.
+
+If the Agreement is configured for Net Interest Payments - that is, the Net Held and Posted Interest Payments check box is checked, then one combined Interest Payment is generated for held and posted cash positions for the Interest Payment Period.
+
+Notwithstanding the above - Interest Payments are never netted across collateral Margin Types. That is, separate Interest Payments are always generated for Variation and Lock Up cash collateral positions for an Agreement, irrespective of how the Net held and Posted Interest Payments flag is set.
+
+The system provides the flexibility to change the "netting behavior" of an Interest Payment. The system supports changing a Net Interest Payment into its constituent Gross held and posted Payments and vice versa.
+
+When Interest Payments are changed in this way, they are simultaneously re-calculated using the latest applicable data, and any open accruals for the agreement take on the new netting behavior until the altered payments are closed. See [Recalculate an Individual Interest Payment](<#recalculate-interest-payments>) for more details on recalculations.
+
+Interest Payments can only be changed from Gross to Net, or vice versa if the following conditions are met:
+
+  * Agreed amounts cannot exist on the Interest Payment. In the case of Gross payments, the agreed amount cannot exist on either the Held or Posted payment.
+  * Gross payments cannot be netted if the period end dates do not match. For example, the Held payment end date has been extended, but the Posted payment has not.
+  * Gross Payments cannot be netted if the Distribution Preferences do not match. For example, the Held payment is a Distribution, but the Posted payment is a Roll In.
+  * Gross Payments must be of the same Margin Type. Gross Variation payment cannot be netted with a gross Lock Up payment.
+  * The switch between Gross and Net can only be performed within the Interest Workflow states.
+
+
+
+**Procedure**
+
+  1. Locate the Interest Payment that needs to modified. If the payment is currently a _Gross_ payment, under the **More** drop down button, the user has the option to **Recalculate to Net**. Conversely, if the payment is currently _Net_ , there select the option of **Recalculate to Gross**.
+
+Depending on whether the Interest Payment is for a Grouped or Standard Payment, the Distribution Preference, Direction, and sent status of the Interest Payment, it can be in one of the following Interest Workflow states:
+
+Grouped or Standard Payment | Payment Distribution Preference | Interest Workflow State  
+---|---|---  
+Standard | Distribution | Due to Cpty  
+|  | Due to Prin  
+|  | Sent  
+| Roll In | Due to Cpty  
+|  | Due to Prin  
+|  | Sent  
+Grouped | Any | Due to be Sent  
+|  | Sent  
+|  | Agreed  
+  2. Select the Interest Payment by clicking the checkbox.
+
+  3. Click the **More** button located on the upper right side of the screen. 
+     * If the payment is currently _Gross_ , then a **Recalculate as Net** button will be available.
+     * If the payment is currently _Net_ , then a **Recalculate as Gross** button will be available.
+  4. If the payment selected is a Net Payment and the **Recalculate as Gross** button is clicked, the current net interest payment for the Interest Period is cancelled. The existing Interest Statement for the Net Payment is deleted.
+
+The interest calculation for the Agreement/Currency pairing selected is re-run for the Interest Period, with the exception that the Agreement is treated as if it were defined not to net Interest Payments.
+
+The Gross Interest Payments resulting from this recalculation are placed in the appropriate interest workflow states.
+
+  5. If the payment selected is a Gross Payment and then the **Recalculate as Net** button is clicked, the current gross interest payments for the Interest Period is cancelled.
+
+The existing Interest Statements for the gross payments are deleted
+
+The interest calculation for the Agreement/Currency pairing selected is re-run for the Interest Period, with the exception that the Agreement is treated as if it were defined as netting Interest Payments.
+
+The single Net Interest Payment resulting from this recalculation is placed in the appropriate Interest Workflow state, according to its distribution preference and payment direction.
+
+
+
+
+**Validations**
+
+  * Agreed Amount Exists on Payment - Gross Payments cannot be switched to be a single net payment, if an agreed amount has been entered on either of the Gross Payments. If the netting type on a gross payment is attempted to be switched, an error message will appear stating that associated payment must not have an agreed amount when switching from gross to net. The payment cannot be netted until the issue is resolved.
+  * Period End Date Mismatch - Gross Payments cannot be switched to be a single net payment, if the period end dates of the open payments do not match. This can occur if one of the gross payments was extended. If the netting type on a gross payment is attempted to be switched, an error message will appear stating that period ends must match. The payment cannot be netted until the issue is resolved.
+
+
+
+**Note:** Additional Considerations
+
+Should an open Interest Payment be altered in this way, the new "netting" behavior that is applied to the payment is also applied to any current open accruals until the open payment is closed.
+
+## Distribute
+
+This behavior is governed by the [Distribution Preference](<agreements_interest.md#distribution-preference>) value that is defined at the agreement level.
+
+Where agreements have this value set to **Distribute** , any Interest Payments that are generated will be subject to processing through the Interest Payment Distribute Workflow. At the conclusion of the Distribution Workflow, the agreed Interest Payment will physically be paid to the owed party.
+
+**Procedure**
+
+  1. To action these payments, select the payment whose Preference is set to **Distribute** by either clicking on the payment or click the checkbox next to the Workflow state.
+  2. The **Distribute** button will become enabled.
+  3. Click on the **Distribute** button and a popup screen will appear.
+  4. The Agreed Amount field is required.
+
+     * The amount of interest that has been agreed between the parties needs to be recorded in the **Agreed Amount** field. The values will default to the Accrued Interest amount and the calculation date. However, the fields are editable if the values need modification.
+     * By default, it is assumed that both parties will fully agree and therefore the field is prepopulated with the calculated amount of the Interest Payment. If the agreement interest amount with the counterparty differs, override the defaulted value in the Agreed Amount field.
+
+**Note:** Agreed Amounts must be entered as a positive number. Additionally, if an agreed amount of zero is entered, the system will accept this but no Interest Movement will be created.
+
+  5. The Settlement Date field is required. This date is defaulted but is editable. The date is determined as being the current date in the Principal Managing Location of the Agreement at the time the item is transitioned into this workflow state. This can differ to your actual timezone. See [Understanding Dates and Times](<understand_date_times.md>) in TLM Collateral for more information.
+
+  6. Verify whether the Interest Payment will be physically settled. By default, it is assumed that Physical Settlement will occur, and therefore the check box is selected.
+  7. By default, the system will attempt to automatically populate this field with the name of the receiving party's matching SSI record which has been set as default. Should no matching SSI have been set as default, the receiving and sending instruction can also be selected.
+
+**Note:** The SSI records available for selection are those that match the movement. Should there be no matching SSI records, the drop-down will be blank. The Settlement Date default value is derived from the settlement offset value of receiving party SSI record selected. Should the selected SSI record be altered, the Settlement Date default value will be refreshed.
+
+See [Understanding SSI hierarchy, defaults and derivation](<agreements_settleinstr.md#understanding-ssi-hierarchy>) for more details on how SSI's are matched to collateral movements.
+
+  8. When satisfied with the values, click the **Distribute** button. The payment will progress to the _Agreed - to be Approved_ workflow state.
+
+     * The transition will validate if a cash collateral Movement(s) has been recently created or cancelled  for a settlement date within the Interest Payment period. The transition process will determine if a cash collateral movement(s) affects the Interest Payment when:
+       * the cash Movement is for the same Agreement Name as the Interest Payment
+       * the cash Movement is for the same Instrument as teh Interest Payment
+       * the cash Movement Type is for the same Position Type of the Interest Payment - i.e. Held (Deliver to Principal, Return to Counterparty) or Posted (Deliver to Counterparty, Return to Principal
+         * **Note:** When an Agreement's **Net Held and Posted INterest Payments** indicator is checked, i.e. Held and Posted Interest Payments are netted, Movement Type is not validated against the Interest Payment Position Type - as all Movement Types will impact the Interest Payment.
+       * the cash Movement is for the same Collateral Margin Type as teh Interest Payment
+       * the cash Movement SettlementDate is less than or equal to the Period End Date of teh Interest Payment
+       * the cash Movement was last edited _after_ the Calculation Date/Time of the Interest Payment
+
+When all the above criteria have been met, the **Distribute** transition will fail and the Interest Payment(s) will remain in the **Sent** state.
+
+
+
+
+## Extend End Date
+
+The application provides the functionality to extend the Period End Date for an Open Interest Payment.
+
+There are some restrictions that apply to extending the End Date for a Payment:
+
+  * An End Date can only be altered on an Open Interest Payment.
+  * The End Date cannot be extended once an Interest Payment has been approved.
+  * The End Date must be amended to a date greater than the open payment's current end date.
+  * The End Date cannot be changed to a date of today or greater.
+  * When an Extended Date Interest Payment is recalculated, the originally entered Extended Payment End Date is retained. If this is to be changed, cancel the extended date payment and then start again.
+
+
+
+To extend the End Date, the user can either click in the check box or click no the Interest Payment to drill down for more information. The **More** drop down will be enabled. Click on the **More** button then select **Extend End Date**.
+
+A pop up screen will appear where the user can edit the End Date. (By Default this will populate as the Previous day, where "Today" is the current Date in the Principal Managing Location of the Agreement.)
+
+Click on the **OK** button.
+
+  * The corresponding Open accrual for the same agreement / currency pairing will be recalculated to have a Period Start Date of one calendar day after the revised End date.
+
+  * The Open Accrual Period End date will be as per the Interest Period End Date defined in the agreement.
+
+  * **Note:** If by extending the payment, the payment direction changes so that a Due to Counterparty payment becomes a Due to Principal payment or vice versa, then the Interest Payment workflow state will move to the appropriate state. 
+
+
+
+
+The system will perform the following validation:
+
+  * The End Date entered cannot be on or before the Period End date, today or greater than today. If a date falls within these parameters, the user will be prompted with a message stating that the End Date must be between Period End and today and the End Date will not be able to be saved.
+
+
+
+**Additional considerations:**
+
+If the user intends to alter the netting type on a Gross Interest Payment, the user will not be able to change the gross payments to a single net payment if the Period End Dates for both do not match.
+
+Altering the Period End Date on a Gross Interest Payment has implications should the intent be to alter its netting type.
+
+Should the Payment End Date be extended on a single Gross Payment (that is either the held or posted payment, but not both held and posted gross payments), it will not be possible to change the gross payments to a single net payment if the Period End Dates for both do not match.
+
+See [How to change a Net Interest Payment to Gross and Vice Versa](<#changing-a-payment-to-net-or-gross>) for more information.
+
+## Recalculate Interest Payments
+
+In the process of agreeing Interest Payments with Counterparties, it may become evident that an Interest Payment has been calculated with incorrect data.
+
+In order to correct an Interest Payment, it will be necessary to remedy the underlying data issue(s) and then recalculate so that the Interest Payment is calculated correctly.
+
+Remedying the underlying data issues may involve:
+
+  * [Failing](<movements.md#fail-a-collateral-movement>) cash collateral movements
+
+  * [Cancelling](<movements.md#cancel-a-manual-movement>) cash collateral movements
+
+  * [Adding back dated cash collateral movements](<addbackdatecashcollatmove.md>)
+
+  * Amending [cash collateral interest terms](<basiceligibility.md#overview>)
+
+  * Amending [Interest Payment terms](<agreements_interest.md>)
+
+  * Amending Index rates
+
+  * Amending [Index data](<reference.md#editing-reference-data>)
+
+
+
+
+Once the Underlying data anomalies have been rectified, it is necessary to recalculate Interest Payments, to replace the original incorrect payments with the correctly calculated versions.
+
+What happens to the original Interest payments is determined by what particular state and Interest Workflow state that the Interest Payments are in when Interest Payments are recalculated.
+
+**Note:** Interest Payments can be recalculated en masse by re-running the Interest Calculation task with the generate payments flag enabled. However, the system provides the flexibility to recalculate an individual Interest Payment from within the Interest Workflow.
+
+**Restrictions**
+
+  * Completed Interest Payments cannot be recalculated.
+  * Open Interest Payments that are in an Approved State are not recalculated. This applies to the Interest Payments that are in the following states:
+    * Interest Distribution Workflow - Approved to be Distributed
+    * Interest Roll In Workflow - Approved to be Rolled In
+    * Grouped Interest Payments Workflow - Approved to be Settled
+  * Ad Hoc payments are recalculated, but the end date that was entered is not changed by the recalculation.
+  * Interest Payments where the period end date has been extended are recalculated, but like Ad Hoc payments, the end date that was entered is not changed by the recalculation.
+  * Should the cash interest terms change on an Agreement to **Do Not Calculate Accrual** any open interest payments for that Agreement / Currency pair cannot be recalculated from the Interest Workflow. If it is attempted, a warning message will appear that states "Cannot recalculate interest payment because calculation type has changed to **Do Not Calculate Accrual** ".
+
+**Note:** However, the user can recalculate open payments where the calculation method has changed to Do Not Calculate Accrual by re-calculating the payments via the Interest Calculation Task
+
+
+
+
+Only open payments that are not in an approved state are subject to Payment recalculations.
+
+**Recalculate Process**
+
+There is not a distinct configuration or task for recalculating Interest Payments, but rather, it is an intrinsic function of the Interest Calculation Task when the generate Payments flag is enabled.
+
+Details of running this task are detailed in How to Run an Interest Calculation Task, and the Interest Calculation configuration definitions are detailed in How to Create an Interest Calculation Task Configuration.
+
+**Considerations and Outcomes**
+
+When the Interest Calculation Task is run with a configuration that has the Generate Payments flag enabled, the task will do the following:
+
+  * Calculate Open Interest Accruals.
+  * Calculate and generate Interest Payments per Ccy, per Margin Type, per agreement, for those agreements where the Interest Period End Date has been exceeded. 
+  * If a current open Interest Payment exists for the same Ccy, Margin Type and Agreement (in any state other than approved) , the task will compare the newly calculated Interest Payment to the existing Interest Payment.
+  * If the newly calculated Interest Payment [differs](<#fields-compared-when-interest-payments-recalculated>) to the original Interest Payment, then the original Interest Payment is replaced. 
+  * If replaced, the original Interest Payment is updated to a Replaced state. Currently it is not possible to view these through the GUI. 
+  * If an Interest Movement had been generated on an Interest Payment that was replaced, the Interest Movement is updated to an ignored state. 
+  * The recalculated Interest Payment is placed in one of the initial Interest Workflow states:
+
+Type of Payment | State  
+---|---  
+Grouped | Due to be Sent  
+Standard | Due to Prin to be Sent  
+Standard | Sent to be Agreed  
+Standard | Due to Cpty - to be Sent  
+
+
+
+The recalculated Interest Payment is identifiable within the Interest Workflow states to differentiate it from other Interest Payments - see [Identifying Recalculated Interest Payments](<#identifying-recalculated-interest-payments>) for more details.
+
+**Summary**
+
+The below table summarizes what happens when Interest Payments are recalculated and an open Interest Payment exists in one of the Interest Workflow states.
+
+Interest Workflow State Original Payment In (Roll-ins & Distributions) | Standard or Grouped Workflow | Subject to Recalc. ? | If replaced, Workflow Queue that new Interest Payment placed in. | State original Interest Movement updated to. | State that replaced Interest Payment Updated to.  
+---|---|---|---|---|---  
+Due to Prin - to be Sent | Standard | Yes | Due to Prin - to be Sent | N/A | Replaced  
+Due to Cpty - to be Sent | Standard | Yes | Due to Cpty - to be Sent | N/A | Replaced  
+Send to be Agreed | Standard | Yes | Due to Prin to be Sent  
+or  
+Due to Cpty to be Sent | N/A | Replaced  
+Agreed to be Approved | Standard | Yes | Due to Prin to be Sent  
+or  
+Due to Cpty to be Sent | Ignored | Replaced  
+Approved to Rolled in / Distributed | Standard | No | N/A | N/A | N/A  
+Due to be Sent | Grouped | Yes | Due to be Sent | N/A | Replaced  
+Sent | Grouped | Yes | Due to be Sent | N/A | Replaced  
+Agreed to be Approved | Grouped | Yes | Due to be Sent | Ignored | Replaced  
+Approved to be Settled | Grouped | No | N/A | N/A | N/A  
+  
+In short, open Interest Payments are only replaced if a newly calculated Interest Payment is different, and the original Interest Payment is not in an approved state. If the original Interest Payment which is replaced had an Interest Movement attached to it, the Interest Movement is updated to an ignored state.
+
+**Note:** Should the Interest Calculation fail for any reason, this will be indicated in the task status, and the original interest payments will not be replaced or moved.
+
+### Fields Compared when Interest Payments Recalculated
+
+When an open Interest Payment is recalculated, the system compares the original Interest Payment to the recalculated Interest Payment.
+
+Specifically, the following fields are checked:
+
+  * Index
+  * Spread
+  * Period Start
+  * Period End
+  * Calculation Method
+  * Day Count Convention
+  * Accrued Interest
+  * Distribution Preference
+  * Payment Direction
+
+
+
+If a difference is found in any of the above fields, the original payment is replaced with the recalculated payment.
+
+### Identifying Recalculated Interest Payments
+
+The system allows the Interest Calculation task to be run numerous times. If the task is run with the generate payments flag enabled, Interest Payments will be generated for those agreements where the Interest Period End Date has been reached or exceeded.
+
+Similarly, the system allows for the [recalculation](<#recalculate-interest-payments>) of an Individual Interest payment.
+
+Should an existing Open Interest Payment exist in any of the following Interest Workflow states:
+
+Type of Payment | State  
+---|---  
+Standard | Due to Cpty - to be Sent  
+Standard | Due to Prin - to be Sent  
+Standard | Sent - to be Agreed  
+Standard | Agreed - to be Approved  
+Grouped | Due to be Sent  
+Grouped | Sent  
+Grouped | Agreed - to be Approved  
+  
+then the system will compare the newly calculated Interest Payment with the original Interest payment.
+
+If the newly generated Interest Payment amount differs from the original, then the system will remove the original Interest Payment from its current state.
+
+## Reopen Payment
+
+Interest Payments are generated for an Interest Period per currency, per margin type per Agreement.
+
+Once an Interest Payment is in a completed state, it is not possible to add a cash collateral movement (for the same agreement and margin type) with a settlement date that would fall within the preceding now closed interest period.
+
+The system allows for a user to reopen an interest payment.
+
+There are some basic criteria that govern whether an Interest Payment can be Reopened.
+
+  * An **Interest Payment** can only be reopened if it is in a **Completed** state.
+  * An Interest Payment can only be reopened if there are no **subsequent** Interest Payments in existence.
+  * Interest Payments can only be reopened from the **All Payments** Tab in the Interest Module.
+
+
+
+**Note:** If the above criteria is met and the 'Reopen payment' is not available, check the permissions to ensure proper authorization for reopening interest periods.
+
+**Procedure**
+
+  1. Click on the **All** in the navigation pane under Interest.
+  2. Next to the Agreement Name text box there is a drop down button. Click the drop down.
+  3. Under the Period End Date is the **Activity** field. Select **Completed Only**. Then select a date range of completed interest payments.
+  4. Click the **Search** button to return completed payments.
+  5. Select a payment and the **Reopen Payment** button will become available.
+
+
+
+## Resend
+
+Interest Statements can be resent to Counterparties, if required, from the following Interest Workflow states:
+
+  * Distribution Payments - Sent to be Agreed
+  * Roll In Payments - Sent to be Agreed
+
+
+
+**Procedure**
+
+  1. Select the check box(es) to the left of the required Interest Payment(s).
+  2. A **Resend** button will become visible.
+  3. Click on the **Resend** button to send the Interest Statement to the defined contacts.
+
+**Note:** A contact can be defined as eligible to receive lock up and/or variation interest statements, so ensure that the margin type for the Interest Payment in the grid matches the contact's defined eligibility.
+
+
+
+
+**Validation**
+
+It is not possible to resend Interest Statements when a cash collateral Movement(s) has been recently [created](<movements.md#create-a-manual-movement>) or [cancelled](<movements.md#cancel-a-manual-movement>) for a settlement date within the Interest Payment period.
+
+The Interest Payment **Resend** transition process will determine if a cash collateral movement(s) affects the Interest Payment when:
+
+  * the cash Movement is for the same Agreement Name as the Interest Payment
+  * the cash Movement is for the same Instrument as the Interest Payment
+  * the cash Movement Type is for the same Position Type of the Interest Payment - i.e. Held (Deliver to Principal, Return to Counterparty) or Posted (Deliver to Counterparty, Return to Principal) 
+
+
+
+**Note:** When an Agreement's Net Held and Posted Interest Payments indicator is checked, i.e. Held and Posted Interest Payments are netted, Movement Type is not validated against the Interest Payment Position Type - as all Movement Types will impact the Interest Payment.
+
+  * the cash Movement is for the same Collateral Margin Type as the Interest Payment
+  * the cash Movement Settlement Date is less than or equal to the Period End Date of the Interest Payment
+  * the cash Movement was last edited after the Calculation Date/Time of the Interest Payment
+
+
+
+When all of the above criteria have been met, the **Resend** transition will fail and and no emails will be sent. 
+
+Interest Payments that fail the transition can be identified by the ![failed_icon.jpg](Images/failed_icon.jpg) icon under the Transition Status column. 
+
+In order to advance the Interest Payment(s) failing for an impacting cash collateral movement, the Interest Payment(s) needs to be [recalculated](<#recalculate-interest-payments>). However, it is strongly recommended to:
+
+  * [Identify](<movements.md#view-movements>) the underlying movement(s) impacting the Interest Payment
+  * [Progress](<movements.md#approve-or-reject-manual-movements>) the movement(s) to an In Transit or Settled state
+  * [Verify](<movements.md#view-movements>) all the movements within the Payment Period are accurate
+
+
+
+_before_ [recalculating](<#recalculate-interest-payments>) the failing Interest Payment(s). 
+
+Note: The last edited time on a Movement changes with each settlement state progression. Therefore, it is strongly recommended that any underlying movement affecting the transition of an Interest Payment is progressed to an In Transit state prior to recalculating the Interest Payment. Progressing the movement to a Settled state is recommended if your organization requires the Settlement Task to run more frequently than on an end of Principal Managing Location basis.
+
+**Common Reason for having to resend an Interest Statement**
+
+The most common reason for an Interest Statement being in a failed sent status is due to missing or incorrect contact details on the Agreement.
+
+If this is the case, add /correct the contacts (see [How to Define a Contact](<contactinfo.md#contact-information>) for guidance) and then resend the Interest Statement from this state.
+
+**Note:** The actual Interest Statement report is generated when the . Adding or correcting contact details subsequent to this task completing, will not generate a new version of the Interest Statement with the amended contact details. However, clicking the **Resend** button after contacts have been amended will cause the Interest Statement to be sent to the revised contacts, and the sent status will update accordingly. The revised contacts will be included on Interest Statement when it is next generated.
+
+## View Distribution Notice
+
+While the interest payment is in a state of **Agreed - To Be Approved** the user can view the Distribution Notice prior to it being sent once the interest payment is approved. 
+
+Select the **More** drop down and then select **View Distribution Notice**.
+
+At the bottom of the page, the user will see the Interest Distribution Notice be generated into a pdf file. The user can click on it and then view the notice.
+
+![](Images/interest_distribution_notice.jpg)
+
+## Roll In
+
+This behavior is governed by the [Distribution Preference](<agreements_interest.md#distribution-preference>) value that is defined at the agreement level.
+
+Where agreements have this value set to Roll In, any Interest Payments that are generated will be subject to processing through the Interest Payment Roll In Workflow.
+
+This means that once fully processed, the Interest Payment will be added to (or Rolled In to) the corresponding cash collateral balance in the system. That is, the Collateral Balance will be adjusted by the agreed Interest Payment.
+
+**Procedure**
+
+  1. To action these payments, select the payment whose _Preference_ is set to **RollIn** by either clicking on the payment or click the checkbox next to the Workflow state.
+  2. The **Roll In** button will become enabled.
+  3. Click on the **Roll In** button and a popup screen will appear.
+  4. The Agreed Amount and Settlement Date fields are required. The values will default to the Accrued Interest amount and the period end date which is based off of the Settlement offset date. However, the fields are editable if the values need modification.
+  5. When satisfied with the values, click the **Roll In** button. The payment will progress to the **Agreed - to be Approved** state.
+
+     * The transition will validate if a cash collateral Movement(s) has been recently created or cancelled  for a settlement date within the Interest Payment period. The transition process will determine if a cash collateral movement(s) affects the Interest Payment when:
+       * the cash Movement is for the same Agreement Name as the Interest Payment
+       * the cash Movement is for the same Instrument as teh Interest Payment
+       * the cash Movement Type is for the same Position Type of the Interest Payment - i.e. Held (Deliver to Principal, Return to Counterparty) or Posted (Deliver to Counterparty, Return to Principal
+         * **Note:** When an Agreement's **Net Held and Posted INterest Payments** indicator is checked, i.e. Held and Posted Interest Payments are netted, Movement Type is not validated against the Interest Payment Position Type - as all Movement Types will impact the Interest Payment.
+       * the cash Movement is for the same Collateral Margin Type as teh Interest Payment
+       * the cash Movement SettlementDate is less than or equal to the Period End Date of teh Interest Payment
+       * the cash Movement was last edited _after_ the Calculation Date/Time of the Interest Payment
+
+When all the above criteria have been met, the **Roll In** transition will fail and the Interest Payment(s) will remain in the **Sent** state.
+
+
+
+
+## View Interest Payments
+
+Interest Payments can be viewed for completed (historical) or Interest Payments that are created on cash collateral positions for Agreements when the following conditions are met:
+
+  * The corresponding Interest Period End Date as defined on the Agreement(s) has been reached or exceeded.
+
+
+  * Cash Collateral Interest Terms are defined on the Agreement for the currencies in question.
+
+
+
+Payments can be viewed within the [workflow](<interest_workflow.md#all>).
+
+  * Next to the Agreement Name text box filter, there is a drop down button. Click the drop down.
+  * Under the Period End Date is the Activity field. Select **Active Only**.
+  * Select the **Search** button to return interest payments.
+
+
+
+## View Statement
+
+Interest statements are available to view within the system for:
+
+**Open Accruals** \- defined as the interest that has accrued from the Interest Period Start Date until the previous day. "Previous Day" is determined from the perspective of the current Time/Date for the Agreement's Principal Managing Location - see Understanding Dates and Times in TLM Collateral Management.
+
+**Completed Interest Payments** \- Interest Payments for prior Interest Periods which have been fully processed until the Interest Payments are in a completed state.
+
+**Open Interest Payments** \- Interest Payments that have been generated for the previous Interest Period, but have not yet been fully processed through to a settled state.
+
+The format that the Interest Statements take (i.e. whether they are a single report, stacked for held and posted positions, or completely separate) is governed by the Net Held and Posted Interest Payments flag on the Agreement, and additionally, for net payments, whether both held and positions existed during the Interest Period.
+
+For Agreements that net payments, a single "stacked" Interest Statement is created, with the held and posted positions split out onto separate pages within the same statement. If only held or posted positions existed during the Interest Period, a single non-stacked Statement is produced.
+
+Where Agreements are configured for Gross Interest Payments, separate Interest Statements are produced for the held and posted payments.
+
+The user can view the Interest statement in all the interest workflow states. 
+
+To view the interest statement:
+
+  * Interest Workflow - Click on the interest or select the interest to drill down to for more information. The **More** drop down will appear and the user can select **View Statement**.
+  * Open Accruals - Select the accrual by clicking in the radial button next to the Agreement name. A **View Statement** button will appear.
+
+
+
+The interest statement will be displayed in pdf format.
+
+![interest_statement.jpg](Images/interest_statement.jpg)
+
+## View Interest Distribution Notices
+
+When Interest Distributions are approved, an Interest Distribution Confirmation Notice is sent to any contacts defined as eligible to receive it. 
+
+It is also possible to view the notice directly from within the Application.
+
+To view the notice, select the item in the grid by clicking the checkbox or on the payment. Then select the drop-down menu "More" and select "View Distribution Notice.

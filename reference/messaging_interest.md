@@ -1,0 +1,74 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_interest.html
+
+# Distributions/Roll Ins Interest Payments
+
+## Behavior for Messaging Interest Payment Distributions/Roll Ins
+
+This topic outlines the behavior for **Interest Payment Distributions and Roll Ins** in the standard interest payment workflow that are subject to electronic processing with Acadia via the TLM® Collateral Management Messaging Interest Adapter.
+
+The following Interest Payment Distribution Workflow queues have specific behavior exhibited when processing [Messaging Eligible](<messaging_margincalls.md#messaging-eligibility>) interest payment distributions and roll ins:
+
+## Due to Prin – to be Sent & Due to Cpty – to be Sent
+
+Initially, all [Messaging Eligible](<messaging_margincalls.md#messaging-eligibility>) Interest Payment Distributions and Rolls Ins for Agreements that are members of a Combined Business Lines Agreement Group are placed within the _Due to Prin - to be Sent_ or _Due to Cpty – to be Sent_ Workflow states.
+
+When **Send Interest Payments** is selected, the following happens:
+
+  * TLM Collateral Management publishes interest payment notification messages for the [selected items](<messaging_understanding_interest_payment.md>).
+  * In turn, the [TLM Collateral Management Messaging Interest Adapter](<messaging_margincalls.md#components>) subscribes to the notification messages.
+  * For any interest payment where the [Agreement has been configured with an Agreement Short Name plus Agreement Currency against a group alias](<messaging_agmt_link.md>), the Interest Adapter takes the Interest Payment information and sends an electronic Interest Payment message to Acadia. 
+  * The Interest Payments are tagged with an external Id number.
+  * An email interest payment notice is also sent to any of the [contacts for the Agreement](<contactinfo.md#contact-information>) which are defined to receive it. That is, even Messaging Eligible interest payments will also send email interest payment notices if the Agreements are configured to do so.
+  * Simultaneously, within TLM Collateral Management, the selected interest payment(s) are transitioned into the Sent workflow state to await, and process interest payment updates from Acadia.
+
+
+
+**Note:** Response statuses received from Acadia for the interest payments are only updated in the Sent state. It is therefore imperative that all the interest payments be transitioned into this state in order that they can be updated.
+
+## Sent
+
+It is expected that Messaging Eligible interest payments will remain in this Workflow state until a status update response is received from Acadia via the Interest Adapter.
+
+If the original interest payment message was not received by the Counterparty, the **Resend** button can be used to send the interest payment notification message again. However, once this is done, TLM Collateral Management will not check whether it has already been sent. This could potentially result in duplicate interest payment notifications being issued which may result in an error response from Acadia for a duplicate message. It is recommended to use this with caution.
+
+Interest payments in this state that are cancelled through recalculation (single or via task) or transition: extend settlement date, cancel extend settlement date, cancel ad hoc payment or change in netting (i.e. gross to net; net to gross) will publish message that will be relayed to cancel the original interest payment in Acadia. This will clear the way for the updated interest payment to be sent by the user.
+
+**Interest Payment status responses from Acadia**
+
+While in the **Sent** workflow state, the Interest Adaptor will process interest statements for the following statuses:
+
+## Finalized
+
+  1. [Agreed amount and Settlement Date](<messaging_understanding_interest_payment.md>) will be updated based upon the provided match and finalized interest payment from Acadia. Please see Acadia documentation for further information on how the payment amount and value date fields may be set based upon operational tolerances and cash cut offs.
+  2. SSIs will be applied.
+  3. Physical Settlement flag will be marked as checked.
+  4. Interest Payment will be transitioned to Agreed – to be Approved.
+
+
+
+## Mismatched or Disputed
+
+A message exception will be published to the TLM® Collateral Management Messaging Intervention Tool for statuses of Mismatched or Disputed with details for the user to investigate.
+
+**Note:**
+
+  * Additional interest payment statuses (i.e. Unpaired) will not be processed by the Interest Adapter and may need further investigation within Acadia.
+  * Process as Distribution and Process as Roll In are outside the scope of this integration. Additional processing may be required where the interest statement sent to Acadia from TLM Collateral Management may need to be cancelled, prior to sending an updated statement.
+
+
+
+## Agreed
+
+Once Interest Payments have been agreed with the Counterparty, and the Agreed Amount and Settlement Date for the payment recorded (whether manually entered or uploaded via a payment summary file), the Interest Payment needs to be independently approved before it can be further processed through the Workflow.
+
+Interest Payment Items that are sent for managerial approval are displayed in the grid when this Workflow state name is clicked.
+
+Interest Payments can be approved or rejected from this state.
+
+**Note:**
+
+  1. Actions within this state are not integrated with Acadia.
+  2. Interest payments that have been transitioned to this state have been finalized in Acadia.
+  3. While the state and actions are fully audited within TLM Collateral Management, rejecting an interest payment that has been finalized in Acadia will require coordination with the Counterparty to resolve.
+
+

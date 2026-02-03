@@ -1,0 +1,481 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/movement_actions.html
+
+# Movement Actions
+
+## Approve or Reject Manual Movements
+
+The Movement Screen allows a user to approve or reject various Collateral Movements.
+
+Three conditions apply for **Approve** :
+
+-The approving user cannot be the same user as the user who entered the Collateral Movements.  
+-The approving user must have privilege entitlements sufficient to approve Collateral Movements.  
+-Only Collateral Movements that are in a To Be Approved state can be approved.  
+
+
+Three conditions apply for **Reject** :
+
+-The rejecting user must have privilege entitlements sufficient to reject Collateral Movements.  
+-A movement can be rejected by the same user that entered the movement.  
+-Only Collateral Movements that are in a To be Approved state can be rejected.  
+
+
+  1. To approve or reject a movement, click on the Movements in the left navigation pane.
+  2. Select a settlement date range by clicking on the **from** and **to** fields in the settlement date filter at the top of the screen and then press the search button.
+  3. All movements that fall in that settlement date range will be returned. To filter the movements to only show the ones that need approval, set the Status field in the grid to the value of 'To Be Approved'.
+  4. The user has the option to approve or reject the movement.
+
+
+
+## Approve Movements that are Pending Cancellation
+
+The Movement Screen allows users with the requisite permissions to approve collateral movements that are Pending Cancellation. That is, a user has already requested that the movement be cancelled, but their request is not processed until a second user approves it. By approving a movement that is pending cancellation, the end result will be that the movement gets cancelled.
+
+There are controls regarding which users can approve movements that are pending cancellation:
+
+  * The approving user cannot be the same user as the user who requested the movement cancellation.
+  * The approving user must have privilege entitlements sufficient to approve movement cancellation requests.
+  * Only collateral movements that are flagged as Pending Cancellation can have cancellation approval applied.
+
+
+
+**Procedure**
+
+  1. Navigate to the Movements screen.
+  2. Locate the movements that are flagged as Pending Cancellation. This can be done through the drop-down Movement Filter, select _All Pending Cancellation_ then click the **Search** button.
+
+**Note:** As well as using search criteria such as Settlement State (only movements that are in a Settled, In Transit or Failed state can be flagged as Pending Cancellation), Settlement Date Range and optionally Instrument Class and/or Agreement Name); further filtering the records to be returned by using the check box Filter by Pending Cancellation.
+
+  3. Locate the movement that needs approval for the cancellation.
+
+  4. Click on the required movement.
+
+**Note:** Provided the following control conditions are met: - the user is not the one whom requested the cancellation, the user has sufficient privileges, the Approve Cancellation button will become enabled.
+
+  5. Click the **Approve Cancellation** button.
+
+
+
+
+**Validations**
+
+  1. If short position movement checking has been enabled, the system performs a [short position check](<movements_short_position_checking.md>) to see if cancelling the movement will cause a (or exacerbate an existing) short position.
+
+**Note:** A short position warning will not prevent the movement being cancelled.
+
+  2. The system also validates that cancelling the movement would not result in an invalid position. That is, whether there are any dependent movements linked to the movement being cancelled. If this is the case the system will throw an exception message and the pending cancellation will not be approved. 
+
+"The movement cannot be canceled because doing so would result in an invalid position."
+
+
+
+
+Assuming the validations are passed, then the Pending Cancellation is approved. Specifically:
+
+  * The movement's settlement state is updated to Cancelled.
+    * When approvaling the cancellation of a settled collateral movement, any associated collateral position could be affected. That is, if the cancellation was approved for a collateral movement that settled using the "adjust positions" flag, then the corresponding settled collateral position will be affected when the collateral movement is cancelled, as it will "roll out" of the position.
+  * The Pending Cancellation flag on the movement is cleared.
+  * The Reviewed By and Reviewed Date fields of the movement are updated with the cancellation approving user and the time the pending cancellation was approved.
+
+
+
+**Note:** Important Interest Payment Consideration
+
+If approving the cancellation of a cash collateral movement(s) for a settlement date within an open interest period, it is strongly recommended to recalculate any open interest payment(s) for the affected agreement to ensure the approved cancelled movement is correctly reflected within the ending balance of the open payment period and the beginning balance of the open accrual.
+
+## Cancel a Movement
+
+**Procedure**
+
+To mark a collateral movement as cancelled:
+
+  1. In the Navigation Pane click **Movements**.
+  2. Select a date range for movements based on the Settlement Date that is required to be returned and then click on the search button ![](Images/search_button.jpg).
+
+**Note:** The movements that are returned from the search are restricted to information based on [user scope and responsibility](<understand_scope_responsibility.md>).
+
+By clicking on the agreement, the history of the movement can be viewed.
+
+  3. To cancel the movement, click on the **Cancel** button in the top right corner of the page.
+
+  4. The **Cancel Comment** form appears where a mandatory comment is required for the movement. Once the comment is entered, click on the **Cancel** button.
+
+
+
+### Manual Movement
+
+Typically a collateral movement would be cancelled when it has been:
+
+  * Input in error and it has been advanced to the Confirmed state. If the margin call was still in the Agreed state, then the collateral movements could be deleted from there. Collateral movements on margin calls that have been advanced to the Confirmed State cannot be cancelled directly from that state.
+
+  * Updated to a settled state within the application, but in actuality the movement never settled, nor will it ever.
+
+  * Updated to a failed state in the expectation that it would settle in the future. However, the user will now have confirmed that it will never settle.
+
+
+
+
+Collateral Movements can only be cancelled that are in the following settlement states:
+
+  * In Transit
+  * Failed
+  * Settled
+
+
+
+**Note:**
+
+  1. The system can be configured so that the request to cancel a movement requires approval. Should this be the case, the request to cancel the movement is not immediately processed, but instead results in the movement being updated to indicate it is pending cancellation, and remains so until a sufficiently permissioned second user either approves the pending cancellation (in which case the movement is truly cancelled), or rejects the pending cancellation (in which case the movement status remains unchanged).
+  2. If cancellation approvals are not enabled, then approval is not required, and the movement is cancelled upon request.
+  3. When the user cancels a settled collateral movement, any associated collateral position could be affected. For example, if the collateral movement the user is cancelling was settled using the "adjust positions" flag, then the corresponding settled collateral position will be affected when the collateral movement is cancelled, as it will "roll out" of the position.
+
+
+
+### Interest Movement
+
+TLM Collateral Management allows for a user to Cancel an Interest Movement. Typically this will be because the Interest Movement that was processed and settled was totally incorrect.
+
+There are two basic rules that govern whether an Interest Movement can be Cancelled.
+
+  * An Interest Movement can only be cancelled as long as there are no subsequent Interest Payments in existence in any state (open or completed).
+  * Only Interest Movements that are in an In Transit Settlement State can be cancelled.
+
+
+
+This means that an interest movement can only be cancelled for the most recent interest payment.
+
+**Example:** To clarify this rule, consider the following:
+
+Description  
+---  
+\- An Interest Payment for June is in a Completed state.  
+\- The associated Interest Movement for June is in a Settled settlement state.  
+\- An Interest Payment for July has been generated and is in an Open state.  
+\- The Interest Movement for July's Interest Payment does not yet exist.  
+  
+It is not possible to Cancel the Interest Movement for June, as an Interest Payment exists for July.  
+  
+If the Interest Payment for July had not yet been generated, then it would be possible to fail the Interest Movement for June.  
+  
+The Interest movement is updated to a Cancelled state. The corresponding Interest Payment is re-opened, and placed in one of the following Interest Workflow states:  
+  
+\- If the Payment was for the Grouped Workflow, it will be placed in Grouped Interest Payments Workflow - Sent state.  
+\- If the Payment was for Standard Interest Workflow, a further evaluation occurs based on Distribution Preference.  
+\- If the Movement Type was Interest Distribution, the Interest Payment is moved to Interest Distribution Workflow - Sent to be Agreed state.  
+\- If the Movement Type was Interest Roll-In, the Interest Payment is moved to Interest Roll In Workflow - Sent to be Agreed state.  
+  
+Irrespective of the Workflow state that the Payment is moved to, the Transition status for the Interest Payment will be Reprocessed. See [Identifying and Resubmitting Failed or Cancelled Interest Payments](<resubmit_fail_cancel_int_pay.md>) for more details.  
+  
+**Additional Considerations** :
+
+  * When an Interest Movement is cancelled, the settlement state for the Interest movement is updated to a [Cancelled](<movements.md#search-criteria>) Settlement state.
+  * Cancelled Interest movements are not taken into consideration for margin calculation, nor are they considered for inclusion in the Settle Movements task.
+  * Cancelled Interest movements are not included in collateral positions.
+  * The Interest Payment will have to be re-processed before the Interest Movement is amended. See [Identifying and Resubmitting Failed or Cancelled Interest Payments](<resubmit_fail_cancel_int_pay.md>) for more details.
+  * It is possible to get two open payments under certain conditions. See [How to deal with two open payments](<#dealing-with-two-open-payments>) for more details.
+
+
+
+#### Dealing with Two Open Payments
+
+When calculating Interest payments, the system will only allow one open payment to exist at any one time. There are however, fringe scenarios, where as a result of cancelling / failing Interest Movements for an Interest Period, that two Open Payments for the same Agreement and currency can occur.
+
+Should this rare scenario occur, the following procedure should be followed:
+
+  1. Process the earliest open Interest payment through the Interest Workflow adding the correct settlement date and agreed amount.
+  2. Process the Interest Payment in 1) through to completed, and run the settlement task to settle the Interest Movement.
+  3. Re-run the Interest Calculation task with generate payments on to recalculate the latter open payment to reflect the details from the earlier payment.
+  4. Process the latter open payment as per normal.
+
+
+
+**Note:** It is critical that the earliest open payment is processed first to completion before the latter payment is processed - otherwise potentially incorrect collateral balances could be generated. Please contact a TLM® Collateral Management Support Representative if assistance is required.
+
+## Create a Manual Movement
+
+In the normal course of business, Collateral Movements are entered in association with Margin Calls. However, this may not always be the case, and the system allows the user to create a standalone Collateral Movement for an Agreement.
+
+Examples of this include:
+
+  * Representing a historic movement of collateral, as Collateral Movements entered on margin calls cannot have settlement dates in the past. 
+  * Position adjustment.
+  * Representing a Collateral Movement that is not associated with a margin call.
+
+
+
+**Procedure**
+
+To add standalone collateral movement:
+
+  1. Select Movements from the Navigation Pane.
+  2. Click on the Movements button ![create_movement_button.jpg](Images/create_movement_button.jpg) in the top right corner of the screen.
+  3. The _Create Movement_ dialog box will appear. Enter an Agreement Name.
+
+**Note** : The choice of agreements that can be enter here is limited by the assigned Agreement Scope.
+
+If the Agreement the user selects has Posting Party defined as either Principal or Counterparty, then the movement direction the user is adding will be evaluated to ensure compatibility with posting party definition.
+
+The following table summarizes permissible movements:
+
+Agreement Posting Party Value | Permissible Movement  
+---|---  
+Principal | Deliver to Counterparty  
+  
+Return to Principal  
+Counterparty | Deliver to Principal  
+  
+Return to Counterparty  
+Both | All Movements  
+  4. Once the Agreement has been entered, the screen will expand and the user can enter the direction of the movement and the Instrument.
+
+  5. The 'Target' field defaults to 'Notional' and can be changed to 'Market Value' through the drop down box. Enter the 'Amount' of the movement and tab out for field or click on the **Calculate** button to calculate the 'Market Value (Agmt Ccy)' and 'Market Value Applied'.
+  6. The 'Settlement Date' can be adjusted by clicking on the date and a date picker field will appear.  
+  
+Settlement Date can be historic. This date will default according to settlement offsets defined in the system. Settlement offset values can be defined in three areas in the application. Specifically, the system will seek values in the following locations in this order:  
+  
+a. Settlement offsets defined on receiving party's relevant Agreement or Entity  
+b. If not found, then any settlement offsets that are defined on the agreement.  
+c.If no agreement level offsets exist, it will default to system level default settings.  
+d.If no values are defined at the system level either, the date will defaults to Today +1 business day.  
+  
+"Today" is defined as the current date in the Principal Managing Location of the Agreement. See [Understanding Settlement Date Defaults](<understand_date_times.md#settlement-date-defaults>) for more information.
+  7. A 'Trade Date' can be set but is not required. By default, Trade Date field is not populated.  
+  
+**Note:** Trade Date is not validated to ensure that it is equal to or prior to Settlement Date.
+  8. The movement will default to a 'Physical Settlement'. However, that can be changed by un-checking the box. If the Settlement Date is changed to a date prior to today, then the field will automatically be unchecked.
+  9. A 'Reason' for the movement is required. The movement will not save until a reason is entered.
+  10. The **Create** button will appear once the 'Reason' is entered. Once the button is pressed, the movement will be saved.
+
+
+
+Any entry of collateral movement is subject to the same [validation](<movement_validation.md>) as collateral movements entered via Workflow, except that settlement date can be for a prior date.
+
+**Note:** If a cash movement is entered with an historic settlement date to remedy an incorrect Interest Payment, then it is essential to recalculate the Interest Payment once the necessary corrective movements are approved. Failure to recalculate the Interest Payment will result in incorrect ending balances from the current payment period propagating to the next payment period's opening balance as well as the open accrual.
+
+### Adding Backdated Cash Collateral Movements
+
+**Background**
+
+It may be necessary to add backdated cash collateral movements for several reasons.
+
+  * Discovery that a cash collateral Movement is missing from an Agreement.
+  * Discovery that a cash collateral Movement has a different settlement date in TLM® Collateral Management versus the true settlement date in the settlement systems.
+  * Discovery that a cash collateral Movement has a different notional amount or currency in TLM Collateral Management versus the settlement systems.
+
+
+
+Often these inconsistencies are identified when the Principal and Counterparty attempt to agree their Interest Payments at the end of an Interest Period and discover that the details of the collateral movements for the Interest Period in question are not correct.
+
+In order that the collateral movements history be correct - _a pre-requisite for Interest accrual and payment calculation_ \- it is likely that the incorrect collateral movements be failed or cancelled, and then correcting backdated collateral movements be entered to truly reflect the settlement history for the period.
+
+TLM Collateral provides functionality to add standalone movements which can be entered with settlement dates within the open Interest Period should this need to be done.
+
+**Note:** Currently, it is only possible to enter backdated cash movements for open interest periods - not closed ones. 
+
+For example, assume today is the 3rd October, for an agreement with an Interest Period End date of 31st September, and that Interest Payments for the Period Ending September have been generated, but not yet completed.
+
+It would be possible to enter a backdated cash collateral movement for the Period 1st September to 31st September, because that Interest Period and payment are currently open.
+
+However, it would not be possible to add a cash movement or approve a cash movement with a settlement date prior to 1st September, as that Interest Period would be closed.
+
+**Inclusion of In Transit Cash Collateral Movements for Interest Accrual and Payment Purposes**
+
+The Interest Accrual and Interest Payment calculation takes In Transit Cash Collateral Movements into consideration as settled movements, provided that the settlement date for the In Transit movement(s) is in the past.
+
+This allows for users to add backdated cash collateral movements to an agreement to correctly reflect the movement history for an Interest Period and calculate the Interest Accruals and Payments without having to have run the settlement task.
+
+Settled cash movements are taken into consideration in the Interest Calculation as a matter of course.
+
+**Note:** When entering a backdated cash collateral movement(s) within an open interest period, it is strongly recommended to recalculate any open interest payment(s) for the affected agreement to ensure the backdated movement is correctly reflected within the ending balance of the open payment period and the beginning balance of the open accrual.
+
+## Delete a Movement
+
+Collateral Movements on a Margin Call can only be deleted when they are in a **Rejected** state.
+
+**Procedure**
+
+To delete a movement from a margin call:
+
+  1. Select Movements from the Navigation Pane and perform a search for the movement that needs to be deleted.
+  2. Select a movement to delete by clicking in the radial button to the left of name of the movement.
+  3. Click the **Delete** button
+  4. As this action is not reversible, the user will be prompted with a warning message asking to confirm the deletion or cancel the action. If **Delete** is selected, then the record will be deleted.
+
+
+
+**Considerations**
+
+  * Only collateral movements that have not yet been sent to the settlements Workflow state can be deleted. The workflow states that the movements can be deleted from are the following:
+
+    * Demand - Agreed
+    * Antic Demand - Agreed
+    * Grouped Margin - Agreed
+
+
+
+where the Collateral Movement is in a "Rejected" settlement state.
+
+## Fail a Collateral Movement
+
+Why fail a collateral movement?
+
+The settle movements task assumes that settlement will occur for any given settlement date, and will mark the collateral movements as settled provided that there are no problems processing the movement.
+
+If it transpires that the collateral movement has failed settlement, it is necessary to record this for reporting or other purposes.
+
+**Note:** It is assumed that a collateral Movement in a failed state will be eventually settled. Failed movements are considered to be in an intermediary state, and therefore will be subject to additional processing. Namely, they can be:
+
+  * re-opened - if it is expected that the collateral movement will settle without any changes
+  * cancel/replaced. - if it is expected that the collateral movement will settle, but with changes.
+  * cancelled outright if the collateral movement will not occur.
+
+
+
+**Procedure**
+
+To mark a collateral movement as failed:
+
+  1. In the Navigation Pane click **Movements**.
+  2. Enter the appropriate date range and search for the collateral movements that are required to be returned.  
+The movements that are returned from the search are restricted to those agreements which the user has permissions to see via the user's membership of [agreement responsibilities](<understand_scope_responsibility.md>) and/or agreement groups.
+
+Movements can be failed in one of the following states:
+
+     * In Transit
+     * Settled
+  3. Select the movement by clicking in the radial circle. Only one movement can be selected at a time.
+
+  4. Select the **Fail** button and the movement will be set to a 'Failed' status.
+
+Failed movements are taken into consideration for margin calculation, but are not considered for inclusion in the settle movements task.
+
+Validation occurs when Failing Movements.
+
+The system has logic built in to validate when a collateral movement can be failed. A movement cannot be failed if it will create an invalid collateral position.
+
+
+
+
+## Rejecting Movements that are Pending Cancellation
+
+The Movement Screen allows users with the requisite permissions to reject collateral movements that are Pending Cancellation. That is, a user has already requested that the movement be cancelled, but their request is not processed until a second user actions it. By rejecting a movement that is pending cancellation, the end result is that the cancellation request is discarded.
+
+There are controls regarding which users can reject movements that are pending cancellation:
+
+  * The rejecting user cannot be the same user as the user who requested the movement cancellation.
+  * The rejecting user must have privilege entitlements sufficient to reject movement cancellation requests.
+  * Only collateral movements that are flagged as Pending Cancellation can have cancellation approval rejected.
+
+
+
+**Procedure**
+
+  1. Navigate to the Movements screen.
+  2. Locate the movements that are flagged as Pending Cancellation. his can be done through the drop-down Movement Filter, select _All Pending Cancellation_ then click the **Search** button.
+
+**Note:** As well as using search criteria such as Settlement State (only movements that are in a Settled, In Transit or Failed state can be flagged as Pending Cancellation), Settlement Date Range and optionally Instrument Class and/or Agreement Name); records to be returned can be further filtered by using the check box Filter by Pending Cancellation. 
+
+  3. Locate the movement that needs to be rejected for the cancellation. 
+
+  4. Click on the movement that needs to be rejected.
+  5. Provided that the above control conditions are met - the user is not the one whom requested the cancellation, the user has sufficient privileges, the Approve Cancellation button will become enabled.
+  6. Click **Reject Cancellation** button. 
+  7. The _Reject Comment_ dialog opens, and enter an explanation as the rejection has occurred on this pending cancellation request.
+
+
+
+**Note:** The text that is entered here will be visible on the movement, so it is recommended to populate with pertinent information. Click OK to commit the rejection. 
+
+The Pending Cancellation is rejected. Specifically:
+
+  1. The Pending Cancellation field for the movement is cleared.
+  2. The reject comments entered are stored on the Movement in the Reject Reason field.
+  3. The Movement's History is updated to clear the pending cancellation flag, as well as with the user whom applied the Reject Cancellation action.
+  4. The _Reviewed By_ field on the movement is updated with the rejecting user's id; similarly Reviewed Date is populated with the time and date the Reject Cancellation was applied.
+  5. The following right click functions that can typically be applied to a movement are re-enabled:-
+
+a) Add Movement to Existing  
+b) Cancel  
+c) Cancel / Replace  
+d) Fail  
+e) Re-Open
+
+  6. It is important to understand that the settlement state of the movement is not changed when the Pending Cancellation is rejected. Conceptually it is as if the cancellation request did not occur.
+
+
+
+
+## Re-Open a Failed Movement
+
+Collateral Movements that have been failed are not regarded as being in a final settlement state provided the following conditions are true:
+
+  * Failed Collateral Movements are taken into consideration in Margin Calculations.
+
+  * Failed Collateral Movements are excluded from processing by the Settlement Task.
+
+
+
+
+Failed collateral movements are considered as being in an intermediary settlement state. which will require additional processing before their life cycle is completed. In essence, the settlement state of failed will remain unless action is taken.
+
+Specifically, there are three actions that can be applied to a failed collateral movement:
+
+  * If the collateral movement is never expected to be settled, the movement can be cancelled.
+  * If the collateral movement is now expected to settle without any changes it can be Re-opened.
+  * If the collateral movement is now expected to settle but requires changes to one or more of the following fields:
+    * Notional
+    * Settlement Date
+
+
+
+then it must be cancel / replaced before being processed further.
+
+**Procedure**
+
+  1. Go to Navigation Pane and select **Movements**.
+  2. Select a date range, a from date and a to date range, in order to locate the failed position and click on the search button.
+  3. When movements are returned, the data can be filtered further through the grid. For example, selecting a status of _Failed_.
+  4. Find the movement and either select the radial button on click on the movement. A **Re-Open** button will appear in the top right corner.
+  5. Once the button is clicked, the movement will re-open and it's status will change to **In Transit**.
+
+
+
+**Note:** If the grid is filtered on _Failed_ movements, once the movement is re-opened, the user will need to search for it again as it will disappear from the grid as it no longer meets the criteria of being _Failed_.
+
+## View Eligibility Breaches
+
+**Collateral Movements**
+
+When Collateral Movements are created the system checks to see whether the Instrument selected on the Collateral Movement matches the following Agreement eligibility rules
+
+  * Basic Eligibility
+  * Advanced Eligibility
+  * Ratings Based Eligibility
+  * Wrong Way Risk Eligibility
+
+
+
+When a collateral movement is being booked:
+
+  * [As a standalone movement via the Movements Module](<#create-a-manual-movement>)
+  * [Through the standard Margin Call Workflow](<margin_calls_movements.md>)
+  * [As a delivery movement(s) on a collateral substitution.](<substitutions_workflow_actions.md#add-movements-substitution>)
+
+
+
+The collateral movement entry form provides direct feedback as to the eligibility of the instrument selected as the actual movement booking is undertaken.
+
+Should the instrument be eligible according to the agreement's basic eligibility rules, - and optionally if they exist - advanced, ratings based and wrong way risk eligibility rules - then a green checkmark is displayed in the movement form under the **Is Eligible** field.
+
+If one or more eligibility checks are failed, then a red X will be displayed under **Is Eligible**. By clicking on the Eligiblity Breaches window, the reason for the failure will be displayed.
+
+Field | Description  
+---|---  
+Rule Name | This will read "Basic Eligibility" if that is the evaluation that has failed. If the failure is due to an Advanced, Ratings Based and/or Wrong Way Risk evaluation then this field will list the actual Rule Names that the movement has failed evaluations for.  
+Reason | This provides additional information as to how the nature of eligibility failure.  
+  
+For Basic Eligibility breaches, the cause maybe that there are no eligible buckets set up on the Agreement for the instrument to fall into.  
+  
+Or because the instrument on the movement could fall into more than one collateral bucket assigned to the Agreement.  
+  
+For Advanced and Ratings Based Eligibility Failures, the failure is typically because one criteria on the rules have not been met. The reason field provides information as to which criteria these are.

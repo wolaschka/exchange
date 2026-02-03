@@ -1,0 +1,551 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/task_imports.html
+
+# Import Tasks
+
+## Create Task
+
+  1. Within the Task Configuration screen, select Import Configuration from the filter drop-down.
+  2. To create a new Import Task, select the **Create Import Configuration** button.
+  3. A pop-up screen will appear with the following fields made available:
+
+
+
+**Note:** Fields in red are required.
+
+The following fields are required for creating all imports.
+
+Section | Field | Description  
+---|---|---  
+Configuration Details | Name | This is used to specify a unique name of the Import Configuration.  
+  
+**Note:** Ensure that the name entered for the configuration does not have a double space in it (e.g. Name of Config), otherwise problems may arise when the task is run. If the task is run and this [validation message 8](<validation_messages.md#8>) is seen, double double check the name of the configuration.  
+| Description | This field can be used to provide a brief description of the process for later reference. This could be, for example, the business purpose of the import configuration or the name of the system from which the corresponding data came.  
+File Format and Location | Import Format | This field is used to specify the format of the data set to be imported, which will currently default to Delimited Text File. Selecting this option will then display corresponding fields to be entered, relating to this import format.  
+  
+**Note:** The actual import file should be encoded in UTF-8 format.  
+| Delimiter | This field is used to specify the corresponding delimiter to be used in the file. The following delimiters are supported:  
+  
+  
+| Actual Delimiter Character| Character Description  
+---|---  
+,| Comma  
+|| Pipe| ~| Tilda| !| Apostrophe| @| At| | #| Hash| $| Dollar| %| Percent| ^| Circumflex| &| Ampersand|  __| Asterisk| ?| Question Mark| /| Foward Slash| \| Backward Slash| .| Full Stop| :| Colon| ;| Semi-Colon| <TAB>| Tab |  | Row Start | This field is used to specify the row number of the first row in the file where the data actually starts and will default to 1. A typical usage of this is where the first row in the file is a header row. If a start row of 1 were specified in this instance then the header row would be incorrectly loaded.  
+| Import File | This field is used to specify the name and location of the corresponding text file. This must be a location that the server running the import process has access to.  
+  
+The file may have any extension name.  
+| Mapping File | This field is used to specify the name and location of the corresponding mapping file. This must be a location that the server running the import process has access to. This must be an XML file.  
+  
+This section is only display for import configurations which contain numerical information.
+
+Section | Field | Description  
+---|---|---  
+Numeric Separators | Decimals | This field specifies the characters that are expected on the file to separate decimals in numbers.  
+  
+There are two choices:  
+Period - Decimal separator is expressed as a period/full stop, e.g. 100.25. This is the default.  
+  
+Comma - Decimal separator is expressed as a comma, e.g. 100,25  
+  
+This section is only displayed for import configurations which contain date information.
+
+Section | Field | Description  
+---|---|---  
+Date Format | Date Locale | This field is used to define the region for the corresponding format of ALL dates in the data set to be imported. Changing the Date Locale will change the corresponding Date Formats listed below.  
+| Standard | Select this radio button and choose from a selection of Standard Date formats  
+| Date Format | This field is used to define the Date Format of ALL dates to be imported in the data set and will default to the Regional Setting as per the user's PC. A date not conforming to this format will be treated as an incorrect data type when the import occurs.  
+| Custom | This allows the date format to be customized.  
+| Date Format | This field allows the customized date to be defined using the following:  
+M - Month  
+d - Day  
+y - Year  
+h - Hour  
+m -Minute  
+s - second  
+and custom separators of your choice.  
+  
+This section for Alias Groups will be displayed depending on the type of Import Configuration. For example, when the Import Configuration is created for Instruments, only the Entity Alias Group will be displayed. This is because an Instrument feed does not contain any Agreement or Trade Type information. It does, however, contain Issuer information. As an Issuer is a type of Entity aliases may be needed in order for TLM® Collateral Management to recognize the issuer as a valid entity.
+
+If a Repo Trades import configuration is created, Agreement, Entity, Trade Type and Branch Alias Groups will be displayed. This is because a trade feed might contain all of these types of information.
+
+Section | Field | Description  
+---|---|---  
+Alias Groups | Agreement Alias Group | Select from the list of [Alias Groups](<reference_related_data.md#alias-groups>) the one which is used to define the Agreement aliases for this import.  
+| Entity Alias Group | Select from the list of [Alias Groups](<reference_related_data.md#alias-groups>) the one which is used to define the Entity aliases for this import.  
+| Trade Type Alias Group | Select from the list of [Alias Groups](<reference_related_data.md#alias-groups>) the one which is used to define the Trade Type aliases for this import.  
+| Branch Alias Group | Select from the list of [Alias Groups](<reference_related_data.md#alias-groups>) the one which is used to define the Principal and Counterparty Branch aliases for this import.  
+| Entity Group Alias Group | Select from the list of [Alias Groups](<reference_related_data.md#alias-groups>) the one which is used to define the Entity Group aliases for this import.  
+  
+4) When all required and optional fields are filled in as required, click the **Save** button.
+
+## Edit Task
+
+  1. Within the Task Configuration screen, select **Imports** for the Configuration then select the _Type_ that needs modification from the filter drop-down.
+  2. Select the specific configuration that needs modification by clicking on that configuration.
+  3. A pop-up screen will appear where the data can be modified.
+  4. Click the **Save** button when all the changes have been made.
+
+
+
+## Delete Task
+
+**Procedure**
+
+  1. Within the Task Configuration screen, select **Imports** for the Configuration then select the _Type_ that the deletion should occur upon from the filter drop-down.
+  2. From the results from the prior step, select a configuration that needs to be deleted by clicking in on a radial button. The **Delete** button will become visible.
+  3. Click the **Delete** button.
+  4. A popup window will appear confirming the deletion. Select _Cancel_ if this was pressed in mistake or select **Delete** to delete the configuration.
+
+
+
+## Mapping File
+
+The mapping file must be an XML file in a predefined format which identifies the column on the file to be imported (Position) and maps this to the destination column in the relevant table in the database ( ColumnName).
+
+The ColumnName must be the name expected by the database - ColumnNames are case sensitive also. If the mapping file contains an incorrect ColumnName the import will not work. The Import Status will display the message "An unknown error occurred while processing the file". This is classed as an Exception and no records will be imported. The corresponding Value for this message will read "The column identified in the mapping file (column name) does not exist on the import table".
+
+Note: If there is data which will not be received on the import file but will be maintained manually in the application, the corresponding ColumnName should not be included in the mapping file. In this case any data entered manually will not be removed during the import. The mapping file must be saved to a location that the server running the import process has access to and is defined in the import configuration.
+
+It is also possible to include a default value for a column on a mapping file. For example, if an Instruments file exists which contains credit ratings for those instruments and the rating is always a long term rating, a user can do one of the following:
+
+  * A user can use the mapping file to indicate which column the debt structure value is in. The entry would be, for example:
+        
+        <mapping Position="10" ColumnName=" DebtStructure" />
+        
+
+
+
+
+or
+
+  * A user could not include a debt structure value and use the mapping file to default the value to Long Term. The entry in that case would be:
+        
+        <mapping DefaultValue=”Long Term” ColumnName=” DebtStructure” />
+        
+
+
+
+
+Currently, a default value can only be specified for columns which are not mapped to a "Position" in the file. During imports the system will validate that either a Position or a DefaultValue are specified but not both.
+
+If the value is a date it can currently be updated in three ways:
+
+Include the actual date on the mapping file (This would need to be updated daily).
+
+Default the date to "Today". For example, to default the RateDate on an FX Rates file to the current business day that would include the following entry in the mapping file:
+    
+    
+    <mapping DefaultValue=”{Today}” ColumnName=” RateDate”/>
+    
+
+Default the date to " PreviousBusinessDay". (Note, holiday calendars are currently not implemented for the sake of imports in TLM® Collateral Management so business days are considered to be any non-weekend day.) For example, to default the RateDate on an FX Rates file to the previous business day, include the follow entry in the mapping file:
+    
+    
+    <mapping DefaultValue=”{PreviousBusinessDay}” ColumnName=” RateDate”/>
+    
+
+Dates will be formatted using the Date Locale and Date Format on the corresponding Import Configuration. The date used will be that of application server - this means that the definition of Today and Previous Day come from the date on the application server, and not the client.
+
+Mapping file Column Names for Management Information Collateral Positions
+
+How to Define Default Value Rules in a Mapping File It is currently possible to define "Default Value Rules" in a mapping file in order to define how a value in an import file should be interpreted. This can be done in any import mapping file. 
+
+### Define Default Value Rules
+
+It is currently possible to define "Default Value Rules" in a mapping file in order to define how a value in an import file should be interpreted. This can be done in any import mapping file.
+
+Below is an example for OTC Trades and Exposure Trade Overrides where the usage of Default value rules removes the need to supply the fields AdditionalMarginDueTo and LockUpMarginDueTo on the import file.
+
+The entry for Additional Margin in the mapping file could be, for example:
+    
+    
+    <mapping ColumnName="AdditionalMarginDueTo">
+    
+      <defaultValueRules>
+    
+        <if Column="AdditionalMargin" Operator="LessThan" Value="0" Then="Counterparty"/>
+    
+        <if Column="AdditionalMargin" Operator="GreaterThan" Value="0" Then="Principal"/>
+    
+      </defaultValueRules>
+    
+    </mapping>
+    
+
+In this above illustration, if the Additional Margin value supplied is less than 0 (that is a negative number) the system will update the Additional Margin Due To field to be "Counterparty" and if the value supplied is greater than 0 (that is a positive number) the field will be set to Principal.
+
+The supported operators are:
+
+  * LessThan
+  * LessThanorEqual
+  * GreaterThan
+  * GreaterThanOrEqual
+  * Equals
+
+
+
+If "Default Value Rules" is defined but "Default Value" is also defined, the rules will take precedence.
+
+## Run Task
+
+**Procedure**
+
+  1. Within the Task Configuration screen, select _Imports Configuration_ then select the appropriate type of filter from the filter drop-down.
+
+The available types are the following:
+
+     * [Agreement Cash Interest Terms](<import_agreement_cash_interest_terms.md>)
+     * [Agreement Margins](<import_agreement_margins.md>)
+     * [Agreement Replication](<import_agreement_replication.md>)
+     * [Agreements](<import_agreements.md>)
+     * [Agreements Lockup Only](<import_agreement_lock_up_only.md>)
+     * [Alias](<import_aliases.md>)
+     * [Asset Pool Balances](<import_asset_pool_balances.md>)
+     * [Basic Eligibility](<import_basic_eligibility.md>)
+     * [Collateral Buckets](<import_collateral_buckets.md>)
+     * [Collateral Positions](<import_collateral_positions.md>)
+     * [Contact Assignments](<import_contact_assignments.md>)
+     * [Counterparty Contacts](<import_counterparty_contacts.md>)
+     * [Debt Instrument Prices](<import_debt_instrument_prices.md>)
+     * [Entities](<import_entities.md>)
+     * [Entity Ratings](<import_entity_ratings.md>)
+     * [Equity Instrument Prices](<import_equity_instrument_prices.md>)
+     * [Exposure Trade Overrides](<import_exposure_trade_overrides.md>)
+     * [FX Rates](<import_fx_rates.md>)
+     * [Holidays](<import_holiday_calendars.md>)
+     * [IM IA Exposures](<import_im_ia_exposures.md>)
+     * [Index Rates](<import_index_rates.md>)
+     * [Instrument Ratings](<import_instrument_ratings.md>)
+     * [Instruments](<import_instruments.md>)
+     * [Margin Calls](<import_margin_calls.md>)
+     * [Margin Terms](<import_margin_terms.md>)
+     * [OTC Comparison Trades](<import_otc_comparison_trades.md>)
+     * [OTC Trades](<import_otc_trades.md>)
+     * [Profit and Loss](<import_profit_and_loss.md>)
+     * [Repo Trades](<import_repo_trades.md>)
+     * [Triparty Positions](<import_triparty_positions.md>)
+  2. Select the configuration that needs to be run by clicking the radial button next to the configuration.
+
+  3. The **Run** button will become enabled and available to be clicked.
+  4. Click the **Run** button.
+  5. The results can be viewed from the [Task Status](<task_status.md#results-of-the-task>) screen.
+
+
+
+## Current Restrictions
+
+In the initial implementation of this import module there are a number of restrictions that apply to imported data:
+
+  * Only Delimited Text files are currently supported using a simple mapping file.
+  * The Text files must be encoded in UTF-8 format if non ascii characters are required. Special Characters are supported in Agreements and Agreement Margin imports.
+
+They are `~!@#$%^&*()_+=-[]\';,./{}|:"<>? ONLY
+
+    * Note in order to support this if the field has an intentional double quotes in it, it must be completely surrounded by double quotes to tell the system to take it in as a complete string. Then, for each intentional double quotes, it must be escaped with a double quote. Because of this rule, double quotes not opening and closing a field will cause an error at import.
+
+Example: In order to get Agreement "1" as an agreement name it must be entered as |"Agreement ""1"""|
+
+    * Note: CSV files automatically add the open, close and escaping quotes. For example if Agreement "1" is entered into a CSV, when the csv file is opened in a text editor, the result is "Agreement ""1""". Double quotes not at either end of the delimiter will make the import fail or partially work.
+
+Examples: |Test "Agreement"| |"Test" Agreement| |"Test "Agreement"| |Test " Agreement|
+
+  * Sequential imports of data only (imports can be queued but a file will not start to import until the previous one has completed)
+
+**Note:** It is possible to run Trade Imports (Repo and OTC only) [concurrently](<task_status.md#concurrent-task-execution>).
+
+  * No drill down to individual records with regards to error messages.
+
+  * For certain fields where a default exists, the following behavior occurs:
+    * **For Inserts (i.e. importing a new record)**
+      * If the Field is not mapped, the field will get the default value.
+      * If the field is mapped but blank in the file, the result will be the default value for the field and no error message.
+      * If the field is mapped, but a bad value exists on the import file, a warning is raised, stating that the field was set to Null, and the default values will be used.
+    * **For amends (i.e. updating existing records)**
+      * If the field is not mapped, the default value is applied (and possibly overwrites the value that was there)
+      * If the field is mapped but blank - the default value is applied, with no error message (and possibly overwrites the value that was there)
+      * If the field is mapped but an invalid entry in the import file, a warning message is raised stating that the value was set to Null. The default value is applied (and possibly overwrites the value that was there)
+
+
+
+**Note:** Whilst a task is in progress, it is not recommended to process items in the system - specifically, margin calls, substitutions, movements and interest payments. Doing so may result in data inconsistency. It is recommended to wait until the task has completed before processing items. 
+
+## Import File Changes
+
+The below table records changes to the Import files per release. Please see the applicable data file format topic for more details on the individual import configurations.
+
+Release Number | Data Import Type | Type of Update | Previous Column Name | New Value  
+---|---|---|---|---  
+5.1.0 | Agreements | New |  | HolidayCalendar  
+5.1.0 | Holidays | New |  | HolidayCalendarName (mandatory)  
+5.1.0 | Holidays | New |  | Description  
+5.1.0 | Holidays | New |  | HolidayDate (mandatory)  
+5.1.1 | Index Rates | New |  | IndexName (mandatory)  
+5.1.1 | Index Rates | New |  | Rate (mandatory)  
+5.1.1 | Index Rates | New |  | RateDate (mandatory)  
+5.1.4 | Agreements | New |  | IncludeAccrualInMarginCalc  
+5.1.4 | Agreements | New |  | InterestPaymentPreference (mandatory)  
+5.1.4 | Agreements | New |  | InterestPaymentCalendar  
+5.1.4 | Agreements | New |  | InterestPeriodFrequency  
+5.1.4 | Agreements | New |  | InterestPaymentExactDates  
+5.1.4 | Agreements | New |  | InterestPaymentDayOfWeek  
+5.1.4 | Agreements | New |  | InterestPaymentDayOfMonth  
+5.1.4 | Agreements | New |  | InterestPaymentCalendarType  
+5.1.4 | Agreements | New |  | InterestPaymentMonths  
+5.1.4 | Agreements | New |  | InterestPaymentWeekOfMonth  
+5.1.4 | Agreement Cash Interest Terms | New |  | Agreement (mandatory)  
+5.1.4 | Agreement Cash Interest Terms | New |  | Currency (mandatory)  
+5.1.4 | Agreement Cash Interest Terms | New |  | MarketIndex (mandatory)  
+5.1.4 | Agreement Cash Interest Terms | New |  | Spread  
+5.1.4 | Agreement Cash Interest Terms | New |  | CalculationType  
+5.1.4 | Agreement Cash Interest Terms | New |  | HolidayCalendar  
+5.1.6 | Agreement | New |  | CanRehypothecate  
+5.1.8 | Instrument | New |  | NextCouponDate  
+5.1.9 | Basic Eligibility | Update | PrinValuationPercentage | _Now mandatory_  
+5.1.9 | Basic Eligibility | Update | CptyValuationPercentage | _Now mandatory_  
+5.1.9 | Entity | New | CustodianIdentifier (mandatory if entity is custodian) |   
+5.1.10 | Margin Terms | New |  | Currency  
+5.1.10 | Agreement | New |  | AgreementStatus (mandatory)  
+5.1.10 | Agreement | New |  | AgreementStatusDetail  
+5.1.10 | Agreement | New |  | AmendmentDate  
+5.1.10 | Agreement | New |  | GoverningLaw  
+5.1.10 | Agreement | New |  | MasterAgreementDate  
+5.1.10 | Agreement | New |  | SignatureDate  
+5.1.11 | Agreement | New |  | PostingParty  
+5.1.11 | Instrument | New |  | IsSinkable  
+5.1.11 | Instrument | New |  | IsCallable  
+5.1.11 | Instrument | New |  | IsCoveredBond  
+5.1.11 | Instrument | New |  | IsPrivatePlacement  
+5.1.12 | Collateral Positions | New |  | CollateralMarginType (mandatory)  
+5.1.12 | Agreement | New |  | CollateralAllocationType (mandatory)  
+5.1.12 | Agreement | Update/Rename | CanRehypothecate | AvailableForRehypothecation  
+5.1.13 | Agreement | Update/Rename | Collateral Allocation Method | Acceptable values changed from "satisfy lock up first" to "auto allocate"  
+5.1.13 | Agreement | Update/Rename | IncludeAccrualInMarginCalc | IncludeVariationAccrual  
+5.1.13 | Agreement | New |  | IncludeLockUpAccrual  
+5.1.13 | Agreement | New |  | TriPartyVariationCustodian  
+5.1.13 | Agreement | New |  | TriPartyLockUpCustodian  
+5.1.13 | Agreement Cash Interest Terms | New |  | MarginTypes  
+5.1.14 | Agreement | New |  | CashSettlementOffset  
+5.1.14 | Agreement | New |  | DebtSettlementOffset  
+5.1.14 | Collateral Positions | Update | MarketValueAgreementCurrency | _Now mandatory_  
+5.1.14 | Collateral Positions | Update | MarketValueSystemCurrency | _Now mandatory_  
+5.1.15 | Collateral Positions | Update | MarketValueSystemCurrency | Mandatory only if concentration key set. Otherwise ignored.  
+5.1.15 | Collateral Positions | Update | MarketValueAgreementCurrency | Mandatory only if concentration key set. Otherwise ignored.  
+5.1.15 | Collateral Positions | Update | AgreementCurrency | Mandatory only if concentration key set. Otherwise ignored.  
+5.1.15 | Collateral Positions | Update | SystemCurrency | Mandatory only if concentration key set. Otherwise ignored.  
+5.1.15 | Agreements | New |  | NetInterestPayments (Mandatory)  
+5.1.15 | Agreement Cash Interest Terms | Update | MarginTypes | AppliesToCollateralMargin (mandatory)  
+5.1.15 | Agreement Cash Interest Terms | New |  | AppliesToPositionType (mandatory)  
+5.1.15 | Agreement Cash Interest Terms | Update | Calculation Type | Do Not Calculate as a value is no longer valid.  
+  
+Replaced with Do Not Calculate Accrual.  
+5.1.19 | Agreements | New |  | UseMTAOnLockUpMarginTerms (Mandatory)  
+5.1.19 | Agreements | New |  | UseRoundingOnLockUpMarginTerms (Mandatory)  
+5.1.19 | Instruments | New |  | IsPutable  
+5.1.19 | Instruments | New |  | IsGuaranteed  
+5.1.19 | Instruments | New |  | IsCreditLinkedNotes  
+5.1.19 | Instruments | New |  | IsBullet  
+5.1.23 | All |  |  | Quotes are now handled.  
+5.1.24 | Agreements | New |  | InterestRoudingMethod  
+5.1.24 | Agreements | New |  | InterestApplyPrecisionTo  
+5.1.24 | Agreements | New |  | Price Adjustment  
+  
+  
+5.1.24 | Instruments | Update | The following fields are removed:  
+  
+SPRating  
+  
+MoodyRating  
+  
+FitchRating  
+  
+DebtStructure |   
+5.1.24 | Instrument Ratings | New Import | This is a whole new import config | see [File Format for Instrument Ratings](<import_instrument_ratings.md>)  
+5.1.24 | OTC Trades | New |  | ClearingHouse  
+5.1.24 | OTC Trades | New |  | ClearingHouseReference  
+5.1.24 | OTC Trades | New |  | ClearingStatus  
+5.1.24 | Repo Trades | New |  | ClearingHouse  
+5.1.24 | Repo Trades | New |  | ClearingHouseReference  
+5.1.24 | Repo Trades | New |  | ClearingStatus  
+5.1.24 | Basic Eligibility | New |  | LockUpHeldValuationPct  
+5.1.24 | Basic Eligibility | New |  | LockUpPostedValuationPct  
+5.1.24 | Basic Eligibility | Update | The Field "Party" is removed |   
+5.1.24 | Basic Eligibility | Update | PrinValuationPercentage | VariationHeldValuationPct  
+5.1.24 | Basic Eligibility | Update | CptyValuationPercentage | VariationPostedValuationPct  
+5.1.25 | Instruments | New |  | CostOfFunding  
+5.1.25 | Instrument Prices | Update | Coupon Accrual - this field can now support negative numbers. |   
+5.1.25 | Agreement Margins | Update | Amount - this field is changed to data type decimal (19,6) |   
+5.1.25 | Agreement Margins | New |  | MarginMethod (_Mandatory_)  
+5.1.25 | Margin Terms | New |  | MinimumTransferAmountMethod (_Mandatory_)  
+5.1.25 | Margin Terms | New |  | ThresholdMethod (Mandatory)  
+5.1.25 | Margin Terms | New |  | RoundingAmountMethod (_Mandatory_)  
+5.1.25 | Margin Terms | Update | MinimumTransferAmount - this field is changed to data type decimal (19,6) |   
+5.1.25 | Margin Terms | Update | RoundingAmount - this field is changed to data type decimal (19,6) |   
+5.1.25 | Margin Terms | Update | Threshold - this field is changed to data type decimal (19,6) |   
+5.1.25 | Exposure Trade Overrides | Update | LockUpMarginMethod  
+  
+1\. this field is changed to data type decimal (19,6)  
+  
+2\. Percent Exposure added as a permissible value |   
+5.1.25 | Exposure Trade Overrides | Update | Additional Margin Method  
+  
+1\. this field is changed to data type decimal (19,6)  
+  
+2\. Percent Exposure added as a permissible value |   
+5.1.25 | OTC Trades | Update | Additional Margin Method  
+  
+1\. this field is changed to data type decimal (19,6)  
+  
+2\. Percent Exposure added as a permissible value |   
+5.1.25 | OTC Trades | Update | LockUpMarginMethod  
+  
+1\. this field is changed to data type decimal (19,6)  
+  
+2\. Percent Exposure added as a permissible value |   
+5.1.26 | Instruments | Update |  | LotIncrement  
+5.1.26 | Instruments | Update |  | MinimumLot (Mandatory when LotIncrement defined)  
+5.1.26 | FX Rates | Update |  | FXRateSource (_Mandatory_)  
+5.1.27 | Instrument Prices | Update | Import Config / Task now named **Debt** Instrument Prices |   
+5.1.27 | Equity Instrument Prices | New | This is a whole new import config | see [File Format for Equity Instrument Prices](<import_equity_instrument_prices.md>)  
+5.1.27 | Instruments | Update |  | Price Terms is now a mandatory field.  
+  
+addition of new equity related fields:  
+  
+AverageVolatility  
+  
+Beta  
+  
+DividendCurrencyId  
+  
+DividendPayable  
+  
+ExchangeId  
+  
+InstitutionalOwnershipPct  
+  
+IsOptionable  
+  
+MarketCapitalization  
+  
+NextDividendDate  
+  
+Past52WeekHigh  
+  
+Past52WeekLow  
+  
+PERatio  
+  
+SharesIssued  
+  
+SharesOutstanding  
+  
+Ticker  
+  
+TradingVolume  
+  
+UCITSCompliant  
+  
+Removal of PriceDenominator Field. Superceded by Price Terms  
+5.1.27 | Entities | Update |  | 3 new fields  
+  
+IsCentralCounterparty  
+  
+IsClearingMember  
+  
+IsClearingClient  
+5.1.27 | Margin calls | New | This is a whole new import config. | see [File Format for Margin Calls}(import_margin_calls.md)  
+5.1.28 | Collateral Positions | Update | Import now can be used for Agreements of Central Clearing and Client Clearing Business Lines. |   
+5.1.28 | Collateral Buckets | Update | Issue Date bands now supported and importable on Debt Collateral Buckets | Six new optional fields added to support this:  
+  
+IssueDateBandLowerOperator  
+  
+IssueDateBandLowerOrdinal  
+  
+IssueDateBandLowerTimePeriod  
+  
+IssueDateBandUpperOperator  
+  
+IssueDateBandUpperOrdinal  
+  
+IssueDateBandUpperTimePeriod  
+5.1.29 | Basic Eligibility | Update | Validations added for Central Clearing Agreements |   
+5.1.29 | Profit and Loss | New | This is a new import file config | see [File Format for Profit and Loss](<import_profit_and_loss.md>)  
+5.1.30 | Basic Eligibility | Update |  | 4 new fields added to fully support Central Clearing Business Line Agreements.  
+  
+GuaranteeHeldValuationPct  
+  
+GuaranteePostedValuationPct  
+  
+SurplusHeldValuationPct  
+  
+SurplusPostedValuationPct  
+5.1.30 | OTC Import | Update | 1 new optional field  
+  
+CommonTradeReference |   
+5.1.30 | OTC Comparison Import | New | This is a new import file config | See [File Format for OTC Comparison Trades](<import_otc_comparison_trades.md>)  
+5.1.30 | Agreement Margins | Update | Import extended to incorporate Central Clearing Agreement. |   
+5.2.0 | Collateral Positions | Update | The following fields are removed:  
+  
+InstrumentType |   
+5.2.1 | Margin Terms | Update |  | The following fields were added.  
+  
+DeliverMinimumTransferAmount  
+  
+ReturnMinimumTransferAmount  
+  
+DeliverRoundingAmount  
+  
+ReturnRoundingAmount  
+  
+The current fields MinimumTransferAmount and RoundingAmount remain and are used for the Repo and Sec Lending Agreements which have no differentiation between the Delivery and Return values.  
+5.2.1 | Agreements | New |  | Two new non-mandatory fields were added.  
+  
+AllowIntradayCalculation  
+  
+IntradayTolerance  
+5.2.1 | Agreement Cash Interest Terms | Update |  | 3 New Calculation Types importable:  
+  
+Simple Allows Negative  
+  
+Compound Business Days Allows Negative  
+  
+Compound Calendar Days Allows Negative  
+5.2.2 | Asset Pool Balances | New | New Import Configuration | see [File Format For Asset Pool Balances](<import_asset_pool_balances.md>)  
+5.2.2 | Collateral Positions | Update |  | The following non mandatory field was added:  
+  
+AssetPoolName  
+  
+The field can be specified on posted positions only.  
+5.2.2 | Entities | Update |  | The following non mandatory field was added:  
+  
+MonitorShortPositions  
+  
+The filed can be specified for Principal Entities only.  
+5.2.4 | Asset Pool Balances | Update |  | The following mandatory field was added:  
+  
+EffectiveDate  
+5.2.8 | OTC Lock Up Only Agreement Import | New | This is a whole new import config. | See [File Format for OTC Lock Up Only Agreements](<import_agreement_lock_up_only.md>)  
+5.2.9 | Agreements  
+  
+OTC Lock Up Only Agreement | Update |  | The following non-mandatory fields were added:  
+  
+SplitToleranceAmount  
+  
+SplitToleranceCurrency  
+  
+SplitToleranceMethod  
+5.2.11 | Entities | Update |  | The following non-mandatory fields were added:  
+  
+EntityGroups  
+5.2.11 | Instruments | Update | Stock Index import column | Ability to import more than one Stock Index using sub-delimiter.  
+5.4.0 | Agreement Replication | New | This is an entirely new import configuration. | See [File Format for Agreement Replication](<import_agreement_replication.md>)  
+5.4.1 | Instruments | Update |  | The following non-mandatory fields were added:  
+  
+CUSIP  
+  
+ISIN  
+  
+SEDOL  
+  
+Ticker  
+5.4.3 | Counterparty Contacts | New | This is an entirely new import configuration | See [File Format for Counterparty Contacts](<import_counterparty_contacts.md>)  
+5.4.3 | Contact Assignments | New | This is an entirely new import configuration | See [File Format for Contact Assignments](<import_contact_assignments.md>)  
+5.4.4 | Triparty Collateral Positions | New | This is an entirely new import configuration | See [File Format for Triparty Collateral Positions](<import_triparty_positions.md>)

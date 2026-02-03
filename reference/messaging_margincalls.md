@@ -1,0 +1,182 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_margincalls.html
+
+# Overview
+
+## Background
+
+TLM Collateral Management contains core functionality for processing margin calls, interest payments and substitutions between the parties of a Collateral Agreement. This core functionality provides for the sending of margin call, interest payment and substitution notices between the Principal to the Counterparty by way of email, and then recording the responses. As such, the process relies on each party contacting each other by email, phone or other methods, and then recording their responses. Once the responses are recorded, the events can be further processed through the workflow.
+
+TLM Collateral Management can optionally be installed with additional components to achieve margin call, interest payment and substitution workflow integration with Acadia. This allows for electronic processing and messaging of margin calls, interest payments and substitutions in these workflows.
+
+Please see the [Scope of Functionality](<#scope-of-functionality>) section to see full details of current support.
+
+## Components
+
+The following components are involved in achieving margin call, interest payment and substitution workflow integration. These components can be pictorially represented in this [diagram](<messaging_schematic.md>).
+
+The components and their role can be summarized as follows:
+
+Component | Description  
+---|---  
+TLM Collateral Management | TLM® Collateral Management publishes notification messages of all margin call, interest payment and substitution workflow activity, and also has the ability to subscribe to (consume) and process incoming margin call, interest payment and substitution messages.  
+TLM Collateral Management Margin Call Messaging Adapter | The TLM® Collateral Management Margin Call Messaging Adapter acts as the connectivity gateway between TLM Collateral Management and Acadia for margin calls. It filters the margin call workflow notifications sent by TLM Collateral Management for those Agreements that are linked to their corresponding Acadia equivalents, and publishes those messages to Acadia's API in a format that it understands. Conversely, it receives messages from Acadia to which TLM Collateral Management subscribes. The Adapter also publishes any errors it encounters while processing this activity.  
+TLM Collateral Management Acadia Integration Messaging Adapter | The TLM® Collateral Management Acadia Integration Adapter acts as the connectivity gateway between TLM Collateral Management and Acadia for interest payments and substitutions. It filters the workflow notifications sent by TLM Collateral Management for those Agreements that are linked to their corresponding Acadia equivalents, and publishes those messages to Acadia's API in a format that it understands. Conversely, it receives messages from Acadia to which TLM Collateral Management subscribes. The Adapter also publishes any errors it encounters while processing this activity.  
+TLM Collateral Management Public API | The TLM® Collateral Management Public API's role is to subscribe to receive any error messages associated with workflow message processing that TLM Collateral Management and its adapters may have published. The API in turn exposes a web service that the TLM® Collateral Management Messaging Intervention Tool can use.  
+TLM Collateral Management Messaging Intervention module | TLM® Collateral Management Messaging Intervention Tool calls the TLM® Collateral Management Public API's negotiation service to get error information to display for a user to determine the remedial steps necessary.  
+  
+## Scope of Functionality
+
+The following is the broad scope of Acadia functional integration for margin call, interest payment and substitution processing:
+
+Release | Description  
+---|---  
+5.2.9 | Demands, No Actions and Anticipated Demands in the _Standard_ and _Grouped_ Margin Call Workflow.  
+| Margin Calls for the OTC, OTC Lock Up Only, Repo, Securities Lending, Client Clearing Business Lines.  
+| Use of the existing Margin Call Workflow states.  
+| Margin Call Scenarios supported:  
+  
+**Demands:** Fully Agree; Partial Agreement; Full Dispute  
+**Anticipated Demands:** Full Agreement, Partial Agreement; Sole Valuation Agent notices  
+**No Actions:** Full Dispute; Sole Valuation Agent notices  
+| Collateral Pledge functionality support:  
+  
+\- Ability to receive / validate counterparty pledge data from Acadia and convert that into collateral movements using TLM Collateral Management pricing and valuation percentages.  
+\- Ability to send pledge-accept notifications to Acadia when approval of Demand Margin call movements occurs.  
+\- Ability to send collateral pledge messages to Acadia on Anticipated Demands when approval of Margin Call Movements occurs.  
+\- All collateral notices in TLM Collateral Management will be processed, per their existing set up, e.g. email notices will be sent to the defined agreement contacts; margin call notices will be emailed.  
+5.2.10 | Recalculations (Principal Cancels Call for Demands, Principal Cancels Agreed amount for fully Agreed Anticipated Demands, Cancels Dispute Amount for Partially Agreed Anticipated Demands and No Actions)  
+| Waives (Principal Cancels Call)  
+| Reset Agreed Amount (Cpty Cancels Agreed Amount on Demands. Cpty Cancels call for Anticipated Demands. Principal Cancels Agreed Amount on Fully Agreed Anticipated Demands and Cancels Dispute Amount on Partially Agreed Anticipated Demands)  
+| Reset Dispute Amount (Cpty Cancels Dispute Amount for Demands)  
+| Reset Call Amount (Principal Cancels Dispute Amount for No Actions)  
+| Agreement Polling Configuration (configured in adapter)  
+| Delayed retries of messaging.  
+| Pledge Rejects (Principal for Demands)  
+| Pledge Amends (Counterparty for Demands)  
+| Pledge Cancels (Counterparty for Demands)  
+| Reprocessing messages  
+5.2.12 | ["Suggested"](<messaging_suggestedpledges.md>) collateral pledges for Anticipated Demands  
+| Workflow STP flags for [Demand](<messaging_demand_workflow.md#receiving-collateral-pledge-information>) and [Anticipated Demands](<messaging_anticdemand_workflow.md#agreed-awaiting-collateral-details-state>)  
+| Auto Approvals for [Demands](<messaging_demand_workflow.md#confirmed-to-be-approved-state>) and [Anticipated Demands](<messaging_anticdemand_workflow.md#confirmed-to-be-approved-state>)  
+| Publishing of [Collateral Positions](<messaging_suggestedpledges.md>) for Demand, Anticipated Demand, No Action and SVA margin calls  
+5.4.1 | Check if a movement can be booked to a position in an [Asset Pool](<assetpools.md>) for returns on a [Demands](<messaging_demand_workflow.md#receiving-collateral-pledge-information>)  
+| Transition to a new workflow state in [Anticipated Demands](<messaging_anticdemand_workflow.md#confirmed-to-be-approved-state>) and [Group Workflows](<messaging_grouped_workflow.md#waived-to-be-approved-state>) where a margin call is awaiting a counterparty response for proposed movements (accept/reject).  
+| Determine if an Agreement is eligible for [messaging](<messaging_agmt_link.md#agreement-linking-mechanism>) from a margin calculation.  
+| Please see [Messaging Known Considerations](<messaging_knownconsiderations.md>) for additional details.  
+5.8 | When a Margin Call is sent, the imported IM and IA values will be included on the published message.  
+| When IM and IA are present on the published margin call sent message, the Margin Call Adapter will replace the initial exposure figure with the IA amount and add the IM Exposure with the IM amount. The Adapter does this when it sends messages for create margin calls, create expected calls and created expected call notifications.  
+| The Margin Call Adapter can replace initial exposure with IA and add IM exposure with the IM amount, in the message to Acadia.  
+| In the case of margin calls for lock up only agreements, the Margin Call Adapter will do an additional step to check Initial Margin Type and Margin Approach. When the Initial Margin Type is Regulatory and Margin Approach is Allocated or Distinct, only the IM Exposure will be set and the initial exposure figure will not be set.  
+5.12 | Interest Payments in the Standard and Grouped Margin Call Workflow.  
+| Interest Payments for the OTC, OTC Lock Up Only, Repo, Securities Lending, Client Clearing Business Lines  
+| Use of the existing Interest Payment Workflow states  
+| Interest Payment Scenarios supported:  
+[**Distributions:**](<messaging_interest.md#sent>) Send payment notice; Update agreed amount and settlement date; Distribute  
+[**Roll Ins:**](<messaging_interest.md#sent>) Send payment notice; Update agreed amount and settlement date; Roll In  
+[**Grouped:**](<messaging_interest_grouped.md#sent>) Send payment notice; Update agreed amount and settlement date; Agree  
+5.13 | Interest Payments in the Standard and Grouped Margin Call Workflow.  
+| Interest Payments for the OTC, OTC Lock Up Only, Repo, Securities Lending, Client Clearing Business Lines.  
+| Use of the existing Interest Payment Workflow states.  
+| Additional Interest Payment Scenarios supported:  
+[**Distributions:**](<messaging_interest.md#sent>) Cancel messages for when interest payments are recalculated, date extended, cancel of date extended, cancel of adhoc payment and change in netting preference (i.e. gross vs net).  
+[**Roll Ins:**](<messaging_interest.md#sent>) Cancel messages for when interest payments are recalculated, date extended, cancel of date extended, cancel of adhoc payment and change in netting preference (i.e. gross vs net).  
+[**Grouped:**](<messaging_interest_grouped.md#sent>) Cancel messages for when interest payments are recalculated, date extended, cancel of date extended, cancel of adhoc payment and change in netting preference (i.e. gross vs net).  
+5.16 | Create substitution and recall proposal requests from counterparty.  
+| Autobook substitution returns and delivers from my counterparty.  
+| Auto transition my counterparty's substitution requests for my approval.  
+5.17 | Send and resend substitution and recall proposal requests to my counterparty.  
+| Accept and Reject recall proposal requests to and from my counterparty.  
+| Approve and Reject substitutions from my counterparty.  
+| Process accept and reject substitution responses from my counterparty.  
+| Add replacements to accepted recall proposals to and from my counterparty.  
+| Update and Amend substitution and recall proposal requests to and from counterparty.  
+| Cancel substitution and recall proposal requests to and from my counterparty.  
+  
+## Agreement Linking Requirements
+
+Agreements are linked between TLM Collateral Management and Acadia by recording the Acadia Agreement Short Name plus Agreement Currency on the TLM Collateral Management Agreement against a specific Alias Group. The Alias group name is in turn referenced in TLM Collateral Management's configuration files.
+
+See [Message Agreement Linking](<messaging_agmt_link.md>) for More details and example.
+
+## Messaging Eligibility
+
+Margin Calls, Interest Payments, and Substitutions can be subject to messaging processing when the following criteria have been met:
+
+  1. The components listed above for Acadia Integration have been installed and configured.
+  2. The Agreement in TLM Collateral Management has been successfully linked to its corresponding Agreement record in the Acadia system
+  3. It is for an Agreement in one of the following Business Lines:
+
+     * OTC
+     * OTC Lock Up Only
+     * Repo
+     * Securities Lending
+     * Client Clearing
+
+**Note:** Acadia integration is not supported for Agreements in the Central Clearing Business Line.
+
+
+
+
+For the purposes of explanation, any Margin Call, Interest Payment or Substitution that meets the above criteria will be referred to as "Messaging Eligible" and will be processed by electronic messages communicated between the Principal and Counterparty using the Acadia integration infrastructure.
+
+## Margin Call Matching Criteria
+
+Margin Call Messages received from Acadia are matched to calls in TLM Collateral Management using the following criteria:
+
+  * Agreement Short Name
+  * Agreement/Call Ccy
+  * Close of Business Date
+    * Close of Business Date is evaluated to be the first valid business date in TLM Collateral Management on or before the date provided from Acadia which does not include holidays or weekends.
+  * Collateral Margin Type
+  * Margin Call Type
+
+
+
+Margin Calls are eligible for matching only while in certain workflow states. The below table summarizes this.
+
+**Workflow States where margin calls eligible for messaging matching**
+
+Standard / Grouped Workflow | Call Type | Workflow State  
+---|---|---  
+Standard | Demand | Sent Demands  
+Standard | Anticipated Demand | Sent - SVA Anticipated Demands  
+Standard | Anticipated Demand | Anticipated Demands  
+Standard | No Actions | Sent - SVA No Actions  
+Standard | No Actions | No Actions  
+Grouped | All | Sent - Awaiting Call Details  
+  
+If a margin call received from Acadia matches _multiple_ calls in TLM Collateral Management, then TLM Collateral Management will assign the incoming call to an Anticipated Demand. If no match can be found for the incoming call, an error is published containing the call details and the matching criteria.
+
+Published errors can be seen in the TLM Collateral Management Messaging Intervention Tool web plug in.
+
+## Messaging Workflow Overview
+
+Messaging eligible margin calls, interest payments, and substitutions are processed through the standard and grouped margin call workflows along with non messaging eligible calls, with the key exception that they are processed electronically and exhibit slightly different behaviors.
+
+If segregating messaging eligible calls, it is recommend to create a separate [Agreement Responsibility group](<reference_related_data.md#agreement-responsibility-group>) for those that are processed through the Standard margin call workflows, and a separate Agreement Group for those that are processed via the Grouped margin call workflow.
+
+Messaging eligible calls exhibit slightly different behaviors to non messaging eligible calls in terms of workflow processing. These are outlined in the below workflow topics.
+
+## Messaging Auto Approval Eligibility
+
+Messaging eligible Agreements can be configured to auto approve margin calls for those Agreements within the TLM Collateral Management Demand and Anticipated Demand standard and group workflows. Please see the Acadia documentation on how to setup the Agreements to be subject to Auto Approval.
+
+Agreements eligible for auto approval exhibit slightly different margin call transition validations than non messaging eligible Agreements. These new behaviors are outlined in the below workflow topics.
+
+There are certain restrictions within the messaging workflow with respect to Auto Approval eligibility. These restrictions are outlined in [Messaging: Known Considerations](<messaging_knownconsiderations.md>) topic.
+
+## Standard Margin Call Workflow
+
+  * [Demand Workflow: Behavior for Messaging Margin Calls](<messaging_demand_workflow.md>)
+  * [Anticipated Demand Workflow: Behavior for Messaging Margin Calls](<messaging_anticdemand_workflow.md>)
+  * [No Actions Workflow Behavior for Messaging Margin Calls](<messaging_noactions_workflow.md>)
+  * [Behavior for Messaging Distribution/Rolls Ins Interest Payments](<messaging_interest.md>)
+
+
+
+## Grouped Margin Call Workflow
+
+  * [Grouped Margin Call Workflow Messaging Behavior](<messaging_grouped_workflow.md>)
+  * [Behavior for Messaging Grouped Interest Payments](<messaging_interest_grouped.md>)
+
+

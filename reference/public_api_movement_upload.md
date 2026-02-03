@@ -1,0 +1,467 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/public_api_movement_upload.html
+
+# Public API Movement Upload
+
+TLM® Collateral Management has the ability to automatically upload and process movements in bulk via its Public API.
+
+## Functional Overview
+
+The Public API for TLM Collateral Management provides programmatic capabilities to automate the creation and auto-approval of Margin Call and Manual Movements from a set of supplied **Movement Posting** data.
+
+The API Movement upload function provides for a high degree of flexibility and control by including as part of the movement posting data definition:
+
+  * Tolerances to be used when validating the Margin Call Agreed amount.
+  * Tolerances to use when validating the Total value of collateral movements created against the Margin Call Agreed Amount.
+  * Configurable exception behaviors to undertake when the creation of collateral movements triggers:
+
+    * Short Position warnings.
+    * Eligibility breaches.
+    * Concentration breaches.
+  * Notification of processing and validation errors back through the API to allow the sender of the messages to track progress, and remedy errors. 
+
+
+
+
+## Scope of Applicability
+
+For the initial implementation, the Public API movement upload capability exists for margin call and manual movement types. Margin call movement creation is limited to where the following characteristics are true:
+
+  * Agreement is for the [OTC Business Line](<agreements_define.md#otc>).
+  * Margin calls are subject to the [standard](<margin_calls_overview.md>) Margin call work flow.
+  * The margin call is in one of the following work flow queues:
+
+    * Demands - Awaiting Collateral Details.
+    * Anticipated Demands - Anticipated Demands.
+    * Anticipated Demands - Awaiting Collateral Details.
+    * Anticipated Demands - Sent SVA Anticipated Demands.
+
+
+
+## Generic Movement Creation Behavior
+
+When the Public API creates movements from movement posting data, the following is true:
+
+  * Any existing collateral movements on Margin Calls will be preserved; they will not be deleted or overwritten.
+  * Agreement scope is not applied. That is, the Public API is not limited to creating movements for specific Principals only.
+  * Movements are uniquely identifiable within TLM Collateral Management. The **updated by** value on the collateral movement will be the user account which is running the Unattended Workflow Windows Service.
+
+
+
+This topic provides an overview of what constitutes the movement posting message, how the collateral movements are automatically created, associated to margin calls, validated, and automatically approved.
+
+**Note:** The API data definitions, requests, outputs and functionality are highly technical in nature and aimed at a development audience, and therefore outside the remit of this user guide. The information provided here is for background knowledge and information, and is generalized to an extent for explanatory and illustrative purposes. Please refer to the "TLM Collateral Management Public API" web page of the documentation that accompanies within the TLM Collateral Public API deployment media for more detailed technical information.
+
+## Movement Posting Message Specifications
+
+Movements that are intended to be uploaded into TLM Collateral Management via the Public API are constructed as one of the following message types:-
+
+**Movement Posting Messages** \- for movements that are to be associated with _Margin Calls_.
+
+**Manual Movement Posting Messages** \- for _manual_ movements.
+
+For _Movement Posting Messages_ the specification is made up of "members", some of which contain the definition criteria of which margin call the movement data should be associated to in TLM Collateral Management, whilst others define the tolerance and preference information which is used to determine the behavior of validations undertaken during the upload and creation processes. Some members may be made up of a "collection" of items, meaning they are composed of one or more underlying data items. For example, the member MarginSpecification is made up of a collection of Margin call related details, (i.e. Margin Call Id, Agreement Name, Margin Call Date).
+
+The specification for _Manual Movement Posting Messages_ is similar, but made up of three members.
+
+The composition of these messages is summarized in the following tables.
+
+Composition of a Movement Posting Message
+
+Member | Collection? | Comments | Collection Definition  
+---|---|---|---  
+Applicable Margin Specification | Y | This contains the criteria to uniquely identify the margin call to post the movements against - see the collection definition  
+  
+Margin Specification is only valid one or the other of the following is true:  
+  
+1\. MarginCallId is defined  
+2\. All other fields except MarginCallId are set. | MarginCallId  
+|  |  | Agreement Name  
+|  |  | Principal Managing Location CalculationDate  
+  
+The margin calculation date, per the timezone of the Principal Managing Location defined on the Agreement  
+|  |  | IsAntic  
+  
+This Boolean flag if set True denotes that the associated call is an Anticipated Demand; Set False for a Demand.  
+|  |  | Margin Type  
+  
+\- LockUp  
+\- Variation  
+\- Surplus  
+\- Guarantee  
+Agreed Amount Tolerance | Y | This defines how closely the counterparty call amount and the agreed amount set on the margin call must match in order to be auto agreed during workflow processing - see definition  
+  
+Agreed Amount Tolerance specification is only valid when:  
+  
+\- either a range or percentage is defined  
+\- value defined is >=0 | Within Range  
+  
+Above or below Agreed Amount by this number  
+|  |  | Within Percentage  
+  
+Above or below Agreed Amount by this percentage of that amount.  
+Total Entered Tolerance | Y | This defines how closely the agreed amount set on the margin call, and the total market value of the movements must match for the margin call to be auto approved during workflow processing - see definition  
+  
+Tolerance specification is only valid when:  
+  
+-either a range or percentage is defined  
+\- value defined is >0 | Within Range  
+  
+Above or below Agreed Amount by this number  
+|  |  | Within Percentage  
+  
+Above or below Agreed Amount by this percentage of that amount  
+Movements | Y | The movements to upload against this call - see definition.  
+  
+Only AssetPoolName is optional, the other fields must be defined. | IsReturn  
+  
+Whether the movement is a return or deliver  
+  
+\- True: Return  
+\- False: Deliver  
+|  |  | Notional  
+|  |  | SettlementDate  
+|  |  | PhysicalSettlement  
+|  |  | InstrumentIdentifier  
+|  |  | InstrumentIdentifierType  
+|  |  | UniqueMovementIdentifier  
+|  |  | AssetPoolName  
+Exception Behavior | Y | Preferences for how any warnings encountered during transitioning items through workflow should be handled. See definition. | Fail for Short Position  
+  
+Stop processing the workflow after entering all movements if any of them results in a short position. See Note 2.  
+|  |  | Fail for Eligibility  
+  
+Stop processing the workflow after entering all movements if any of the entered movements does not meet the agreement’s eligibility rules.  
+|  |  | Fail for Concentration  
+  
+Stop processing the workflow before approving the margin call if the entered movements cause a breach of concentration rules.  
+Agreed Amount | N | The amount to be agreed to on the margin call. Note that this value is ignored if the agreed amount has already set on the margin call. |   
+Counterparty Call Amount | N | The call amount specified from the Counterparty's perspective. If specified it must be greater than zero. |   
+Counterparty Call Type | N | The Margin Call Type as calculated by the Counterparty, but specified from the perspective of the Principal. | Margin Call Types  
+  
+\- Demand  
+\- AnticipatedDemand  
+\- NoAction  
+  
+**Note:**
+
+  1. A Movement Posting is deemed invalid if Applicable Margin Specification is not set, or if optional AgreedAmount is zero or a negative number, or if optional Counterparty Call Amountis zero or a negative value or Movements is empty, 
+  2. If either the AgreedAmount, Counterparty Call Amount or Counterparty Call Type are supplied, then values for all three must be defined, otherwise the movement posting will be deemed invalid.
+
+
+
+Composition of a Manual Movement Posting Message
+
+Member | Collection? | Comments | Collection Definition  
+---|---|---|---  
+Agreement name | N | The Agreement to whom the movement is to be applied. |   
+Movements | Y | The movements to upload against this call - see definition  
+  
+Only AssetPoolName and Reason are optional, the other fields must be defined.  
+  
+Notional amounts should be defined without signage. | IsReturn  
+  
+Whether the movement is a return or deliver  
+  
+\- True: Return  
+\- False: Deliver  
+|  |  | Notional  
+|  |  | SettlementDate  
+|  |  | PhysicalSettlement  
+|  |  | InstrumentIdentifier  
+|  |  | InstrumentIdentifierType  
+|  |  | AssetPoolName  
+|  |  | Unique Movement Identifier  
+  
+Unique identifier associated with a movement to correlate it to the response.  
+|  |  | Reason  
+|  |  | Margin Type  
+  
+\- LockUp  
+\- Variation  
+\- Surplus  
+\- Guarantee  
+\- Additional  
+|  |  | AffectedParty  
+  
+The party to whom the movement applies  
+  
+\- Principal  
+\- Counterparty  
+Exception Behavior | Y | Preferences for how any warnings encountered during transitioning items through workflow should be handled. See definition | Fail for Short Position  
+  
+Stop processing the workflow after entering all movements if any of them creates a short position  
+|  |  | Fail for Eligibility  
+  
+Stop processing the workflow after entering all movements if any of the entered movements does not meet the agreement’s eligibility rules  
+|  |  | Fail for Concentration  
+  
+Stop processing the workflow before approving the margin call if the entered movements cause a breach of concentration rules  
+  
+## Margin Call Movement Posting Upload Process
+
+Movements that should be associated to Margin Calls in TLM Collateral Management are communicated through the Public API, as Movement Posting messages, and then processed. 
+
+The process can be represented [schematically](<api_mc_mvmt_upload_schematic.md>). First, become familiar with the schematic, but essentially when a Movement Posting message is received, the following occurs:
+
+  1. Based on the message's Applicable Margin Specification (that is, whether Call Id is defined, or whether a series of call related criteria is defined), the system attempts to locate a single margin call that matches the specification. If no single match is found, a FailedMarginCallNotFound API error is raised. 
+  2. The matching TLM Collateral Management Margin Call is examined to see if it contains a populated Agreed Amount. If it does, then the process skips the settings agreed amount phase (steps 3 to 5 and moves directly on to step 6) 
+  3. When the matched TLM Collateral Management Margin Call does not have a populated Agreed Amount, the process first checks to see if the call is in an eligible workflow state to have an Agreed amount applied. To be eligible for agreed amount applying, the margin call must be in one of the following [standard margin call workflow](<margin_calls_overview.md>) states:
+
+     * for a **Demand** \- [Sent Demands](<margin_calls_overview.md#demand-standard-workflow>)
+     * for an **Anticipated Demand** , either [Anticipated Demands](<margin_calls_overview.md#anticipated-demand-standard-workflow>) or [Sent SVA Anticipated Demands](<margin_calls_overview.md#anticipated-demand-standard-workflow>)
+
+If the matching Margin Call is in any other workflow queue, it is deemed that a validation failure has occurred, and a FailedInvalidWorkflowState API error is generated, and processing of that call stops.
+
+  4. The API upload process then examines the message to see whether **all** the following three fields contain Null values:-
+
+a. Agreed Amount
+
+b. Counterparty Call Amount
+
+c. Counterparty Call Type
+
+If they are, then the upload process interprets this to mean that the margin call is being fully agreed to, and sets the values as follows:
+
+For a Demand Margin Call
+
+Field | Gets populated with  
+---|---  
+Agreed Amount | Principal Call Amount value  
+  
+For an Anticipated Demand Margin Call
+
+Field | Gets populated with  
+---|---  
+Agreed Amount | Principal's Expected Call Amount value  
+Counterparty Call Amount | Principal's Expected Call Amount value  
+  
+As the margin call has been fully agreed to, the process then moves onto the **Agreed Amount Tolerance** Check in step 7) and skips step 5).
+
+  5. When the three fields [Agreed Amount, Counterparty Call Amount, Counterparty Call Type] are populated on the message, the upload process applies these values to the corresponding fields on the matched margin call. Simultaneously, TLM Collateral Management evaluates whether a partial dispute should be raised based on the values received and the margin call details. The logic used in this evaluation is identical to that used if the values were entered via the TLM Collateral Management for standard margin call workflow:
+
+**Demand** \- Should the difference between the [Agreed Amount and the Principal Call amount is greater than the dispute tolerance](<margin_calls_agree.md#agrees-partially>), raise a partial dispute 
+
+**Anticipated Demand** \- Should the difference between the [Counterparty Call Amount and Agreed amount exceeds the Agreed Amount](<margin_calls_agree.md#agrees-partially>), raise a partial dispute. 
+
+If at any time during the application of these values and the setting of the Agreed Amount, an exception is encountered, the API process will report an error or errors[AgreedAmountNotSet; InvalidCounterpartyCallAmountForCounterpartyCallType; MustSetAllOrNoAgreedAmountFields] and processing stops. Assuming no errors are encountered, the process then moves onto the **Agreed Amount Tolerance** Check in step 7)
+
+**Note:** Should a partial dispute have been raised in this step, the API upload process continues against the partially agreed element of the margin call. If no dispute was raised, then processing continues of the fully agreed margin call.
+
+  6. The matching margin call (which already has a populated Agreed Amount) is then examined to see if it is an eligible workflow state. To be eligible, the margin call must be in one of the following standard margin call workflow states:
+
+     * for Demands - [Agreed Awaiting Collateral Details](<margin_calls_overview.md#demand-standard-workflow>)
+     * for Anticipated Demands, Agreed Awaiting Collateral Details
+
+If the margin call is in any other workflow queue, it is deemed that a validation failure has occurred, and a FailedInvalidWorkflowState API error is generated, and processing of that call stops.
+
+**Note:** Step 6 is only applicable when the matched margin call already had a populated Agreed Amount.
+
+  7. An **Agreed Amount Tolerance Check** is now undertaken to check that Margin Call Amount and Agreed Amount recorded are within the tolerances defined in AgreedAmountTolerance.
+
+a. If tolerance check is passed, the process moves on to _eligibility_ and _short position checks_ outlined in the next step.
+
+b. If tolerance check is failed, an API error of FailedAgreedAmountNotWithinTolerance is generated, and processing for the call stops.
+
+**Note:** If AgreedAmount Tolerance is Null, the check does not occur.
+
+  8. All the movements that are specified in the movement posting message for the Margin Call are then checked to ensure that they don't fail Agreement Eligibility rules, and that they don't raise any Short Position warnings.
+
+Short position checking is carried according to a combination of the following settings:
+
+     * The Fail for Short Position Exception Behavior Value on the Margin Call Movement/Manual Movement Message.
+     * The [Track Short Positions flag](<movements_short_position_checking.md#enable-short-position-checking>) in the TLM Collateral Management system web.config file.
+     * The Monitor Short Position flag on the Movement's [Principal Entity](<entities_general.md#shortpositions>).
+
+The combination can be summarized as follows:
+
+Short Position Checking on Movements Uploaded via API
+
+API Fail for short Position Exception Behavior Value | System Web Config Track Short Position value | Principal Entity Monitor Short Position flag | Movements Check for Short Positions ?  
+---|---|---|---  
+False | False | False | No  
+False | True | False | No  
+False | True | True | Yes  
+False | False | True | No  
+True | False | False | No  
+True | False | True | Yes  
+True | True | True | Yes  
+True | True | False | No  
+  9. If no short position or eligibility warnings are raised, actual collateral movements are created and saved in an In Progress Settlement state, and the process moves onto the Concentration Check phase. 
+
+  10. If eligibility or short position warnings are raised, the API looks to the corresponding Exception Behavior criteria (Fail for Short Position and Fail for Eligibility) in the Movement Posting message to determine how to proceed:
+
+a. If the corresponding exception behavior flag is set as **True** , the following occurs:
+
+     * An API error is raised according to the validation failure [NotAllMovementsSaved, MovementsFailedEligibility, MovementsCreatedShortPosition]
+     * The system creates and saves only those collateral movements on the margin call which did not raise eligibility or short position warnings.
+     * The system does not pass the successfully created collateral movements on for further processing.
+
+b. If the flag is set as **false** , the following occurs:
+
+     * The system creates _all_ the collateral movements on the margin call irrespective of whether eligibility or short position warnings were raised.
+     * The system passes all the created movements onto the _Concentration Check_ phase.
+
+In summary: If one or more movements did not get generated as there was a validation failure, and the corresponding exception behavior flag was set as True, none of the successfully created movements on the margin call are passed on for further processing.
+
+  11. Movements are then subject to a **Concentration check** , to see if any concentration rules defined on the Agreement have been breached.
+
+**Note:** When undertaking concentration evaluation, the system considers all the movements which have been created for the margin call as a group, as opposed to individually validating them. For example, if three movements have been created for a margin call, the concentration check is carried out on the totality of the 3 movements.
+
+  12. If no concentration breaches are raised for the margin call's movements, then the system moves onto the _Total Tolerance check_ phase.
+
+  13. If concentration breaches occur, the API looks to Exception Behavior Fail for Concentration definition in the Movement Posting message to determine how to proceed.
+
+a. If Fail for Concentration exception behavior flag is set as **True** , the following occurs:
+
+     * An API error of MovementsFailedConcentration is raised
+     * The system does not pass the movements on for further processing.
+
+b. If Fail for Concentration flag is set as **false** , the following occurs:
+
+     * The system passes the created movements onto the _Total Tolerance Check_ phase.
+  14. Movements are then subject to **Total Tolerance check** to ensure that any difference between the total agreement currency value of the movements (i.e value using valuation percentages) and the Agreed Amount, is within the values defined in Total Entered Tolerance
+
+a. If this tolerance, check is failed, then an API error of TotalMarketValueNotWithinTolerance is generated, and the movements are not passed onto the auto-approval phase.
+
+b. If the Total Tolerance check is passed, the process continues, and the movements are passed onto the _auto-approval_ phase.
+
+**Note:** If Total Entered Tolerance is Null, the check does not occur.
+
+  15. At this stage, movements have been created against the Margin Calls in TLM Collateral Management and movement creation validations have been passed.
+
+  16. The Margin Call is then **automatically approved** :
+
+a. Demands are transitioned to Demand Workflow - Confirmed Sent to Settlement state
+
+b. Anticipated Demands are transitioned to Antic Demands Workflow - Confirmed Sent to Settlements state
+
+c. The collateral movements associated to the Margin Call are set to an In Transit settlement status.
+
+d. A collateral confirmation notice will be sent via email to any contacts on the Agreement whom are configured to receive it.
+
+Should any exceptions be encountered during the automatic approval stage process, then an API error message of TransitionMarginCallUnsuccessful is raised. 
+
+
+
+
+**Note:** When movement data is uploaded though the Public API, it is the TLM Collateral Management Workflow Automation Service ("WAS") that actually creates and books the Collateral Movements. It is important to understand that for a given movement posting message that the WAS books Return Movements before it books Deliver Movements. In essence, irrespective of the order in which the movements are presented within the API request, all Returns are processed first and then Delivers. This is important in terms of how short positions can be triggered.
+
+## Manual Movement Posting Upload Process
+
+Manual Movements to be uploaded to TLM Collateral Management are communicated through the Public API, as Manual Movement Posting messages.
+
+The process can be represented, [schematically](<api_manual_mvmt_upload_schematic.md>). Become familiar with the schematic to aid an understanding of the process. Essentially, when a Manual Movement Posting message is received, the following occurs:
+
+  1. The API interrogates the Manual Movement Posting to identify the specified Agreement, and seeks to find a matching Agreement within TLM Collateral Management. If no matching Agreement is found, an API error FailedAgreementNotFound is raised, and processing stops. Assuming Agreement is found, the process moves on. 
+  2. All the movements that are specified in the manual movement posting message for the single Agreement are then checked to ensure that they don't fail agreement eligibility rules, and that they don't raise any _short position_ warnings.
+
+Short position checking is carried according to a _combination_ of the following settings:
+
+     * The Fail for Short Position Exception Behavior Value on the Margin Call Movement/Manual Movement Message.
+     * The [Track Short Positions flag](<movements_short_position_checking.md>) in the TLM Collateral Management system web.config file.
+     * The Monitor Short Position flag on the Movement's [Principal Entity](<entities_general.md#shortpositions>).
+
+The combination can be summarized as follows:
+
+Short Position Checking on Movements Uploaded via API
+
+API Fail for short Position Exception Behavior Value | System Web Config Track Short Position value | Principal Entity Monitor Short Position flag | Movements Check for Short Positions ?  
+---|---|---|---  
+False | False | False | No  
+False | True | False | No  
+False | True | True | Yes  
+False | False | True | No  
+True | False | False | No  
+True | False | True | Yes  
+True | True | True | Yes  
+True | True | False | No  
+  3. If no short position or eligibility warnings are raised, the actual collateral movements are created, and the process moves onto the _Concentration Check_ phase. 
+
+  4. If eligibility or short position warnings are raised, the API looks to Exception Behavior criteria in the Manual Movement Posting message to determine how to proceed:
+
+a. If the corresponding exception behavior flag is set as **True** , the following occurs:
+
+     * An API error is raised according to the validation failure [NotAllMovementsSaved, MovementsFailedEligibility, MovementsCreatedShortPosition]
+     * The system creates _only_ those collateral movements which did not raise eligibility or short position warnings.
+     * The system does not pass the created collateral movements on for further processing.
+
+b. If the flag is set as false, the following occurs:
+
+     * The system creates all the collateral movements irrespective of whether eligibility or short position warnings were raised.
+     * The system passes the created movements onto the _Concentration Check_ phase.
+
+In summary: If one or more movements fails to generate due to a validation failure, and the corresponding exception behavior flag was set as True, none of the successfully created movements are passed on for further processing.
+
+  5. The generated movements are then subject to a **Concentration check** , to see if any concentration rules defined on the Agreement have been breached.
+
+**Note:** When undertaking concentration evaluation, the system considers all the movements which have been created as a group, as opposed to individually validating them. For example, if three movements have been created for an agreement, the concentration check is carried out on the totality of the 3 movements.
+
+  6. If no concentration breaches are raised, the movement is passed onto the _auto approval_ stage.
+
+  7. If concentration breaches occur, the API looks to Exception Behavior Fail for Concentration definition in the Manual Movement Posting message to determine how to proceed:
+
+a. If the corresponding exception behavior flag is set as **True** , an API error of MovementsFailedConcentration is raised, and the movement is not automatically approved.
+
+b. If the flag is set as **False** , the process moves onto to the _auto approval_ stage outlined in the next step.
+
+  8. The manual movements are then **automatically approved** , and set to an In Transit Settlement status. If during this auto approval stage any exceptions are encountered an API error of TransitionMarginCallUnsuccessful is raised.
+
+**Note:**
+
+     1. It is worth remarking that a single manual movement posting message can contain _multiple_ movements for an agreement, and that these will be processed/evaluated collectively in one pass. This is in contrast to manual movement entry via the TLM Collateral Management where only a single movement is entered / validated at a time.
+     2. Similarly, when evaluating whether a short position results from movement processing, it is important to understand that when movement data on a message is uploaded via the Public API, it is the TLM Collateral Management Workflow Automation Service ("WAS") that actually creates and books the Collateral Movements, and that irrespective of the order in which the movements are presented within the API message request, all the Returns movements on the message are processed first and then the Delivers.
+
+
+
+## Movement Posting Responses
+
+The Public API provides responses to denote how the Movement Posting message requests were processed.
+
+Composition of a Movement Posting Response
+
+Member | Comments | Composition  
+---|---|---  
+Successful | A Boolean flag indicating whether the entire margin call workflow was a success | True / False  
+Posting failures | A list of failure types that occurred during the automated workflow.  
+  
+These may not have been fatal to the entire workflow. See Successful flag to determine whether fatal. | Failure Types  
+  
+Possible values:  
+  
+\- AgreedAmountNotWithinTolerance  
+\- TotalMovementMarketValueNotWithinTolerance  
+\- AgreementNotFound  
+\- MovementsFailedConcentration  
+\- MovementsFailedEligibility  
+\- InvalidWorkflowState  
+\- MarginCallNotFound  
+\- AgreedAmountNotSet  
+\- AgreedAmountAlreadySet  
+\- InvalidCounterpartyCallAmountForCounterpartyCallType  
+\- MovementCreatedShortPosition  
+CreationResults | list of results for each movement provided for upload | Unique Movement Identifier  
+|  | Successful  
+  
+Flag indicating movement created successfully  
+|  | Fail Reason  
+  
+possible values:  
+  
+\- Movement Would Create Short Position  
+\- Closed Interest Period  
+\- Concurrency Exception  
+\- Invalid Movement  
+\- Invalid Operation  
+\- Item Not Found  
+\- Persistence Failure  
+\- Validation  
+|  | IsShortPosition  
+  
+Boolean indicating whether the movement caused a short position, or failed to remedy an existing short position  
+|  | EligibilityStatus  
+  
+possible values:  
+  
+\- Instrument Not Found  
+\- Is Eligible  
+\- Is Not Eligible

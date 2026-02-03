@@ -1,0 +1,46 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/approve_highvalue_collat_mvmt.html
+
+# Approve High Value Collateral Movements in Margin Call Workflow
+
+## Overview
+
+In Scope High Value Movements that are subject to a Second level of approval can be approved within the workflow.
+
+Once the Margin Call and its associated movements have gone through the First level of approval, it is then assessed whether the Second level of approval applies and a user with the right permission can approve the margin call and its movements. For further understanding of applicability, refer to the topic [Understanding High Value Movement Approval Controls](<high_value_movement.md#understanding-high-value-movement-approval-controls>).
+
+**Note:** It is also possible that Margin Call type Collateral Movements awaiting a Second level of approval can be approved via the Movements Screen.
+
+## Procedure
+
+  1. Select the **Confirmed Approval** workflow state. 
+  2. Select the call that needs Second level approval by clicking the checkbox or clicking on the call. It is important to understand that bulk approvals do not apply to such approvals and can only be acted upon one by one hence there are no check boxes applicable here.
+  3. Upon the selection of the call, the buttons **Approve - Second Level** and **Reject - Second Level** will be enabled if:
+
+     1. The user has sufficient privileges to approve High Value Collateral Movements.
+     2. The user is not the user who promoted the collateral movements for the First level of approval.
+     3. The user is not the user whom approved the First Level.
+
+**Note:** To differentiate the Second level of approvals from the First, the pair of Approve and Reject buttons has been segregated. The First level of approval is a bulk processing functionality for which the calls are selected using the check boxes. The Second level of approval is a one by one processing functionality and the margin call has to be highlighted in order to be approved.
+
+  4. If satisfied with the Collateral Movements that have been entered, proceed to the next step. Otherwise, follow the guide on [How to Reject High Value Collateral Movements in Margin Call Workflow](<reject_highvalue_collat_mvmt.md>).
+
+  5. Click on **Approve - Second Level**.
+  6. Collateral Movements will be updated from a pending settlement state to an In Transit state.
+
+
+
+**Please note the following:**
+
+  1. To determine whether High Value Movement approval applies, the following logic takes place:
+     1. Payment Tolerance amount and its currency defined on the Principal Managing Location is converted into the Agreement Currency (if applicable) using the agreement's defined FX Rate Source.
+     2. The market value of ALL collateral movements in Agreement Currency ("Total Amount") for a single margin call is compared to the Payment Tolerance amount.
+        1. For eligible collateral, the post-haircut market value in Agreement Ccy is considered.
+        2. For ineligible collateral, the pre-haircut market value in Agreement Ccy is considered.
+     3. If the **Total Amount** is equal to or greater than the defined Payment Tolerance amount, the status of the collateral movements remains in the To be Approved state and the Required Approval Level is updated to **Second**.
+     4. If the **Total Amount** is less than the defined Payment Tolerance amount, the collateral movements transition to the next state and are set to In Transit status.
+  2. Collateral Movements on a Margin Call are approved or rejected in entirety. That is to say, where more than one Collateral Movement exists on a Margin Call, it is currently not possible to approve one movement only, or approve one movement and reject another. All movements must be either be approved or rejected.
+  3. There is an exception to 1) for OTC Agreements that segregate requirements. For these form of agreements, separate margin call requirements are generated for the Lock Up and for the Variation Requirements. Each requirement therefore has a margin type of either Lock Up or Variation.
+
+
+
+Collateral movements are added per margin requirement - that is collateral movements are added per margin type. Therefore when collateral movements are approved - they are approved per margin requirement. That is, the collateral movements for margin type lock up can be approved on the lock up requirement, but collateral movements may exist for the variation requirement and require approval separately.

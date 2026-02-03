@@ -1,0 +1,858 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_recalc.html
+
+# Margin Call Recalculation
+
+The system allows for Margin Calculations to be run more than once on any given day.
+
+## Understanding and Identifying Replacement Margin Calls
+
+A Margin Call for an Agreement is defined as a **Replacement** when margin calculations for an Agreement have been re-run for a calculation date and resulted in a new margin call being generated which replaces the previously issued Margin Call.
+
+The previously issued margin call is cancelled outright and replaced with the replacement margin call. It does not matter whether the margin call that is being replaced, was a Start of Day Margin call, or an Intraday Margin Call.
+
+It does not matter how the previously issued margin call was communicated to the client - (Sent via the Send Calls transition or advanced via the Already Notified transition).
+
+The key concept to understand is that the Margin Call that is replaced has already been communicated to the client.
+
+The process of how a margin call gets replaced differs depending on the recalculation process that is applied. The particular recalculation process that is applied is driven by whether the Agreement is subject to the Standard Margin Call Workflow or the Grouped Margin Call Workflow.
+
+Should the New Margin Calculation results differ from the original Margin Calculation Result, and the original Margin Calculation result is in any of the following Workflow States:
+
+  * Demands - Sent, Waived, Disputed
+  * Anticipated Demand - Agreed, Disputed
+    * When a call is in both a Demand and Antic Demand, the Demand is in the Sent or Agreed state
+
+
+
+When a user selects a margin call or clicks on the checkbox next to the call, the system will return two action buttons to choose from, **Send New Result** or **Use Original Result**.
+
+When the user clicks on the call, the call details will display a side by side view of the original call and the new call.
+
+The Margin Calculation Results must be reviewed. A decision of whether to use the original call or the results of the new call must be made. Until a decision is made, the system will not allow the original or revised Margin Calculation Result to be processed.
+
+**Note:** The system retains the Original Margin Calculation Results and the latest set of Margin Calculation results for comparison. If the Margin Calculations is run three times in a day, the third set of margin calculations will supersede the second set of margin calculations, and the new margin calculation indicator will only exist where the first and third set of margin calculations differ subject to the above conditions.
+
+In a Grouped call, the recalculation process differs for OTC Agreements depending on whether the Agreement is defined as eligible to generate Intraday Margin Calls.
+
+For more information on specific recalculation process in TLM® Collateral Management, see the topics in the below table.
+
+Agreements in Standard Margin Call Workflow | Agreements in Grouped Margin Call Workflow  
+---|---  
+[Processing Original or New Margin Calculation Results](<#processing-original-or-new-margin-calculation-results>) | [Recalculations for Grouped Margin Call Workflow](<margin_calls_grouped_recalc.md#recalculations-for-grouped-margin-call-workflow>)  
+[Processing Original or New Margin Calculation Results for Non Auto Allocate Agreements](<#how-to-process-original-or-new-margin-calculation-results-for-non-auto-allocate-agreements>) | [Intraday Margin Calculations](<intraday_mc.md#intraday-margin-calculations>)  
+  
+### Fields Used to Identify Recalculation
+
+When the Margin Calculation Task is run subsequent times on the same day, the system checks the new Margin Calculation Results to determine whether the recalculated results are different to the original Margin Calculation Results for that day.
+
+Should the system determine that a New Margin Calculation result has occurred, two possible outcomes are possible depending on which workflow state the original Margin Calculation Result is in:
+
+The recalculated Margin Calculation Result replaces the original Margin Calculation Result in entirety.
+
+The system displays the original and new Margin Calculation Results side by side and a choice must be made as to which result to process.
+
+More Details on this can be found in [How to Process Original or New Margin Calculation Results](<#processing-original-or-new-margin-calculation-results>).
+
+The fields that the system uses to determine whether a recalculation has caused a difference are:
+
+  * DeliverToPrincipal
+  * DeliverToCounterparty
+  * ReturnToPrincipal
+  * ReturnToCounterparty
+  * NetExposure
+  * NetExposureFavorOf
+  * NettedAdditionalMargin
+  * NettedAdditionalMarginDueTo
+  * LockUpMargin
+  * LockUpMarginDueTo
+  * LockUpMarginReturnToCpty
+  * LockUpMarginReturnToPrin
+  * LockUpMarginDeliverToCpty
+  * LockUpMarginDeliverToPrin
+  * Threshold
+  * RoundingMethod
+  * RoundingAmount
+  * MinimumTransferAmount
+  * MarginTermType
+  * VariationCollateralHeld
+  * VariationCollateralPosted
+  * LockUpCollateralHeld
+  * LockUpCollateralPosted
+  * LockUpCalculationType
+  * CalculationType
+  * SettledHeld
+  * SettledPosted
+  * SettledLockUpHeld
+  * SettledLockUpPosted
+  * AccruedHeld
+  * AccruedPosted
+  * AccruedLockUpHeld
+  * AccruedLockUpPosted
+  * PriorAgreedDeliverToCpty
+  * PriorAgreedDeliverToPrin
+  * PriorAgreedReturnToCpty
+  * PriorAgreedReturnToPrin
+  * PriorAgreedLockUpDeliverToPrin
+  * PriorAgreedLockUpDeliverToCpty
+  * PriorAgreedLockUpReturnToPrin
+  * PriorAgreedLockUpReturnToCpty
+  * InTransitDeliverToPrin
+  * InTransitReturnToPrin
+  * InTransitDeliverToCpty
+  * InTransitReturnToCpty
+  * InTransitLockUpDeliverToPrin
+  * InTransitLockUpDeliverToCpty
+  * InTransitLockUpReturnToPrin
+  * InTransitLockUpReturnToCpty
+  * ValuationDate - Note, that if a valuation date were specified as Monthly on a Monday, and were altered to be weekly on a Monday, this would not be considered a difference.|
+  * AgreementStatus
+  * AgreementStatusDetail
+  * PostingParty
+
+
+
+### Examples
+
+See [Replacement Examples for Standard Margin Call Workflow](<margin_calls_replacement_example.md#standard-workflow-examples>) when a call is defined as a replacement.
+
+See [Replacement Examples for Grouped Margin Call Workflow](<margin_calls_replacement_example.md#grouped-workflow-examples>) when a call is defined as a replacement.
+
+## Identifying Replacement Margin Calls
+
+The system allows the Margin Calculations to be run more than once on any given day. Should this be done, new Margin Calculation Results will be generated.
+
+The New Margin Calculation results are compared to the existing Margin Calculation results to see if any key data has changed. If so, the system will determine that the new Margin Calculation Result differs from the original result, and that action is required.
+
+Replacement Margin calls are identified distinctly within TLM Collateral Management via the following behavior:
+
+  1. The email that gets sent which contains the Replacement Margin Call Notice is titled Margin Notice ("Replacement)- (MarginType) (MarginCallType) (Principal) (Counterparty")
+
+  2. The text body of the email states "Please find attached an Replacement Margin call notice for (MarginType) (MarginCallType) for COB (YYYY MM DD)".
+
+
+
+
+How the new Margin Calculation Result will affect any existing Margin Calculation Results that exist for the day depends on several factors.
+
+Should the original Margin Calculation Result exist as any of the following Workflow Queues:
+
+  * A Demand in the Unsent Demands state
+  * An Antic Demand in the Anticipated Demands state
+  * A No Action item in the No Actions state
+
+
+
+then the New Margin Calculation Result will replace the original Margin Calculation in entirety, and the new Margin Calculation Result details will be displayed as soon as the grid is refreshed.
+
+Should the New Margin Calculation results differ from the original Margin Calculation Result, and the original Margin Calculation result be in any of the following Workflow states:
+
+  * Demands
+    * Sent Demands state
+    * Waived state
+    * Disputes state
+  * Antic Demands
+    * Anticipated Demand state (when margin call is both a Demand and Antic Demand, and the Demand is in the Sent or Agreed state) 
+    * Agreed Awaiting Collateral Details state
+    * Disputes state
+
+
+
+Then the system will indicate that a New Margin Calculation result is available by displaying in the New Margin Calc field in the Workflow grid in the upper right pane.
+
+The new Margin Calculation Result must be reviewed a decision made on whether to use this, or retain the original Margin Calculation Result. Until this is done, the system will not allow either the original or revised Margin Calculation Result to be processed.
+
+**Note:** The system retains the Original Margin Calculation Results and the latest set of Margin Calculation results for comparison. If the Margin Calculations is run three times in a day, the third set of margin calculations will supersede the second set of margin calculations, and the new margin calculation indicator will only exist where the first and third set of margin calculations differ subject to the above conditions. See Also:
+
+How to Process Original or New Margin Calculation Results
+
+How to Process Original or New Margin Calculation Results for Non Auto Allocate Agreements
+
+## Processing Original or New Margin Calculation Results
+
+When Margin Calculations have been run more than once on a day, the system provides the flexibility to either use the data from the very latest set of Margin Calculation Results or to use the data from the original Margin Calculation Results.
+
+For any affected Margin Calculation Result, a choice must be made.
+
+  1. Retain the original Margin Calculation Result and Ignore the Margin Calculation Result generated from the Recalculation.
+
+or
+
+  2. Replace the original Margin Calculation Result with the new Margin Calculation Result generated from the Recalculation.
+
+
+
+
+**Note:** When the Margin Call that has been sent is replaced, the replacement call is indicated as such when it is sent out. [See Understanding and Identifying Replacement Margin Calls](<#understanding-and-identifying-replacement-margin-calls>)
+
+Any item in the Workflow States that is affected by a recalculation will not be able to be selected within the detailed grid view as shown below.
+
+![side_by_side_indicator.jpg](Images/side_by_side_indicator.jpg)
+
+The user needs to click on the margin call to view the recalculation results in order to progress it.
+
+![side_by_side.jpg](Images/side_by_side.jpg)
+
+If the original Margin Calculation result is selected, the user will be prompted to enter an explanatory text as to why this calculation was retained as opposed to choosing the the new recalculated Margin result. The recalculated Margin result is then cancelled and the original Margin Calculation Result remains in the same Workflow state.
+
+If retaining the recalculated Margin result, the original Margin Calculation Result is cancelled and the revised Margin result is available for processing.
+
+The choices made available are determined by which particular Workflow state the Original Margin Calculation Result is in and how the recalculated Margin Calculation Result differs from the original Margin Calculation Result.
+
+Below is a summary of the choices that differ in the Workflow states for Demands or Antic Demands.
+
+**Original Result is a Demand in the Sent or Agreed Workflow State**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand available for processing.  
+| Send New Result | \- Original Demand cancelled.  
+\- Agreed Amount (if Entered) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New Demand is available for processing in [Sent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Antic Demand is cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements if entered) remain attached to Original Demand.  
+\- Original Demand available for processing.  
+| Process as Antic Demand | \- Original Demand cancelled.  
+\- Agreed Amount (if Entered on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New Antic Demand created in [Anticipated] state  
+No Action | Use Original Result | Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Agreed Amount if Entered) remains on Original Demand  
+\- Collateral Movements if entered) remain attached to Original Demand.  
+\- Original Demand available for processing.  
+| Process as No Action | \- Original Demand cancelled.  
+\- Agreed Amount (if Entered on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand and Antic Demand cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand available for processing.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- New Antic Demand added to the [Anticipated] state.  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+  
+**Original Result is a Demand in the [Waived Approvals] state**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Waive New Result | \- Justification comment(s) and categories required for waiving new Demand.  
+\- New Demand added to [Waived Approvals] state.  
+\- Original Demand cancelled.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+Antic Demand | Process as Antic Demand | \- Original Demand cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+No Action | Process as No Action | \- Original Demand cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Waive New Result | \- Justification comment(s) and categories required for waiving new Demand.  
+\- New Demand added to [Waived] state.  
+\- New Antic Demand created in [Anticipated] state.  
+\- Original Demand cancelled.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is a Demand in the [Waived] state**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Waive New Result | \- Justification comment(s) and categories required for waiving new Demand.  
+\- New Demand added to [Waived Approval] state.  
+\- Original Demand cancelled.  
+| Send New Result | \- Original Demand cancelled.  
+New Demand sent to Counterparty, and added to [Sent] state.  
+Antic Demand | Process as Antic Demand | \- Original Demand cancelled.  
+-New Antic Demand created in [Anticipated] state.  
+No Action | Process as No Action | \- Original Demand cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Waive New Result | \- Justification comment(s) and categories required for waiving new Demand.  
+\- New Demand added to [Waived] state.  
+New Antic Demand created in [Anticipated] state.  
+\- Original Demand cancelled.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is a Demand in the [Disputed] state**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original Demand remains in [Disputed] state.  
+| Send New Result | \- Original Demand is cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+Original Demand remains in [Disputed] state.  
+| Process as Antic Demand | \- Original Demand cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original Demand remains in [Disputed] state.  
+| Process as No Action | \- Original Demand cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original Demand remains in [Disputed] state.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is a Demand with Partial Dispute in the [Disputed] state, and Partial Agreed in the [Sent] state**
+
+**Note:** In this state Demands may have agreed amount and collateral movements entered
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original partially disputed demand remains in Disputes state.  
+\- Original partially agreed demand remains in Sent state.  
+\- Agreed Amount remains on partially agreed demand.  
+\- Collateral Movements (if entered) remain attached to partially agreed demand.  
+| Send New Result | \- Original partially Agreed Demand is cancelled.  
+\- Original partially disputed demand is cancelled.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- Agreed Amount (on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original partially disputed demand remains in Disputes state.  
+Original partially agreed demand remains in Sent state.  
+\- Agreed Amount remains on partially agreed demand.  
+\- Collateral Movements (if entered) remain attached to partially agreed demand  
+| Process as Antic Demand | \- Original partially Agreed Demand is cancelled.  
+\- Original partially disputed demand is cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+\- Agreed Amount (on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original partially disputed demand remains in Disputes state.  
+\- Original partially agreed demand remains in Sent state.  
+\- Agreed Amount remains on partially agreed demand.  
+\- Collateral Movements (if entered) remain attached to partially agreed demand.  
+| Process as No Action | \- Original partially Agreed Demand is cancelled.  
+\- Originally partially disputed demand is cancelled.  
+\- New No Action created in [No Action] state.  
+\- Agreed Amount (on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original partially disputed demand remains in Disputes state.  
+\- Original partially agreed demand remains in Sent state.  
+\- Collateral Movements (if entered) remain attached to partially agreed demand.  
+| Send New Result | \- Original Demand cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+\- Agreed Amount (on original demand) is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen.  
+  
+**Note:** A Demand that is partially disputed is split out into two items - one item a partial dispute will exist in the [Disputed] state, while the partially agreed item on the Call will exist in the [Sent] state. As a margin Recalculation can affect both items, the recalculation is actionable from both states.
+
+**Original Result is an SVA Antic Demand in the [Sent SVA] state**
+
+New Result | Button | Action  
+---|---|---  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | Original Antic Demand cancelled.  
+\- New Antic Demand sent to Counterparty, and added to [Sent SVA] state.  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand cancelled.  
+\- New Demand created in [Unsent] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+| Process as No Action | \- Original Antic Demand cancelled.  
+\- New No Action created in [Unsent SVA] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand and Antic Demand cancelled.  
+\- Original Antic Demand available for processing  
+| Send New Result | \- Original Antic Demand cancelled.  
+\- New Antic Demand sent to Counterparty, and added to [Sent SVA] state/  
+\- New Demand added to the [Unsent] state.  
+  
+**Original Result is an Antic Demand in the [Agreed] state**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Demand created in [Unsent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is an Antic Demand in the [Disputed] State**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original Antic Demand remains in [Disputed] state.  
+| Send New Result | \- Original Antic Demand is cancelled  
+\- New Demand created and placed in [Sent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original Antic Demand remains in [Disputed] state.  
+| Send New Result | \- Original Antic Demand cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original Antic Demand remains in [Disputed] state.  
+| Send New Result | \- Original Demand cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original Antic Demand remains in [Disputed] state.  
+| Send New Result | \- Original Antic Demand cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is an Antic Demand with Partial Dispute in the [Disputed] State, and Partially Agreed in the [Agreed] State**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original partially disputed antic demand remains in [Disputed] state.  
+\- Original partially agreed antic demand remains in [Agreed] state.  
+| Send New Result | \- Original partially Agreed Antic Demand is cancelled.  
+\- Original partially disputed Antic demand is cancelled/  
+\- New Demand sent to Counterparty, and added to [Unsent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original partially disputed Antic demand remains in [Disputed] state.  
+\- Original partially agreed Antic demand remains in [Agreed] state.  
+| Send New Result | \- Original partially Agreed Antic Demand is cancelled  
+\- Original partially disputed Antic demand is cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original partially disputed antic demand remains in [Disputed] state.  
+\- Original partially agreed antic demand remains in [Agreed] state.  
+| Send New Result | \- Original partially Agreed Antic Demand is cancelled.  
+\- Original partially disputed Antic demand is cancelled.  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original partially disputed antic demand remains in [Disputed] state.  
+\- Original partially agreed antic demand remains in [Agreed] state.  
+| Send New Result | Original partially Agreed Antic Demand is cancelled.  
+\- Original partially disputed Antic demand is cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Note:** A Demand that is partially disputed is split out into two items - one item a partial dispute will exist in the [Disputed] state, while the partially agreed item on the Call will exist in the [Agreed] state. As a margin Recalculation can affect both items, the recalculation is actionable from both states.
+
+**Original Result is an Antic Demand in the [Agreed] state.**
+
+New Result | Button | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Demand created in [Unsent] state.  
+\- Collateral movements from original antic demand are set to ignored state and can be seen from the Movements Screen  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Antic Demand created in [Anticipated] state.  
+\- Collateral movements from original antic demand are set to ignored state and can be seen from the Movements Screen.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original Antic Demand available for processing.  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New No Action created in [No Action] state.  
+\- Collateral movements from original antic demand are set to ignored state and can be seen from the Movements Screen  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand.  
+\- New Demand and Antic Demand cancelled.  
+\- Original Antic Demand available for processing  
+| Send New Result | \- Original Antic Demand with agreed amount cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+\- Collateral movements from original antic demand are set to ignored state and can be seen from the Movements Screen  
+  
+**Original Result is a Demand & Antic Demand where Demand in [Sent] State and Antic Demand in [Anticipated] State**
+
+**Note:** In this state, Demands may have an agreed amount and collateral movements entered.
+
+New Result | Button (see note below) | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand  
+\- New Demand is cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Send New Result  
+(Demand Call Type) | \- Original Demand with agreed amount cancelled.  
+\- Original Antic Demand Cancelled  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand  
+\- New Antic Demand is cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Process as Antic Demand  
+(Demand Call Type) | \- Original Demand with agreed amount cancelled.  
+\- Original Antic Demand Cancelled.  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New Antic Demand created in [Anticipated] state.  
+No Actions | Use Original Result | \- Justification comment required for ignoring new No Action  
+\- New No Action is cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand and Antic Demand available for processing.  
+| Process as No Action  
+(Antic Demand Call Type)  
+  
+Process as No Action  
+(Demand Call Type) | \- Original Demand with agreed amount cancelled.  
+\- Original Antic Demand Cancelled.  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen  
+\- New No Action created in [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand is cancelled.  
+\- New Antic Demand is cancelled.  
+\- Agreed Amount (if Entered) remains on Original Demand.  
+\- Collateral Movements (if entered) remain attached to Original Demand.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Send New Result  
+(Demand Call Type) | \- Original Demand with agreed amount cancelled.  
+\- Original Antic Demand Cancelled.  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Collateral movements, (if entered on original demand) are set to ignored state and can be seen from the Movements Screen.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is a Demand & Antic Demand where Antic Demand in [Agreed] State and Demand in [Unsent] State**
+
+New Result | Button (see note below) | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand  
+\- New Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Send New Result  
+(Demand Call Type) | \- Original Antic Demand with agreed amount cancelled.  
+\- Original Demand Cancelled  
+\- New Demand added to [Unsent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand  
+\- New Antic Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Process as Antic Demand  
+(Demand Call Type) | \- Original Antic Demand with agreed amount cancelled.  
+\- Original Demand Cancelled  
+\- New Antic Demand added to [Anticipated] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+-Original Demand and Antic Demand available for processing.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Process as No Action  
+(Demand Call Type) | \- Original Antic Demand with agreed amount cancelled.  
+\- Original Demand Cancelled  
+\- New No Action added to [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand is cancelled.  
+\- New Antic Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+| Send New Result(Antic Demand Call Type)  
+  
+Send New Result(Demand Call Type) | \- Original Antic Demand with agreed amount cancelled.  
+\- Original Demand Cancelled.  
+\- New Demand created in [Unsent] state.  
+\- New Antic Demand created in [Anticipated] state.  
+  
+**Original Result is a Demand & Antic Demand where Antic Demand in [Agreed] State and Demand in [Sent] State**
+
+New Result | Button (see note below) | Action  
+---|---|---  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand  
+\- New Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Agreed Amount remains on original Antic Demand.  
+\- Collateral Movements (if entered) remain attached to Original Demand and Antic Demand.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Send New Result  
+(Demand Call Type) | \- Original Antic Demand cancelled.  
+\- Original Demand cancelled  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Agreed Amount on original Antic demand is reset (i.e removed)  
+\- Collateral movements, (if entered on original demand and antic demand are set to ignored state and can be seen from the Movements Screen.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand  
+\- New Antic Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Agreed Amount remains on original Antic Demand.  
+\- Collateral Movements (if entered) remain attached to Original Demand and Antic Demand.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Process as Antic Demand  
+(Demand Call Type) | \- Original Antic Demand cancelled.  
+\- Original Demand cancelled  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Agreed Amount on original Antic demand is reset (i.e removed)  
+\- Collateral movements, (if entered on original demand and antic demand are set to ignored state and can be seen from the Movements Screen.  
+\- New Antic Demand added to [Anticipated] state.  
+No Actions | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Agreed Amount remains on original Antic Demand.  
+\- Collateral Movements (if entered) remain attached to Original Demand and Antic Demand.  
+| Process as No Action  
+(Antic Demand Call Type)  
+  
+Process as No Action  
+(Demand Call Type) | \- Original Antic Demand cancelled.  
+\- Original Demand cancelled  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Agreed Amount on original Antic demand is reset (i.e removed)  
+\- Collateral movements, (if entered on original demand and antic demand are set to ignored state and can be seen from the Movements Screen.  
+\- New No Actions added to [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand is cancelled.  
+\- New Antic Demand is cancelled.  
+\- Original Demand and Antic Demand available for processing.  
+\- Agreed Amount (if Entered) remains on Original Demand  
+\- Agreed Amount remains on original Antic Demand.  
+\- Collateral Movements (if entered) remain attached to Original Demand and Antic Demand.  
+| Send New Result  
+(Antic Demand Call Type)  
+  
+Send New Result  
+(Demand Call Type) | \- Original Demand Cancelled.  
+\- Original Antic Demand Cancelled.  
+\- Agreed Amount (if Entered) on original demand is reset (i.e. removed)  
+\- Agreed Amount on original Antic demand is reset (i.e removed)  
+\- Collateral movements, (if entered on original demand and antic demand are set to ignored state and can be seen from the Movements Screen.  
+\- New Demand sent to Counterparty, and added to [Sent] state.  
+\- New Antic Demand added to [Anticipated] state.  
+  
+**Original Result is an SVA No Action in the [Sent SVA] State**
+
+New Result | Button | Action  
+---|---|---  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original No Action available for processing.  
+| Send New Result | \- Original No Action cancelled.  
+\- New Antic Demand sent to Counterparty, and added to [Sent SVA] state.  
+Demand | Use Original Result | -Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original No Action available for processing  
+| Send New Result | \- Original No Action cancelled.  
+\- New Demand created in [Unsent] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original No Action available for processing.  
+| Send New Result | \- Original No Action cancelled.  
+\- New No Action Sent and added to [Sent SVA] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand and Antic Demand cancelled.  
+\- Original No Action available for processing  
+| Send New Result | \- Original No Action cancelled.  
+\- New Antic Demand sent to Counterparty, and added to [Unsent SVA] state.  
+\- New Demand added to the [Unsent] state.  
+  
+**Original Result is an No Action in the [Disputed] State**
+
+New Result | Button | Action  
+---|---|---  
+Antic Demand | Use Original Result | \- Justification comment required for ignoring new Antic Demand.  
+\- New Antic Demand is cancelled.  
+\- Original No Action remains in Disputes state.  
+| Send New Result | \- Original No Action cancelled.  
+New Antic Demand added to [Anticipated] state.  
+Demand | Use Original Result | \- Justification comment required for ignoring new Demand.  
+\- New Demand is cancelled.  
+\- Original No Action remains in Dispute state.  
+| Send New Result | \- Original No Action cancelled.  
+\- New Demand created in [Unsent] state.  
+No Action | Use Original Result | \- Justification comment required for ignoring new No Action.  
+\- New No Action is cancelled.  
+\- Original No Action remains in Disputes state.  
+| Send New Result | \- Original No Action cancelled.  
+\- New No Action added to [No Action] state.  
+Demand & Antic Demand | Use Original Result | \- Justification comment required for ignoring new Demand and Antic Demand  
+\- New Demand and Antic Demand cancelled.  
+\- Original No Action remains in [Disputed] state.  
+| Send New Result | \- Original No Action cancelled.  
+\- New Antic Demand added to [Anticipated] state.  
+\- New Demand added to the [Unsent] state.  
+  
+## How to Process Original or New Margin Calculation Results for Non Auto Allocate Agreements
+
+When OTC Agreements are defined as segregating Lock Up and Variation requirements, a separate margin call is generated for each of the margin requirements.
+
+The margin call generated for each requirement will be either a Demand, Antic Demand, Demand/Antic Demand or No Action.
+
+Although legally these individual call requirements form one single margin call, TLM® Collateral Management provides the flexibility to process each through the Workflow separately and independently.
+
+See [Working with OTC Agreements that Segregate Lock Up and Variation Margin](<segregate_lockup_varmargin.md>) for details.
+
+Part of core TLM Collateral functionality is to provide users with the ability to run margin calculations numerous times per business day and make an evaluation whether to use the results from the very latest set of Margin Calculations, or to stick with the results from the original Margin Calculations.
+
+For those collateral agreements that don't segregate variation and lock up, the process for how to deal with margin recalculations is detailed in [How to Process Original or New Margin Calculation Results](<#processing-original-or-new-margin-calculation-results>), and should be referenced as a general baseline for the methodology that TLM Collateral Management applies when Margin Calculations are re-run.
+
+For any affected Margin Calculation Result, the user must make a choice:
+
+Whether to retain the original Margin Calculation Result and Ignore the Margin Calculation Result generated from the Recalculation. Whether to replace the original Margin Calculation Result with the new Margin Calculation Result generated from the Recalculation. Note when the Margin Call is replaced that has been sent, the replacement call is indicated as such when then sent out. See [Understanding and Identifying Replacement Margin Calls](<#understanding-and-identifying-replacement-margin-calls>)
+
+This approach also holds true for non-auto allocation (aka Segregated) agreements, but is enhanced somewhat. As these agreements always have at least two margin call requirements on a single margin call, there are scenarios where the individual requirements are considered linked for recalculation purposes, and other situations when they are regarded as unlinked.
+
+The following methodology is applied to margin call requirements generated for non auto allocated agreements:
+
+First the current "re-calculable" state for each of the individual margin requirements is determined. Once the re-calculable state is determined, the system applies pre-determined rules to govern what actions can be performed, and what their outcomes will be. Identification of re-calculable state
+
+The re-calculable state of each requirement is ascertained by its current position in the margin call workflow. This can be summarized per the table below.
+
+"Re-calculable" state | Workflow States  
+---|---  
+Automatically Replace | Demands- Unsent  
+  
+Antic Demands - Anticipated  
+  
+Antic Demands - Unsent SVA  
+  
+No Actions - No Action  
+  
+No Actions - Unsent - SVA  
+Eligible for Side by Side comparisons | Demand Workflow - Sent  
+  
+Demand Workflow - Waived Approval  
+  
+Demand Workflow - Waived  
+  
+Demand Workflow - Disputed  
+  
+Antic Demands Workflow - Agreed  
+  
+Antic Demands Workflow - Sent SVA  
+  
+Antic Demands Workflow - Disputed  
+  
+No Actions Workflow - Sent - SVA  
+  
+No Actions Workflow - Disputed  
+Non-Re-calculable | Demand Workflow - Confirmed Approval  
+  
+Demand Workflow - Confirmed  
+  
+Demand Workflow - Disputed  
+  
+Antic Demands Workflow - Confirmed Approval  
+  
+Antic Demands Workflow - Confirmed  
+  
+  
+  
+**Application of Rules**
+
+The following rules are then applied to determine what occurs when the margin calculation is re-run for these agreements and results in a new margin calculation result.
+
+  * If all the call requirements are in a re-calculable state of **Automatically Replace** then the new margin calculation results will replace the existing call requirements in entirety. No side by side comparison will be displayed.
+  * If one of the call requirements is in a re-calculable state of **Automatically Replace** but the other requirement is in a state of “Eligible for side by side comparisons”, the following occurs:
+
+    * The new calculation result icon will be displayed beside _each_ of the requirements in their respective Workflow grids.
+    * Additionally, a side by side comparison between the original calculation and latest calculation will be displayed in the read only section.
+    * Action buttons of **Use Original Result** and **Send New Result** are shown beside each of the results.
+    * Neither requirement can be advanced until the side by side comparisons are actioned.
+    * Should the side by side items in the re-calculable state of automatically replace not be processed when the item expires in the state the system will default the choice of calculations to apply to the item as if Use Original Result was selected. 
+    * Although the two requirements are ostensibly linked , recalculation outcomes depend on which item is processed first.
+      * Processing the item in the automatically replace state first will apply the selected actions (use Original or New Calculation Results), only to that item - the item in the eligible for side by state will not be affected, and will still require the user to select the original or new result.
+      * Processing the item in the eligible for side by side comparison state first will apply the selected action (to use Original or New Calculation Results) both to that requirement AND the requirement in the automatically replace state. In short, if the item in the automatically replace state is processed first, the system assumes that the two items are independent of each other. Should the item in the eligible for side by side state be processed first, the system assumes that the two requirements are linked and processes both based on the button selected.
+  * If one of the call requirements is in a re-calculable state of **Automatically Replace** but the other requirement is in a state of **Non-Recalcuable** , then the new margin calculation results replace in entirety the requirement in the **Automatically Replace** state, but the requirements in “Non-Recalcuable” are not affected.
+
+  * If all call requirements are in a re-calculable state of **Eligible for side by side comparisons** then:
+    * The new calculation result icon will be displayed beside each of the requirements in their respective Workflow grids together with side by side comparisons in the read only section.
+    * Each requirement will require independent processing which will not affect the other.
+    * That is, actioning a lock up call requirement will not affect the associated variation call requirement and vice-versa.
+    * There is one exception to this rule - if the variation requirement has both a Demand and Antic Demand element, then acting on either variation demand, or variation antic demand, will action both.
+  * If one of the call requirements is in a re-calculable state of **Eligible for side by side comparisons** and the other call requirement is in a state of **Non-Recalcuable** , then will be displayed in the Workflow grid beside the requirement that is in the **Eligible for side by side comparisons** state.
+
+
+
+Clicking **Use Original Result** or **Send New Result** on the eligible requirement will action only that requirement. Any margin call requirements in the **Non-Recalcuable** state will not be affected.
+
+  * If both call requirements are in re-calculable state of **Non-Recalcuable** then any recalculations are ignored.
+
+
+
+Following on from the above rules, the following recalculation scenarios for OTC segregated agreements are identical to scenarios for non-segregated agreements:
+
+  * If both requirements are in an auto-replacement state, they will both be replaced in entirety by the new calculation results without any warning to the user.
+  * If both requirements are in a state of eligible for side by side comparison, a recalculation will result in a side by side comparison. The key difference here from standard margin calls is that the recalculation will cause a side by side comparison to be presented on all the requirement.
+
+Side by side processing is separate and independent for each requirement. That is each requirement requires re-processing, and will not affect the other requirements.
+
+  * If both requirements are in a non-re-calculable state, any subsequent margin calculation results are ignored.
+
+
+
+
+Given this similarity, please see [How to Process Original or New Margin Calculation Results](<margin_calls_recalc.md#processing-original-or-new-margin-calculation-results>) for details of how to process the choices and outcomes for these scenarios.
+
+The recalculation scenarios that are therefore truly unique to segregated OTC agreements are:
+
+  * One margin requirement is in a state of auto-replace, while the other is in a state of eligible for side by side comparison.
+  * One margin requirement is in a state of auto-replace, while the other is in a non-re-calculable state.
+  * One of the margin requirements is in a state of eligible for side comparison, while the other is in a non-re-calculable state.
+
+

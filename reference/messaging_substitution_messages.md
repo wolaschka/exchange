@@ -1,0 +1,108 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_substitution_messages.html
+
+# Substitution Messaging
+
+## Behavior for Messaging Substitutions
+
+This topic outlines the behavior for **Substitutions** in the workflow that are subject to electronic processing with Acadia via the TLM® Collateral Management Messaging Substitution Adapter.
+
+## Pending
+
+Initially, all [Messaging Eligible](<messaging_margincalls.md#messaging-eligibility>) pending substitution events are contained within the [Pending Workflow state](<substitutions_workflow.md#pending>).
+
+From here, pending events can either be [proposed](<substitutions_workflow_actions.md#propose>) or [sent for approval](<substitutions_workflow_actions.md#send-for-approval>). When proposing, the user is proposing a recall of either held or posted collateral to their counterparty. Pending full substitutions will have both the recalls and replacements (returns and delivers). The user would send the full substitution for approval, prior to it being sent to the counterparty.
+
+Selecting Propose will publish a message to send the proposed recall event to the counterparty through Acadia. The proposal event will transition to [Proposed](<substitutions_workflow.md#proposed>). A substitution notice will also be emailed to the counterparty to any contacts configured on the agreement to receive substitution notices.
+
+Selecting Send for Approval will transition the substitution event to [Approvals](<substitutions_workflow.md#approvals>). From here an approver can approve pending counterparty or reject with comments. Any rejections will transition back to Pending with a state of Pending Rejected. The user can choose to make changes to or transition the events in Pending: 
+
+  1. [Add Return](<substitutions_workflow_actions.md#add-return-movement>) (Recall) Movements
+  2. [Add Substitute](<substitutions_workflow_actions.md#add-substitute-movement>) (Replacement) Movements
+  3. [Edit](<substitutions_detail.md#edit-movements>) / [Delete](<substitutions_workflow_actions.md#delete-a-movements>) movements from the details
+  4. [Send for Approval](<substitutions_workflow_actions.md#send-for-approval>) any initial or rejected pending full substitutions. Event transitions to [Approvals](<substitutions_workflow.md#approvals>).
+  5. [Propose](<substitutions_workflow_actions.md#propose>) any inital recall proposals. Event transitions to [Proposed](<substitutions_workflow.md#proposed>). 
+  6. [Cancel](<substitutions_workflow_actions.md#cancel-substitution>) any pending or rejected events.
+
+
+
+**Note:** When TLM Collateral Management publishes a notification, it is Acadia agnostic. This means notifications will always generate for any workflow event as per the definition of the underlying event within TLM Collateral Management. The adapter will filter these messages and process only those notifications that are configured with an Agreement Short Name plus Agreement Currency against a group alias that is known to Acadia.
+
+## Proposed
+
+It is expected that messaging eligible proposal recalls will remain in this workflow queue until a response is received from the counterparty via the adapter. Also, proposal recalls from your counterparty will appear here. The sent notice field will show whether the event originated from and a message was sent from TLM Collateral Management. It is expected that the TLM Collateral Management user will act on the incoming events that were received and not sent.
+
+The Proposed queue will contain events that have a state of Proposed and Proposal Rejected. When a proposal is accepted, it will transition to the state of Proposal Accepted and will now be available in the In Progress queue, as this is where the substitute replacement collateral will be added/received.
+
+If the original proposal message was not received by the counterparty, the [Resend Call(s)](<substitutions_workflow_actions.md#resend>) button can be used to send the notification message again. The resent message will only update the original message if a change has been made to the proposed return movement details.
+
+Actions available:
+
+  1. [Accept](<substitutions_workflow_actions.md#accept>) will accept the proposal. The proposal will transition from [Proposed](<substitutions_workflow.md#proposed>) to Proposal Accepted.
+  2. [Reject](<substitutions_workflow_actions.md#reject>) will reject the proposal and requires a comment. The proposal will transition from [Proposed](<substitutions_workflow.md#proposed>) to Proposal Rejected.
+  3. [Add Return](<positions.md#create-substitutions>) (Recall) movements.
+  4. [Edit](<substitutions_detail.md#edit-movements>) / [Delete](<substitutions_workflow_actions.md#delete-a-movements>) movements from the details.
+  5. [Resend](<substitutions_workflow_actions.md#resend>) will resend the proposal.
+  6. [Cancel](<substitutions_workflow_actions.md#cancel-substitution>) will send a cancellation message. Cancelling a proposal can only occur when the event is a state of Proposal Rejected or Proposal Accepted. To cancel a proposal that you have sent, it is recommended that a user reject the proposal and then cancel.
+
+
+
+**Note:**
+
+**Incoming Proposals** \- [Incoming proposals](<messaging_understanding_substitution.md#substitution-matching-criteria>) will be automatically booked provided there is a matching agreement, instrument, position and collateral margin type, and there is not already an existing proposal.
+
+**Proposal Amendments and Updates** \- Incoming proposal amendments and updates will be automatically booked to an existing proposal in a state of Proposal Rejected. Again, the incoming message details must match an agreement, instrument, position and collateral margin type. Events that the TLM Collateral Management user has sent which are in Proposal Rejected may be updated and resent. The resend would publish the updates to the adapter to amend the proposal in Acadia.
+
+## In Progress
+
+This queue will contain events with workflow states of Proposal Accepted, Rejected Internally and Rejected by Counterparty. The events are in progress, awaiting either substitute replacement collateral details or updates of rejected substitutions.
+
+Actions available:
+
+  1. [Add Return](<positions.md#create-substitutions>) (Recall) movements.
+  2. [Add Substitute](<substitutions_workflow_actions.md#add-substitute-movement>) (Replacement) movements.
+  3. [Edit](<substitutions_detail.md#edit-movements>) / [Delete](<substitutions_workflow_actions.md#delete-a-movements>) movements from the details.
+  4. [Send for Approval](<substitutions_workflow_actions.md#send-for-approval>) any full substitutions (both return and deliver sides) or rejected substitutions. Event transitions to [To Be Approved](<substitutions_workflow.md#approvals>)
+  5. [Cancel](<substitutions_workflow_actions.md#cancel-substitution>) will send a cancellation message.
+
+
+
+**Note:**
+
+**Proposal Accepted** \- These substitution events are awaiting the replacement substitute collateral details. The direction of the substitution, who is next to act on the substitution, will change based on the position. Posted positions require the TLM Collateral Management user to add the replacement, where held positions require the counterparty to add the replacment collateral. The workflow can be [filtered](<substitutions.md#search-criteria>) by held and posted position.
+
+**Rejected Internally** \- These substitution events have been rejected from the Approvals by a user within TLM Collateral Management. The substitution in this state will either be updated and sent for approval or cancelled. The next to act on the substitution will be based on the position: held will be the counterparty and posted will be the TLM Collateral Management user. The workflow can be [filtered](<substitutions.md#search-criteria>) by held and posted position.
+
+**Rejected Externally** \- These substitutions events have been rejected from Pending Cpty and will have a state of **Rejected by Counterparty**. The TLM Collateral Management user is expected to update the substitution to then send for approval. Alternatively, the user may cancel the substitution.
+
+**Incoming Substitutions** \- [Incoming substitutions](<messaging_understanding_substitution.md#substitution-matching-criteria>) will be automatically booked and transitioned for approval provided there is a matching agreement, instrument, position and collateral margin type, and there is not already an substitution.
+
+**Proposal Amendments and Updates** \- Incoming substitution amendments and updates (Add Replacements) will be automatically booked to an existing substitution in a state of Proposal Accepted and Rejected Internally and transitioned for approval. Again, the incoming message details must match an agreement, instrument, position and collateral margin type. Events that the TLM Collateral Management user has sent which are in Rejected by Counterparty may be updated and resent for approval. Approve and Approve Pending Cpty for outgoing substitutions will publish the updates to the adapter to amend and update substitutions in Acadia. 
+
+## Approvals
+
+This queue will contain events with the workflow state of To Be Approved - Unsent and To Be Approved - Substitution. The events require approval and will be either outgoing, initiated in TLM Collateral Management, or incoming, received from the counterparty.
+
+Actions available:
+
+  1. [Approve](<substitutions_workflow_actions.md#approve>) \- Substitutions will transition from To Be Approved to Confirmed - Sent to Settlements and the movement statuses will update to In-Transit. A messsage will be published and the adapter will either create a new substitution, add the replacement to a proposal or amend an exisiting substitution.
+  2. [Approve Pending Counterparty](<substitutions_workflow_actions.md#approve-pending-counterparty>) \- Substitutions will transition from To Be Approved to Pending Cpty and the movement statuses will remain as To Be Approved, as the counterparty will respond if they accept or reject. A messsage will be published and the adapter will either create a new substitution, add the replacement to a proposal or amend an exisiting substitution.
+  3. [Reject](<substitutions_workflow_actions.md#reject>) \- To Be Approved - Unsent substitutions will transition to Pending with a state of Pending Rejected, as they have not been sent to the counterparty. To Be Approved - Substitution will transition to In Progress with a state of Rejected - Internally. Movement statuses will be updated to Rejected. A message will be published to the adapter to reject the substitution with reject comments.
+
+
+
+**Note:** If Substitution Movements are subject to a **Second** level of approvals, they will not yet be transitioned to the next state and remain in the _To be Approved_ state. Follow the guides on [Understanding High Value Movement Approval Controls](<high_value_movement.md>) and [How to Approve High Value Substitution Movements](<high_value_movement.md#understanding_high_value_movement_approval_controls>) for further information.
+
+## Pending Cpty
+
+This queue will contain events with the workflow state of To Be Approved. The events are awaiting acceptance from the counterparty. From here the event will either be accepted and transition to Confirmed or rejected and transition to In Progress. Incoming messages from the counterparty will automatically transition the substitution events.
+
+Actions available:
+
+  1. [Counterparty Accepts](<substitutions_workflow_actions.md#counterparty-accepts>) \- The counterparty has accepted the substitution and it now transitions to the [_Confirmed - Sent to Settlement_](<substitutions_workflow.md#confirmed>) workflow state.
+  2. [Counterparty Rejects](<substitutions_workflow_actions.md#counterparty-rejects>) \- The counterparty has rejected the substitution. Rejects will be updated with a comment and transitioned to In Progress for further processing. 
+
+
+
+## Confirmed
+
+This queue will contain events with the workflow states of Confirmed or Cancelled. Events will remain here until they either are completed or expired. Events are completed when the settlement task is run and the movement states are updated from In-Transit to Settled. Cancelled events will expire and be filtered from the current workflow view. Historical events can be viewed using the [advanced workflow filters](<substitutions.md#search-criteria>).

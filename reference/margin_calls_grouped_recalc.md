@@ -1,0 +1,91 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_grouped_recalc.html
+
+# Recalculations for Grouped Margin Call Workflow
+
+TLM® Collateral Management allows a Margin Calculations Task or a single margin calculation to be run more than once on any given day. Should one of these tasks be run, a new Margin Calculation Results will be generated.
+
+How new Margin Calculation Results are treated depends on whether the Agreement is eligible for Intraday Margin Call generation or not:
+
+If the Agreement is eligible to generate Intraday Margin calls "Intraday Eligible Agreements" see [Intraday Margin Calculations](<intraday_mc.md#intraday-margin-calculations>) for how subsequent calculations on a given day are treated. This topic is not applicable to Intraday Eligible Agreements.
+
+This topic is concerned with those Agreements subject to the grouped margin call workflow that are not defined as eligible for generating Intraday Margin calls ("Non Intraday Agreements")
+
+For these Non Intraday Agreements, how the new Margin Calculation Result will affect any existing Margin Calculation Results that exist in the Grouped Workflow for the same calculation date, is determined by whether the underlying agreement has a collateral allocation flag or not, and how this field is set.
+
+  1. For Client Clearing Agreements, and OTC Agreements where collateral allocation flag is set to Auto Allocate or Lock Up Only, the following process occurs:
+
+a. The New Margin Calculation results are compared to the existing Margin Calculation results to see if any key data has changed.  
+b. If no data has changed, the original Margin Calculation is left untouched.  
+c. If any data has changed, the system will determine that the new Margin Calculation Result **differs** from the original result  
+  
+**Note:** This evaluation process is only applicable to the grouped margin call workflow. The "standard" workflow recalculation behavior is different, and is outlined in [How to Identify Recalculated Margin Calculation Results](<margin_calls_recalc.md#understanding-and-identifying-replacement-margin-calls>)  
+  
+d. The system then decides whether or not to apply the new Margin Calculation Result.  
+e. This determination is governed by the current Grouped Workflow state that the original Margin Calculation Result is in.  
+f. If the original Margin Calculation result is in Approved or Confirmed states then the new Margin Calculation Result is ignored.  
+g. If the original Margin Calculation result is in the Unsent state, then the original Margin Calculation result is deleted and replaced in entirety by the new Margin Calculation Result.  
+h. If the original Margin Calculation result is in any other workflow state then the original Margin Calculation Result is deleted, and the new Margin Calculation Result is placed in the Unsent state.
+
+Additionally:
+
+     * Any Comparison Margin call information that may have been uploaded is removed. 
+     * Should any collateral movements exist on the original margin calculation, they are removed and set to an ignored state.  
+If the original Margin calculation result had a partially agreed and a partially disputed element, both are cancelled.
+     * The behavior of applying differing New Margin Calculation Results can be summarized by the following table:
+Current Grouped Workflow State of original margin calculation | Affected by Recalculations | Comments  
+---|---|---  
+Unsent | Yes | Original Margin Calculation Result replaced in entirety by new results.  
+Sent | Yes | Original Margin calculation results cancelled, and all attached collateral movements set to ignored state.  
+  
+New Margin calculation results placed in Unsent Calls state  
+Agreed No Action | Yes |   
+Waived Approval | Yes |   
+Waived | Yes |   
+Disputed | Yes |   
+Confirmed Approval | No | New Margin Calculation results ignored.  
+Confirmed | No | New Margin Calculation results ignored.  
+  2. For OTC Agreements where collateral allocation flag is set to Segregate Lock Up and Variation the following process occurs: Agreements that separate lock up and variation margin requirements generate both a lock up margin requirement and a variation lock up requirement.
+
+Although these requirements are separately processed through the workflow, they form a single margin calculation result and therefore are linked in certain scenarios when a margin recalculation is performed.
+
+When a margin recalculation occurs on the same day for these Agreements, the following process occurs:
+
+a. The New Margin Calculation results are compared to the existing Margin Calculation results to see if any key data has changed.  
+b. If no data has changed, the existing margin requirements are left unchanged.  
+c. If data has changed, the current "re-calculable" state for each of the individual margin requirements is determined.  
+d. Once the re-calculable state is determined, the system applies pre-determined rules to govern what occurs.
+
+**Identification of re-calculable state**
+
+The re-calculable state of each margin requirement is ascertained by its current position in the grouped margin call workflow. This can be summarized per the table below.
+
+Re-calculable state | Grouped Workflow State  
+---|---  
+Automatically Replace | Unsent Calls  
+Sent State  
+Waived Approval State  
+Waived State  
+Agreed No Action State  
+Disputed State  
+Non-Re-calculable | Confirmed Approval State  
+Confirmed  
+  
+The following rules are then applied:
+
+If all margin call requirements are in a re-calculable state of Automatically Replace then:
+
+     * The new margin calculation results will replace the existing margin call requirements in entirety. 
+     * That is the new margin call requirements will be placed in the Unsent Calls 
+     * Any collateral movements that existed on any margin call requirement are removed and set to an ignored state. 
+
+If all margin call requirements are in a re-calculable state of Non-Recalculable then:
+
+     * The new margin calculation results are ignored in entirety. 
+     * The margin call requirements and associated collateral movements are therefore untouched. 
+
+If some margin call requirements are in a re-calculable state of Automatically Replace and other are in a re-calculable state of Non-Re-calculable then:
+
+     * The margin call requirements in the Non Re-calculable state and their associated collateral movements are not touched. 
+     * The margin call requirements in the Automatically replace state are replaced in entirety by the new calculation equivalents which are placed in the Unsent Calls queue. Any collateral movements that existed on the margin requirements in the automatically replace state are removed and set to an ignored state. 
+
+

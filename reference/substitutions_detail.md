@@ -1,0 +1,200 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/substitutions_detail.html
+
+# Substitution Details
+
+At the top of the screen, relevant information to the substitution is displayed for reference for the user.
+
+  * Agreement Name - The Agreement on which the substitution is occurring.
+  * Margin Type - The Margin Type of the collateral position which will be either LockUp or Variation.
+  * Position Type - Indicating whether the position that is being subject to a substitution is either Held by the Principal, or Posted to the Counterparty.
+  * Return Market Value - The Total Value of the Return Movements that were created on the substitution.
+  * Substitute Market Value - The Total Value of the Delivery Movements entered on the substitution.
+  * Total Market value Difference - Calculated as Substitute Mkt Val minus Return Mkt Val. This field quickly enables the user to see whether the delivery movements that have been entered on the substitution are worth less than the value of collateral being returned on the substitution. 
+  * Workflow State - The state of the substitution within the workflow.
+  * Status - Status of the substitution (In Progress, Rejected, Success, Warning and Failed).
+
+
+
+## Positions and Movements
+
+This tab on the details screen will show a grid of the movements for that substitution and the evaluated concentration status.
+
+### Concentration Status
+
+Just above the positions and movements grid, there are two fields that evaluate the collateral positions and movements involved in the substitution against concentration rules that apply to the Principal and the Counterparty.
+
+The results of the evaluation are displayed as: Held Concentation and Posted Concentration Status.
+
+Should the collateral positions or movements not breach any rules for a Party, the button will be disabled and display **_Passed_**.
+
+If the collateral movements breach any concentration rules, **_Failed_** is displayed. Clicking on the button will display details of the rule breach.
+
+The evaluation is conducted live, and therefore can change dynamically as movements are added.
+
+### Positions and Movements Grid
+
+This section contains a grid which shows all the returning and delivering collateral movements that were created on the substitution.
+
+Field Name | Comments  
+---|---  
+Checkbox | Clicking the checkbox will enable the [**Delete**](<substitutions_workflow_actions.md#delete-a-movements>) button to remove a position or movement from the substitution. Multiple movements can be selected but at least one return movement must remain on the substitution. Otherwise, the user should cancel the entire substitution.  
+Actions | There are four options under the Actions column.  
+  
+| Action| Description  
+---|---  
+[Edit](<#edit-movements>)| Clicking on the edit icon will open up the movement window for the user to modify.  
+[View Eligibility Breaches](<view_eligibility_breaches.md>)| Clicking on the magnifying glass will open a window below the positions and movements grid to view the [Eligibility Breaches](<view_eligibility_breaches.md>).  
+View Settlement Instructions| When the view Settlement Instructions is selected, the data is displayed below the _Positions and Movements tab_.  
+  
+When the data is returned, it will be read-only details for both Receiver and Sender for each movement.  
+  
+See [Settlement Instructions](<agreements_settleinstr.md#settlement-instructions>) for more information regarding Settlement Instructions.  
+[View Instrument](<instruments.md>)| When this is selected, a new window will open up in the browser and will display the instrument details of the movement that was selected.  
+Settlement Date | The settlement date selected for the return collateral movement. Note that should the substitution have numerous collateral returns, this maybe differing dates for different movements.  
+State | The current movement state.  
+Eligibility | The eligibility of the movement and instrument, as defined in the collateral agreement.  
+Direction | The direction of the return collateral movement:  
+  
+Should the collateral that is to be substituted be a Held position by the Principal, this will be a Return to Counterparty movement.  
+  
+Should it be a Posted position, then this will be a Return to Principal Movement.  
+Instrument Ref/Description | The Instrument Identifier ID for the Collateral that is being returned along with the description of the Instrument.  
+Notional | The notional of the movement.  
+Mkt Value Agmt | The market value of the movement in agreement currency  
+Asset Pool | Name of the asset pool from where the collateral was sourced.  
+  
+#### Edit Movements
+
+Collateral Movements on a substitution can only be edited when the event is in either the following states:
+
+  * Pending
+  * Pending Rejected
+  * Proposed Rejected
+  * Rejected Internally
+  * Rejected by Counterparty
+
+
+
+**Procedure**
+
+  1. Select the _View Details_ button by clicking on the magnifying glass.
+  2. Select the movement that requires editing by clicking on the ![edit_icon.jpg](Images/edit_icon.jpg) icon.
+  3. The edit movement dialog box will open.
+  4. Make the required changes. The following fields can only be edited:
+
+     * Instrument Ref
+     * Asset Pool - Editable only on Deliver to Counterparty / Return to Principal Movements.
+     * Target and Amount
+     * Receiving Instruction - see **Note** below.
+     * Sending Instruction - see **Note** below.
+     * Settlement Date
+     * Trade Date
+     * Physical Settlement Indicator
+  5. Click Save to commit the changes.
+
+  6. The Return Market Value, Substitute Market Value, and the Total Market Value Difference amounts will be updated accordingly.
+
+
+
+**Note:**
+
+  * When a movement is edited, the Receiving Instruction & Sending Instruction fields "reset", and the system will automatically populate these fields with the matching SSI records that have been set as default. (See [Understanding SSI hierarchy](<agreements_settleinstr.md#understanding-ssi-hierarchy>), defaults and derivation for more details on how SSI's are matched to collateral movements.) What is important to consider is the following:
+    * The Default SSI records may be different to those on the original collateral movement booking.
+    * The default values for the Settlement Date field are derived from the settlement offset value of the selected Receiving Instruction SSI record. Should the Receiving Instruction SSI record alter, the Settlement Date default value will be refreshed.
+    * Care should therefore be exercised when cancel / replacing a movement to ensure that the SSI's records selected are as intended. To assist, Booked Instructions section details the SSI record names previously recorded on the collateral movement.
+  * When the Collateral Movement is edited, the Price and Valuation fields will be taken from the current values for these in the system. These could be different from when the Collateral Movement was originally entered.
+
+
+
+For guidance on how to populate these fields, see [Create a Collateral Movement](<movement_actions.md>) for more details.
+
+#### View Instrument
+
+When a Collateral Position or Movement is selected on a Substitution, the ability to view the Instrument details is available.
+
+**Procedure**
+
+  1. Select the ![dotdotdot.jpg](Images/dotdotdot.jpg) icon for a specific position or movement; a menu will appear.
+  2. Select the **View Instrument** and a new tab will open up in the browser where the user can view the instrument details.
+
+
+
+## Transition History
+
+Substitutions will progress through the various states of the Workflow.
+
+This tab will provide a historical view of where the Substitution has been within the workflow.
+
+This tab is sorted by Transition Date (from the Perspective of the Principal Managing Location) by default and contains the following information for the Substitution:
+
+Field | Comments  
+---|---  
+From | The Workflow State that the Substitution was in prior to the transition.  
+To | The Workflow State that the Substitution was transitioned to.  
+Transition Date | The time and date of the transition (from the perspective of the Principal Managing Location) on the Agreement.  
+Transitioned By | The user who initiated the transition.  
+Comment | Any comments associated with the transition - e.g., comments added when a waive was requested, or comments added when an approval was rejected.  
+  
+There may be situations where an entry exists in the table, but the transitioned _from_ and _to_ values are identical. In these situations, it means that an item was updated in a Workflow state but did not actually leave that Workflow state when the update occurred.
+
+## Asset Allocation
+
+Asset Allocation is available to be allocated toward a _Deliver to Counterparty_. Available to Allocate balances are calculated using optimistic methodology and shown across a five settlement day range, beginning from Today (T) to four business days in the future (T+4).
+
+When a Principal is required to substitute to a Counterparty, it can either meet this requirement in one of two ways:
+
+  1. Use Available Assets inventory
+  2. Obtain collateral from an external supply
+
+
+
+The Available Asset inventory is housed within TLM® Collateral, and is made up from two main sources:
+
+  1. Rehypothecatable Collateral - Certain Collateral Agreements specify that the holder of Collateral has the right to use the collateral assets for their own purposes, such as meeting margin requirements when they themselves are called for margin on Antic Demands. This right to use or re-use received Collateral is often referred to as Rehypothecation, and is defined on the Agreement.
+  2. [Asset Pools](<assetpools.md>) \- Positive instrument balances on Asset Pool(s) that have been associated to the Principal.
+
+
+
+These two sources of available collateral are differentiated via the **Asset Pool** field in the form:
+
+  * A blank Asset Pool field denotes that the collateral's source is from the rehypothecatable inventory.
+  * Collateral balances that originate from an asset pool are clearly denoted with the Asset Pool name in the field.
+
+
+
+To assist, the available to allocate balance for an instruments [default settlement offset date](<understand_date_times.md#settlement-date-defaults>) is indicated in bold type. This means that when the asset is selected, the amount allocated is the balance shown in bold, and the settlement date applied will be the corresponding date shown at the top of the column.
+
+During the selection process, the system will attempt to match the amount of the collateral selected to the Entered Returns Total.
+
+It is also possible to override the selected details, or remove a collateral position selected for allocation.
+
+The purpose of this screen is to allow the user:
+
+  * To see what rehypothecatable assets are available that can be used to satisfy the deliver to counterparty leg of the substitution.
+  * To see what asset pool balances are available for allocation to satisfy the deliver to counterparty leg of the substitution.
+  * To list the priority preference for how available assets should be used. (This requires [Collateral Ladder](<collateral_ladders.md>) functionality from TLM® Collateral Manager web application.)
+  * To indicate the default settlement date offset for an available collateral balance.
+  * To select a sufficient quantity of an available asset or series of assets to meet the return amount already entered on the substitution.
+  * To automatically create collateral movements based on the assets selected for allocation.
+
+
+
+**Note:** The newly created collateral movements will have the same margin type as the original collateral position that is being substituted. If the substitution that is having assets allocated to was originated from a collateral position with a margin type of variation, then the collateral movements created in this step will be for margin type variation also.
+
+**Process for Allocating Assets**
+
+  1. To see allocations available, click on **Asset Allocations**.
+  2. Select the allocation by clicking the radial button on the left side of asset.
+  3. Click the **Asset Allocation** button located on the right side of the page.
+  4. A pop-up screen will appear pre-populated. The user can create the movement or adjust the amount then create the deliver to principal movement.
+
+
+
+**Process for Removing Allocated Assets**
+
+  1. To remove a movement created from asset allocation, go to the _Positions and Movements_ tab.
+  2. Select the movement and click the **Delete** button.
+  3. As this action is not reversible, the user will be prompted with a warning message asking to confirm the deletion or cancel the action. If Delete is selected, then the record will be deleted.
+  4. The amount that was allocated to the movement will be returned to the asset.
+
+

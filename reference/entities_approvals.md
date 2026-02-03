@@ -1,0 +1,43 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/entities_approvals.html
+
+# Approvals Process for Entities
+
+## Overview
+
+In many institutions, when a user (with sufficient privileges) creates or amends an Entity (and other reference data items) an approval of the changes will be required which is known among Collateral Practitioners as Approvals.
+
+This control prevents Entities being created or changed by one user, and for these changes to have immediate effect in margin results or other system areas.
+
+## Configuration
+
+The requirement for approval of Entities is not mandatory. It can be [enabled /disabled](<system_configuration.md#database-approvals>) from an external configuration setting.
+
+## Approvals Process
+
+When Approvals for Entities is [enabled](<system_configuration.md#database-approvals>) the following behavior occurs:
+
+Step | Behavior Process  
+---|---  
+1 | When any of the Entity data fields are populated for the first time, or have their values changed by a user, the values are not directly applied to the database when the **Save** button is clicked. The values that have been added are in a **Pending Approval** state.  
+2 | When an Entity has one or more items that are **Pending Approval** the whole Entity form becomes greyed-out and the whole entity form is non editable for all users. The Entity is now in a state of **Locked for Approval**.  
+3 | Locked Entities can be identified via the column with locked icon on the Entities grid.  
+No further changes or updates can be made to any of the Entity fields while it is Locked for Approval.  
+4 | If one of the following data imports  
+  
+\- Entities  
+\- Entity Ratings  
+  
+is run and contains a record for an Entity that is in a **Locked for Approval** state, the record will fail to be imported and a [Validation Message](<validation_messages.md#263>) will be raised.  
+5 | The Entity remains in a state of **Locked for Approval** until there are no longer any values that are Pending Approval.  
+6 | Details of the Entities' Pending Approval changes are placed under the Pending Approval Type.  
+7 | Within the Pending view in the Approvals screen, there are three potential actions that can be applied to the Entity Pending Approval record.:  
+  
+a) The Pending Approval Record can be **Approved** at which point the Pending Approval values are applied to the Entity object as approved values.  
+b) The Pending record can be **Rejected** which will cause the Pending Approval values to be discarded.  
+c) The approver may Request **Reject for Resubmission** of the Pending Approval record.  
+  
+In the case of a) and b) there are no longer any Pending Approval values, and the Entity is no longer Locked for Approval.  
+  
+In the case of c) the Entity is still locked for approval for all users, except the original updating user who can make additional edits via the Edit for Resubmission right click function.  
+  
+Approval, rejection or Requesting for Resubmission of pending values is done in entirety.

@@ -1,0 +1,179 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/reports.html
+
+# Reports
+
+## Overview
+
+Within TLM Collateral Management, there are a few control reports that are built into the system.
+
+At the top of the screen there will be a drop-down with a list of reports available. The displayed default report is [Report Eligibility and Concentration Breaches](<#eligibility-and-concentration-breaches>).
+
+Click on the drop-down to see and select the other available reports. With each report, filter parameters will be available to choose from depending on the report.
+
+For more reports, see TLM Collateral Reporting. The reporting component will allow organizations to make use of a reporting database which is separate to the TLM Collateral Operations database in which the daily operational tasks are run.
+
+## Grid Features
+
+The reports grid can be [sorted](<grid_features.md#sorting>), [paged](<grid_features.md#paging>), [exported](<grid_features.md#export-grid>), [reorder columns](<grid_features.md#reorder-columns>), and fields can be [disabled or resized](<grid_features.md#display-and-resizing-columns>) for all reports except for Eligibility and Concentration Breaches.
+
+The Eligibility and Concentration Breaches report only allows for paging.
+
+## Eligibility and Concentration Breaches
+
+This report will display eligibility and concentration rule breaches along with the reason for the breach.
+
+To run the report, there are several filtering options available.
+
+  * Managing Location (this is Principal Managing Location)
+  * Business Line
+  * Agreement
+
+
+
+Click the **Show** button to run the report.
+
+The report will display a default of 10 agreements at a time. This number can be adjusted by selecting the drop-down labeled _Number of Agreements_.
+
+The results of the last Full Eligibility and Concentration calculation are displayed and grouped on separate tabs as follows: 
+
+  * Breaches on Held Positions
+
+    1. Agreement Name
+    2. Eligibility Breaches detail
+    3. Total Collateral Positions for Agreement detail
+    4. Concentration Rule Breaches detail
+    5. Concentration Rule Positions detail
+  * Breaches on Posted Positions
+
+    1. Agreement Name
+    2. Eligibility Breaches detail
+    3. Total Collateral Positions for Agreement detail
+    4. Concentration Rule Breaches detail
+    5. Concentration Rule Positions detail
+
+**Eligibility Breaches** \- Each Instrument which has breached an eligibility rule is displayed with the name of the rule which has broken and the reason why that rule has broken.
+
+**Concentration Rule Breaches** \- The Rule Name and Rule Description of the breached rule are displayed along with the reason that the rule has been breached. If there is more than one concentration rule breached for an agreement each one will be displayed under a separate Rule Name header.
+
+**Concentration Rule Positions** \- Any positions which formed part of the concentration rule calculation are displayed. For example, if a rule was defined as "Min 30% Collateral from Govts", all the existing positions for the agreement which are government bonds would be displayed. The remainder of the collateral positions for the agreement are displayed, for information purposes, in the Total Collateral Positions for Agreement section.
+
+**Total Collateral Positions for Agreement** \- This section displays all existing collateral positions for the agreement. This information may be useful in determining what course of action to take to rectify a concentration breach. For example, if your rule states " Min 30% Collateral from Govts", this breach can be rectified by substituting out a non government collateral position. It is here where other positions can be seen that could be substituted.
+
+
+
+
+The report can be exported by clicking the export icon ![export_icon.jpg](Images/export_icon.jpg). The report can be saved as a PDF, Microsoft XPS or can be printed.
+
+For more detailed information about the results displayed on the report see [Eligibility and Concentration Breaches](<eligibility_and_concentration_breaches.md>).
+
+## Unassigned OTC Trades
+
+The report will show the results of trades which are only considered as "unassigned" after the Trade Assignment task has been run. That is, if a trades file is imported and the Trade Assignment task has not been run, the trades imported are not considered as unassigned.
+
+The filter option available is the _Created Since_ date field. (This is the date the trades were loaded per the database.)
+
+The default value for the filter is the current date. This allows for easy identification of trades which are newly unassigned today. To see just the trades which have become unassigned since a particular date, select the date check box and use the date selector to pick the relevant date.
+
+To see all unassigned trades, clear the date from the _Created Since_ date field.
+
+Click the **Show** button to run the report.
+
+The fields displayed are the following:
+
+  * Trade Reference
+  * Import Configuration Name
+  * Principal
+  * Counterparty
+  * Principal Branch
+  * Counterparty Branch
+  * Trade Type
+  * Agreement
+  * Unassigned Date
+
+
+
+## Unassigned Repo Trades
+
+This report will work the same as [Unassigned OTC Trades](<#unassigned-otc-trades>) but for Repo trades.
+
+## Top 50 Agreement Exposure Differences in System Currency
+
+The report is displayed in a grid format and includes the 50 agreements (for the relevant Business Line) which have the biggest changes in total Exposure between yesterday and today.
+
+The filter option available is Business Line. The options available are _All, OTC, Repo, Securities Lending and Client Clearing_. When the report is selected, the default Business line will be _All_.
+
+Select the relevant Business Line and then click the **Show** button to run the report.
+
+The fields displayed (in default column order) are:
+
+  * Agreement Name
+  * Exposure Difference
+  * Trade Count Difference
+  * Exposure COB
+  * Count COB
+  * Exposure COB-1
+  * Count COB-1
+  * Exposure COB-2
+  * Count COB-2
+  * Counterparty
+  * Principal
+
+
+
+The Exposure Difference is calculated as Exposure COB-1 minus Exposure COB.
+
+The Exposure COB-2 details are displayed for information purposes and to help identify trends or blips in exposure.
+
+## Top 50 Trade Count Differences by Agreements
+
+The report is displayed in a grid format and includes the 50 agreements (for the relevant Business Line) which have the biggest changes in total Trade Count between yesterday and today.
+
+The filter option available is Business Line. The options available are _All, OTC, Repo, Securities Lending and Client Clearing_. When the report is selected, the default Business line will be _All_.
+
+Select the relevant Business Line and then click the **Show** button to run the report.
+
+The fields displayed (in default column order) are:
+
+  * Agreement Name
+  * Exposure Difference
+  * Trade Count Difference
+  * Exposure COB
+  * Count COB
+  * Exposure COB-1
+  * Count COB-1
+  * Exposure COB-2
+  * Count COB-2
+  * Counterparty
+  * Principal
+
+
+
+The Trade Count Difference is calculated as Count COB-1 minus Count COB.
+
+The Count COB-2 details are displayed for information purposes and to help identify trends or blips in numbers of trades.
+
+## Top 50 Trade Count Differences by Book
+
+The report is displayed in a grid format and includes the 50 books which have the biggest changes in total Trade Count between yesterday and today.
+
+The filter option available is Business Line. The options available are _All, OTC, Repo, Securities Lending and Client Clearing_. When the report is selected, the default Business line will be _All_.
+
+Select the relevant Business Line and then click the **Show** button to run the report.
+
+The fields displayed (in default column order) are:
+
+  * Book
+  * Exposure Difference
+  * Trade Count Difference
+  * Exposure COB
+  * Trade Count COB
+  * Exposure COB-1
+  * Trade Count COB-1
+  * Exposure COB-2
+  * Trade Count COB-2
+
+
+
+The Trade Count Difference is calculated as Trade Count COB-1 minus Trade Count COB.
+
+The Trade Count COB-2 details are displayed for information purposes and to help identify trends or blips in numbers of trades.

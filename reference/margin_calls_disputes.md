@@ -1,0 +1,441 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/margin_calls_disputes.html
+
+# Standard Margin Call Disputes
+
+## Overview
+
+This option is available before physically sending the Counterparty the Margin Call Notice for operational or relationship reasons.
+
+## Dispute on a Demand
+
+To record the Demand as a full dispute there are 1 of 3 choices:
+
+  1. If the Counterparty believes the call is a _Demand_ but believes the Call Amount is different then leave the **Cpty Call Type** as a Demand, enter the Cpty Call Amount and tab out of the field. The Call Amount will automatically be populated.
+
+  2. If the Counterparty believes that the Principal owes money, then the user can change the **Cpty Call Type** to _Anticipated Demand_ and can fill in the **Cpty Call Amount** field with the value that the Counterparty is expecting.
+
+  3. If the Counterparty believes that the call should be a **No Action** , then change the **Cpty Call Type** to No Action.
+
+
+
+
+**Procedure**
+
+  1. Select the call to be disputed by clicking the checkbox to the left of the margin call.
+  2. Click the **Dispute** button located in the top right corner above the grid.
+  3. When a full or partial Dispute is created on a Margin call, the **Dispute Information** form opens.
+  4. At least one dispute category and dispute comments, must be recorded. Additionally, it is recommended best practice to complete the information in the [Counterparty Margin Details](<#record-counterparty-responses-and-agreed-amounts-on-demands>) tab to record additional information regarding the dispute. This is outlined in [How to Record a Counterparty's Calculation Details](<margin_calls_tabs.md#counterparty-tab>).
+  5. Click the **Dispute** button that will appear in the lower right side of the screen after the required fields are entered. If at least one dispute category and the dispute comment field is not populated, the **Dispute** button will remained disabled and the only option available is to **Cancel** the dispute
+  6. The Demand selected will be advanced to the Demand - Disputed state with an agreed amount of zero if it is a full dispute. If there is a partial dispute, then the disputed part will be advanced to the Demand - Disputed state.
+
+
+
+**Note:**
+
+Demands get transitioned into the Disputes Workflow state for one of three reasons:
+
+  * Either the Demand was disputed in entirety by the Counterparty.
+
+This can either be recorded in the _Unsent_ state, via the user clicking on **Dispute** button or in _Sent_ state by the user changing the Margin Type to **No Action**.
+
+  * The Demand is in a _Sent_ state and was partially agreed to, but the difference between the amount agreed and the Demand amount was greater than the dispute tolerance.
+
+  * The Demand is for Margin Type Lock Up for an OTC Agreements that separates Lock Up and variation requirements, and the counterparty has not fully agreed to the lock up requirement.
+
+
+
+
+In this last two bullet points noted above, the following will have to occur:
+
+  * A partial dispute item was created and placed in the Disputes workflow state,
+
+  * The partially agreed demand exists elsewhere in the Demand workflow state.
+
+
+
+
+### Partial Dispute
+
+**Procedure**
+
+  1. A partial dispute will generate when the **Agreed Amount** does not match the **Call Amount**. 
+  2. When the clicks the **Agree** button when the Agreed Amount does not match the Call Amount, the _Agree Margin Call_ dialog box will extend and the user must enter a **Dispute Category** and a **Dispute Comment**. One or multiple dispute categories can be entered.
+  3. Once the required information is entered, the **Dispute** button becomes enabled.
+  4. When the **Dispute** button is clicked, a separate dispute call is created and transition to the **Disputed** state while the current call is moved to the **Agreed** state.
+
+
+
+  
+
+
+## Dispute on an Anticipated Demand
+
+Anticipated Demands get transitioned into the Disputes Workflow state in one of the following ways:
+
+  1. Either the user did not fully agree to the counterparty's call in which case it will be a recorded as a partial dispute.
+
+  2. The call was for Margin Type Lock Up for an OTC Agreement that separates Lock Up and variation requirements, and the user fully disputes the lock up call requirement. In this case it will be in this state as a full dispute.
+
+  3. The Counterparty had a different Margin Call type to the Principal.
+
+For example:
+
+     * The counterparty had calculated that no margin requirement was due (a No Action)
+
+     * The counterparty calculated that they were due to provide Margin to the Principal (an Anticipated Demand from the Counterparty's perspective)
+
+
+
+
+### Antic Demand Dispute on a No Action
+
+In the case where the Principal has calculated an Anticipated Demand but the Counterparty has calculated a No Action Margin Call, then a dispute should be generated as a No Action.
+
+**Procedure**
+
+  1. Click the checkbox to the required Antic Demand or click on the required Antic Demand.
+  2. Click on the **Dispute** button that will appear once the margin call has been selected.
+  3. Click the drop-down box for **Cpty Call Type** and select **No Action**. The Cpty Call Amount and the Agreed Amount fields will disappear and the **Dispute** button will become enabled.
+  4. Click the **Dispute** button.
+  5. Dispute Category and Comment fields will open up and are required before progressing the call.
+  6. Once the required information is entered, the **Dispute** button will become enabled.
+  7. Click the **Dispute** button.
+  8. The call will move to the **Disputed** state, the Cpty Call Amount and Agreed Total are set to zero.
+
+
+
+### Antic Demand Dispute on a Cpty Principal Demand
+
+In this case the Principal has calculated an Anticipated Demand but the Counterparty has calculated that the Principal is entitled to Margin from them.
+
+**Procedure**
+
+  1. Click the checkbox to the required Antic Demand or click on the required Antic Demand.
+  2. Click on the **Dispute** button that will appear once the margin call has been selected.
+  3. Click the drop-down box for **Cpty Call Type** and select **Demand**. The Agreed Amount field will disappear but the **Cpty Call Amount** field will remain.
+  4. Fill in the _Cpty Call Amount_ and tab out of the field and the **Dispute** button will become enabled.
+  5. Click the **Dispute** button.
+  6. Dispute Category and Comment fields will open up and are required before progressing the call.
+  7. Once the required information is entered, the **Dispute** button will become enabled.
+  8. Click the **Dispute** button.
+  9. The call will move to the **Disputed** state, the Cpty Call Amount and Agreed Total are set to zero.
+
+Dispute Amount with is calculated as the total difference between the Prin Cpty Call Amount and Cpty Call Amount.
+
+**Note:** [Agree Tolerance](<agreements_general.md##agree-tolerance-method>)) evaluation does not occur when the Margin Call type differs for the Principal and Counterparty.
+
+
+
+
+Considerations for [OTC Agreements that separate Lock Up and variation requirements](<agreements_define.md#segregate>).
+
+Agreements of this form, generate separate margin calls for the lock up and variation requirements of the Margin Calculation Result. See [Working with OTC Agreements that Segregate Lock Up and Variation Margin](<segregate_lockup_varmargin.md>) for more information on this.
+
+Where the variation requirement results in an antic demand, the agreed amount for the variation element is entered identically and processed identically to the scenarios outlined above.
+
+  
+
+
+## Dispute on a No Action
+
+The No Actions Type field can provide details of why a Margin Calculation resulted in No Action.
+
+From the Principal's perspective, a No Action Margin Calculation Result is not actionable in the sense that there is a Margin Requirement obligation to meet.
+
+However, should the Counterparty initiate a Margin Call on a No Action margin call (that is, they have not calculated a No Action result), the system allows the Counterparty's Call Type and Call Amount to be recorded.
+
+As the Principal has calculated a No Action Margin Call, once the Counterparty information is recorded, the call will be disputed in full.
+
+**Procedure**
+
+  1. Click the checkbox or select the Margin Call that is in dispute.
+  2. The Dispute button will become enabled, click the Dispute button.
+  3. The Dispute Margin Call popup screen will appear.
+  4. Select the Margin Call Type that the Counterparty has calculated.
+
+**Note:** Counterparty Call Type should be entered from the Principal's perspective. If the Counterparty has calculated a Demand on the Principal, select Anticipated Demand. If the Counterparty has calculated that the Principal can make a Demand on them, select Demand.
+
+  5. In the Cpty Call Amount field, enter the Amount of the Margin Call that the Counterparty has calculated. The Counterparty's Call Amount should be entered as a positive number (Shortcuts of k, m, and b can be used).
+
+  6. Tab out of the field and the Dispute button will become enabled.
+  7. Click the Dispute button.
+  8. The Disputes Information form appears where the dispute categorie(s) and comment must be entered. 
+  9. The system sets the following values on the Margin Call:
+
+**Cpty Call Amount** \- is set the with amount entered into Cpty Call Amount. The signage that is associated to this stored CptyCallAmount value depends on what was selected as Cpty Call Type.
+
+Value Recorded for Counterparty Call Type | Signage Applied to Counterparty Call Amount  
+---|---  
+Demand | Positive  
+Anticipated Demand | Negative  
+  
+**Agreed Amount** \- is set with zero.
+
+**Dispute Amount** \- is set as the absolute difference between Agreed Amount and Cpty Call Amount.
+
+The No Action item is advanced to the Disputed filter with a **Disputed** workflow state.
+
+
+
+
+## Consideration to Disputed State
+
+  1. Disputed and Partially disputed Demands or Anticipated Demands exist in the Disputed state only on the day in which they were transitioned into this state. Once the date in the Agreement's Principal Managing Location (ML) has rolled onto the next day, (i.e. Date Time for that Agreements Principal Entity Managing Location is > than dispute date) then that item will no longer viewable.
+
+**Note:** The user's local time/date may not be same as Principal ML time/date and therefore the user may see items in here with differing dates to their local timezone and items expiring from this grid during their day.
+
+  2. Disputed Demands or Antic Demands and Partially disputed Demands or Antic Demands in the Disputed Workflow state can be affected by a recalculation on the same day that generates differing Margin Calculation Results.  
+  
+i.e. If a Demand or Antic Demand is advanced into this Workflow state today and Margin Calculations are run again today that result in a different Margin Calculation Result, the original Demand or Antic Demand in this Workflow state, and if partially disputed, the partially agreed Demand or Antic demand, in the Agreed state will be affected.  
+  
+This also applies to No Actions as it too can be affected by a recalculation on the sae day that generates differing Margin Calculation results.
+
+  3. For No Actions, should the Margin Calculation Task be re-run, any items in this state will be replaced by the New Margin Calculation Results in entirety.
+
+No Actions exist in this state only on the day that they were calculated. If they are not actioned by the end of the calculation date, then they are removed from the grid and are viewable only by searching for them through the advanced filters.
+
+The Calculation Date and time used to determine whether the No Action items are shown in this state is based on the timezone and date of the Managing Location of the Principal Entity on the Agreement.
+
+This means that No Action Calls may be seen in this state that have a calculation date that differs to the user's local timezone and date if the user has Agreements with a variety of Principal Entity Managing Locations in their Agreement Responsibility Groups. It also means that some items disappear from this state as the date in the Principal Entity Managing Location for an Agreement changes and is no longer the same date as the Calculation date.
+
+  4. Items in this state are filtered according to the [Agreement Scope and Agreement Responsibility Groups](<understand_scope_responsibility.md>) that the user is assigned to.
+
+
+
+
+## Record Counterparty Responses and Agreed Amounts on Demands
+
+Once a Margin Call Notice has been successfully communicated to the Counterparty, the next stage of the Margin Call process is to contact the Counterparty to ascertain confirm whether they agree to the Margin Call and if so, by how much.
+
+There are essentially four response scenarios that can occur:
+
+  * The Counterparty Agrees in Full to the Demand.
+  * The Counterparty Agrees Partially to the Demand.
+  * The Counterparty Disagrees with the Demand as they believe No Margin call is due - that they have calculated a No Action Margin Call. The Agreed Amount will be zero.
+  * The Counterparty Disagrees with the Demand as they believe that Margin is due to them - that is they have calculated a Demand on the Principal. The Agreed Amount will be zero.
+
+
+
+For the above scenarios, the amount of the Principal's Demand that the Counterparty agrees to is entered as an Agreed amount within the Sent State.
+
+**Note:** If the system is configured to evaluate whether [Agree Tolerance Method](<agreements_general.md#agree-tolerance-method>) should be employed to calculate the Agreed amount, then the Counterparty's Call Amount must be recorded and the Calculate Agreed function must be used. See [Examples of Split The Difference](<example_agree_tolerance_method.md#examples-of-split-the-difference>) for more details.
+
+**Recording the Counterparty Response and Setting Agreed Amounts**
+
+As outlined above, there are four possible responses from the Counterparty, and each has a different way of progressing through the subsequent Workflow states.
+
+  
+
+
+**Scenario 1: The Counterparty agrees to the Principal's Demand in Full**
+
+When the demand call is in a **Sent** state, click on the **Agree** button.
+
+The user will be prompted to enter the **Cpty Call Amount**. When the user tabs out of the field, the system will automatically calculate the **Agreed Amount**.
+
+Ensure that the **Cpty Call Type** field remains set as _Demand_. (By default, this field's drop-down value is set per the current call type)
+
+Optionally, the Counterparty's calculation can be recorded of what the Margin Call amount is in the **Cpty Call Amount** field.
+
+If the **Cpty Call Amount ** is elected to be entered, the system can also calculate what the applicable Agreed Amount will be by clicking on Calculate Agreed button.
+
+When tabbing out of the **Cpty Call Amount** field, the system first evaluates:
+
+  * Whether the Agreement has a defined [Agree Tolerance Method](<agreements_general.md#agree-tolerance-method>)
+
+  * Whether the Counterparty Call Amount is < Principal Call Amount
+
+  * Whether the difference between Counterparty Call Amount and Principal call amount is within the [Agree tolerance](<agreements_general.md#agree-tolerance-method>) amount.
+
+
+
+
+Should all three of these evaluations return as true, then the system will calculate the Agreed amount incorporating splitting methodology. See [Examples of Split the Difference Usage](<example_agree_tolerance_method.md>) for examples.
+
+Should one or more of the criteria not be met, the application will calculate the Agreed Amount as being the lower of the Principal Call Amount or Cpty Call Amount value.
+
+For this scenario, as the counterparty is agreeing to the call in full (ie. Cpty Call Amount is >= Principal Call), no agree tolerance methodology will be used.
+
+To not have the system calculate the Agreed Amount for the call, enter the amount that the Counterparty has agreed to directly in the Agreed Amount field without recording the Cpty Call Amount.
+
+When directly entering the Agreed Amount, this should be the same as the Prin Call Amount if the Counterparty has fully agreed to the margin call. When entering amounts, the keyboard shortcuts of k, m, and b can be used. For example, 1.5m is interpreted as 1,500,000.
+
+**Note:** It is important to understand that when the Agreed Amount is entered directly, the system will not evaluate whether the call should be subject to the agree tolerance methodology.
+
+Click Apply Button.
+
+The Agreed amount recorded is applied to the Margin Call as an Agreed Total Amount. Additionally, the system will automatically distribute this agreed amount between Agreed Deliver and Agreed Return. See [Understanding How Agreed Amounts are allocated](<margin_calls_agree.md>) for more information.
+
+It is now possible to Enter Collateral Movements on the Demand.
+
+Consider the following:
+
+  * It is not mandatory to record Cpty Call Amount, nor have the system calculate an Agreed Amount.
+
+  * However, an agreed amount must be recorded before the Apply button can be clicked.
+
+  * The Apply button is disabled until an agreed amount is recorded.
+
+  * Collateral Movements cannot be entered on a Demand until and agreed amount has been applied.
+
+  * Agreed amounts applied are not taken into consideration as collateral values until the next business day.
+
+
+
+
+  
+
+
+**Scenario 2: The Counterparty partially agrees to the Principal's Demand**
+
+When the demand call is in a **Sent** state, click on the **Agree** button.
+
+The user will be prompted to enter the **Cpty Call Amount**. When the user tabs out of the field, the system will automatically calculate the **Agreed Amount**.
+
+Ensure that the Cpty Call Type field remains set as Demand. By default, this field's drop-down value is set per the current call type.
+
+Optionally, the Counterparty's calculation can be recorded of what the Margin Call amount is in the **Cpty Call Amount** field. 
+
+When tabbing out of the **Cpty Call Amount** field, the system first evaluates:
+
+  * Whether the Agreement has a defined [Agree Tolerance Method](<agreements_general.md#agree-tolerance-method>)
+
+  * Whether the Counterparty Call Amount is < Principal Call Amount
+
+  * Whether the difference between Counterparty Call Amount and Principal call amount is within the [Split the Difference](<agreements_general.md#agree-tolerance-method>) tolerance amount.
+
+
+
+
+Should all three of these evaluations return as true, then the system will calculate the Agreed amount incorporating splitting methodology. See [Examples of Split the Difference Usage](<example_agree_tolerance_method.md>) for examples.
+
+Should one or more of the criteria not be met, the application will calculate the Agreed Amount as being the lower of the Principal Call Amount or Cpty Call Amount value.
+
+The amount can directly be entered into **Agreed Amount** and bypass the system calculation without recording the **Cpty Call Amount**.
+
+When entering amounts, the keyboard shortcuts of k, m, and b can be used. For example, 1.5m is interpreted as 1,500,000.
+
+Click the Apply button.
+
+The system will then evaluate whether a partial dispute should be created.
+
+If the difference between the **Agreed Amount** recorded and the Prin Call Amount is greater than the dispute tolerance, then a partial dispute item is created for this margin call for the difference.
+
+Simultaneously, the Dispute Information form opens, and the user must input categories and comments for the partial dispute. Please note that this step is required by default, but can be disabled by a System Administrator.
+
+The Partial Dispute item created is advanced to the Disputes state.
+
+The partially agreed amount recorded is applied to the Margin Call as an Agreed Total Amount.
+
+Additionally, the system will automatically distribute this agreed amount between Agreed Deliver and Agreed Return. See [Understanding How Agreed Amounts are allocated](<margin_calls_agree.md>) for more information.
+
+If **Cpty Call Amount** was entered, it is recorded against the Margin Call in the **Cpty Call Amount** field.
+
+It is now possible to Enter Collateral Movements on the Demand.
+
+Consider the following:
+
+a. It is not mandatory to record Cpty Call Amount, nor have the system calculate an Agreed Amount. b. However, an agreed amount must be recorded before the Apply button can be clicked. c. The Apply button is disabled until an agreed amount is recorded. d. Collateral Movements cannot be entered on a Demand until and agreed amount has been applied. e. Agreed amounts applied are not taken into consideration as collateral values until the next business day.
+
+  
+
+
+**Scenario 3: The Counterparty disputes the Principal's Demand in entirety, as they have calculated a No Action Margin Call**
+
+Under this scenario, the Counterparty dispute the Principal's Demand, as they have calculated that no margin requirement is due. That is, from their perspective, their margin calculation has resulted in a No Action margin call type.
+
+When the demand call is in a **Sent** state, click on the **Dispute** button.
+
+From the **Cpty Call Type** drop-down field, select **No Action**. By default, this field's drop-down value is set per the current call type, so will have defaulted as Demand.
+
+Automatically, the Cpty Call Amount Field and Agreed Amount Fields will be set with a zero value and into a read only mode. Click the **Dispute** button.
+
+The Dispute Information form opens, and the user must input categories for the dispute and add dispute comments. Please note that this step is required by default, but can be disabled by a System Administrator.
+
+The Demand is recorded as a Dispute and is advanced to the Disputes state. 
+
+Simultaneously, the following values are set on the Margin Call.
+
+  * Cpty Call Amount with zero
+
+  * Total Agreed Amount with zero
+
+  * Dispute Amount with the Prin Call Amount value.
+
+
+
+
+Consider the following:
+
+  * It is not mandatory to record Cpty Call Amount, nor have the system calculate an Agreed Amount. It is possible to enter a zero Agreed amount figure directly into the field.
+  * However, an agreed amount must be recorded before the Apply button can be clicked.
+  * The Dispute button is disabled until an agreed amount is recorded.
+  * Agree tolerance evaluation does not occur when the Margin Call type differs for the Principal and Counterparty.
+
+
+
+  
+
+
+**Scenario 4: The Counterparty disputes the Principal's Demand in entirety, as they have calculated a Demand Margin Call**
+
+Under this scenario, the Counterparty disputes the Principal's Demand, as they have calculated that they are due margin from the Principal. That is, from their perspective, their margin calculation has resulted in a Demand margin call type.
+
+When the demand call is in a **Sent** state, click on the **Dispute** button.
+
+From the **Cpty Call Type** drop-down field, select **Anticated Demand**. Cpty Call Types are always entered from the Principal's perspective.
+
+By default, this field's drop-down value is set per the current call type, so will have defaulted as Demand.
+
+Automatically, the Agreed Amount Field will be set with a zero value and into a read only mode.
+
+In the **Cpty Call Amount** Field, enter the Counterparty's calculation of the call amount that is due to them. When entering amounts, the keyboard shortcuts of k, m, and b can be used. For example, 1.5m is interpreted as 1,500,000.
+
+The **Dispute** button will now enable. Click the button.
+
+The Dispute Information form opens, and the user must input categories for the dispute and add dispute comments. Please note that this step is required by default, but can be disabled by a System Administrator.
+
+The Demand is recorded as a Dispute and is advanced to the Disputes state. Simultaneously, the following values are set on the Margin Call.
+
+**Cpty Call Amount** with the value entered. Total Agreed Amount with zero.
+
+Dispute Amount with the Prin Call Amount value **plus** the _Absolute_ value of the Cpty Call Amount entered.
+
+Consider the following:
+
+  * It is not mandatory to record Cpty Call Amount, nor have the system calculate an Agreed Amount. It is possible to enter a zero Agreed amount figure directly into the field. 
+  * However, an agreed amount must be recorded before the Apply button can be clicked.
+  * The Dispute button is disabled until an agreed amount is recorded.
+  * Agree tolerance evaluation does not occur when the Margin Call type differs for the Principal and Counterparty.
+
+
+
+Considerations for OTC Agreements that separate Lock Up and variation requirements.
+
+Agreements of this form, generate separate margin calls for the lock up and variation requirements of the Margin Calculation Result. See [Working with OTC Agreements that Segregate Lock Up and Variation Margin](<segregate_lockup_varmargin.md>) for more information on this.
+
+Where the variation requirement results in a demand, the agreed amount for the variation element is entered identically and processed identically to the scenarios outlined above.
+
+Where the lock up requirement results in a demand, again the agreed amount for the lock up element is entered identically to the above scenarios, with one minor exception:
+
+**Dispute Tolerance is not employed when counterparty partially agrees to lock up demand requirement**
+
+Enter the amount that the Counterparty has agreed to in the **Agreed Amount** field.
+
+Click the Apply button.
+
+If there is a difference between the agreed amount entered and the demand lock up call amount a partial dispute item is created for this margin call for the difference.
+
+Simultaneously, the Dispute Information form opens, and the user must input categories and comments for the partial dispute.
+
+**Note:** This step is required by default, but can be disabled by a System Administrator.
+
+The Partial Dispute item created is advanced to the Disputes state.
+
+The partially agreed amount entered is applied to the Margin Call as an Agreed Total Amount.
+
+Additionally, the system will automatically distribute this agreed amount between Agreed Deliver and Agreed Return. See [Understanding How Agreed Amounts are allocated](<margin_calls_agree.md>) for more information.
+
+It is now possible to Enter Collateral Movements on the Demand.
+
+**Note:** An agreed amount must be entered in order to enable the Apply button. When the Apply button is clicked, the Agreed is evaluated to see whether a partial dispute should be created based on dispute tolerances. Agreed amounts entered are not taken into consideration as collateral values until the next business day.

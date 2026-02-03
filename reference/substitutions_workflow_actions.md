@@ -1,0 +1,499 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/substitutions_workflow_actions.html
+
+# Actions
+
+## Accept
+
+When a substitution is has been proposed to a counterparty, the counterparty has the option to **Accept** or [**Reject**](<#reject>) the proposal.
+
+If the counterparty accepts the return movement(s) for substitution, then the **Accept** button can be clicked and the substitution will move to the **Proposal Accepted** workflow state.
+
+If using the predefined filters, then a _Proposal Accepted_ can be found under [_In Progress_](<substitutions_workflow.md#in-progress>).
+
+**Procedure**
+
+  1. Select the proposal recall by clicking the radial button.
+  2. For proposal recalls with a state of Proposed, select the **Accept** button that will become available. This will transition the event to **Proposal Accepted**.
+
+
+
+## Add Return Movement
+
+When a substitution is created, additional return movements can be added to the substitution.
+
+Additional return movement(s) can be added when the substitution is in the following workflow states in the grid:
+
+  * Pending
+  * Pending Rejected
+  * Proposal Rejected
+  * Proposal Accepted
+  * Rejected Internally
+  * Rejected by Counterparty
+
+
+
+A user can only create return movements for agreements that they are entitled to see according to their Agreement Scope. Please see [Understanding Agreement Scopes](<understand_scope_responsibility.md#agreement-scope>) for more information.
+
+**Procedure**
+
+  1. Select the substitution by clicking the radial button.
+  2. For substitutions with a state of Pending or Pending Rejected, select the **Add Return Movement** button that will become available. The user will be prompted with an Add Return Movement screen.
+
+
+
+For substitutions with a state of Proposal Rejected, Proposal Accepted, Rejected Internally or Rejected by Counterparty, the user adds additional return movements from the [Agreement Positions](<positions.md>), selecting the agreement's available position to be returned and substituting it.
+
+**Note:** The fields highlighted in red require a value.
+
+Section | Fields | Description  
+---|---|---  
+Instrument | Direction | Read-only field displaying the direction of the return movement. If the position is being held then the direction will be "Return to Counterparty". If the position is posted, then the direction will be "Return to Principal".  
+| Instrument Ref | The instrument that is being substituted.  
+| Description | Read-only field displaying the textual description of the instrument on the collateral movement.  
+| Currency | Read-only field displaying the currency defined on the instrument.  
+| Minimum Lot | Read-only field displaying the minimum amount of the Instrument which can be transferred.  
+| Lot Increment | Read-only field displaying the incremental amount which the Instrument can be transferred in.  
+| Price | Read-only field displaying the price of the instrument.  
+| Price Date | Read-only field of date that the price is taken from for the calculations.  
+| Is Eligible | Read-only field that displays if the instrument breached any eligibility rules.  
+| Eligible Breaches | If eligibility breaches occur, this can be expanded to view the breaches.  
+Notional | Target | This is an editable drop-down field with values of _Notional_ and _Market Value_. Notional amounts will be validated against existing Minimum Lot and Lot increment, and rounded if necessary.  
+| Amount | Enter the amount that is being substituted. The value will hold up to a 12 digit positive value plus two decimals.  
+| Notional | Read-only field that is based upon what value was entered under the target field. If the target field is notional, then the value will be the same. If the target field is set to market value, then the value is converted to the notional value.  
+| Market Value (Agmt Ccy) | Read-only field that displays the Market value of the movement in the currency of the agreement before any valuation percentage has been applied.  
+| Valuation % | Read-only field that displays the system will populate this field with the appropriate Valuation percentage for the collateral as defined in the Basic Eligibility tab of the agreement.  
+  
+If the collateral is ineligible, that is:  
+a. no eligible collateral bucket or instrument exists on the agreement  
+or  
+b. the security selected can potentially fall within more several eligible buckets on the agreement  
+or  
+c. the collateral being selected fails an [Advanced Eligibility Rule](<advancedeligrules.md>) defined on the agreement  
+d. the collateral selected fails a [Ratings Based Eligibility Rule](<ratingbasedeligrules.md>) defined on the agreement.  
+e. the collateral selected fails a [Wrong Way Risk Eligibility Rule](<wrongwayrisk.md>) defined on the agreement.  
+  
+Then the valuation percentage will default to zero, and the movement will be calculated as having zero market value.  
+  
+Similarly, if the actual instrument has been set up with a zero % value, then the collateral position will be calculated with a market value of zero.  
+| Market Value Applied | When the calculate button is clicked, this value is calculated in agreement currency using dirty prices and valuation percentages applicable for the agreement.  
+  
+If the collateral is eligible and a price exists it is calculated as Notional * Price * Valuation Percentage.  
+  
+If the collateral is eligible and a price doesn't exist, it is calculated as zero market value.  
+  
+If the collateral is ineligible (i.e. Valuation percentage is zero) but a price exists, it is calculated as Notional * Price * assumed valuation percentage of 100.  
+  
+If the collateral is ineligible and a price doesn't exist, it is calculated as zero market value.  
+  
+This is so that the user can know the market value of the ineligible collateral that they need to have substituted. See [Understanding How Mkt Val (Agmt Ccy) is calculated and displayed](<understanding_mktval_calculation.md>) for more details.  
+| Concentration Status | This will contain a check mark or an x depending on if the collateral falls within or outside the concentration rule.  
+| Concentration Breaches | If the collateral falls outside the concentration rule then the system will display which rule it does not meet.  
+Settlement | Receiving Instruction | By default, the system will attempt to automatically populate this field with the name of the receiving party's matching SSI record which has been set as default. Should no matching SSI have been set as default, click on the down arrow to select a matching receiving party SSI record set to use for the movement.  
+  
+**Note:**  
+1\. The SSI records available for selection are those that match the movement. Should there be no matching SSI records, the drop-down will be blank.  
+2\. Similarly, should the instrument selected on the movement be amended, the SSI record that is defaulted / SSI records available in the drop-down will update.  
+3\. The Settlement Date default value is derived from the settlement offset value of receiving party SSI record selected. Should the selected SSI record be altered, the Settlement Date default value will be refreshed.  
+  
+See [Understanding SSI hierarchy, defaults and derivation](<agreements_settleinstr.md#understanding-ssi-hierarchy>) for more details on how SSI's are matched to collateral movements.  
+| Sending Instruction | The process is identical to that for the **Receiving Instruction** field, excepting that the SSI record selected is applicable to the Sending Party for the Substitution Return Movement.  
+| Settlement Date | The Settlement Date default value is derived from the settlement offset value of receiving party SSI record selected. Should the selected SSI record be altered, the Settlement Date default value will be refreshed.  
+| Trade Date | By default, Trade Date field is not populated. Click on the field and select a Trade Date.  
+  
+Trade Date is not validated to ensure that it is equal to or prior to Settlement Date.  
+| Physical Settlement | By default, the Physical Settlement check box is selected, indicating that this movement should be settled physically. If this is not to be the case, the checkbox can be deselected.  
+  
+  1. Click the **Save** button to add the return movement to the substitution.
+  2. The return movement can be seen when viewing the substitution under the **Positions and Movements** tab.
+
+
+
+## Add Substitute Movement
+
+When a substitution is created, additional deliver movements can be added to the substitution.
+
+Additional deliver movement(s) can be added when the substitution is in the following workflow states in the grid:
+
+  * Pending
+  * Pending Rejected
+  * Proposal Accepted
+  * Rejected Internally
+  * Rejected by Counterparty
+
+
+
+A user can only create deliver movements for agreements that they are entitled to see according to their Agreement Scope. Please see [Understanding Agreement Scopes](<understand_scope_responsibility.md#agreement-scope>) for more information.
+
+**Procedure**
+
+  1. Select the substitution by clicking the radial button.
+  2. Select the **Add Substitute Movement** button that will become available. The user will be prompted with an Add Substitute Movement screen.The fields highlighted in red require a value.
+  3. The user will be prompted with a pop up window where the user can select an instrument, adjust the amount if necessary and then create the movement.
+
+
+
+Below are the fields that are available while entering the substitution movement(s).
+
+**Note:** Fields in noted red are required. Fields noted in blue are editable.
+
+Section | Field | Description  
+---|---|---  
+Instrument | Direction | The direction of the deliver collateral movement.  
+  
+Should the collateral that is to be substituted be a Held position by the Principal, this will be a Return to Counterparty movement.  
+  
+Should it be a Posted position, then this will be a Return to Principal Movement.  
+| Instrument Ref | The Instrument Identifier ID for the Collateral that is being returned.  
+| Asset Pool |   
+| Description | This is automatically populated by the system once a valid instrument has been selected.  
+| Currency | This is automatically populated by the system with the currency of the instrument that was entered.  
+| Minimum Lot | This is automatically populated from the value entered on the Debt Instrument.  
+| Lot Increment | This is automatically populated from the value entered on the Debt Instrument.  
+| Price | The price field is automatically populated by the system. The process for deriving this differs slightly depending on the Business Line of the Agreement:  
+  
+\- For OTC Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method that have been stipulated on the agreement.  
+\- For Repo and Securities Lending Agreements, the system will populate this field with the latest available dirty price for the price source and price quote method and price adjustment that have been.  
+  
+**Note:** If no dirty price is available using the determining criteria then a tooltip will appear warning _No price available for this Instrument_.  
+  
+If a price is missing, a zero price will be used to calculate the value of the collateral movement.  
+| Price Date | This field is automatically populated by the system and shows the price date for the instrument ref. Please note that the price date shown here is for the Instrument price for the specific price source and price quote method defined on the agreement.  
+  
+The price date can be derived from 2 sources:  
+| Is Eligible | The instrument selected is subject to the following eligibility rules defined on the Agreement:  
+Basic Eligibility  
+Advanced Eligibility  
+Ratings Based Eligibility  
+Wrong Way Risk Eligibility  
+  
+If the selected instrument passes all the above eligibility checks, then a green check will appear. If one or more eligibility checks are failed, then a red X will appear.  
+  
+Then Eligibility Breaches will become visible for review by click on the red arrow.  
+  
+The screen contains information regarding the failure:  
+  
+**Rule Name** \- This will read "Basic Eligibility" if that is the eligibility evaluation that has failed. If the failure is due to an Advanced,Ratings Based and/or Wrong Way Risk evaluation then this field will list the actual Rule Names that the instrument failed.  
+  
+**Reason** \- This provides additional information as to the nature of eligibility failure.  
+  
+For Basic Eligibility breaches, the cause may be due to no eligible buckets set up on the Agreement for the instrument to fall into.  
+  
+Or because the instrument on the movement could fall into more than one collateral bucket assigned to the Agreement.  
+  
+For Advanced and Ratings Based Eligibility rule, the failure is typically because one or more eligibility criteria on the rules have not been met.  
+  
+For Wrong Way Risk eligibility rule, the failure is due to Instrument Issuer matching an Issuer that exits in the same Entity Group as the Principal or Counterparty, depending on how the rule is defined.  
+  
+The Rule Name field outlines which eligibility rules have been breached, while the criteria field provides information as to what the specific breached criteria within the rules are.  
+  
+**Note:**  
+\- If the movement fails basic eligibility evaluation, then advanced, ratings based eligibility and wrong way risk evaluations are not conducted.  
+  
+\- If the movement fails any eligibility evaluation, then it will receive a 0 Valuation Percentage and be effectively assigned zero market value.  
+Notional | Target | Collateral Movements can be entered as either notional amounts or market value amounts. If notional amount is entered, the system will calculate the market value and vice versa.  
+| Amount | Enter here the amount of the movement, including decimals if required. Shortcuts of k, m and b are acceptable, and up to 3 decimal places will be taken into consideration if using shortcuts.  
+  
+The amount can be entered as either a market value amount or a notional amount, as denoted by the Enter Target drop down selection.  
+  
+Once the amount is entered, click on the word **calculate** to calculate the reciprocal value.  
+  
+\- If Notional is selected, the amount is applied to the notional field, and Market Value (Agmt Ccy) is calculated and populated in the Market Value (Agmt Ccy) field.  
+  
+**Note:** Any notional entered must meet any defined Minimum Lot and Lot Increment values. Such that the notional entered must be equal to or greater than the Minimum Lot. And, the notional entered must be divisible by the Lot Increment.  
+  
+\- If the notional entered does not meet the two criteria above, then the system will adjust the notional to meet the criteria.  
+  
+\- If Market Value was selected, the amount entered is applied to the Market Value Applied (Agmt Ccy) field, and Notional is calculated and populated in the Notional field.  
+  
+This calculated amount will be automatically rounded to ensure that it is greater than minimum lot and divisible by minimum increment amount.  
+| Notional | The notional of the Instrument for the return movement that was entered when the return movement was created.  
+| Market Value (Agmt Ccy) | The market value of the return collateral movement, calculated as Notional * Dirty Price * Valuation Percentage, then converted back to the agreement currency if necessary.  
+| Valuation % | The system will populate this field with the appropriate Valuation percentage for the collateral as defined in the Basic Eligibility tab of the agreement.  
+  
+The valuation percentages that are used depend on the movement type being entered, and are as follows:  
+  
+**Deliver to Principal** \- Uses Held Valn%  
+  
+**Return to Principal** \- Uses Posted Valn%  
+  
+**Deliver to Cpty** \- Uses Posted Valn %  
+  
+**Return to Cpty** \- Uses Held Valn%  
+  
+If the collateral is ineligible, that is:  
+  
+\- no eligible collateral bucket or instrument exists on the agreement  
+or  
+\- the security selected can potentially fall within more several eligible buckets on the agreement  
+or  
+\- the collateral being selected fails an [Advanced Eligibility](<advancedeligrules.md#advanced-eligibility-rules>) rule defined on the agreement  
+\- the collateral selected fails a [Ratings Based Eligibility](<ratingbasedeligrules.md#rating-based-eligibility-rules>) rule defined on the agreement.  
+\- the collateral selected fails a [Wrong Way Risk Eligibility](<wrongwayrisk.md#wrong-way-risk>) rule defined on the agreement.  
+  
+Then the valuation percentage will default to zero, and the movement will be calculated as having zero market value.  
+  
+Similarly, if the actual collateral bucket or instrument has been set up with a zero % value, then the collateral movement will be calculated with a market value of zero.  
+| Market Value Applied |   
+| Concentration Status | Similar to eligibility, the system checks whether the movement will cause a breech of any Concentration rules that are defined on the agreement.  
+  
+The process works in the following way, once is clicked:  
+  
+In order for a green **x** to be displayed, no concentration rules exist on the agreement. Or, concentration rules are defined but no concentration breaches exist, nor will be caused when the movement is added.  
+  
+If the concentration rule is breached, a red x will be displayed and the user can click on the arrow to view the breaches.  
+A breach will occur if on of the following conditions is true:  
+\- One or more of the concentration rules for the Agreement is currently in breach and this movement does not correct the breach.  
+\- The movement being added will cause a concentration breach.  
+  
+The screen contains information regarding the concentration breech:  
+**Rule Name** \- the Agreement's concentration Rule Name that the movement will breech if it is booked.  
+**Reason** \- this provides information on what aspect of the Rule has been breached.  
+  
+**Note:** Failed is displayed when a concentration breach exists, and the movement being added does not remedy this.  
+Settlement | Sending Instructions | The system will attempt to automatically populate this field with the receiving party's matching SSI record which has been set as default.  
+  
+Should no matching SSI record which has been set as default be found, the field will not be populated.  
+  
+**Note:** Although this field is not visible on this screen, the defaulting process occurs at this point.  
+| Settlement Date | The settlement date selected for the return collateral movement. Note that should the substitution have numerous collateral returns, this maybe differing dates for different movements.  
+| Trade Date | Used to record the substitution movements.  
+| Physical Settlement | Indicates whether the movement is to be settled physically via real movements, or alternatively is a entry level adjustment without physical movements.  
+  
+To indicate that the collateral movement should not be physically settled, clear the check box.  
+  
+If the Settlement Date is changed to a date prior to today, then the field will automatically be unchecked.  
+  
+  1. Click the **Save** button to add the deliver movement to the substitution.
+  2. The deliver movement can be seen when viewing the substitution under the **Positions and Movements** tab.
+
+
+
+## Approve Pending Counterparty
+
+When a substitution is in the **Approvals** workflow queue, one of the actions available is to **Approve Pending Counterparty**. If the user chooses this action, the substitution will transition to the _Confirmed - Pending Cpty Response_ workflow state. A substitution notice will be sent out to any contacts set to receive substitution notices. The underlying collateral movement statuses will remain as **To Be Approved** as the counterparty will either accept or reject the substitution.
+
+This action becomes available for approval when the substitution is in the following workflow states in the grid:
+
+Workflow State | Description  
+---|---  
+To Be Approved - Substitution | When the substitution is in this workflow state, the substitution has gone through the proposal process. This means the proposal and the return movement(s) have been accepted. When the substitution is in this state, the approval actions are Approve or Approve Pending Cpty  
+To Be Approved - Unsent | When the substitution is in this workflow state, the return and deliver movement(s) were added initially and sent for approval without notifying the counterparty. When the substitution is in this state, the only approve action is Approve Pending Cpty, as this will be the initial notification to the counterparty of the substitution.  
+  
+**Procedure**
+
+  1. Select the Substitution to be approved by clicking the radial button on the left side of the substitution.
+  2. Click on the **Approve Pending Counterparty** button located in the top right corner of the screen.
+
+
+
+**Note:**
+
+  1. The user who originally submitted the Substitution for approval cannot approve the item.
+  2. Only users with certain privilege levels can approve or reject items. See the system administrator for more information on user roles. This means that if the user does not see, the user is either the one who input the Collateral Movements, and/or the user does not have the necessary privilege levels to approve Substitutions.
+  3. Substitutions are approved or rejected in entirety. That is to say, it is currently not possible to approve one movement only, or approve one movement and reject another. The user must either approve or reject the whole Substitution, not individual underlying movements.
+  4. If Substitution Movements are subject to a Second level of approvals, they will not yet be transitioned to the next workflow state and remain in the To be Approved state. Follow the guides on [Understanding High Value Movement Approval Controls](<high_value_movement.md#understanding-high-value-movement-approval-controls>) and [How to Approve High Value Collateral Movements](<approve_highvalue_collat_mvmt.md>) for further information.
+  5. It is not currently possible to approve or reject Substitutions from the Movements Screen.
+
+
+
+## Approve
+
+When a substitution is in the **Approvals** workflow queue, one of the actions available is to **Approve** the substitution. If the user chooses to approve the substitution, the substitution will automatically be moved to the _Confirmed - Sent to Settlement_ workflow state (**Note:** this is an end workflow state). A substitution notice will be sent out to any contacts set to receive substitution notices. The underlying collateral movement statuses are updated to an In Transit.
+
+This action becomes available for approval when the substitution is in the following workflow states in the grid:
+
+Workflow State | Description  
+---|---  
+To Be Approved - Substitution | When the substitution is in this workflow state, the substitution has gone through the proposal process. This means the proposal and the return movement(s) have been accepted. When the substitution is in this state, the approval actions are Approve or Approve Pending Cpty  
+To Be Approved - Unsent | When the substitution is in this workflow state, the return and deliver movement(s) were added initially and sent for approval without notifying the counterparty. When the substitution is in this state, the only approve action is Approve Pending Cpty, as this will be the initial notification to the counterparty of the substitution.  
+  
+**Procedure**
+
+  1. Select the Substitution to be approved by clicking the radial button on the left side of the substitution.
+  2. Click on the **Approve** button located in the top right corner of the screen.
+
+
+
+**Note:**
+
+  1. The user who originally submitted the substitution for approval cannot approve the item.
+  2. Only users with certain privilege levels can approve or reject items. See the system administrator for more information on user roles. This means that if the user does not see, the user is either the one who input the Collateral Movements, and/or the user does not have the necessary privilege levels to approve Substitutions.
+  3. Substitutions are approved or rejected in entirety. That is to say, it is currently not possible to approve one movement only, or approve one movement and reject another. The user must either approve or reject the whole Substitution, not individual underlying movements.
+  4. If Substitution Movements are subject to a Second level of approvals, they will not yet be transitioned to the next workflow state and remain in the To be Approved state. Follow the guides on [Understanding High Value Movement Approval Controls](<high_value_movement.md#understanding-high-value-movement-approval-controls>) and [How to Approve High Value Collateral Movements](<approve_highvalue_collat_mvmt.md>) for further information.
+  5. It is not currently possible to approve or reject Substitutions from the Movements Screen.
+
+
+
+## Cancel Substitution
+
+Cancelling a substitution will set the workflow state to Cancelled. The movement statuses will be set to Ignored. Cancelled substitutions can be viewed in the Confirmed queue for the day they are cancelled. Cancelled events will expire and be filtered from the current workflow view. Historical events can be viewed using the [advanced workflow filters](<substitutions.md#search-criteria>).
+
+Substitutions can be cancelled while they are in the following workflow states in the grid:
+
+  * Pending
+  * Pending Rejected
+  * Proposal Accepted
+  * Rejected by Counterparty
+
+
+
+**Procedure**
+
+  1. Select the substitution that requires to be cancelled by clicking the radial button.
+  2. Once the movement is selected, the user will have ability to select the **Cancel** button in the top right corner of the screen.
+  3. After the cancel button is clicked, the user is then prompted with a pop up window to enter a comment and confirm the action. 
+  4. Enter a cancel comment.
+  5. Click on the **Cancel** button to confirm.
+  6. The transition history will be updated and the substitution will be set to the state of **Cancelled**.
+
+
+
+## Counterparty Accepts
+
+When a substitution has been sent to a counterparty, the counterparty has the option to accept or reject the substitution.
+
+If the counterparty accepts the substitution, then the **Counterparty Accepts** button can be clicked and the substitution will move to the **Confirmed - Sent to Settlements** workflow state.
+
+If using the predefined filters, the _Confirmed - Sent to Settlements_ can be found under the [_Confirmed_](<substitutions_workflow.md#confirmed>) filter.
+
+**Procedure**
+
+  1. Select the substitution by clicking the radial button.
+  2. Select the **Counterparty Accepts** button that will become available. This will transition the event to **Confirmed - Sent to Settlements**.
+
+
+
+## Counterparty Rejects
+
+When a substitution has been sent to a counterparty, the counterparty has the option to accept or reject the substitution.
+
+If the counterparty rejects the substitution, then the **Counterparty Rejects** button can be clicked. A reject comment will be required. Once the reject comment has been entered, the substitution will move to the **Rejected by Counterparty** workflow state.
+
+If using the predefined filters, the _Rejected by Counterparty_ can be found under the [_In Progress_](<substitutions_workflow.md#in-progress>) filter.
+
+**Procedure**
+
+  1. Select the substitution by clicking the radial button.
+  2. Select the **Counterparty Rejects** button that will become available. This will transition the event to **Rejected by Counterparty**.
+
+
+
+## Delete a Movement(s)
+
+Movements can be deleted when the substitution is in the following workflow states of the grid:
+
+  * Pending
+  * Pending Rejected
+  * Proposal Accepted
+  * Rejected by Counterparty
+
+
+
+**Note:** When deleting movements, at least one return movement must remain on the substitution. Otherwise, the substitution should be [cancelled](<substitutions_workflow_actions.md#cancel-substitution>). This is to prevent a workflow event without any movements.
+
+**Procedure**
+
+  1. Select the substitution that has movements to be deleted by clicking on the magnifying glass to view the details.
+  2. Under the Positions and Movements tab, select the deliver and/or return movement(s) to be deleted. **Note:** If there is only one return movement in the tab, then when the movement is selected, the **Delete Movement(s)** button will remain disabled. At least one return movement must exist in the substitution.
+  3. When the movement(s) are selected, click the **Delete Movement(s)** button.
+
+
+
+## Propose
+
+When selecting this action, a substitution notice is sent to the Counterparty with the proposed return movement(s).
+
+Once the substitution is proposed, it can be accepted, rejected or the statement can be resent to the counterparty.
+
+The workflow state that allows for the proposal a _Pending_ state.
+
+**Procedure**
+
+  1. Select the substitution from the _Pending_ workflow state by clicking the radial button on the left side.
+  2. The **Propose** button will be become enabled.
+  3. Click the **Propose** button. Assuming that the Notice was successfully generated and communicated to the SMTP server with valid Counterparty contacts and email addresses, an email with subject line of "Details for Collateral Substitution" will be sent, containing a PDF substitution notice to all the defined contacts on the Agreement. The [email sending address](<reference_related_data.md#emailaddress>) will be taken from the agreement group that this Agreement falls under.
+  4. The substitution will move to a _Proposed_ workflow state in the grid. The Sent/Date Time field is updated with the time that was pressed. This date/time is represented from the timezone perspective of the Agreement's Principal Managing Location. This date/time may therefore not be the same as the user's local time. See [Understanding Dates and Times](<understand_date_times.md>) for more information.
+
+
+
+## Reject
+
+This action becomes available when a proposal or approval needs review. The user has the option to **Reject** a proposal or substitution waiting for approval.
+
+The substitutions can be rejected when they are in the following workflow states of the grid:
+
+  * Proposed
+  * To Be Approved - Substitution
+  * To Be Approved - Unsent
+
+
+
+**Procedure**
+
+  1. Select the substitution that needs to be rejected by clicking the radial button on the left side.
+  2. Select the **Reject** button that will become available.
+  3. A _Comment_ will be required before the completion of the rejection can occur.
+
+
+
+The substitution will move to one of the following workflow states in the grid:
+
+  * Proposal Rejected
+  * Rejected Internally
+
+
+
+**Note:**
+
+  * The user who originally submitted the substitution for approval can reject the item.
+  * Substitutions are rejected in its entirety. It is currently not possible to reject one movement only.
+  * Once the substitution is rejected, any of the movements can be edited, deleted or new ones added.
+
+
+
+## Resend
+
+This action allows a user to send the proposal recall again.
+
+The user may want to resend the proposal recall due to:
+
+  * The notice did not send to the counterparty because there were no contacts assigned to receive the notice.
+  * The notice did not send to the counterparty due to an error occurring with the email server.
+  * Movements have been updated or deleted.
+
+
+
+**Procedure**
+
+  1. Select the substitution to be resent by clicking the radial button on the left side.
+  2. Select the **Resend** button that will become available.
+
+
+
+The substitution will remain in the same workflow state once the action is complete. The results can be seen in the grid under the Status and Delivery Status fields. Once both fields have a green check mark, then the notice was sent successfully.
+
+## Send for Approval
+
+The **Send for Approval** button becomes available once the return(s) and deliver(s) movements have been added to the substitution and in one the following workflow state:
+
+  * Pending
+  * Pending Rejected
+  * Rejected Internally
+  * Rejected by Counterparty
+  * Proposal Accepted
+
+
+
+**Procedure**
+
+  1. Select the substitution to be sent for approval by clicking the radial button on the left side.
+  2. Select the **Send for Approval** button that will become enabled.
+
+
+
+When the button is clicked, the substitution will progress to one the following workflow states in the grid.
+
+Workflow State | Description  
+---|---  
+To Be Approved - Substitution | When the substitution is in this workflow state, the substitution has gone through the proposal process. This means the proposal and the return movement(s) have been accepted. When the substitution is in this state, the approval actions are Approve or Approve Pending Cpty  
+To Be Approved - Unsent | When the substitution is in this workflow state, the return and deliver movement(s) were added initially and sent for approval without notifying the counterparty. When the substitution is in this state, the only approve action is Approve Pending Cpty, as this will be the initial notification to the counterparty of the substitution.

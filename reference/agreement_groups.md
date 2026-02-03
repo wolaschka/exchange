@@ -1,0 +1,151 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/agreement_groups.html
+
+# Central Clearing Agreement Group
+
+Central Clearing Agreement groups provide a mechanism for grouping together Margin Calls in the Central Clearing Workflow. It is also possible to filter Margin Calls displayed in the Central Clearing workflow by Central Clearing Agreement group.
+
+Consider the following:
+
+  * An Agreement must be associated to a Central Clearing Agreement group so that any margin calls associated are viewable and actionable in the central clearing Workflow.
+  * If an Agreement is not associated to a central clearing Agreement group it can be seen in the ALL tab, but not actioned.
+  * Users can only see margin calls in the Central Clearing Workflow for Agreements that are members of a Central Clearing Agreement group that the user is associated to.
+
+
+
+**Procedure:**
+
+Select **Reference** from the navigation pane. 
+
+Click on the **Agreements** drop down and select **Agreement Groups**.
+
+**To Add a new group:**  
+* Click on the **Create Combined Business Lines** button located on the top right side of the screen.
+
+**To Edit a group:**  
+* Click on the **Edit** icon next to the group that needs to be modified, make the changes and click the **Save** button to save the changes.
+
+A form will open up and contain 2 tabs. The required fields must have data before the **Save** button will appear.
+
+**Note:** Fields in red are required.
+
+Tab | Section | Fields | Information  
+---|---|---|---  
+General |  | Name  
+Description  
+Alias Group  
+  
+Agreements | Required unique name or label across all Agreement Groups  
+Definition or comment  
+Used when comparison values are being uploaded for members of this Agreement Group  
+Collateral Agreements that will be included in this Agreement Group  
+  
+**Note:** Agreements that meet any of the following filtering criteria will be excluded from the search results:  
+  
+\- Agreements not covered by the user's Agreement Scope. Or in other words, any Agreement with a Parent Entity that is not included in the Agreement scope that the user is associated to.  
+  
+\- Agreements for non-Central Clearing Business Lines.  
+  
+\- Central Clearing Agreements that are already included on another Central Clearing Agreement Group. A Central Agreement can only be included on a single Central Clearing Agreement Group  
+User Assignments | Users | Users | Users must be assigned to a Central Clearing Agreement Group before they can select it as a filter in the Grouped Interest and Grouped Margin Call Workflows. If users are not assigned to any Central Clearing Agreement Groups they will not see any items in the Grouped Workflows.  
+  
+## Combined Business Line Agreement Group
+
+**Combined Business Line** Agreement Groups are used to group together Collateral Agreements so that bulk processing of 
+
+  * Margin Calls
+
+  * Interest Payments
+
+
+
+
+for Agreements within the OTC and Client Clearing Business line can be facilitated within TLM® Collateral Management.
+
+**Example:**
+
+A Fund Manager may be responsible for managing the collateral requirements across a number of Funds (typically a separate Collateral Agreement would be in place for each Fund), and wishes to bulk process Margin Calls and Interest Payments.
+
+Agreement Groups provide a mechanism of grouping together these "Funds" for bulk processing.
+
+**Note:** Only OTC Agreements and Client Clearing Agreements can be added to a Combined Business Line Agreement Group.
+
+**Procedure:**
+
+Select **Reference** from the navigation pane. 
+
+Click on the **Agreements** drop down and select **Agreement Groups**.
+
+Click on the **Create Combined Business Lines**.
+
+A form will open up and contain 5 tabs. Two of the tabs will require fields data before the **Save** button will appear.
+
+**Note:** Fields in red are required.
+
+Tab | Section | Fields | Information  
+---|---|---|---  
+General |  | Name  
+Description  
+Alias Group  
+  
+Agreements | Required name or label  
+Definition or comment  
+Used when comparison values are being uploaded for members of this Agreement Group  
+Collateral Agreements that will be included in this Agreement Group  
+Statements | Statement Display Options | Agreement Group Name  
+Agreement Type  
+Principal  
+Counterparty  
+From Email | Will be used on the Notices  
+Will be used on the summary notices  
+  
+Principal that will be displayed on report  
+Counterparty that will be displayed on report  
+Email address that will be used as the sending address when [Margin Call Summary Sheet](<grouped_reports.md#group-margin-call-summary-sheet>), [Margin Call Summary Notice](<grouped_reports.md#grouped-margin-calls-summary-notice>), [Collateral Confirmation Summary Notice](<grouped_reports.md#grouped-margin-calls-collateral-confirmation-summary-notice>), [Exposure Statements](<grouped_reports.md#exposure-statements=from-grouped-margin-calls>), [Collateral Position Statements](<grouped_reports.md#collateral-position-details-from-grouped-margin-calls>), [Interest Payment summary Sheet](<grouped_reports.md#grouped-interest-payments-summary-sheet>) files are sent from within the Grouped Workflows.  
+| Margin Call Summary Contact | Name  
+  
+Email  
+Include Profit and Loss Statement | Enter the Name of recipient for the [Margin Call Summary Sheet File](<grouped_reports.md#group-margin-call-summary-sheet>) and [Margin Call Summary Notice](<grouped_reports.md#grouped-margin-calls-summary-notice>)  
+Email Address  
+Set the Include Profit and Loss Statement check box, to include a P&L statement when sending the Margin Summary Sheet and Margin Call Summary Notice. If set then a Profit and Loss Statement is included with a Margin Call Summary Sheet and Margin Call Summary Notice when these are sent or resent from the Grouped Margin Call Workflow  
+| Collateral Confirmation Summary Contact | Name  
+  
+Email | Enter the Name of recipient for the [Collateral Confirmation Summary Notice](<grouped_reports.md#grouped-margin-calls-collateral-confirmation-summary=notice>).  
+Enter the email address of the contact defined to receive the report  
+| Interest Summary Contact | Name  
+  
+Email | Enter the name of the person who will receive the [Grouped Interest Payment Summary file](<grouped_reports.md#grouped-interest-payments-summary-sheet>).  
+Enter the email address of the contact defined to receive the report  
+Logo and Disclaimer | Logo | Statement Disclaimer  
+Email Disclaimer | Type or paste the disclaimer that should be used on these notices. The disclaimer will appear at the bottom of the notice  
+Type or paste the policy or legal disclaimer for the email message.  
+Netting Options | Instrument Classes  
+  
+  
+Netting Combination | Debt  
+Cash  
+Equities  
+  
+Net Variation With Lockup | In order for netting to occur for collateral payments on Agreements that are covered by the Agreement group, netting parameters must be set on this tab and the underlying collateral movements must meet netting criteria. (Please see [Payment Netting](<payment_netting.md#payment-netting>) for more information) If collateral movements for agreements are not required for netting, do not populate this tab.  
+User Assignments | Users | Users | Users must be assigned to a Combined Business Lines Agreement Group before they can select it as a filter in the Grouped Interest and Grouped Margin Call Workflows. If users are not assigned to any Combined Business Line Agreement Groups they will not see any items in the Grouped Workflows.  
+  
+Click the **Save** button to save the Agreement Group.
+
+When the **Save** button is clicked, a series of validations occur before the Combined Business Lines Agreement Group is saved to the database. These are summarized in the following table.
+
+Tab | Field Name | Validation Performed | Prevents Record Save ?  
+---|---|---|---  
+General | Name | Name must be populated, otherwise will be displayed together with tool tip of  
+  
+Must be unique, otherwise the following error message will be displayed. ![agmt_grp_already_exists.jpg](Images/agmt_grp_already_exists.jpg) | Yes  
+Statements | Agreement Type | Agreement Type must be populated otherwise the save button will not appear. | Yes  
+| Principal | Principal name must be populated otherwise the save button will not appear | Yes  
+| Counterparty | Counterparty name must be populated, otherwise the save button will not appear. | Yes  
+  
+**Note:**
+
+  1. Agreements can only be added to or removed from a Combined Business Lines Agreement Group when there are no "actioned" Margin Calls or "Interest Payments" See [Moving Agreements in and out Combined Business Lines Agreement Group](<move_agmt_inout_combined_busline.md>) for more details.
+  2. Client Clearing Agreements can only be subject to the Grouped Margin Calculation Configuration and Tasks when they are associated to a Combined Business Lines Agreement Group. Failure to do so will mean margin calls are not calculated and created for these Agreements. 
+  3. Combined Business Line Agreement Groups are audited in the standard way.
+  4. After creating a Combined Business Lines Agreement Group or altering its composition, it is recommended to log off and then back into the system to avoid any caching delays and ensure that any membership updates are fully reflected in all system areas.
+
+

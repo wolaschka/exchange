@@ -1,0 +1,45 @@
+# Source: https://qceqatwapp101.sd01.unicreditgroup.eu:5443/docs/messaging_suggestedpledges.html
+
+# Suggested Collateral Pledges
+
+## Overview
+
+Receiving collateral pledge functionality has been enhanced so that the system can receive "suggested" collateral pledges from Acadia.
+
+## What are "suggested" collateral pledges?
+
+"Suggested" collateral pledges are proposed movements for Anticipated Demand margin calls. Acadia, when suitably configured, has the ability to derive proposed movements from additional information TLM Collateral Management publishes on margin call notifications.
+
+**Note:** Please consult with your Acadia documentation or support representative for details on how to configure Acadia to "suggest" collateral pledges for Anticipated Demands.
+
+## What additional information is published to Acadia?
+
+TLM Collateral Management sends additional information to Acadia for certain margin call actions in order to aid Acadia in one or more of the below:
+
+  1. Suggesting collateral pledges for Anticipated Demands
+  2. Margin Call reconciliations
+  3. Collateral Positions reconciliations
+
+
+
+The following margin call actions send additional information:
+
+  1. **Send Call(s)** publishes _full_ details of the margin call and collateral positions (settled and in transit). Applies to Unsent Demands, Unsent – SVA Anticipated Demands, Unsent – SVA No Actions.
+  2. **Send Grouped Call(s)** publishes _full_ details of the margin call and collateral positions (settled and in transit). Applies to Unsent Calls.
+  3. **ReSend Call(s)** publishes _full_ details of the margin call and collateral positions (settled and in transit). Applies to Sent Awaiting Collateral Details, Sent – SVA Anticipated Demands, Sent – SVA No Actions.
+  4. **Agree Call** publishes _full_ details of the margin call and collateral positions (settled and in transit). Applies to Sent Awaiting Collateral Details, Agreed Awaiting Collateral Details.
+  5. **Approve** publishes _full_ details of the margin call in addition to the movements associated with the margin call. Applies to Confirmed to be Approved.
+
+
+
+**Note:** It is required to run the **Margin Calculation Analysis** task directly after the **Margin Calculation** task in order to publish Collateral Positions used within the margin calculation. If the Margin Calculation Analysis task is not run, live Collateral Positions will be published.
+
+Additionally, TLM Collateral Management does not require additional configuration to publish the above additional information. This information will always be published even if the "suggested" collateral pledges are not configured in Acadia.
+
+When the **Collateral Eligibility Extract** task is run and the extract is created, if configured, the Margin Call Adapter will send collateral eligibility information for messaging eligible agreements to Acadia.
+
+## Does TLM Collateral Management treat "suggested" pledges differently?
+
+"Suggested" collateral pledges apply to Anticipated Demands only. Other than that, TLM Collateral Management will process a "suggested" collateral pledge in the same manner as any other movement booking within the system.
+
+Please see [Anticipated Demand Workflow - Agreed Awaiting Collateral Details](<messaging_anticdemand_workflow.md#agreed-state>) state for the workflow behavior of an incoming "suggested" collateral pledge. 
