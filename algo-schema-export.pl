@@ -2,14 +2,19 @@
 #
 # algo-schema-export.pl — Export Algo Oracle DB schema to markdown files
 #
-# Usage:
-#   perl algo-schema-export.pl --user DBUSER --sid ORACLE_SID --output docs/algo-schema/
-#   perl algo-schema-export.pl --user DBUSER --sid ORACLE_SID --schema OWNER --output docs/algo-schema/
-#   perl algo-schema-export.pl --user DBUSER --pass SECRET --sid SID --output docs/algo-schema/
+# Runs inside UCB_ALGO517 project (Bin/batch/) using AlgoEnvironment for
+# DB credentials. No manual user/password/SID needed.
 #
-# Password: via --pass, ORACLE_PASSWORD env var, or prompted from STDIN
+# Usage (from Eclipse EPIC or VDI shell):
+#   perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/
+#   perl algo-schema-export.pl --db RPT --schema OWNER --output /path/to/output/
 #
-# Dependencies: DBI, DBD::Oracle (standard on ALGO517 VDI)
+# Options:
+#   --db       Database: OP (operational, default), RPT (reporting)
+#   --schema   Schema owner to export (default: connected user)
+#   --output   Output directory for markdown files (required)
+#
+# Dependencies: DBI, DBD::Oracle, Utility/AlgoEnvironment (via project Lib/)
 #
 # Output:
 #   tables-and-columns.md  — All tables with column definitions
@@ -20,50 +25,55 @@
 
 use strict;
 use warnings;
+use FindBin;
+use lib "$FindBin::Bin/../../Lib";
+
 use DBI;
 use Getopt::Long;
 use File::Path qw(make_path);
 use File::Spec;
 use POSIX qw(strftime);
+use Utility;
 
 # ---------------------------------------------------------------------------
 # Command-line options
 # ---------------------------------------------------------------------------
-my ($user, $pass, $sid, $output_dir, $schema_owner, $help);
+my ($db_type, $output_dir, $schema_owner, $help);
+$db_type = 'OP';
 
 GetOptions(
-    'user|u=s'   => \$user,
-    'pass|p=s'   => \$pass,
-    'sid|s=s'    => \$sid,
+    'db|d=s'     => \$db_type,
     'output|o=s' => \$output_dir,
     'schema=s'   => \$schema_owner,
     'help|h'     => \$help,
 ) or usage();
 
 usage() if $help;
-usage("--user is required")   unless $user;
 usage("--output is required") unless $output_dir;
 
-# Password: arg > env > prompt
-$pass //= $ENV{ORACLE_PASSWORD};
-unless ($pass) {
-    print "Password for $user: ";
-    chomp($pass = <STDIN>);
-}
-
-# SID: arg > env
-$sid //= $ENV{ORACLE_SID};
-unless ($sid) {
-    usage("--sid is required (or set ORACLE_SID env var)");
+$db_type = uc($db_type);
+unless ($db_type =~ /^(OP|RPT)$/) {
+    usage("--db must be OP or RPT (got: $db_type)");
 }
 
 # ---------------------------------------------------------------------------
-# Connect to Oracle
+# Connect to Oracle via AlgoEnvironment
 # ---------------------------------------------------------------------------
-my $dsn = "dbi:Oracle:$sid";
-print "Connecting to $sid as $user...\n";
+my ($sid, $user, $pass);
 
-my $dbh = DBI->connect($dsn, $user, $pass, {
+if ($db_type eq 'RPT') {
+    $sid  = get_DB_RPT();
+    $user = get_DB_RPT_USER();
+    $pass = get_DB_RPT_PWD();
+} else {
+    $sid  = get_DB_OP();
+    $user = get_DB_OP_USER();
+    $pass = get_DB_OP_PWD();
+}
+
+print "Connecting to $db_type database $sid as $user...\n";
+
+my $dbh = DBI->connect("dbi:Oracle:$sid", $user, $pass, {
     RaiseError => 1,
     AutoCommit => 1,
     PrintError => 0,
@@ -438,12 +448,12 @@ print "  Found $idx_count indexes\n";
     print $fh "- **[constraints.md](constraints.md)** \x{2014} Primary key and unique constraints\n";
     print $fh "\n";
     print $fh "## How to Regenerate\n\n";
-    print $fh "Run from VDI with Oracle access:\n\n";
+    print $fh "Run from UCB_ALGO517 project (Bin/batch/) on VDI:\n\n";
     print $fh "```\n";
-    print $fh "perl algo-schema-export.pl --user USER --sid SID --output docs/algo-schema/\n";
-    print $fh "perl algo-schema-export.pl --user USER --sid SID --schema OWNER --output docs/algo-schema/\n";
+    print $fh "perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/\n";
+    print $fh "perl algo-schema-export.pl --db RPT --schema OWNER --output /path/to/exchange/algo-schema/\n";
     print $fh "```\n\n";
-    print $fh "Password can be provided via `--pass`, `ORACLE_PASSWORD` env var, or interactive prompt.\n";
+    print $fh "Credentials are resolved automatically via AlgoEnvironment.\n";
 
     close $fh;
     print "  Wrote $file\n";
@@ -501,20 +511,20 @@ sub usage {
     print <<'USAGE';
 Usage: perl algo-schema-export.pl [OPTIONS]
 
+Place in UCB_ALGO517/SentryInterface-ALGO517/Bin/batch/ and run from there.
+DB credentials are resolved via AlgoEnvironment (deployed on each environment).
+
 Required:
-  --user, -u    Oracle username
   --output, -o  Output directory for markdown files
 
 Optional:
-  --pass, -p    Oracle password (or set ORACLE_PASSWORD env, or prompted)
-  --sid, -s     Oracle SID (or set ORACLE_SID env)
+  --db, -d      Database: OP (operational, default) or RPT (reporting)
   --schema      Schema owner to export (default: connected user)
   --help, -h    Show this help
 
 Examples:
-  perl algo-schema-export.pl --user DBUSER --sid PROD_SID --output docs/algo-schema/
-  perl algo-schema-export.pl -u DBUSER -s TEST_SID --schema ALGO_OWNER -o docs/algo-schema/
-  ORACLE_PASSWORD=secret perl algo-schema-export.pl -u DBUSER -s SID -o output/
+  perl algo-schema-export.pl --db OP --output /path/to/exchange/algo-schema/
+  perl algo-schema-export.pl --db RPT --schema REPORTING_OWNER -o output/
 USAGE
     exit($msg ? 1 : 0);
 }
