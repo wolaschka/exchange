@@ -1,0 +1,177 @@
+
+14:04
+Public Synonyms in Oracle
+Purpose
+A public synonym is a database-wide alias for an object (table, view, sequence, procedure, etc.) that's accessible to all users without requiring them to prefix the object with its owner schema.
+
+Example:
+
+sql
+-- Without synonym: users must know the schema
+SELECT * FROM hr.employees;
+
+-- With public synonym: schema-transparent access
+CREATE PUBLIC SYNONYM employees FOR hr.employees;
+SELECT * FROM employees;  -- works for everyone
+Key benefits:
+
+Schema abstraction — applications don't need hardcoded schema names
+Simplified migrations — point synonym to different schema without code changes
+Cleaner SQL — no schema prefixes needed
+Can Oracle Auto-Recreate Dropped Public Synonyms?
+No. Oracle does not automatically recreate public synonyms once they're dropped. If someone executes:
+
+sql
+DROP PUBLIC SYNONYM employees;
+That synonym is gone permanently until explicitly recreated. There's no automatic mechanism or background process that restores them.
+
+What might appear like auto-recreation:
+Installation/patch scripts — Oracle's own installation scripts (for features like APEX, XDB, or during upgrades) recreate synonyms as part of their execution
+Deployment pipelines — your organization's CI/CD might include synonym creation in migration scripts
+utlrp.sql or recompilation — these recompile invalid objects but don't recreate dropped synonyms
+Data dictionary synonyms — Oracle's core synonyms (like DBA_TABLES, V$SESSION) are recreated during certain catalog scripts like catalog.sql or catproc.sql
+Quick check for synonym existence:
+sql
+SELECT * FROM dba_synonyms 
+WHERE synonym_name = 'YOUR_SYNONYM' 
+  AND owner = 'PUBLIC';
+Is there a specific synonym that seemed to reappear after you deleted it? That would help narrow down what's actually recreating it.
+
+how can i check which process  or user recreated thy synonym
+
+14:06
+Tracking Who Recreated a Public Synonym
+1. Check Audit Trail (if auditing is enabled)
+sql
+-- Unified Audit (12c+)
+SELECT event_timestamp, dbusername, action_name, object_schema, object_name, sql_text
+FROM unified_audit_trail
+WHERE object_name = 'YOUR_SYNONYM'
+  AND action_name IN ('CREATE', 'CREATE PUBLIC SYNONYM')
+ORDER BY event_timestamp DESC;
+
+-- Traditional Audit (if enabled)
+SELECT timestamp, username, action_name, obj_name, sql_text
+FROM dba_audit_trail
+WHERE obj_name = 'YOUR_SYNONYM'
+ORDER BY timestamp DESC;
+2. Check if Auditing is Even Active
+sql
+-- Check audit configuration
+SELECT parameter, value FROM v$option WHERE parameter LIKE '%Unified%';
+SELECT value FROM v$parameter WHERE name = 'audit_trail';
+
+-- See what's being audited
+SELECT * FROM audit_unified_enabled_policies;  -- 12c+
+SELECT * FROM dba_stmt_audit_opts;              -- traditional
+3. Enable Auditing for Future Tracking
+If not already auditing DDL on synonyms:
+
+sql
+-- Unified Audit (12c+): create a policy
+CREATE AUDIT POLICY synonym_audit_policy
+  ACTIONS CREATE PUBLIC SYNONYM, DROP PUBLIC SYNONYM;
+
+AUDIT POLICY synonym_audit_policy;
+
+-- Traditional audit
+AUDIT CREATE PUBLIC SYNONYM;
+AUDIT DROP PUBLIC SYNONYM;
+4. Check Recent DDL via Metadata
+This won't show who, but shows when the object was last modified:
+
+sql
+SELECT owner, object_name, object_type, created, last_ddl_time
+FROM dba_objects
+WHERE object_name = 'YOUR_SYNONYM'
+  AND object_type = 'SYNONYM';
+5. Search for Scripts That Might Be Responsible
+If it's a scheduled job or deployment:
+
+sql
+-- Check scheduler jobs for suspicious activity
+SELECT owner, job_name, job_action, last_start_date
+FROM dba_scheduler_jobs
+WHERE job_action LIKE '%SYNONYM%'
+   OR job_action LIKE '%your_synonym_name%';
+
+-- Check for DBMS_JOB entries
+SELECT job, what, last_date, next_date FROM dba_jobs;
+6. Grep Your Codebase/Deployment Scripts
+Outside the database, search your Git repos or deployment folders:
+
+bash
+grep -ri "CREATE PUBLIC SYNONYM your_synonym" /path/to/scripts/
+grep -ri "CREATE PUBLIC SYNONYM" *.sql
+Most likely culprits:
+
+A deployment/migration script in your CI/CD pipeline
+A DBA maintenance script
+Oracle installation/patching (for system synonyms)
+A Flyway/Liquibase migration that runs on startup
+Which synonym keeps reappearing? I can help narrow it down further.
+
+are special rights needed to create public synonym
+
+14:22
+Privileges Required for Public Synonyms
+To Create a Public Synonym
+You need the CREATE PUBLIC SYNONYM system privilege:
+
+sql
+GRANT CREATE PUBLIC SYNONYM TO some_user;
+To Drop a Public Synonym
+You need the DROP PUBLIC SYNONYM system privilege:
+
+sql
+GRANT DROP PUBLIC SYNONYM TO some_user;
+Check Who Has These Privileges
+sql
+-- Direct grants to users
+SELECT grantee, privilege
+FROM dba_sys_privs
+WHERE privilege IN ('CREATE PUBLIC SYNONYM', 'DROP PUBLIC SYNONYM')
+ORDER BY grantee;
+
+-- Grants via roles (need to check recursively)
+SELECT grantee, granted_role
+FROM dba_role_privs
+WHERE granted_role IN (
+    SELECT role FROM role_sys_privs 
+    WHERE privilege IN ('CREATE PUBLIC SYNONYM', 'DROP PUBLIC SYNONYM')
+);
+
+-- Which roles contain these privileges?
+SELECT role, privilege
+FROM role_sys_privs
+WHERE privilege IN ('CREATE PUBLIC SYNONYM', 'DROP PUBLIC SYNONYM');
+Common Roles That Include These Privileges
+Role	Typically Has
+DBA	Both CREATE and DROP
+IMP_FULL_DATABASE	CREATE PUBLIC SYNONYM
+DATAPUMP_IMP_FULL_DATABASE	CREATE PUBLIC SYNONYM
+Narrow Down Your Suspect List
+Combine the privilege check with active users:
+
+sql
+-- Users with CREATE PUBLIC SYNONYM who logged in recently
+SELECT DISTINCT s.username
+FROM v$session s
+WHERE s.username IN (
+    SELECT grantee FROM dba_sys_privs 
+    WHERE privilege = 'CREATE PUBLIC SYNONYM'
+    UNION
+    SELECT grantee FROM dba_role_privs 
+    WHERE granted_role IN (
+        SELECT role FROM role_sys_privs 
+        WHERE privilege = 'CREATE PUBLIC SYNONYM'
+    )
+);
+This gives you a shortlist of users capable of creating that synonym — combined with the audit trail queries from before, you should be able to pinpoint the culprit.
+
+
+
+
+
+
+Claude ist eine KI und kann Fehler machen. Bitte überprüfe die Antworten.
